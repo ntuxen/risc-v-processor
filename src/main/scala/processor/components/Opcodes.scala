@@ -1,6 +1,6 @@
 package processor.components
-
-
+import chisel3._
+import chisel3.util._
 object Opcode {
   val Alu = "b0110011".U
   val AluImm = "b0010011".U
@@ -56,5 +56,10 @@ object AluFunct7 {
 
 object InstrType extends Enumeration {
   type InstrType = Value
-  val RType, IType, SType, BType, JType = Value
+  val RType, IType, SType, BType, UType, JType = Value
+}
+
+object AluOperation extends Enumeration{
+  type AluOperation = Value
+  val Add, Sub, And, Or, Xor, Sll, Srl, Sra, Slt, Sltu = Value
 }

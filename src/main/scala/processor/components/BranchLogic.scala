@@ -1,5 +1,5 @@
 package processor.components
 
-class BranchLogic {
+class BranchLogic{
 
 }
