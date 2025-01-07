@@ -54,7 +54,7 @@ class IDStage {
       is(Opcode.lui) {
         io.instrType := InstrType.UType.id.U
       }
-
+    }
       // Decode the instruction based on type
       switch(io.instrType) {
         is(InstrType.RType.id.U) {
@@ -90,9 +90,7 @@ class IDStage {
           io.rd := io.instruction(11, 7)
         }
       }
-    }
   }
-
 }
 
 
