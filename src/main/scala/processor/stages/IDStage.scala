@@ -10,23 +10,21 @@ class IDStage {
       val rs1 = Output(UInt(5.W))
       val rs2 = Output(UInt(5.W))
       val rd = Output(UInt(5.W))
-      val imm = Output(UInt(32.W))
       val funct3 = Output(UInt(3.W))
       val funct7 = Output(UInt(7.W))
       val instrType = Output(UInt(3.W))
+      val opcode = Output(UInt(7.W))
     })
-
     // Default values for outputs
     io.rs1 := 0.U
     io.rs2 := 0.U
     io.rd := 0.U
-    io.imm := 0.U
     io.funct3 := 0.U
     io.funct7 := 0.U
     io.instrType := 0.U
-    val opcode = io.instruction(6, 0)
+    io.opcode := io.instruction(6, 0)
     //Find instruction type from opcode
-    switch(opcode) {
+    switch(io.opcode) {
       is(Opcode.Alu) {
         io.instrType := InstrType.RType.id.U
       }
@@ -66,27 +64,22 @@ class IDStage {
         }
         is(InstrType.IType.id.U) {
           io.rs1 := io.instruction(19, 15)
-          io.imm := io.instruction(31, 20)
           io.funct3 := io.instruction(14, 12)
         }
         is(InstrType.SType.id.U) {
           io.rs1 := io.instruction(19, 15)
           io.rs2 := io.instruction(24, 20)
-          io.imm := io.instruction(31, 20)
           io.funct3 := io.instruction(14, 12)
         }
         is(InstrType.BType.id.U) {
           io.rs1 := io.instruction(19, 15)
           io.rs2 := io.instruction(24, 20)
-          io.imm := io.instruction(31, 20)
           io.funct3 := io.instruction(14, 12)
         }
         is(InstrType.JType.id.U) {
-          io.imm := io.instruction(31, 20)
           io.rd := io.instruction(11, 7)
         }
         is(InstrType.UType.id.U) {
-          io.imm := io.instruction(31, 12)
           io.rd := io.instruction(11, 7)
         }
       }
