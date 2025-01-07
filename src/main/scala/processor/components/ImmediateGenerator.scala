@@ -8,9 +8,10 @@ class ImmediateGenerator extends Module {
     val immediate = Output(SInt(32.W))
   })
 
+  io.immediate := 0.S(32.W)
   switch(io.instrType){
     is(InstrType.RType.id.U){
-      io.immediate := 0.U
+      io.immediate := 0.S(32.W)
     }
     is(InstrType.IType.id.U){
       io.immediate := io.instruction(31, 20).asSInt

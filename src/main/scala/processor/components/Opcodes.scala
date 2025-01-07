@@ -9,7 +9,7 @@ object Opcode {
   val branch = "b1100011".U
   val jal = "b1101111".U
   val jalr = "b1100111".U
-  val lui = "b1101111".U
+  val lui = "b0110111".U
   val auipc = "b0010111".U
 }
 
