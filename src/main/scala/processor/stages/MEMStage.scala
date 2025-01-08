@@ -4,9 +4,9 @@ import chisel3.util._
 import processor.components.MemoryTest
 import processor.components.Memory
 
-class MEMStage {
+class MEMStage extends Module {
   val io = IO(new Bundle {
-    val ALURes = Input(SInt(32.W))
+    val ALURes = Input(UInt(32.W))
     val address = Input(UInt(32.W))
     val dataWriteMem = Input(UInt(32.W))
     val memWriteEnable = Input(UInt(1.W))
@@ -15,7 +15,7 @@ class MEMStage {
     val writeDataMux = Input(UInt(1.W))
     val rdRegIn = Input(UInt(5.W))
 
-    val writeData = Output(SInt(32.W))
+    val writeData = Output(UInt(32.W))
     val registerWriteEnableOut = Output(UInt(32.W))
     val rdRegOut = Output(UInt(5.W))
   })
@@ -31,7 +31,7 @@ class MEMStage {
   rdReg := io.rdRegIn
 
   // OUTPUTS FROM REGISTERS
-  when(controlReg(0) === 1){
+  when(controlReg(0) === 1.U){
     io.writeData := dataMem.io.dataOut
   } .otherwise {
     io.writeData := ALUResReg
