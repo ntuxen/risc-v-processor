@@ -24,8 +24,14 @@ class RegisterFile extends Module {
 
   when((io.writeEnable === 1.U)){
     RegFile(io.rd) := io.writeData
+    when(io.rd === 0.U){
+      RegFile(io.rd) := 0.U
+    }
   }.otherwise{
     RegFile(io.rd) := RegFile(io.rd)
+    when(io.rd === 0.U) {
+      RegFile(io.rd) := 0.U
+    }
   }
 
   io.operand1 := RegFile(io.rs1)
