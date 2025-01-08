@@ -12,3 +12,6 @@ libraryDependencies += "edu.berkeley.cs" %% "chiseltest" % "0.5.6"
 libraryDependencies += "edu.berkeley.cs" % "ip-contributions" % "0.5.1"
 
 libraryDependencies += "net.fornwall" % "jelf" % "0.9.0"
+// Test configuration
+testFrameworks += new TestFramework("org.scalatest.tools.Framework")
+libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "3.0.0"

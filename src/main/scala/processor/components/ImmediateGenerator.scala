@@ -3,14 +3,17 @@ import chisel3._
 import chisel3.util._
 class ImmediateGenerator extends Module {
   val io = IO(new Bundle{
+    //------------Input-------------//
     val instrType = Input(UInt(3.W))
     val instruction = Input(UInt(32.W))
+    //------------Output-------------//
     val immediate = Output(SInt(32.W))
   })
 
+  io.immediate := 0.S(32.W)
   switch(io.instrType){
     is(InstrType.RType.id.U){
-      io.immediate := 0.U
+      io.immediate := 0.S(32.W)
     }
     is(InstrType.IType.id.U){
       io.immediate := io.instruction(31, 20).asSInt

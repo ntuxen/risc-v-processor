@@ -1,8 +1,4 @@
 package processor.stages
-<<<<<<< Updated upstream
-
-class EXStage {
-=======
 import chisel3._
 import chisel3.util._
 import processor.components.{ALU, ControlUnit, ImmediateGenerator, RegisterFile}
@@ -19,7 +15,6 @@ class EXStage extends Module {
     val rd = Input(UInt(5.W))
     val writeData = Input(UInt(32.W))
     val writeEnable = Input(UInt(1.W))
-    val rdReg = Input(UInt(5.W))
     //------------Output-------------//
     val ALURes = Output(SInt(32.W))
     val address = Output(UInt(32.W))
@@ -67,7 +62,7 @@ class EXStage extends Module {
   //Connect RegFile
   RegFile.io.rs1 := io.rs1
   RegFile.io.rs2 := io.rs2
-  RegFile.io.rd := io.rdReg
+  RegFile.io.rd := io.rd
   RegFile.io.writeData := io.writeData
   RegFile.io.writeEnable := io.writeEnable
   io.dataWriteMem := RegFile.io.operand2
@@ -98,6 +93,5 @@ class EXStage extends Module {
 
   //Connect rdReg
   io.rdRegIn := rdReg
->>>>>>> Stashed changes
 
 }
