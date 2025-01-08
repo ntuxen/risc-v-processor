@@ -17,7 +17,7 @@ class EXStage extends Module {
     val writeEnable = Input(UInt(1.W))
     val rdReg = Input(UInt(5.W))
     //------------Output-------------//
-    val ALURes = Output(SInt(32.W))
+    val ALURes = Output(UInt(32.W))
     val address = Output(UInt(32.W))
     val dataWriteMem = Output(UInt(32.W))
     val registerWriteEnableIn = Output(UInt(1.W))
@@ -50,7 +50,7 @@ class EXStage extends Module {
   rdReg := io.rd
 
   //Initialize outputs
-  io.ALURes := 0.S(32.W)
+  io.ALURes := 0.U(32.W)
   io.address := 0.U
   io.dataWriteMem := 0.U
   io.registerWriteEnableIn := 0.U
@@ -88,6 +88,7 @@ class EXStage extends Module {
   io.WriteDataMux := controlUnit.io.WriteDataMux
   io.MemReadEnable := controlUnit.io.MemReadEnable
   io.MemWriteEnable := controlUnit.io.MemWriteEnable
+  ALU.io.ALUSel := controlUnit.io.AluSel
 
 
 

@@ -1,6 +1,7 @@
 package processor
 
 import chisel3._
+import chisel3.stage.ChiselStage
 import chisel3.util._
 import processor.components._
 import processor.stages._
@@ -41,7 +42,13 @@ class ProcessorTopLevel extends Module {
   EX.io.writeEnable := MEM.io.registerWriteEnableOut
   EX.io.rdReg := MEM.io.rdRegOut
 
+  //--- Temporary Connection ---//
+  IF.io.AddressJump := 0.U
+  IF.io.EnableJump := false.B
 
+}
 
+object Processor extends App {
+  (new chisel3.stage.ChiselStage).emitVerilog(new ProcessorTopLevel)
 }
 
