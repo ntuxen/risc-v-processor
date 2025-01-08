@@ -40,6 +40,12 @@ class ControlUnit  extends Module{
        (io.funct3 === AluFunct3.srl.U && io.funct7 === AluFunct7.default.U) -> AluOperation.Srl.id.U,
        (io.funct3 === AluFunct3.sra.U && io.funct7 === AluFunct7.SRA_SUB.U) -> AluOperation.Sra.id.U
      ))
+ } .otherwise {
+   io.MemWriteEnable := false.B
+   io.MemReadEnable := false.B
+   io.RegWriteEnable := false.B
+   io.WriteDataMux := false.B
+   io.AluSel := 0.U
  }
 
 

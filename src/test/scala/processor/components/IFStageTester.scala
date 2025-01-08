@@ -1,5 +1,3 @@
-package processor.components
-
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
@@ -15,8 +13,8 @@ class IFStageTester extends AnyFlatSpec with ChiselScalatestTester {
 
       // Verify the upcounting feature
       for( addr <- 0 to 5) {
-        dut.io.instruction.expect((addr*4).U)
         dut.clock.step(1)
+        dut.io.instruction.expect((addr*4).U)
       }
 
       // Verify jump functionality
