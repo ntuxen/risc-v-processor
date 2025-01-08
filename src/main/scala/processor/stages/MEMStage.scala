@@ -1,8 +1,8 @@
 package processor.stages
 import chisel3._
 import chisel3.util._
-import processor.components.MemoryTest
-import processor.components.Memory
+import processor.components.DataMemoryTest
+import processor.components.DataMemory
 
 class MEMStage extends Module {
   val io = IO(new Bundle {
@@ -23,7 +23,7 @@ class MEMStage extends Module {
   val ALUResReg = RegInit(0.U(32.W))
   val controlReg = RegInit(0.U(2.W)) // Bit #1 = registerWriteEnableIn, Bit #0 = writeDataMux
   val rdReg = RegInit(0.U(5.W))
-  val dataMem = Module(new MemoryTest(1024,10))
+  val dataMem = Module(new DataMemoryTest(1024,10))
 
   // INPUTS TO REGISTERS
   ALUResReg := io.ALURes
