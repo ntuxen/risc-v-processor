@@ -1,0 +1,4 @@
+# Test ADDI
+li x4, 15           # Load x4 with 15
+addi x4, x4, 5      # x4 = x4 + 5 = 20
+addi x4, x4, -20    # x4 = x4 - 20 = 0 (Reset x4)

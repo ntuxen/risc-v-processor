@@ -1,0 +1,4 @@
+li x5, 35           # Load x5 with 35
+li x6, 10           # Load x6 with 10
+sub x7, x5, x6      # x7 = x5 - x6 = 25
+sub x7, x7, x7      # x7 = x7 - x7 = 0 (Reset x7)

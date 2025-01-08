@@ -1,0 +1,5 @@
+# Test OR
+addi x12, x0, 10      # Load binary 1010 into x12
+addi x13, x0, 5      # Load binary 0101 into x13
+or x14, x12, x13    # x14 = x12 OR x13 = 0b1111
+and x14, x14, x0    # x14 = x14 AND x0 = 0 (Reset x14)

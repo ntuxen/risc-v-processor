@@ -1,0 +1,4 @@
+# Test ORI
+addi x15, x0, 10     # Load binary 1010 into x15
+ori x15, x15, 0b0000 # x15 = x15 ORI 0b0000 = 0b1010
+xor x15, x15, x15   # x15 = x15 XOR x15 = 0 (Reset x15)
