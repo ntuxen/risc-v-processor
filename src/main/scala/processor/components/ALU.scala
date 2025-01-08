@@ -9,7 +9,7 @@ class ALU extends Module {
     val operand1 = Input(UInt(32.W))
     val operand2 = Input(UInt(32.W))
     //------------Output-------------//
-    val result = Output(UInt(32.W))
+    val ALURes = Output(SInt(32.W))
   })
 
   // Typecast operands to SInt for all ALU operations
@@ -19,19 +19,19 @@ class ALU extends Module {
   // ALU Operations, using signed operands directly
   switch(io.ALUSel) {
     is(AluOperation.Add.id.U) {
-      io.result := (signedOperand1 + signedOperand2).asUInt
+      io.ALURes := (signedOperand1 + signedOperand2).asUInt
     }
     is(AluOperation.Sub.id.U) {
-      io.result := (signedOperand1 - signedOperand2).asUInt
+      io.ALURes := (signedOperand1 - signedOperand2).asUInt
     }
     is(AluOperation.And.id.U) {
-      io.result := (signedOperand1 & signedOperand2)
+      io.ALURes := (signedOperand1 & signedOperand2)
     }
     is(AluOperation.Or.id.U) {
-      io.result := (signedOperand1 | signedOperand2)
+      io.ALURes := (signedOperand1 | signedOperand2)
     }
     is(AluOperation.Xor.id.U) {
-      io.result := (signedOperand1 ^ signedOperand2)
+      io.ALURes := (signedOperand1 ^ signedOperand2)
     }
   }
 }
