@@ -23,5 +23,11 @@ class InstrMemoryTest(val size: Int, val addrWidth: Int) extends Module {
   io.dataOut := dataReg      // Output the value from the register
 
   // For testing purposes
-  mem(1) := "h12300093".U
+  mem(1) := "h11100093".U
+  mem(2) := "h22200113".U
+  mem(3) := "h00000013".U
+  mem(4) := "h00000013".U
+  mem(5) := "h00000013".U
+  mem(6) := "h00000013".U
+  mem(7) := "h002081b3".U
 }

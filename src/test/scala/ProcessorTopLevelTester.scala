@@ -8,7 +8,7 @@ class ProcessorTopLevelTester extends AnyFlatSpec with ChiselScalatestTester {
     test(new ProcessorTopLevel).withAnnotations(Seq(WriteVcdAnnotation))
     { dut =>
 
-      dut.clock.step(10)
+      dut.clock.step(20)
 
     }
   }

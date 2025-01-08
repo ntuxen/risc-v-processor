@@ -34,6 +34,6 @@ class RegisterFile extends Module {
     }
   }
 
-  io.operand1 := RegFile(io.rs1)
-  io.operand2 := RegFile(io.rs2)
+  io.operand1 := RegNext(RegFile(io.rs1))
+  io.operand2 := RegNext(RegFile(io.rs2))
 }
