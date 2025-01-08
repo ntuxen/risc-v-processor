@@ -14,4 +14,7 @@ class InstrMemoryTest(val size: Int, val addrWidth: Int) extends Module {
   val mem = RegInit(VecInit(Seq.tabulate(size) { i => (i*1).U(width.W)}))
   // Read
   io.dataOut := RegNext(mem(io.addr)) // RegNext because RegInit has asynchronous read, which we do not want
+
+  // For testing purposes
+  mem(1) := "h12300093".U
 }

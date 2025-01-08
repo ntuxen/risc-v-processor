@@ -9,12 +9,17 @@ import processor.stages._
 class ProcessorTopLevel extends Module {
   val io = IO(new Bundle {
 
+    val stealingSignals = Output(UInt(32.W)) // FAKE OUTPUT
+
   })
 
   val IF = Module(new IFStage)
   val ID = Module(new InstructionDecoder) // ID Stage
   val EX = Module(new EXStage)
   val MEM = Module (new MEMStage)
+
+  // FAKE OUTPUT
+  io.stealingSignals := EX.io.writeData
 
   //-------------Connections-------------//
   //---- ID <- IF -----//
@@ -34,7 +39,7 @@ class ProcessorTopLevel extends Module {
   MEM.io.address := EX.io.address
   MEM.io.dataWriteMem := EX.io.dataWriteMem
   MEM.io.memWriteEnable := EX.io.MemWriteEnable
-  MEM.io.registerWriteEnableIn := EX.io.registerWriteEnableIn
+  MEM.io.registerWriteEnableIn := EX.io.RegWriteEnable
   MEM.io.writeDataMux := EX.io.WriteDataMux
   MEM.io.rdRegIn := EX.io.rdRegIn
   //----  EX <- MEM ----//

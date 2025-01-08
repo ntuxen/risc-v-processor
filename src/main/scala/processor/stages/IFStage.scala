@@ -13,8 +13,8 @@ class IFStage extends Module {
   // PC logic
   // Remember that the PC implicitly starts at an instruction address 4 higher
   // TODO: fix the above
-  val PC = RegInit("hFFFFFFFC".U(32.W))
-  val NextInstrAdd = WireDefault(Mux(io.EnableJump, io.AddressJump, PC + 4.U)) // TODO: set increment to 4 instead
+  val PC = RegInit("hFFFFFFFF".U(32.W))
+  val NextInstrAdd = WireDefault(Mux(io.EnableJump, io.AddressJump, PC + 1.U)) // TODO: set increment to 4 instead
   PC := NextInstrAdd
 
   // Instruction memory

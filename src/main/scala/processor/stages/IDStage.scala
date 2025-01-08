@@ -66,6 +66,7 @@ class InstructionDecoder extends Module {
     is(InstrType.IType.id.U) {
       io.rs1 := io.instruction(19, 15)
       io.funct3 := io.instruction(14, 12)
+      io.rd := io.instruction(11, 7)
     }
     is(InstrType.SType.id.U) {
       io.rs1 := io.instruction(19, 15)
