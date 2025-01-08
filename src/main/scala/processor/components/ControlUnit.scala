@@ -3,10 +3,12 @@ import chisel3._
 import chisel3.util._
 class ControlUnit  extends Module{
   val io = IO(new Bundle{
+    //------------Input-------------//
     val funct3 = Input(UInt(3.W))
     val funct7 = Input(UInt(7.W))
     val instrType = Input(UInt(3.W))
     val opcode = Input(UInt(7.W))
+    //------------Output-------------//
     val MuxAluSel = Output(UInt(1.W))
     val AluSel = Output(UInt(8.W))
     val RegWriteEnable = Output(UInt(1.W))

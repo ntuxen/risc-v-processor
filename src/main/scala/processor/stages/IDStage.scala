@@ -5,7 +5,9 @@ import processor.components._
 
 class InstructionDecoder extends Module {
   val io = IO(new Bundle {
+    //------------Input-------------//
     val instruction = Input(UInt(32.W))
+    //------------Output-------------//
     val rs1 = Output(UInt(5.W))
     val rs2 = Output(UInt(5.W))
     val rd = Output(UInt(5.W))
