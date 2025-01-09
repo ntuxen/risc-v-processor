@@ -15,8 +15,8 @@ class ImmediateGenerator extends Module {
     is(InstrType.RType.id.U){
       io.immediate := 0.U(32.W)
     }
-    is(InstrType.IType.id.U){
-      io.immediate := io.instruction(31, 20)
+    is(InstrType.IType.id.U) {
+      io.immediate := Cat(Fill(20, io.instruction(31)), io.instruction(31, 20))
     }
     is(InstrType.SType.id.U){
       io.immediate := Cat(io.instruction(31, 25), io.instruction(11, 7))
