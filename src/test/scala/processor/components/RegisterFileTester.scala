@@ -1,8 +1,7 @@
-package processor.components
-
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
+import processor.components.RegisterFile
 
 class RegisterFileTester extends AnyFlatSpec with ChiselScalatestTester {
   "RegisterFileTester" should "pass" in {
@@ -25,15 +24,21 @@ class RegisterFileTester extends AnyFlatSpec with ChiselScalatestTester {
       // RUN 1 (Try to write a value to x1)
       pokeInputs(1.U, 31.U, 42.U, 1.U, 1.U)
       dut.clock.step()
+      pokeInputs(1.U, 31.U, 42.U, 1.U, 0.U)
+      dut.clock.step()
       checkOutputs(42.U, 0.U, "Error when writing to registerFile x1")
 
       // RUN 2 (Try to write a value to x2)
       pokeInputs(31.U, 2.U, 42.U, 2.U, 1.U)
       dut.clock.step()
+      pokeInputs(31.U, 2.U, 42.U, 2.U, 0.U)
+      dut.clock.step()
       checkOutputs(0.U, 42.U, "Error when writing to registerFile x2")
 
       // RUN 3 (Try to write a value to x0 and hopefully fail)
       pokeInputs(0.U, 31.U, 42.U, 0.U, 1.U)
+      dut.clock.step()
+      pokeInputs(0.U, 31.U, 42.U, 0.U, 0.U)
       dut.clock.step()
       checkOutputs(0.U, 0.U, "Error when writing to registerFile x0 (should not be possible)")
     }
