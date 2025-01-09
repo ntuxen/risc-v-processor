@@ -35,7 +35,7 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   EX.io.rs1 := ID.io.rs1
   EX.io.rs2 := ID.io.rs2
   EX.io.rd := ID.io.rd
-  EX.io.PC := ID.io.PCOut
+  EX.io.BranchAddressIn := ID.io.PCOut
   //---- MEM <- EX  ----//
   MEM.io.ALURes := EX.io.ALURes
   MEM.io.address := EX.io.address
@@ -44,7 +44,7 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   MEM.io.registerWriteEnableIn := EX.io.RegWriteEnable
   MEM.io.writeDataMux := EX.io.WriteDataMux
   MEM.io.rdRegIn := EX.io.rdRegIn
-  MEM.io.BranchAddressIn := EX.io.BranchAddress
+  MEM.io.BranchAddressIn := EX.io.BranchAddressOut
   //----  EX <- MEM ----//
   EX.io.writeData := MEM.io.writeData
   EX.io.writeEnable := MEM.io.registerWriteEnableOut
