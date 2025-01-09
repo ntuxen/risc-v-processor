@@ -11,23 +11,29 @@ class InstrMemoryTest(val size: Int, val addrWidth: Int) extends Module {
     val dataOut = Output(UInt(width.W))
   })
 
-  // Make memory with RegInit.
-  // Insert dummy values (incrementing numbers from 0)
-  val mem = RegInit(VecInit(Seq.tabulate(size) { i => (i*1).U(width.W)}))
-  // Read
-  annotate(new ChiselAnnotation {
-    def toFirrtl = DontTouchAnnotation(dataReg.toTarget) // Mark the problematic register as non-optimizable
-  })
-  val dataReg = RegInit(0.U) // Initialize register explicitly
-  dataReg := mem(io.addr)    // Update dataReg with the memory value
-  io.dataOut := dataReg      // Output the value from the register
+  // Define the program
+  val program: Seq[UInt] = Seq(
+    "h00f00213".U(32.W), // Sample instructions
+    "h00520213".U(32.W),
+    "hfec20213".U(32.W),
+    "h00000013".U(32.W),
+    "h00000013".U(32.W),
+    "h00000013".U(32.W),
+    "h00000013".U(32.W),
+    "h002081b3".U(32.W)
+  )
 
-  // For testing purposes
-  mem(1) := "h11100093".U
-  mem(2) := "h22200113".U
-  mem(3) := "h00000013".U
-  mem(4) := "h00000013".U
-  mem(5) := "h00000013".U
-  mem(6) := "h00000013".U
-  mem(7) := "h002081b3".U
+  // Initialize memory with program and fill the rest with 0
+  val mem = RegInit(VecInit(
+    program.padTo(size, 0.U(32.W)) // Pad with 0 to reach the required size
+  ))
+
+  // Explicit register with DontTouchAnnotation
+  val dataReg = RegNext(mem(io.addr), init = 0.U) // Equivalent to using RegInit for init
+  annotate(new ChiselAnnotation {
+    def toFirrtl = DontTouchAnnotation(dataReg.toTarget) // Keep register from being optimized
+  })
+
+  //io.dataOut := dataReg // Assign register value to output
+  io.dataOut := mem(io.addr)
 }

@@ -6,9 +6,6 @@ import processor.stages.IFStage
 class IFStageTester extends AnyFlatSpec with ChiselScalatestTester {
       it should "pass in test" in {
         test(new IFStage).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
-          dut.reset.poke(true.B)
-          dut.clock.step(1)
-          dut.reset.poke(false.B)
           // Debug: Initial Instruction
           println(s"Initial Instruction = ${dut.io.instruction.peek()}")
 
