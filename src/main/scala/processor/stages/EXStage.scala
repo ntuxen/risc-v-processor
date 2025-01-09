@@ -27,6 +27,8 @@ class EXStage extends Module {
     val MemReadEnable = Output(UInt(1.W))
     val MemWriteEnable = Output(UInt(1.W))
     val BranchAddressOut = Output(UInt(32.W))
+    val readIsIO = Output(Bool())
+    val IOWriteEnable = Output(Bool())
   })
   //Load needed modules/components
   val RegFile = Module(new RegisterFile)
@@ -61,6 +63,8 @@ class EXStage extends Module {
   io.WriteDataMux := 0.U
   io.MemReadEnable := 0.U
   io.MemWriteEnable := 0.U
+  io.readIsIO := false.B
+  io.IOWriteEnable := false.B
 
   //Connect RegFile
   RegFile.io.rs1 := io.rs1
@@ -73,7 +77,7 @@ class EXStage extends Module {
   //ALU and RegFile connections
   ALU.io.operand1 := RegFile.io.operand1
   ALU.io.operand2 := Mux(controlUnit.io.MuxAluSel === 1.U, immGen.io.immediate, RegFile.io.operand2)
-  io.ALURes := ALU.io.ALURes
+    io.ALURes := ALU.io.ALURes
   io.address := ALU.io.ALURes
 
   //Connect ImmGen
@@ -92,6 +96,14 @@ class EXStage extends Module {
   io.MemReadEnable := controlUnit.io.MemReadEnable
   io.MemWriteEnable := controlUnit.io.MemWriteEnable
   ALU.io.ALUSel := controlUnit.io.AluSel
+
+
+  // Logic for memory-mapped IO: address in memory or IO
+  when(ALU.io.ALURes >= 1024.U) { // if requested address is in IO space
+    io.MemWriteEnable := false.B // Don't write to normal memory
+    io.readIsIO := true.B
+    io.IOWriteEnable := controlUnit.io.MemWriteEnable
+  }
 
 
   //Connect rdReg
