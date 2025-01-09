@@ -16,6 +16,7 @@ class EXStage extends Module {
     val writeData = Input(UInt(32.W))
     val writeEnable = Input(UInt(1.W))
     val rdReg = Input(UInt(5.W))
+    val PC = Input(UInt(32.W))
     //------------Output-------------//
     val ALURes = Output(UInt(32.W))
     val address = Output(UInt(32.W))
@@ -25,6 +26,7 @@ class EXStage extends Module {
     val WriteDataMux = Output(UInt(1.W))
     val MemReadEnable = Output(UInt(1.W))
     val MemWriteEnable = Output(UInt(1.W))
+    val BranchAddress = Output(UInt(32.W))
   })
   //Load needed modules/components
   val RegFile = Module(new RegisterFile)
@@ -89,9 +91,9 @@ class EXStage extends Module {
   ALU.io.ALUSel := controlUnit.io.AluSel
 
 
-
-
   //Connect rdReg
   io.rdRegIn := rdReg
 
+  //BranchAddress Logic:
+  io.BranchAddress := io.PC + (immGen.io.immediate << 1)
 }

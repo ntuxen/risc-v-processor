@@ -14,10 +14,12 @@ class MEMStage extends Module {
     val registerWriteEnableIn = Input(UInt(1.W))
     val writeDataMux = Input(UInt(1.W))
     val rdRegIn = Input(UInt(5.W))
+    val BranchAddressIn = Input(UInt(32.W))
 
     val writeData = Output(UInt(32.W))
     val registerWriteEnableOut = Output(Bool())
     val rdRegOut = Output(UInt(5.W))
+    val BranchAddressOut = Output(UInt(32.W))
   })
 
   val ALUResReg = RegInit(0.U(32.W))

@@ -7,6 +7,7 @@ class InstructionDecoder extends Module {
   val io = IO(new Bundle {
     //------------Input-------------//
     val instruction = Input(UInt(32.W))
+    val PCIn = Input(UInt(32.W))
     //------------Output-------------//
     val rs1 = Output(UInt(5.W))
     val rs2 = Output(UInt(5.W))
@@ -15,6 +16,7 @@ class InstructionDecoder extends Module {
     val funct7 = Output(UInt(7.W))
     val instrType = Output(UInt(3.W))
     val opcode = Output(UInt(7.W))
+    val PCOut = Output(UInt(32.W))
   })
   // Default values for outputs
   io.rs1 := 0.U
@@ -85,6 +87,10 @@ class InstructionDecoder extends Module {
       io.rd := io.instruction(11, 7)
     }
   }
+
+  //Connect PC
+  io.PCOut := io.PCIn
+
 }
 
 class IDStage {

@@ -25,6 +25,7 @@ class ProcessorTopLevel extends Module {
   //---- ID <- IF -----//
   // There are no input register in the ID stage; instead there is an output register in the IF stage
   ID.io.instruction := IF.io.instruction
+  ID.io.PCIn := IF.io.PC
   //---- EX <- ID -----//
   EX.io.instruction := IF.io.instruction // No register in ID stage anyways, so this is valid
   EX.io.instrType := ID.io.instrType
@@ -34,6 +35,7 @@ class ProcessorTopLevel extends Module {
   EX.io.rs1 := ID.io.rs1
   EX.io.rs2 := ID.io.rs2
   EX.io.rd := ID.io.rd
+  EX.io.PC := ID.io.PCOut
   //---- MEM <- EX  ----//
   MEM.io.ALURes := EX.io.ALURes
   MEM.io.address := EX.io.address
@@ -42,13 +44,16 @@ class ProcessorTopLevel extends Module {
   MEM.io.registerWriteEnableIn := EX.io.RegWriteEnable
   MEM.io.writeDataMux := EX.io.WriteDataMux
   MEM.io.rdRegIn := EX.io.rdRegIn
+  MEM.io.BranchAddressIn := EX.io.BranchAddress
   //----  EX <- MEM ----//
   EX.io.writeData := MEM.io.writeData
   EX.io.writeEnable := MEM.io.registerWriteEnableOut
   EX.io.rdReg := MEM.io.rdRegOut
 
+  //----- IF <- MEM ------//
+  IF.io.BranchAddress := MEM.io.BranchAddressOut
+
   //--- Temporary Connection ---//
-  IF.io.AddressJump := 0.U
   IF.io.EnableJump := false.B
 
 }
