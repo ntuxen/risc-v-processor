@@ -28,48 +28,71 @@ class DecodingTester extends AnyFlatSpec with ChiselScalatestTester {
 
       printDutState()
 
+      dut.clock.step(1)
+
       // Test ADD instruction (R-Type)
       // Full instruction: opcode (0110011), funct3 (000 for ADD), funct7 (0000000 for ADD)
       val addInstruction = "b0000000_00010_00001_000_00011_0110011".U // ADD x3 = x1 + x2
       dut.io.instruction.poke(addInstruction)
       println("Poked instruction for ADD (x3 = x1 + x2)")
-
+      dut.clock.step(1)
       printDutState()
       // Test SUB instruction (R-Type)
       // Full instruction: opcode (0110011), funct3 (000 for SUB), funct7 (0100000 for SUB)
       val subInstruction = "b0100000_00100_00011_000_00101_0110011".U // SUB x5 = x3 - x4
       dut.io.instruction.poke(subInstruction)
       println("Poked instruction for SUB (x5 = x3 - x4)")
-
+      dut.clock.step(1)
       printDutState()
       // Test AND instruction (R-Type)
       // Full instruction: opcode (0110011), funct3 (111 for AND), funct7 (0000000 for AND)
       val andInstruction = "b0000000_00110_00101_111_00111_0110011".U // AND x7 = x5 & x6
       dut.io.instruction.poke(andInstruction)
       println("Poked instruction for AND (x7 = x5 & x6)")
-
+      dut.clock.step(1)
       printDutState()
       // Test ADDI instruction (I-Type)
       // Full instruction: opcode (0010011), funct3 (000 for ADDI), imm (12 bits)
       val addiInstruction = "b000000000101_00001_000_00010_0010011".U // ADDI x2 = x1 + 5
       dut.io.instruction.poke(addiInstruction)
       println("Poked instruction for ADDI (x2 = x1 + 5)")
-
+      dut.clock.step(1)
       printDutState()
       // Test ORI instruction (I-Type)
       // Full instruction: opcode (0010011), funct3 (110 for ORI), imm (12 bits)
       val oriInstruction = "b000000001011_00010_110_00011_0010011".U // ORI x3 = x2 | 11
       dut.io.instruction.poke(oriInstruction)
       println("Poked instruction for ORI (x3 = x2 | 11)")
-
+      dut.clock.step(1)
       printDutState()
       // Test ANDI instruction (I-Type)
       // Full instruction: opcode (0010011), funct3 (111 for ANDI), imm (12 bits)
       val andiInstruction = "b000000000011_00011_111_00100_0010011".U // ANDI x4 = x3 & 3
       dut.io.instruction.poke(andiInstruction)
       println("Poked instruction for ANDI (x4 = x3 & 3)")
-
       printDutState()
+      dut.clock.step(1)
+      // Test Slli instruction (I-Type)
+      val slliInstruction = "h00101093".U // slli x1, x0, 1
+      dut.io.instruction.poke(slliInstruction)
+      println("Poked instruction for slli x1, x0, 1")
+      printDutState()
+      dut.clock.step(1)
+      // Test Srli instruction (I-Type)
+      val srliInstruction = "h00105093".U // srli x1, x0, 1
+      dut.io.instruction.poke(srliInstruction)
+      println("Poked instruction for srli x1, x0, 1")
+      printDutState()
+      dut.clock.step(1)
+      // Test Srai instruction (I-Type)
+      val sraiInstruction = "h40105093".U // srai x1, x0, 1
+      dut.io.instruction.poke(sraiInstruction)
+      println("Poked instruction for srai x1, x0, 1")
+      printDutState()
+      dut.clock.step(1)
+
+
+
 
     }
   }
