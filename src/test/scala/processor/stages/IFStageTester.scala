@@ -30,7 +30,7 @@ class IFStageTester extends AnyFlatSpec with ChiselScalatestTester {
             println(f"Cycle $i: Instruction at PC=${i * 4}: 0x${instruction.toString(16)}")
 
             dut.io.EnableJump.poke(false.B)
-            dut.io.AddressJump.poke(0.U)
+            dut.io.BranchAddress.poke(0.U)
             dut.clock.step(1) // Step once to set PC+4
             dut.clock.step(1) // Step again to resolve SyncReadMem
 
@@ -40,7 +40,7 @@ class IFStageTester extends AnyFlatSpec with ChiselScalatestTester {
           // Test jump logic
           println("\nTesting jump logic:")
           dut.io.EnableJump.poke(true.B)     // Activate jump
-          dut.io.AddressJump.poke(8.U)      // Jump to addr 8
+          dut.io.BranchAddress.poke(8.U)      // Jump to addr 8
           dut.clock.step(1)                 // Execute the jump
           dut.clock.step(1)                 // Resolve memory access
 
