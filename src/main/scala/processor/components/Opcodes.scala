@@ -59,7 +59,18 @@ object InstrType extends Enumeration {
   val RType, IType, SType, BType, UType, JType = Value
 }
 
-object AluOperation extends Enumeration{
+object AluOperation extends Enumeration {
   type AluOperation = Value
+
+  // Arithmetic and Logical Operations
   val Add, Sub, And, Or, Xor, Sll, Srl, Sra, Slt, Sltu = Value
+
+  // Branch Operations
+  val Beq, Bne, Blt, Bge, Bltu, Bgeu = Value
+
+  // Load Operations
+  val Lb, Lh, Lw, Lbu, Lhu = Value
+
+  // Store Operations
+  val Sb, Sh, Sw = Value
 }
