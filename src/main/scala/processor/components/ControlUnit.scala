@@ -1,14 +1,16 @@
 package processor.components
 import chisel3._
 import chisel3.util._
-class ControlUnit  extends Module{
-  val io = IO(new Bundle{
-    //------------Input-------------//
+
+// ControlUnit
+class ControlUnit extends Module {
+  val io = IO(new Bundle {
+    // Inputs
     val funct3 = Input(UInt(3.W))
     val funct7 = Input(UInt(7.W))
     val instrType = Input(UInt(3.W))
     val opcode = Input(UInt(7.W))
-    //------------Output-------------//
+    // Outputs
     val MuxAluSel = Output(UInt(1.W))
     val AluSel = Output(UInt(8.W))
     val RegWriteEnable = Output(UInt(1.W))
@@ -17,37 +19,73 @@ class ControlUnit  extends Module{
     val MemWriteEnable = Output(UInt(1.W))
   })
 
+  // Default values for outputs
   io.MemWriteEnable := false.B
   io.MemReadEnable := false.B
   io.RegWriteEnable := false.B
   io.WriteDataMux := false.B
   io.AluSel := 0.U
+  io.MuxAluSel := 1.U // Default immediate
 
-  //Controlling mux that chooses rs2 or immediate for the ALU
- when((io.opcode === Opcode.Alu) || (io.opcode === Opcode.branch)){
-   io.MuxAluSel := 0.U //Take rs2
- }.otherwise{
-   io.MuxAluSel := 1.U //Take Immediate
- }
+  // Helper function to map ALU opcode and function decoding
+  def getAluOperation(funct3: UInt, funct7: UInt): UInt = {
+    val compositeKey = Cat(funct3, funct7).asUInt()
 
- when(io.opcode === Opcode.Alu || io.opcode === Opcode.AluImm){
-     io.MemWriteEnable := 0.U
-     io.MemReadEnable := 0.U
-     io.RegWriteEnable := 1.U
-     io.WriteDataMux := 0.U
-     io.AluSel := MuxCase(0.U, Array(
-       (io.funct3 === AluFunct3.add.U && io.funct7 === AluFunct7.default.U) -> AluOperation.Add.id.U,
-       (io.funct3 === AluFunct3.sub.U && io.funct7 === AluFunct7.SRA_SUB.U) -> AluOperation.Sub.id.U,
-       (io.funct3 === AluFunct3.xor.U && io.funct7 === AluFunct7.default.U) -> AluOperation.Xor.id.U,
-       (io.funct3 === AluFunct3.or.U && io.funct7 === AluFunct7.default.U) -> AluOperation.Or.id.U,
-       (io.funct3 === AluFunct3.and.U && io.funct7 === AluFunct7.default.U) -> AluOperation.And.id.U,
-       (io.funct3 === AluFunct3.sll.U && io.funct7 === AluFunct7.default.U) -> AluOperation.Sll.id.U,
-       (io.funct3 === AluFunct3.slt.U && io.funct7 === AluFunct7.default.U) -> AluOperation.Slt.id.U,
-       (io.funct3 === AluFunct3.sltu.U && io.funct7 === AluFunct7.default.U) -> AluOperation.Sltu.id.U,
-       (io.funct3 === AluFunct3.srl.U && io.funct7 === AluFunct7.default.U) -> AluOperation.Srl.id.U,
-       (io.funct3 === AluFunct3.sra.U && io.funct7 === AluFunct7.SRA_SUB.U) -> AluOperation.Sra.id.U
-     ))
- }
+    // Ensure lookup table keys are correctly and explicitly defined
+    MuxLookup(compositeKey, 0.U, Seq( //Default to 0.U
+      Cat(AluFunct3.add.U(3.W), AluFunct7.default.U(7.W)) -> AluOperation.Add.id.U,
+      Cat(AluFunct3.sub.U(3.W), AluFunct7.SRA_SUB.U(7.W)) -> AluOperation.Sub.id.U,
+      Cat(AluFunct3.xor.U(3.W), AluFunct7.default.U(7.W)) -> AluOperation.Xor.id.U,
+      Cat(AluFunct3.or.U(3.W), AluFunct7.default.U(7.W)) -> AluOperation.Or.id.U,
+      Cat(AluFunct3.and.U(3.W), AluFunct7.default.U(7.W)) -> AluOperation.And.id.U,
+      Cat(AluFunct3.sll.U(3.W), AluFunct7.default.U(7.W)) -> AluOperation.Sll.id.U,
+      Cat(AluFunct3.slt.U(3.W), AluFunct7.default.U(7.W)) -> AluOperation.Slt.id.U,
+      Cat(AluFunct3.sltu.U(3.W), AluFunct7.default.U(7.W)) -> AluOperation.Sltu.id.U,
+      Cat(AluFunct3.srl.U(3.W), AluFunct7.default.U(7.W)) -> AluOperation.Srl.id.U,
+      Cat(AluFunct3.sra.U(3.W), AluFunct7.SRA_SUB.U(7.W)) -> AluOperation.Sra.id.U
+    ))
+  }
 
+  // Opcode-specific logic
+  switch(io.opcode) {
+    is(Opcode.Alu, Opcode.AluImm) { // ALU Operations
+      io.RegWriteEnable := true.B
+      io.AluSel := getAluOperation(io.funct3, io.funct7)
+      io.MuxAluSel := Mux(io.opcode === Opcode.Alu, 0.U, 1.U) // rs2 or immediate
+    }
 
+    is(Opcode.branch) { // Branch Operations
+      io.RegWriteEnable := false.B
+      io.AluSel := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
+        BranchFunct3.beq.U -> AluOperation.Beq.id.U,
+        BranchFunct3.bne.U -> AluOperation.Bne.id.U,
+        BranchFunct3.blt.U -> AluOperation.Blt.id.U,
+        BranchFunct3.bge.U -> AluOperation.Bge.id.U,
+        BranchFunct3.bltu.U -> AluOperation.Bltu.id.U,
+        BranchFunct3.bgeu.U -> AluOperation.Bgeu.id.U
+      ))
+    }
+
+    is(Opcode.load) { // Load Operations
+      io.RegWriteEnable := true.B
+      io.WriteDataMux := true.B
+      io.AluSel := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
+        LoadFunct3.lb.U -> AluOperation.Lb.id.U,
+        LoadFunct3.lh.U -> AluOperation.Lh.id.U,
+        LoadFunct3.lw.U -> AluOperation.Lw.id.U,
+        LoadFunct3.lbu.U -> AluOperation.Lbu.id.U,
+        LoadFunct3.lhu.U -> AluOperation.Lhu.id.U
+      ))
+    }
+
+    is(Opcode.store) { // Store Operations
+      io.MemWriteEnable := true.B
+      io.RegWriteEnable := false.B
+      io.AluSel := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
+        StoreFunct3.sb.U -> AluOperation.Sb.id.U,
+        StoreFunct3.sh.U -> AluOperation.Sh.id.U,
+        StoreFunct3.sw.U -> AluOperation.Sw.id.U
+      ))
+    }
+  }
 }
