@@ -6,14 +6,14 @@ import chisel3.util._
 import processor.components._
 import processor.stages._
 
-class ProcessorTopLevel extends Module {
+class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   val io = IO(new Bundle {
 
     val stealingSignals = Output(UInt(32.W)) // FAKE OUTPUT
 
   })
 
-  val IF = Module(new IFStage)
+  val IF = Module(new IFStage(program))
   val ID = Module(new InstructionDecoder) // ID Stage
   val EX = Module(new EXStage)
   val MEM = Module (new MEMStage)
@@ -54,6 +54,18 @@ class ProcessorTopLevel extends Module {
 }
 
 object Processor extends App {
-  (new chisel3.stage.ChiselStage).emitVerilog(new ProcessorTopLevel)
+  // Define the program
+  val program: Seq[UInt] = Seq(
+    "h00f00213".U(32.W), // Sample instructions
+    "h00520213".U(32.W),
+    "hfec20213".U(32.W),
+    "h00000013".U(32.W),
+    "h00000013".U(32.W),
+    "h00000013".U(32.W),
+    "h00000013".U(32.W),
+    "h002081b3".U(32.W)
+  )
+
+  (new chisel3.stage.ChiselStage).emitVerilog(new ProcessorTopLevel(program))
 }
 
