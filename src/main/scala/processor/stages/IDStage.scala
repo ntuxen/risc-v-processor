@@ -71,7 +71,7 @@ class InstructionDecoder extends Module {
       io.rd := io.instruction(11, 7)
       when(io.funct3 === AluFunct3.sll.U || io.funct3 === AluFunct3.srl.U || io.funct3 === AluFunct3.sra.U){
         //funct7 set to imm[5:11]
-        io.funct7 := Reverse(io.instruction(31, 25))
+        io.funct7 := io.instruction(31, 25)
       }
     }
     is(InstrType.SType.id.U) {

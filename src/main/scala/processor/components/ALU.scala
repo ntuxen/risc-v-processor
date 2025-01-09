@@ -41,7 +41,8 @@ class ALU extends Module {
       io.ALURes := (io.operand1 >> io.operand2(4,0)) // Has to use unsigned operands to make proper logic shift (can max shift 32 bits)
     }
     is(AluOperation.Sra.id.U) {
-      io.ALURes := (signedOperand1 >> signedOperand2.asUInt).asUInt // Has to use signed operands to make arithmetic shift
+      //io.ALURes := (signedOperand1 >> signedOperand2(4,0)).asUInt // Has to use signed operands to make arithmetic shift (can max shift 32 bits)
+      io.ALURes := (signedOperand1 >> (signedOperand2(4,0))).asUInt
     }
     is(AluOperation.Slt.id.U) {
       when(signedOperand1 < signedOperand2){ // Has to be signed to compare signed integers
