@@ -25,7 +25,10 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   //---- ID <- IF -----//
   // There are no input register in the ID stage; instead there is an output register in the IF stage
   ID.io.instruction := IF.io.instruction
-  ID.io.PCIn := IF.io.PC
+
+  //---- EX <- IF -----//
+  EX.io.BranchAddressIn := IF.io.PC
+
   //---- EX <- ID -----//
   EX.io.instruction := IF.io.instruction // No register in ID stage anyways, so this is valid
   EX.io.instrType := ID.io.instrType
@@ -35,7 +38,6 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   EX.io.rs1 := ID.io.rs1
   EX.io.rs2 := ID.io.rs2
   EX.io.rd := ID.io.rd
-  EX.io.BranchAddressIn := ID.io.PCOut
   //---- MEM <- EX  ----//
   MEM.io.ALURes := EX.io.ALURes
   MEM.io.address := EX.io.address
