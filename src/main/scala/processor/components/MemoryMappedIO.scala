@@ -6,30 +6,35 @@ import lib.peripherals._
 class MemoryMappedIO(val memoryMaxAddress: Int) extends Module {
   val io = IO(new Bundle {
     //------- INPUTS --------//
-    val addressInput = Input(UInt(32.W))
-    //val dataWriteMemInput = Input(UInt(32.W))
-    val memWriteEnableInput = Input(Bool())
+    val address = Input(UInt(32.W))
+    val dataWriteMem = Input(UInt(32.W))
+    val writeEnable = Input(Bool())
     //------ OUTPUTS --------//
-    //val addressOutput = Output(UInt(32.W))
-    //val dataWriteMemOutput = Output(UInt(32.W))
-    val memWriteEnableOutput = Output(Bool())
+    val dataReadIO = Output(UInt(32.W))
     val leds = Output(UInt(16.W))
   })
 
-  // Patch signals
-  // io.addressOutput := io.addressInput // Remains unchanged. May be patched over instead
-  // io.dataWriteMemOutput := io.dataWriteMemInput // Remains unchanged. May be patched over instead
-
-  // IO Modules
-  val leds = Module(new MemoryMappedLeds(16))
-
-  // IO logic
-  io.memWriteEnableOutput := io.memWriteEnableInput // Patch directly unless the following is true
-  when(io.addressInput >= memoryMaxAddress.U) { // If address is out of range
-    io.memWriteEnableOutput := false.B // Don't write to normal memory (just in case?)
-    // Write to IO
-
-
+  object IO_Adresses {
+    val LEDs = 0.U
   }
+  // IO Modules
+  val leds = Module(new MemoryMappedLeds(16)) // contains a register
+
+  // Signals
+  val addressIO = io.address - memoryMaxAddress.U // May be accomplished by a shift register, if the data memory size is static
+
+  //------ Patching/IO logic -------//
+  // LEDs
+  leds.io.port.write := io.writeEnable && (addressIO === IO_Adresses.LEDs) // Write when address matches
+  leds.io.port.wrData := io.dataWriteMem(15,0)
+  leds.io.port.read := (!io.writeEnable) && (addressIO === IO_Adresses.LEDs) // Read when not writing
+  leds.io.port.addr := 0.U // For initialization
+  io.dataReadIO := leds.io.port.rdData // Output to register file
+  io.leds := leds.io.pins // Output to LEDs
+  // UART
+
+
+
+
 
 }
