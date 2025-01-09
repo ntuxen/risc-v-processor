@@ -1,8 +1,9 @@
+package processor.components
+
 
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
-import processor.components.{ImmediateGenerator, InstrType}
 
 class ImmediateGenTester extends AnyFlatSpec with ChiselScalatestTester {
   "DecodingTester" should "pass" in {

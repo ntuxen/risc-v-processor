@@ -1,7 +1,8 @@
+package processor.stages
+
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
-import processor.stages._
 
 class MEMStageTester extends AnyFlatSpec with ChiselScalatestTester {
   "MEMStage test" should "pass" in {

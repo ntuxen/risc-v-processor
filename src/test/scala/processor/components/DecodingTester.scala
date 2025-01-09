@@ -1,8 +1,10 @@
+package processor.components
+
 
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
-import processor.stages.{IDStage, InstructionDecoder}
+import processor.stages.InstructionDecoder
 
 class DecodingTester extends AnyFlatSpec with ChiselScalatestTester {
   "DecodingTester" should "pass" in {

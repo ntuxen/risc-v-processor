@@ -1,7 +1,8 @@
+package processor.components
+
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
-import processor.components._
 
 class ControlUnitTester extends AnyFlatSpec with ChiselScalatestTester {
   "ControlUnitTester" should "correctly decode ALU operations" in {

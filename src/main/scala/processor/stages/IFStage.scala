@@ -3,7 +3,7 @@ package processor.stages
 import chisel3._
 import processor.components._
 
-class IFStage extends Module {
+class IFStage(val program: Seq[UInt]) extends Module {
   val io = IO(new Bundle {
     val EnableJump = Input(Bool())
     val BranchAddress = Input(UInt(32.W))
@@ -21,7 +21,7 @@ class IFStage extends Module {
   PC := NextInstrAdd
 
   // Instruction memory
-  val instrMem = Module(new InstrMemoryTest(1024,10))
+  val instrMem = Module(new InstrMemoryTest(1024,10,program))
 
   instrMem.io.addr := NextInstrAdd >> 2.U
   io.instruction := instrMem.io.dataOut

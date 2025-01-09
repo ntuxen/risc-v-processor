@@ -1,7 +1,8 @@
+package processor.components
+
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
-import processor.components.RegisterFile
 
 class RegisterFileTester extends AnyFlatSpec with ChiselScalatestTester {
   "RegisterFileTester" should "pass" in {

@@ -1,11 +1,24 @@
+package processor.stages
+
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
-import processor.stages.IFStage
 
 class IFStageTester extends AnyFlatSpec with ChiselScalatestTester {
-      it should "pass in test" in {
-        test(new IFStage).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
+  // Define the program
+  val program: Seq[UInt] = Seq(
+    "h00f00213".U(32.W), // Sample instructions
+    "h00520213".U(32.W),
+    "hfec20213".U(32.W),
+    "h00000013".U(32.W),
+    "h00000013".U(32.W),
+    "h00000013".U(32.W),
+    "h00000013".U(32.W),
+    "h002081b3".U(32.W)
+  )
+
+  it should "pass in test" in {
+        test(new IFStage(program)).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
           // Debug: Initial Instruction
           println(s"Initial Instruction = ${dut.io.instruction.peek()}")
 
