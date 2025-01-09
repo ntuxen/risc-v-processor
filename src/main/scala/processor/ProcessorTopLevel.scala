@@ -70,7 +70,8 @@ object Processor extends App {
     "h00000013".U(32.W),
     "h002081b3".U(32.W)
   )
-
+  //Example Usage of loadHexFile:
+  //val program: Seq[UInt] = ProgramLoader.loadHexFile("src/test/TestPrograms/AddImmTest.hex")
   (new chisel3.stage.ChiselStage).emitVerilog(new ProcessorTopLevel(program))
 }
 

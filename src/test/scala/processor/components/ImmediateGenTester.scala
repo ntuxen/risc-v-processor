@@ -11,7 +11,6 @@ class ImmediateGenTester extends AnyFlatSpec with ChiselScalatestTester {
 
       def printDutState(): Unit = {
         println("Immediate: " + dut.io.immediate.peek().litValue) // Print instruction type
-
       }
 
       val oriInstruction = "b000000001011_00010_110_00011_0010011".U // ORI x3 = x2 | 11
@@ -27,6 +26,10 @@ class ImmediateGenTester extends AnyFlatSpec with ChiselScalatestTester {
       println("Poked instruction for ANDI (x4 = x3 & 3)")
 
 
+      val NegativeAddiInstruction = "hff500213".U // ADDI x4 = x0 + (-11)
+      dut.io.instruction.poke(NegativeAddiInstruction)
+      dut.io.instrType.poke(InstrType.IType.id.U)
+      println("Poked instruction for ADDI x4 = x0 + (-11)")
 
       printDutState()
 
