@@ -60,6 +60,7 @@ class ALU extends Module {
         io.ALURes := 0.U
       }
     }
+    // --------  BRANCHES --------------//
     is(AluOperation.Beq.id.U){
       when(io.operand1 === io.operand2){
         io.takeBranch := true.B
@@ -89,6 +90,10 @@ class ALU extends Module {
       when(io.operand1 >= io.operand2){
         io.takeBranch := true.B
       }
+    }
+    //------- ----- LOAD & STORE -----------//
+    is(AluOperation.Lb.id.U,AluOperation.Lw.id.U, AluOperation.Lh.id.U,AluOperation.Sb.id.U, AluOperation.Sh.id.U, AluOperation.Sw.id.U){
+      io.ALURes := io.operand1 + io.operand2
     }
   }
 
