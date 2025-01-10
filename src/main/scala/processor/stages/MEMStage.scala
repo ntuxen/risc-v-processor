@@ -21,18 +21,13 @@ class MEMStage extends Module {
     val rdRegOut = Output(UInt(5.W))
     val BranchAddressOut = Output(UInt(32.W))
   })
-
-  val ALUResReg = RegInit(0.U(32.W))
-  val controlReg = RegInit(0.U(2.W)) // Bit #1 = registerWriteEnableIn, Bit #0 = writeDataMux
-  val rdReg = RegInit(0.U(5.W))
+  //DataMemory Module
   val dataMem = Module(new DataMemoryTest(1024,10))
-  val branchAddressReg = RegInit(0.U(32.W))
-
-  // INPUTS TO REGISTERS
-  ALUResReg := io.ALURes
-  controlReg := Cat(io.registerWriteEnableIn, io.writeDataMux)
-  rdReg := io.rdRegIn
-  branchAddressReg := io.BranchAddressIn
+  //Pipeline registers
+  val ALUResReg = RegNext(io.ALURes, 0.U(32.W))
+  val controlReg = RegNext(Cat(io.registerWriteEnableIn, io.writeDataMux), 0.U(2.W)) // Bit #1 = registerWriteEnableIn, Bit #0 = writeDataMux
+  val rdReg = RegNext(io.rdRegIn, 0.U(5.W))
+  val branchAddressReg = RegNext(io.BranchAddressIn, 0.U(32.W))
 
   // OUTPUTS FROM REGISTERS
   when(controlReg(0) === 1.U){

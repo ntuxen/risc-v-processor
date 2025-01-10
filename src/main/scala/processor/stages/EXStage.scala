@@ -34,23 +34,16 @@ class EXStage extends Module {
   val controlUnit = Module(new ControlUnit)
   val ALU = Module(new ALU)
 
-  //Inputs we need to delay
-  val instructionReg = RegInit(0.U(32.W))
-  val instrTypeReg = RegInit(0.U(3.W))
-  val funct3Reg = RegInit(0.U(3.W))
-  val funct7Reg = RegInit(0.U(7.W))
-  val opcodeReg = RegInit(0.U(7.W))
-  val rdReg = RegInit(0.U(5.W))
-  val branchAddrReg = RegInit(0.U(32.W))
+  //Pipeline Registers
+  val instructionReg = RegNext(io.instruction, 0.U)
+  val instrTypeReg = RegNext(io.instrType, 0.U)
+  val funct3Reg = RegNext(io.funct3, 0.U)
+  val funct7Reg = RegNext(io.funct7, 0.U)
+  val opcodeReg = RegNext(io.opcode, 0.U)
+  val rdReg = RegNext(io.rd, 0.U)
+  val branchAddrReg = RegNext(io.BranchAddressIn, 0.U)
 
-  //Inputs to the registers
-  instructionReg := io.instruction
-  instrTypeReg := io.instrType
-  funct3Reg := io.funct3
-  funct7Reg := io.funct7
-  opcodeReg := io.opcode
-  rdReg := io.rd
-  branchAddrReg := io.BranchAddressIn
+
 
   //Initialize outputs
   io.ALURes := 0.U(32.W)
