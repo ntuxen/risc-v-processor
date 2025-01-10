@@ -8,18 +8,13 @@ import processor.stages._
 
 class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   val io = IO(new Bundle {
-
-    val stealingSignals = Output(UInt(32.W)) // FAKE OUTPUT
-
+    val LEDs = Output(UInt(16.W))
   })
 
   val IF = Module(new IFStage(program))
   val ID = Module(new InstructionDecoder) // ID Stage
   val EX = Module(new EXStage)
   val MEM = Module (new MEMStage)
-
-  // FAKE OUTPUT
-  io.stealingSignals := EX.io.writeData
 
   //-------------Connections-------------//
   //---- ID <- IF -----//
@@ -47,6 +42,8 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   MEM.io.writeDataMux := EX.io.WriteDataMux
   MEM.io.rdRegIn := EX.io.rdRegIn
   MEM.io.BranchAddressIn := EX.io.BranchAddressOut
+  MEM.io.IOWriteEnable := EX.io.IOWriteEnable
+  MEM.io.readIsIO := EX.io.readIsIO
   //----  EX <- MEM ----//
   EX.io.writeData := MEM.io.writeData
   EX.io.writeEnable := MEM.io.registerWriteEnableOut
@@ -54,6 +51,9 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
 
   //----- IF <- MEM ------//
   IF.io.BranchAddress := MEM.io.BranchAddressOut
+
+  //---MEMORY MAPPED IO---//
+  io.LEDs := MEM.io.leds
 
   //--- Temporary Connection ---//
   IF.io.EnableJump := false.B
@@ -63,14 +63,14 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
 object Processor extends App {
   // Define the program
   val program: Seq[UInt] = Seq(
-    "h00f00213".U(32.W), // Sample instructions
-    "h00520213".U(32.W),
-    "hfec20213".U(32.W),
+    "h00000013".U(32.W), // Sample instructions
     "h00000013".U(32.W),
     "h00000013".U(32.W),
     "h00000013".U(32.W),
     "h00000013".U(32.W),
-    "h002081b3".U(32.W)
+    "h00000013".U(32.W),
+    "h00000013".U(32.W),
+    "h00000013".U(32.W)
   )
   //Example Usage of loadHexFile:
   //val program: Seq[UInt] = ProgramLoader.loadHexFile("src/test/TestPrograms/AddImmTest.hex")
