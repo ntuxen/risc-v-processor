@@ -31,8 +31,6 @@ class MEMStage extends Module {
   })
   //DataMemory Module
   val dataMem = Module(new DataMemoryTest(1024,10))
-  val branchAddressReg = RegInit(0.U(32.W))
-  val readIsIO = RegNext(io.readIsIO)
 
   // Memory-mapped IO
   val memoryMappedIO = Module(new MemoryMappedIO(1024))
@@ -40,12 +38,13 @@ class MEMStage extends Module {
   memoryMappedIO.io.dataWriteMem := io.dataWriteMem
   memoryMappedIO.io.address := io.address
   io.leds := memoryMappedIO.io.leds // LED signal for top level output pins
-
-  // INPUTS TO REGISTERS
-  ALUResReg := io.ALURes
-  controlReg := Cat(io.registerWriteEnableIn, io.writeDataMux)
-  rdReg := io.rdRegIn
-  branchAddressReg := io.BranchAddressIn
+  
+  //Pipeline Registers
+  val ALUResReg = RegNext(io.ALURes, 0.U(32.W))
+  val controlReg = RegNext(Cat(io.registerWriteEnableIn, io.writeDataMux), 0.U(2.W))
+  val rdReg = RegNext(io.rdRegIn, 0.U(5.W))
+  val branchAddressReg = RegNext(io.BranchAddressIn, 0.U)
+  val readIsIO = RegNext(io.readIsIO)
 
   // OUTPUTS FROM REGISTERS
   when(controlReg(0) === 1.U){ // This should implement the two Multiplexers
