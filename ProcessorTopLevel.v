@@ -1171,37 +1171,37 @@ module InstructionDecoder(
   output [2:0]  io_instrType,
   output [6:0]  io_opcode
 );
-  wire [2:0] _GEN_0 = 7'h37 == io_opcode ? 3'h4 : 3'h0; // @[IDStage.scala 27:16 30:21 56:20]
-  wire [2:0] _GEN_1 = 7'h17 == io_opcode ? 3'h4 : _GEN_0; // @[IDStage.scala 30:21 53:20]
-  wire [2:0] _GEN_2 = 7'h67 == io_opcode ? 3'h1 : _GEN_1; // @[IDStage.scala 30:21 50:20]
-  wire [2:0] _GEN_3 = 7'h6f == io_opcode ? 3'h5 : _GEN_2; // @[IDStage.scala 30:21 47:20]
-  wire [2:0] _GEN_4 = 7'h63 == io_opcode ? 3'h3 : _GEN_3; // @[IDStage.scala 30:21 44:20]
-  wire [2:0] _GEN_5 = 7'h23 == io_opcode ? 3'h2 : _GEN_4; // @[IDStage.scala 30:21 41:20]
-  wire [2:0] _GEN_6 = 7'h3 == io_opcode ? 3'h1 : _GEN_5; // @[IDStage.scala 30:21 38:20]
-  wire [2:0] _GEN_7 = 7'h13 == io_opcode ? 3'h1 : _GEN_6; // @[IDStage.scala 30:21 35:20]
-  wire [6:0] _GEN_9 = io_funct3 == 3'h1 | io_funct3 == 3'h5 | io_funct3 == 3'h5 ? io_instruction[31:25] : 7'h0; // @[IDStage.scala 72:108 26:13 74:19]
-  wire [4:0] _GEN_10 = 3'h4 == io_instrType ? io_instruction[11:7] : 5'h0; // @[IDStage.scala 60:24 91:13 24:9]
-  wire [4:0] _GEN_11 = 3'h5 == io_instrType ? io_instruction[11:7] : _GEN_10; // @[IDStage.scala 60:24 88:13]
-  wire [4:0] _GEN_12 = 3'h3 == io_instrType ? io_instruction[19:15] : 5'h0; // @[IDStage.scala 22:10 60:24 83:14]
-  wire [4:0] _GEN_13 = 3'h3 == io_instrType ? io_instruction[24:20] : 5'h0; // @[IDStage.scala 23:10 60:24 84:14]
-  wire [2:0] _GEN_14 = 3'h3 == io_instrType ? io_instruction[14:12] : 3'h0; // @[IDStage.scala 25:13 60:24 85:17]
-  wire [4:0] _GEN_15 = 3'h3 == io_instrType ? 5'h0 : _GEN_11; // @[IDStage.scala 60:24 24:9]
-  wire [4:0] _GEN_16 = 3'h2 == io_instrType ? io_instruction[19:15] : _GEN_12; // @[IDStage.scala 60:24 78:14]
-  wire [4:0] _GEN_17 = 3'h2 == io_instrType ? io_instruction[24:20] : _GEN_13; // @[IDStage.scala 60:24 79:14]
-  wire [2:0] _GEN_18 = 3'h2 == io_instrType ? io_instruction[14:12] : _GEN_14; // @[IDStage.scala 60:24 80:17]
-  wire [4:0] _GEN_19 = 3'h2 == io_instrType ? 5'h0 : _GEN_15; // @[IDStage.scala 60:24 24:9]
-  wire [4:0] _GEN_20 = 3'h1 == io_instrType ? io_instruction[19:15] : _GEN_16; // @[IDStage.scala 60:24 69:14]
-  wire [2:0] _GEN_21 = 3'h1 == io_instrType ? io_instruction[14:12] : _GEN_18; // @[IDStage.scala 60:24 70:17]
-  wire [4:0] _GEN_22 = 3'h1 == io_instrType ? io_instruction[11:7] : _GEN_19; // @[IDStage.scala 60:24 71:13]
-  wire [6:0] _GEN_23 = 3'h1 == io_instrType ? _GEN_9 : 7'h0; // @[IDStage.scala 26:13 60:24]
-  wire [4:0] _GEN_24 = 3'h1 == io_instrType ? 5'h0 : _GEN_17; // @[IDStage.scala 23:10 60:24]
-  assign io_rs1 = 3'h0 == io_instrType ? io_instruction[19:15] : _GEN_20; // @[IDStage.scala 60:24 62:14]
-  assign io_rs2 = 3'h0 == io_instrType ? io_instruction[24:20] : _GEN_24; // @[IDStage.scala 60:24 63:14]
-  assign io_rd = 3'h0 == io_instrType ? io_instruction[11:7] : _GEN_22; // @[IDStage.scala 60:24 64:13]
-  assign io_funct3 = 3'h0 == io_instrType ? io_instruction[14:12] : _GEN_21; // @[IDStage.scala 60:24 65:17]
-  assign io_funct7 = 3'h0 == io_instrType ? io_instruction[31:25] : _GEN_23; // @[IDStage.scala 60:24 66:17]
-  assign io_instrType = 7'h33 == io_opcode ? 3'h0 : _GEN_7; // @[IDStage.scala 30:21 32:20]
-  assign io_opcode = io_instruction[6:0]; // @[IDStage.scala 28:30]
+  wire [2:0] _GEN_0 = 7'h37 == io_opcode ? 3'h4 : 3'h0; // @[IDStage.scala 25:16 28:21 54:20]
+  wire [2:0] _GEN_1 = 7'h17 == io_opcode ? 3'h4 : _GEN_0; // @[IDStage.scala 28:21 51:20]
+  wire [2:0] _GEN_2 = 7'h67 == io_opcode ? 3'h1 : _GEN_1; // @[IDStage.scala 28:21 48:20]
+  wire [2:0] _GEN_3 = 7'h6f == io_opcode ? 3'h5 : _GEN_2; // @[IDStage.scala 28:21 45:20]
+  wire [2:0] _GEN_4 = 7'h63 == io_opcode ? 3'h3 : _GEN_3; // @[IDStage.scala 28:21 42:20]
+  wire [2:0] _GEN_5 = 7'h23 == io_opcode ? 3'h2 : _GEN_4; // @[IDStage.scala 28:21 39:20]
+  wire [2:0] _GEN_6 = 7'h3 == io_opcode ? 3'h1 : _GEN_5; // @[IDStage.scala 28:21 36:20]
+  wire [2:0] _GEN_7 = 7'h13 == io_opcode ? 3'h1 : _GEN_6; // @[IDStage.scala 28:21 33:20]
+  wire [6:0] _GEN_9 = io_funct3 == 3'h1 | io_funct3 == 3'h5 | io_funct3 == 3'h5 ? io_instruction[31:25] : 7'h0; // @[IDStage.scala 70:108 24:13 72:19]
+  wire [4:0] _GEN_10 = 3'h4 == io_instrType ? io_instruction[11:7] : 5'h0; // @[IDStage.scala 58:24 89:13 22:9]
+  wire [4:0] _GEN_11 = 3'h5 == io_instrType ? io_instruction[11:7] : _GEN_10; // @[IDStage.scala 58:24 86:13]
+  wire [4:0] _GEN_12 = 3'h3 == io_instrType ? io_instruction[19:15] : 5'h0; // @[IDStage.scala 20:10 58:24 81:14]
+  wire [4:0] _GEN_13 = 3'h3 == io_instrType ? io_instruction[24:20] : 5'h0; // @[IDStage.scala 21:10 58:24 82:14]
+  wire [2:0] _GEN_14 = 3'h3 == io_instrType ? io_instruction[14:12] : 3'h0; // @[IDStage.scala 23:13 58:24 83:17]
+  wire [4:0] _GEN_15 = 3'h3 == io_instrType ? 5'h0 : _GEN_11; // @[IDStage.scala 58:24 22:9]
+  wire [4:0] _GEN_16 = 3'h2 == io_instrType ? io_instruction[19:15] : _GEN_12; // @[IDStage.scala 58:24 76:14]
+  wire [4:0] _GEN_17 = 3'h2 == io_instrType ? io_instruction[24:20] : _GEN_13; // @[IDStage.scala 58:24 77:14]
+  wire [2:0] _GEN_18 = 3'h2 == io_instrType ? io_instruction[14:12] : _GEN_14; // @[IDStage.scala 58:24 78:17]
+  wire [4:0] _GEN_19 = 3'h2 == io_instrType ? 5'h0 : _GEN_15; // @[IDStage.scala 58:24 22:9]
+  wire [4:0] _GEN_20 = 3'h1 == io_instrType ? io_instruction[19:15] : _GEN_16; // @[IDStage.scala 58:24 67:14]
+  wire [2:0] _GEN_21 = 3'h1 == io_instrType ? io_instruction[14:12] : _GEN_18; // @[IDStage.scala 58:24 68:17]
+  wire [4:0] _GEN_22 = 3'h1 == io_instrType ? io_instruction[11:7] : _GEN_19; // @[IDStage.scala 58:24 69:13]
+  wire [6:0] _GEN_23 = 3'h1 == io_instrType ? _GEN_9 : 7'h0; // @[IDStage.scala 24:13 58:24]
+  wire [4:0] _GEN_24 = 3'h1 == io_instrType ? 5'h0 : _GEN_17; // @[IDStage.scala 21:10 58:24]
+  assign io_rs1 = 3'h0 == io_instrType ? io_instruction[19:15] : _GEN_20; // @[IDStage.scala 58:24 60:14]
+  assign io_rs2 = 3'h0 == io_instrType ? io_instruction[24:20] : _GEN_24; // @[IDStage.scala 58:24 61:14]
+  assign io_rd = 3'h0 == io_instrType ? io_instruction[11:7] : _GEN_22; // @[IDStage.scala 58:24 62:13]
+  assign io_funct3 = 3'h0 == io_instrType ? io_instruction[14:12] : _GEN_21; // @[IDStage.scala 58:24 63:17]
+  assign io_funct7 = 3'h0 == io_instrType ? io_instruction[31:25] : _GEN_23; // @[IDStage.scala 58:24 64:17]
+  assign io_instrType = 7'h33 == io_opcode ? 3'h0 : _GEN_7; // @[IDStage.scala 28:21 30:20]
+  assign io_opcode = io_instruction[6:0]; // @[IDStage.scala 26:30]
 endmodule
 module RegisterFile(
   input         clock,
@@ -2317,29 +2317,29 @@ module ALU(
   input  [31:0] io_operand2,
   output [31:0] io_ALURes
 );
-  wire [31:0] signedOperand2 = io_operand2; // @[ALU.scala 17:36]
-  wire [31:0] _io_ALURes_T_3 = $signed(io_operand1) + $signed(io_operand2); // @[ALU.scala 23:54]
-  wire [31:0] _io_ALURes_T_7 = $signed(io_operand1) - $signed(io_operand2); // @[ALU.scala 26:54]
-  wire [31:0] _io_ALURes_T_10 = $signed(io_operand1) & $signed(io_operand2); // @[ALU.scala 29:54]
-  wire [31:0] _io_ALURes_T_13 = $signed(io_operand1) | $signed(io_operand2); // @[ALU.scala 32:54]
-  wire [31:0] _io_ALURes_T_16 = $signed(io_operand1) ^ $signed(io_operand2); // @[ALU.scala 35:54]
-  wire [62:0] _GEN_0 = {{31'd0}, io_operand1}; // @[ALU.scala 38:33]
-  wire [62:0] _io_ALURes_T_18 = _GEN_0 << io_operand2[4:0]; // @[ALU.scala 38:33]
-  wire [31:0] _io_ALURes_T_20 = io_operand1 >> io_operand2[4:0]; // @[ALU.scala 41:33]
-  wire [31:0] _io_ALURes_T_23 = $signed(io_operand1) >>> signedOperand2[4:0]; // @[ALU.scala 45:62]
-  wire  _T_9 = $signed(io_operand1) < $signed(io_operand2); // @[ALU.scala 48:27]
-  wire  _T_11 = io_operand1 < io_operand2; // @[ALU.scala 55:24]
-  wire [5:0] _GEN_2 = 8'h9 == io_ALUSel ? {{5'd0}, _T_11} : 6'h2a; // @[ALU.scala 20:13 21:21]
-  wire [5:0] _GEN_3 = 8'h8 == io_ALUSel ? {{5'd0}, _T_9} : _GEN_2; // @[ALU.scala 21:21]
-  wire [31:0] _GEN_4 = 8'h7 == io_ALUSel ? _io_ALURes_T_23 : {{26'd0}, _GEN_3}; // @[ALU.scala 21:21 45:17]
-  wire [31:0] _GEN_5 = 8'h6 == io_ALUSel ? _io_ALURes_T_20 : _GEN_4; // @[ALU.scala 21:21 41:17]
-  wire [62:0] _GEN_6 = 8'h5 == io_ALUSel ? _io_ALURes_T_18 : {{31'd0}, _GEN_5}; // @[ALU.scala 21:21 38:17]
-  wire [62:0] _GEN_7 = 8'h4 == io_ALUSel ? {{31'd0}, _io_ALURes_T_16} : _GEN_6; // @[ALU.scala 21:21 35:17]
-  wire [62:0] _GEN_8 = 8'h3 == io_ALUSel ? {{31'd0}, _io_ALURes_T_13} : _GEN_7; // @[ALU.scala 21:21 32:17]
-  wire [62:0] _GEN_9 = 8'h2 == io_ALUSel ? {{31'd0}, _io_ALURes_T_10} : _GEN_8; // @[ALU.scala 21:21 29:17]
-  wire [62:0] _GEN_10 = 8'h1 == io_ALUSel ? {{31'd0}, _io_ALURes_T_7} : _GEN_9; // @[ALU.scala 21:21 26:17]
-  wire [62:0] _GEN_11 = 8'h0 == io_ALUSel ? {{31'd0}, _io_ALURes_T_3} : _GEN_10; // @[ALU.scala 21:21 23:17]
-  assign io_ALURes = _GEN_11[31:0];
+  wire [31:0] signedOperand2 = io_operand2; // @[ALU.scala 18:36]
+  wire [31:0] _io_ALURes_T_3 = $signed(io_operand1) + $signed(io_operand2); // @[ALU.scala 25:54]
+  wire [31:0] _io_ALURes_T_7 = $signed(io_operand1) - $signed(io_operand2); // @[ALU.scala 28:54]
+  wire [31:0] _io_ALURes_T_10 = $signed(io_operand1) & $signed(io_operand2); // @[ALU.scala 31:54]
+  wire [31:0] _io_ALURes_T_13 = $signed(io_operand1) | $signed(io_operand2); // @[ALU.scala 34:54]
+  wire [31:0] _io_ALURes_T_16 = $signed(io_operand1) ^ $signed(io_operand2); // @[ALU.scala 37:54]
+  wire [62:0] _GEN_0 = {{31'd0}, io_operand1}; // @[ALU.scala 40:33]
+  wire [62:0] _io_ALURes_T_18 = _GEN_0 << io_operand2[4:0]; // @[ALU.scala 40:33]
+  wire [31:0] _io_ALURes_T_20 = io_operand1 >> io_operand2[4:0]; // @[ALU.scala 43:33]
+  wire [31:0] _io_ALURes_T_23 = $signed(io_operand1) >>> signedOperand2[4:0]; // @[ALU.scala 47:62]
+  wire  _T_9 = $signed(io_operand1) < $signed(io_operand2); // @[ALU.scala 50:27]
+  wire  _T_11 = io_operand1 < io_operand2; // @[ALU.scala 57:24]
+  wire [5:0] _GEN_14 = 8'h9 == io_ALUSel ? {{5'd0}, _T_11} : 6'h2a; // @[ALU.scala 21:13 23:21]
+  wire [5:0] _GEN_16 = 8'h8 == io_ALUSel ? {{5'd0}, _T_9} : _GEN_14; // @[ALU.scala 23:21]
+  wire [31:0] _GEN_18 = 8'h7 == io_ALUSel ? _io_ALURes_T_23 : {{26'd0}, _GEN_16}; // @[ALU.scala 23:21 47:17]
+  wire [31:0] _GEN_20 = 8'h6 == io_ALUSel ? _io_ALURes_T_20 : _GEN_18; // @[ALU.scala 23:21 43:17]
+  wire [62:0] _GEN_22 = 8'h5 == io_ALUSel ? _io_ALURes_T_18 : {{31'd0}, _GEN_20}; // @[ALU.scala 23:21 40:17]
+  wire [62:0] _GEN_24 = 8'h4 == io_ALUSel ? {{31'd0}, _io_ALURes_T_16} : _GEN_22; // @[ALU.scala 23:21 37:17]
+  wire [62:0] _GEN_26 = 8'h3 == io_ALUSel ? {{31'd0}, _io_ALURes_T_13} : _GEN_24; // @[ALU.scala 23:21 34:17]
+  wire [62:0] _GEN_28 = 8'h2 == io_ALUSel ? {{31'd0}, _io_ALURes_T_10} : _GEN_26; // @[ALU.scala 23:21 31:17]
+  wire [62:0] _GEN_30 = 8'h1 == io_ALUSel ? {{31'd0}, _io_ALURes_T_7} : _GEN_28; // @[ALU.scala 23:21 28:17]
+  wire [62:0] _GEN_32 = 8'h0 == io_ALUSel ? {{31'd0}, _io_ALURes_T_3} : _GEN_30; // @[ALU.scala 23:21 25:17]
+  assign io_ALURes = _GEN_32[31:0];
 endmodule
 module EXStage(
   input         clock,
@@ -2373,37 +2373,37 @@ module EXStage(
   reg [31:0] _RAND_4;
   reg [31:0] _RAND_5;
 `endif // RANDOMIZE_REG_INIT
-  wire  RegFile_clock; // @[EXStage.scala 34:23]
-  wire  RegFile_reset; // @[EXStage.scala 34:23]
-  wire [4:0] RegFile_io_rs1; // @[EXStage.scala 34:23]
-  wire [4:0] RegFile_io_rs2; // @[EXStage.scala 34:23]
-  wire [31:0] RegFile_io_writeData; // @[EXStage.scala 34:23]
-  wire [4:0] RegFile_io_rd; // @[EXStage.scala 34:23]
-  wire  RegFile_io_writeEnable; // @[EXStage.scala 34:23]
-  wire [31:0] RegFile_io_operand1; // @[EXStage.scala 34:23]
-  wire [31:0] RegFile_io_operand2; // @[EXStage.scala 34:23]
-  wire [2:0] immGen_io_instrType; // @[EXStage.scala 35:22]
-  wire [31:0] immGen_io_instruction; // @[EXStage.scala 35:22]
-  wire [31:0] immGen_io_immediate; // @[EXStage.scala 35:22]
-  wire [2:0] controlUnit_io_funct3; // @[EXStage.scala 36:27]
-  wire [6:0] controlUnit_io_funct7; // @[EXStage.scala 36:27]
-  wire [6:0] controlUnit_io_opcode; // @[EXStage.scala 36:27]
-  wire  controlUnit_io_MuxAluSel; // @[EXStage.scala 36:27]
-  wire [7:0] controlUnit_io_AluSel; // @[EXStage.scala 36:27]
-  wire  controlUnit_io_RegWriteEnable; // @[EXStage.scala 36:27]
-  wire  controlUnit_io_WriteDataMux; // @[EXStage.scala 36:27]
-  wire  controlUnit_io_MemWriteEnable; // @[EXStage.scala 36:27]
-  wire [7:0] ALU_io_ALUSel; // @[EXStage.scala 37:19]
-  wire [31:0] ALU_io_operand1; // @[EXStage.scala 37:19]
-  wire [31:0] ALU_io_operand2; // @[EXStage.scala 37:19]
-  wire [31:0] ALU_io_ALURes; // @[EXStage.scala 37:19]
-  reg [31:0] instructionReg; // @[EXStage.scala 40:31]
-  reg [2:0] instrTypeReg; // @[EXStage.scala 41:29]
-  reg [2:0] funct3Reg; // @[EXStage.scala 42:26]
-  reg [6:0] funct7Reg; // @[EXStage.scala 43:26]
-  reg [6:0] opcodeReg; // @[EXStage.scala 44:26]
-  reg [4:0] rdReg; // @[EXStage.scala 45:22]
-  RegisterFile RegFile ( // @[EXStage.scala 34:23]
+  wire  RegFile_clock; // @[EXStage.scala 35:23]
+  wire  RegFile_reset; // @[EXStage.scala 35:23]
+  wire [4:0] RegFile_io_rs1; // @[EXStage.scala 35:23]
+  wire [4:0] RegFile_io_rs2; // @[EXStage.scala 35:23]
+  wire [31:0] RegFile_io_writeData; // @[EXStage.scala 35:23]
+  wire [4:0] RegFile_io_rd; // @[EXStage.scala 35:23]
+  wire  RegFile_io_writeEnable; // @[EXStage.scala 35:23]
+  wire [31:0] RegFile_io_operand1; // @[EXStage.scala 35:23]
+  wire [31:0] RegFile_io_operand2; // @[EXStage.scala 35:23]
+  wire [2:0] immGen_io_instrType; // @[EXStage.scala 36:22]
+  wire [31:0] immGen_io_instruction; // @[EXStage.scala 36:22]
+  wire [31:0] immGen_io_immediate; // @[EXStage.scala 36:22]
+  wire [2:0] controlUnit_io_funct3; // @[EXStage.scala 37:27]
+  wire [6:0] controlUnit_io_funct7; // @[EXStage.scala 37:27]
+  wire [6:0] controlUnit_io_opcode; // @[EXStage.scala 37:27]
+  wire  controlUnit_io_MuxAluSel; // @[EXStage.scala 37:27]
+  wire [7:0] controlUnit_io_AluSel; // @[EXStage.scala 37:27]
+  wire  controlUnit_io_RegWriteEnable; // @[EXStage.scala 37:27]
+  wire  controlUnit_io_WriteDataMux; // @[EXStage.scala 37:27]
+  wire  controlUnit_io_MemWriteEnable; // @[EXStage.scala 37:27]
+  wire [7:0] ALU_io_ALUSel; // @[EXStage.scala 38:19]
+  wire [31:0] ALU_io_operand1; // @[EXStage.scala 38:19]
+  wire [31:0] ALU_io_operand2; // @[EXStage.scala 38:19]
+  wire [31:0] ALU_io_ALURes; // @[EXStage.scala 38:19]
+  reg [31:0] instructionReg; // @[EXStage.scala 41:31]
+  reg [2:0] instrTypeReg; // @[EXStage.scala 42:29]
+  reg [2:0] funct3Reg; // @[EXStage.scala 43:26]
+  reg [6:0] funct7Reg; // @[EXStage.scala 44:26]
+  reg [6:0] opcodeReg; // @[EXStage.scala 45:26]
+  reg [4:0] rdReg; // @[EXStage.scala 46:22]
+  RegisterFile RegFile ( // @[EXStage.scala 35:23]
     .clock(RegFile_clock),
     .reset(RegFile_reset),
     .io_rs1(RegFile_io_rs1),
@@ -2414,12 +2414,12 @@ module EXStage(
     .io_operand1(RegFile_io_operand1),
     .io_operand2(RegFile_io_operand2)
   );
-  ImmediateGenerator immGen ( // @[EXStage.scala 35:22]
+  ImmediateGenerator immGen ( // @[EXStage.scala 36:22]
     .io_instrType(immGen_io_instrType),
     .io_instruction(immGen_io_instruction),
     .io_immediate(immGen_io_immediate)
   );
-  ControlUnit controlUnit ( // @[EXStage.scala 36:27]
+  ControlUnit controlUnit ( // @[EXStage.scala 37:27]
     .io_funct3(controlUnit_io_funct3),
     .io_funct7(controlUnit_io_funct7),
     .io_opcode(controlUnit_io_opcode),
@@ -2429,66 +2429,66 @@ module EXStage(
     .io_WriteDataMux(controlUnit_io_WriteDataMux),
     .io_MemWriteEnable(controlUnit_io_MemWriteEnable)
   );
-  ALU ALU ( // @[EXStage.scala 37:19]
+  ALU ALU ( // @[EXStage.scala 38:19]
     .io_ALUSel(ALU_io_ALUSel),
     .io_operand1(ALU_io_operand1),
     .io_operand2(ALU_io_operand2),
     .io_ALURes(ALU_io_ALURes)
   );
-  assign io_ALURes = ALU_io_ALURes; // @[EXStage.scala 80:15]
-  assign io_address = ALU_io_ALURes; // @[EXStage.scala 81:14]
-  assign io_dataWriteMem = RegFile_io_operand2; // @[EXStage.scala 75:19]
-  assign io_rdRegIn = rdReg; // @[EXStage.scala 110:14]
-  assign io_RegWriteEnable = controlUnit_io_RegWriteEnable; // @[EXStage.scala 94:21]
-  assign io_WriteDataMux = controlUnit_io_WriteDataMux; // @[EXStage.scala 95:19]
-  assign io_MemWriteEnable = ALU_io_ALURes >= 32'h400 ? 1'h0 : controlUnit_io_MemWriteEnable; // @[EXStage.scala 102:33 103:23 97:21]
-  assign io_readIsIO = ALU_io_ALURes >= 32'h400; // @[EXStage.scala 102:22]
-  assign io_IOWriteEnable = ALU_io_ALURes >= 32'h400 & controlUnit_io_MemWriteEnable; // @[EXStage.scala 102:33 105:22 67:20]
+  assign io_ALURes = ALU_io_ALURes; // @[EXStage.scala 73:15]
+  assign io_address = ALU_io_ALURes; // @[EXStage.scala 74:14]
+  assign io_dataWriteMem = RegFile_io_operand2; // @[EXStage.scala 68:19]
+  assign io_rdRegIn = rdReg; // @[EXStage.scala 104:14]
+  assign io_RegWriteEnable = controlUnit_io_RegWriteEnable; // @[EXStage.scala 88:21]
+  assign io_WriteDataMux = controlUnit_io_WriteDataMux; // @[EXStage.scala 89:19]
+  assign io_MemWriteEnable = ALU_io_ALURes >= 32'h400 ? 1'h0 : controlUnit_io_MemWriteEnable; // @[EXStage.scala 91:21 96:33 97:23]
+  assign io_readIsIO = ALU_io_ALURes >= 32'h400; // @[EXStage.scala 96:22]
+  assign io_IOWriteEnable = ALU_io_ALURes >= 32'h400 & controlUnit_io_MemWriteEnable; // @[EXStage.scala 60:20 96:33 99:22]
   assign RegFile_clock = clock;
   assign RegFile_reset = reset;
-  assign RegFile_io_rs1 = io_rs1; // @[EXStage.scala 70:18]
-  assign RegFile_io_rs2 = io_rs2; // @[EXStage.scala 71:18]
-  assign RegFile_io_writeData = io_writeData; // @[EXStage.scala 73:24]
-  assign RegFile_io_rd = io_rdReg; // @[EXStage.scala 72:17]
-  assign RegFile_io_writeEnable = io_writeEnable; // @[EXStage.scala 74:26]
-  assign immGen_io_instrType = instrTypeReg; // @[EXStage.scala 84:23]
-  assign immGen_io_instruction = instructionReg; // @[EXStage.scala 85:25]
-  assign controlUnit_io_funct3 = funct3Reg; // @[EXStage.scala 89:25]
-  assign controlUnit_io_funct7 = funct7Reg; // @[EXStage.scala 90:25]
-  assign controlUnit_io_opcode = opcodeReg; // @[EXStage.scala 92:25]
-  assign ALU_io_ALUSel = controlUnit_io_AluSel; // @[EXStage.scala 98:17]
-  assign ALU_io_operand1 = RegFile_io_operand1; // @[EXStage.scala 78:19]
-  assign ALU_io_operand2 = controlUnit_io_MuxAluSel ? immGen_io_immediate : RegFile_io_operand2; // @[EXStage.scala 79:25]
+  assign RegFile_io_rs1 = io_rs1; // @[EXStage.scala 63:18]
+  assign RegFile_io_rs2 = io_rs2; // @[EXStage.scala 64:18]
+  assign RegFile_io_writeData = io_writeData; // @[EXStage.scala 66:24]
+  assign RegFile_io_rd = io_rdReg; // @[EXStage.scala 65:17]
+  assign RegFile_io_writeEnable = io_writeEnable; // @[EXStage.scala 67:26]
+  assign immGen_io_instrType = instrTypeReg; // @[EXStage.scala 78:23]
+  assign immGen_io_instruction = instructionReg; // @[EXStage.scala 79:25]
+  assign controlUnit_io_funct3 = funct3Reg; // @[EXStage.scala 83:25]
+  assign controlUnit_io_funct7 = funct7Reg; // @[EXStage.scala 84:25]
+  assign controlUnit_io_opcode = opcodeReg; // @[EXStage.scala 86:25]
+  assign ALU_io_ALUSel = controlUnit_io_AluSel; // @[EXStage.scala 92:17]
+  assign ALU_io_operand1 = RegFile_io_operand1; // @[EXStage.scala 71:19]
+  assign ALU_io_operand2 = controlUnit_io_MuxAluSel ? immGen_io_immediate : RegFile_io_operand2; // @[EXStage.scala 72:25]
   always @(posedge clock) begin
-    if (reset) begin // @[EXStage.scala 40:31]
-      instructionReg <= 32'h0; // @[EXStage.scala 40:31]
+    if (reset) begin // @[EXStage.scala 41:31]
+      instructionReg <= 32'h0; // @[EXStage.scala 41:31]
     end else begin
-      instructionReg <= io_instruction; // @[EXStage.scala 49:18]
+      instructionReg <= io_instruction; // @[EXStage.scala 41:31]
     end
-    if (reset) begin // @[EXStage.scala 41:29]
-      instrTypeReg <= 3'h0; // @[EXStage.scala 41:29]
+    if (reset) begin // @[EXStage.scala 42:29]
+      instrTypeReg <= 3'h0; // @[EXStage.scala 42:29]
     end else begin
-      instrTypeReg <= io_instrType; // @[EXStage.scala 50:16]
-    end
-    if (reset) begin // @[EXStage.scala 42:26]
-      funct3Reg <= 3'h0; // @[EXStage.scala 42:26]
-    end else begin
-      funct3Reg <= io_funct3; // @[EXStage.scala 51:13]
+      instrTypeReg <= io_instrType; // @[EXStage.scala 42:29]
     end
     if (reset) begin // @[EXStage.scala 43:26]
-      funct7Reg <= 7'h0; // @[EXStage.scala 43:26]
+      funct3Reg <= 3'h0; // @[EXStage.scala 43:26]
     end else begin
-      funct7Reg <= io_funct7; // @[EXStage.scala 52:13]
+      funct3Reg <= io_funct3; // @[EXStage.scala 43:26]
     end
     if (reset) begin // @[EXStage.scala 44:26]
-      opcodeReg <= 7'h0; // @[EXStage.scala 44:26]
+      funct7Reg <= 7'h0; // @[EXStage.scala 44:26]
     end else begin
-      opcodeReg <= io_opcode; // @[EXStage.scala 53:13]
+      funct7Reg <= io_funct7; // @[EXStage.scala 44:26]
     end
-    if (reset) begin // @[EXStage.scala 45:22]
-      rdReg <= 5'h0; // @[EXStage.scala 45:22]
+    if (reset) begin // @[EXStage.scala 45:26]
+      opcodeReg <= 7'h0; // @[EXStage.scala 45:26]
     end else begin
-      rdReg <= io_rd; // @[EXStage.scala 54:9]
+      opcodeReg <= io_opcode; // @[EXStage.scala 45:26]
+    end
+    if (reset) begin // @[EXStage.scala 46:22]
+      rdReg <= 5'h0; // @[EXStage.scala 46:22]
+    end else begin
+      rdReg <= io_rd; // @[EXStage.scala 46:22]
     end
   end
 // Register and memory initialization
@@ -15026,26 +15026,26 @@ module MEMStage(
   reg [31:0] _RAND_2;
   reg [31:0] _RAND_3;
 `endif // RANDOMIZE_REG_INIT
-  wire  dataMem_clock; // @[MEMStage.scala 36:23]
-  wire  dataMem_reset; // @[MEMStage.scala 36:23]
-  wire [9:0] dataMem_io_addr; // @[MEMStage.scala 36:23]
-  wire  dataMem_io_enableWrite; // @[MEMStage.scala 36:23]
-  wire [31:0] dataMem_io_dataIn; // @[MEMStage.scala 36:23]
-  wire [31:0] dataMem_io_dataOut; // @[MEMStage.scala 36:23]
-  wire  memoryMappedIO_clock; // @[MEMStage.scala 41:30]
-  wire  memoryMappedIO_reset; // @[MEMStage.scala 41:30]
-  wire [31:0] memoryMappedIO_io_address; // @[MEMStage.scala 41:30]
-  wire [31:0] memoryMappedIO_io_dataWriteMem; // @[MEMStage.scala 41:30]
-  wire  memoryMappedIO_io_writeEnable; // @[MEMStage.scala 41:30]
-  wire [31:0] memoryMappedIO_io_dataReadIO; // @[MEMStage.scala 41:30]
-  wire [15:0] memoryMappedIO_io_leds; // @[MEMStage.scala 41:30]
-  reg [31:0] ALUResReg; // @[MEMStage.scala 33:26]
-  reg [1:0] controlReg; // @[MEMStage.scala 34:27]
-  reg [4:0] rdReg; // @[MEMStage.scala 35:22]
-  reg  readIsIO; // @[MEMStage.scala 38:25]
+  wire  dataMem_clock; // @[MEMStage.scala 35:23]
+  wire  dataMem_reset; // @[MEMStage.scala 35:23]
+  wire [9:0] dataMem_io_addr; // @[MEMStage.scala 35:23]
+  wire  dataMem_io_enableWrite; // @[MEMStage.scala 35:23]
+  wire [31:0] dataMem_io_dataIn; // @[MEMStage.scala 35:23]
+  wire [31:0] dataMem_io_dataOut; // @[MEMStage.scala 35:23]
+  wire  memoryMappedIO_clock; // @[MEMStage.scala 38:30]
+  wire  memoryMappedIO_reset; // @[MEMStage.scala 38:30]
+  wire [31:0] memoryMappedIO_io_address; // @[MEMStage.scala 38:30]
+  wire [31:0] memoryMappedIO_io_dataWriteMem; // @[MEMStage.scala 38:30]
+  wire  memoryMappedIO_io_writeEnable; // @[MEMStage.scala 38:30]
+  wire [31:0] memoryMappedIO_io_dataReadIO; // @[MEMStage.scala 38:30]
+  wire [15:0] memoryMappedIO_io_leds; // @[MEMStage.scala 38:30]
+  reg [31:0] ALUResReg; // @[MEMStage.scala 45:26]
   wire [1:0] _controlReg_T = {io_registerWriteEnableIn,io_writeDataMux}; // @[Cat.scala 33:92]
-  wire [31:0] _io_writeData_T = readIsIO ? memoryMappedIO_io_dataReadIO : dataMem_io_dataOut; // @[MEMStage.scala 55:24]
-  DataMemoryTest dataMem ( // @[MEMStage.scala 36:23]
+  reg [1:0] controlReg; // @[MEMStage.scala 46:27]
+  reg [4:0] rdReg; // @[MEMStage.scala 47:22]
+  reg  readIsIO; // @[MEMStage.scala 50:25]
+  wire [31:0] _io_writeData_T = readIsIO ? memoryMappedIO_io_dataReadIO : dataMem_io_dataOut; // @[MEMStage.scala 54:24]
+  DataMemoryTest dataMem ( // @[MEMStage.scala 35:23]
     .clock(dataMem_clock),
     .reset(dataMem_reset),
     .io_addr(dataMem_io_addr),
@@ -15053,7 +15053,7 @@ module MEMStage(
     .io_dataIn(dataMem_io_dataIn),
     .io_dataOut(dataMem_io_dataOut)
   );
-  MemoryMappedIO memoryMappedIO ( // @[MEMStage.scala 41:30]
+  MemoryMappedIO memoryMappedIO ( // @[MEMStage.scala 38:30]
     .clock(memoryMappedIO_clock),
     .reset(memoryMappedIO_reset),
     .io_address(memoryMappedIO_io_address),
@@ -15062,10 +15062,10 @@ module MEMStage(
     .io_dataReadIO(memoryMappedIO_io_dataReadIO),
     .io_leds(memoryMappedIO_io_leds)
   );
-  assign io_writeData = controlReg[0] ? _io_writeData_T : ALUResReg; // @[MEMStage.scala 54:30 55:18 57:18]
-  assign io_registerWriteEnableOut = controlReg[1]; // @[MEMStage.scala 59:42]
-  assign io_rdRegOut = rdReg; // @[MEMStage.scala 60:15]
-  assign io_leds = memoryMappedIO_io_leds; // @[MEMStage.scala 45:11]
+  assign io_writeData = controlReg[0] ? _io_writeData_T : ALUResReg; // @[MEMStage.scala 53:30 54:18 56:18]
+  assign io_registerWriteEnableOut = controlReg[1]; // @[MEMStage.scala 58:42]
+  assign io_rdRegOut = rdReg; // @[MEMStage.scala 59:15]
+  assign io_leds = memoryMappedIO_io_leds; // @[MEMStage.scala 42:11]
   assign dataMem_clock = clock;
   assign dataMem_reset = reset;
   assign dataMem_io_addr = io_address[9:0]; // @[MEMStage.scala 64:19]
@@ -15073,26 +15073,26 @@ module MEMStage(
   assign dataMem_io_dataIn = io_dataWriteMem; // @[MEMStage.scala 65:21]
   assign memoryMappedIO_clock = clock;
   assign memoryMappedIO_reset = reset;
-  assign memoryMappedIO_io_address = io_address; // @[MEMStage.scala 44:29]
-  assign memoryMappedIO_io_dataWriteMem = io_dataWriteMem; // @[MEMStage.scala 43:34]
-  assign memoryMappedIO_io_writeEnable = io_IOWriteEnable; // @[MEMStage.scala 42:33]
+  assign memoryMappedIO_io_address = io_address; // @[MEMStage.scala 41:29]
+  assign memoryMappedIO_io_dataWriteMem = io_dataWriteMem; // @[MEMStage.scala 40:34]
+  assign memoryMappedIO_io_writeEnable = io_IOWriteEnable; // @[MEMStage.scala 39:33]
   always @(posedge clock) begin
-    if (reset) begin // @[MEMStage.scala 33:26]
-      ALUResReg <= 32'h0; // @[MEMStage.scala 33:26]
+    if (reset) begin // @[MEMStage.scala 45:26]
+      ALUResReg <= 32'h0; // @[MEMStage.scala 45:26]
     end else begin
-      ALUResReg <= io_ALURes; // @[MEMStage.scala 48:13]
+      ALUResReg <= io_ALURes; // @[MEMStage.scala 45:26]
     end
-    if (reset) begin // @[MEMStage.scala 34:27]
-      controlReg <= 2'h0; // @[MEMStage.scala 34:27]
+    if (reset) begin // @[MEMStage.scala 46:27]
+      controlReg <= 2'h0; // @[MEMStage.scala 46:27]
     end else begin
-      controlReg <= _controlReg_T; // @[MEMStage.scala 49:14]
+      controlReg <= _controlReg_T; // @[MEMStage.scala 46:27]
     end
-    if (reset) begin // @[MEMStage.scala 35:22]
-      rdReg <= 5'h0; // @[MEMStage.scala 35:22]
+    if (reset) begin // @[MEMStage.scala 47:22]
+      rdReg <= 5'h0; // @[MEMStage.scala 47:22]
     end else begin
-      rdReg <= io_rdRegIn; // @[MEMStage.scala 50:9]
+      rdReg <= io_rdRegIn; // @[MEMStage.scala 47:22]
     end
-    readIsIO <= io_readIsIO; // @[MEMStage.scala 38:25]
+    readIsIO <= io_readIsIO; // @[MEMStage.scala 50:25]
   end
 // Register and memory initialization
 `ifdef RANDOMIZE_GARBAGE_ASSIGN
@@ -15255,32 +15255,32 @@ module ProcessorTopLevel(
     .io_rdRegOut(MEM_io_rdRegOut),
     .io_leds(MEM_io_leds)
   );
-  assign io_LEDs = MEM_io_leds; // @[ProcessorTopLevel.scala 54:11]
+  assign io_LEDs = MEM_io_leds; // @[ProcessorTopLevel.scala 58:11]
   assign IF_clock = clock;
   assign IF_reset = reset;
   assign ID_io_instruction = IF_io_instruction; // @[ProcessorTopLevel.scala 22:21]
   assign EX_clock = clock;
   assign EX_reset = reset;
-  assign EX_io_instruction = IF_io_instruction; // @[ProcessorTopLevel.scala 25:21]
-  assign EX_io_instrType = ID_io_instrType; // @[ProcessorTopLevel.scala 26:19]
-  assign EX_io_funct3 = ID_io_funct3; // @[ProcessorTopLevel.scala 27:16]
-  assign EX_io_funct7 = ID_io_funct7; // @[ProcessorTopLevel.scala 28:16]
-  assign EX_io_opcode = ID_io_opcode; // @[ProcessorTopLevel.scala 29:16]
-  assign EX_io_rs1 = ID_io_rs1; // @[ProcessorTopLevel.scala 30:13]
-  assign EX_io_rs2 = ID_io_rs2; // @[ProcessorTopLevel.scala 31:13]
-  assign EX_io_rd = ID_io_rd; // @[ProcessorTopLevel.scala 32:12]
-  assign EX_io_writeData = MEM_io_writeData; // @[ProcessorTopLevel.scala 46:19]
-  assign EX_io_writeEnable = MEM_io_registerWriteEnableOut; // @[ProcessorTopLevel.scala 47:21]
-  assign EX_io_rdReg = MEM_io_rdRegOut; // @[ProcessorTopLevel.scala 48:15]
+  assign EX_io_instruction = IF_io_instruction; // @[ProcessorTopLevel.scala 28:21]
+  assign EX_io_instrType = ID_io_instrType; // @[ProcessorTopLevel.scala 29:19]
+  assign EX_io_funct3 = ID_io_funct3; // @[ProcessorTopLevel.scala 30:16]
+  assign EX_io_funct7 = ID_io_funct7; // @[ProcessorTopLevel.scala 31:16]
+  assign EX_io_opcode = ID_io_opcode; // @[ProcessorTopLevel.scala 32:16]
+  assign EX_io_rs1 = ID_io_rs1; // @[ProcessorTopLevel.scala 33:13]
+  assign EX_io_rs2 = ID_io_rs2; // @[ProcessorTopLevel.scala 34:13]
+  assign EX_io_rd = ID_io_rd; // @[ProcessorTopLevel.scala 35:12]
+  assign EX_io_writeData = MEM_io_writeData; // @[ProcessorTopLevel.scala 49:19]
+  assign EX_io_writeEnable = MEM_io_registerWriteEnableOut; // @[ProcessorTopLevel.scala 50:21]
+  assign EX_io_rdReg = MEM_io_rdRegOut; // @[ProcessorTopLevel.scala 51:15]
   assign MEM_clock = clock;
   assign MEM_reset = reset;
-  assign MEM_io_ALURes = EX_io_ALURes; // @[ProcessorTopLevel.scala 35:17]
-  assign MEM_io_address = EX_io_address; // @[ProcessorTopLevel.scala 36:18]
-  assign MEM_io_dataWriteMem = EX_io_dataWriteMem; // @[ProcessorTopLevel.scala 37:23]
-  assign MEM_io_memWriteEnable = EX_io_MemWriteEnable; // @[ProcessorTopLevel.scala 38:25]
-  assign MEM_io_registerWriteEnableIn = EX_io_RegWriteEnable; // @[ProcessorTopLevel.scala 39:32]
-  assign MEM_io_writeDataMux = EX_io_WriteDataMux; // @[ProcessorTopLevel.scala 40:23]
-  assign MEM_io_rdRegIn = EX_io_rdRegIn; // @[ProcessorTopLevel.scala 41:18]
-  assign MEM_io_readIsIO = EX_io_readIsIO; // @[ProcessorTopLevel.scala 44:19]
-  assign MEM_io_IOWriteEnable = EX_io_IOWriteEnable; // @[ProcessorTopLevel.scala 43:24]
+  assign MEM_io_ALURes = EX_io_ALURes; // @[ProcessorTopLevel.scala 37:17]
+  assign MEM_io_address = EX_io_address; // @[ProcessorTopLevel.scala 38:18]
+  assign MEM_io_dataWriteMem = EX_io_dataWriteMem; // @[ProcessorTopLevel.scala 39:23]
+  assign MEM_io_memWriteEnable = EX_io_MemWriteEnable; // @[ProcessorTopLevel.scala 40:25]
+  assign MEM_io_registerWriteEnableIn = EX_io_RegWriteEnable; // @[ProcessorTopLevel.scala 41:32]
+  assign MEM_io_writeDataMux = EX_io_WriteDataMux; // @[ProcessorTopLevel.scala 42:23]
+  assign MEM_io_rdRegIn = EX_io_rdRegIn; // @[ProcessorTopLevel.scala 43:18]
+  assign MEM_io_readIsIO = EX_io_readIsIO; // @[ProcessorTopLevel.scala 46:19]
+  assign MEM_io_IOWriteEnable = EX_io_IOWriteEnable; // @[ProcessorTopLevel.scala 45:24]
 endmodule

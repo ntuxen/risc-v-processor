@@ -72,6 +72,7 @@ class EXStage extends Module {
   ALU.io.operand2 := Mux(controlUnit.io.MuxAluSel === 1.U, immGen.io.immediate, RegFile.io.operand2)
     io.ALURes := ALU.io.ALURes
   io.address := ALU.io.ALURes
+  io.takeBranchOut := ALU.io.takeBranch
 
   //Connect ImmGen
   immGen.io.instrType := instrTypeReg
