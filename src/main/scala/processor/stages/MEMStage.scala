@@ -20,11 +20,13 @@ class MEMStage extends Module {
     val BranchAddressIn = Input(UInt(32.W))
     val readIsIO = Input(Bool())
     val IOWriteEnable = Input(Bool())
+    val takeBranchIn = Input(Bool())
     //------ OUTPUTS ---------//
     val writeData = Output(UInt(32.W))
     val registerWriteEnableOut = Output(Bool())
     val rdRegOut = Output(UInt(5.W))
     val BranchAddressOut = Output(UInt(32.W))
+    val takeBranchOut = Output(Bool())
     //------ PERIPHERALS ---------//
     val leds = Output(UInt(16.W))
 
@@ -44,6 +46,7 @@ class MEMStage extends Module {
   val controlReg = RegNext(Cat(io.registerWriteEnableIn, io.writeDataMux), 0.U(2.W))
   val rdReg = RegNext(io.rdRegIn, 0.U(5.W))
   val branchAddressReg = RegNext(io.BranchAddressIn, 0.U)
+  val takeBranchReg = RegNext(io.takeBranchIn, 0.U)
   val readIsIO = RegNext(io.readIsIO)
 
   // OUTPUTS FROM REGISTERS
@@ -55,6 +58,7 @@ class MEMStage extends Module {
   io.registerWriteEnableOut := controlReg(1)
   io.rdRegOut := rdReg
   io.BranchAddressOut := branchAddressReg
+  io.takeBranchOut := takeBranchReg
 
   // MEMORY RELATED
   dataMem.io.addr := io.address

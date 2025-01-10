@@ -44,6 +44,7 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   MEM.io.BranchAddressIn := EX.io.BranchAddressOut
   MEM.io.IOWriteEnable := EX.io.IOWriteEnable
   MEM.io.readIsIO := EX.io.readIsIO
+  MEM.io.takeBranchIn := EX.io.takeBranchOut
   //----  EX <- MEM ----//
   EX.io.writeData := MEM.io.writeData
   EX.io.writeEnable := MEM.io.registerWriteEnableOut
@@ -51,6 +52,7 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
 
   //----- IF <- MEM ------//
   IF.io.BranchAddress := MEM.io.BranchAddressOut
+  IF.io.EnableJump := MEM.io.takeBranchOut
 
   //---MEMORY MAPPED IO---//
   io.LEDs := MEM.io.leds

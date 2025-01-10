@@ -27,6 +27,7 @@ class EXStage extends Module {
     val MemReadEnable = Output(UInt(1.W))
     val MemWriteEnable = Output(UInt(1.W))
     val BranchAddressOut = Output(UInt(32.W))
+    val takeBranchOut = Output(Bool())
     val readIsIO = Output(Bool())
     val IOWriteEnable = Output(Bool())
   })
@@ -44,8 +45,7 @@ class EXStage extends Module {
   val opcodeReg = RegNext(io.opcode, 0.U)
   val rdReg = RegNext(io.rd, 0.U)
   val branchAddrReg = RegNext(io.BranchAddressIn, 0.U)
-
-
+  
 
   //Initialize outputs
   io.ALURes := 0.U(32.W)
