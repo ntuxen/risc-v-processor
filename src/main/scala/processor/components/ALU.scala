@@ -10,6 +10,7 @@ class ALU extends Module {
     val operand2 = Input(UInt(32.W))
     //------------Output-------------//
     val ALURes = Output(UInt(32.W))
+    val takeBranch = Output(Bool())
   })
 
   // Typecast operands to SInt for all ALU operations
@@ -18,6 +19,7 @@ class ALU extends Module {
 
   // ALU Operations, using signed operands directly
   io.ALURes := 42.U // Default assignment (should only be true if io.ALUSel is undefined)
+  io.takeBranch := false.B
   switch(io.ALUSel) {
     is(AluOperation.Add.id.U) {
       io.ALURes := (signedOperand1 + signedOperand2).asUInt
@@ -58,5 +60,36 @@ class ALU extends Module {
         io.ALURes := 0.U
       }
     }
+    is(AluOperation.Beq.id.U){
+      when(io.operand1 === io.operand2){
+        io.takeBranch := true.B
+      }
+    }
+    is(AluOperation.Bne.id.U){
+      when(io.operand1 =/= io.operand2){
+        io.takeBranch := true.B
+      }
+    }
+    is(AluOperation.Blt.id.U){
+      when(io.operand1.asSInt < io.operand2.asSInt){
+        io.takeBranch := true.B
+      }
+    }
+    is(AluOperation.Bge.id.U){
+      when(io.operand1.asSInt >= io.operand2.asSInt){
+        io.takeBranch := true.B
+      }
+    }
+    is(AluOperation.Bltu.id.U){
+      when(io.operand1 < io.operand2){
+        io.takeBranch := true.B
+      }
+    }
+    is(AluOperation.Bgeu.id.U){
+      when(io.operand1 >= io.operand2){
+        io.takeBranch := true.B
+      }
+    }
   }
+
 }
