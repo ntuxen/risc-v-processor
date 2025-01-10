@@ -51,7 +51,7 @@ class DataMemoryTest(val size: Int, val addrWidth: Int) extends Module {
         }
       }
     }
-    is(AluOperation.Lb.id.U){ // Lbu
+    is(AluOperation.Lbu.id.U){ // Lbu
       switch(specAddr){
         is(0.U){
           dataOut := Cat(Fill(24, 0.U), mem0(commonAddr))
@@ -77,7 +77,7 @@ class DataMemoryTest(val size: Int, val addrWidth: Int) extends Module {
         }
       }
     }
-    is(AluOperation.Lh.id.U){ // Lhu
+    is(AluOperation.Lhu.id.U){ // Lhu
       switch(specAddr){
         is(0.U){
           dataOut := Cat(Fill(16, 0.U), mem1(commonAddr), mem0(commonAddr))
