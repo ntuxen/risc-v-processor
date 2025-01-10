@@ -29,10 +29,7 @@ class MEMStage extends Module {
     val leds = Output(UInt(16.W))
 
   })
-
-  val ALUResReg = RegInit(0.U(32.W))
-  val controlReg = RegInit(0.U(2.W)) // Bit #1 = registerWriteEnableIn, Bit #0 = writeDataMux
-  val rdReg = RegInit(0.U(5.W))
+  //DataMemory Module
   val dataMem = Module(new DataMemoryTest(1024,10))
   val branchAddressReg = RegInit(0.U(32.W))
   val readIsIO = RegNext(io.readIsIO)
