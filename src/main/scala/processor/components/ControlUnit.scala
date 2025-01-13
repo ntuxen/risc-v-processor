@@ -96,9 +96,11 @@ class ControlUnit extends Module {
     }
     is(Opcode.jal){
       io.RegWriteEnable := true.B
+      io.AluSel := Opcode.jal
     }
     is(Opcode.jalr){
       io.RegWriteEnable := true.B
+      io.AluSel := Opcode.jalr
     }
   }
 }

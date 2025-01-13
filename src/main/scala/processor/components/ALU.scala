@@ -95,6 +95,9 @@ class ALU extends Module {
     is(AluOperation.Lb.id.U,AluOperation.Lbu.id.U,AluOperation.Lw.id.U, AluOperation.Lh.id.U,AluOperation.Lhu.id.U,AluOperation.Sb.id.U, AluOperation.Sh.id.U, AluOperation.Sw.id.U){
       io.ALURes := io.operand1 + io.operand2
     }
+    is(Opcode.jal, Opcode.jalr){
+      io.takeBranch := true.B
+    }
   }
 
 }
