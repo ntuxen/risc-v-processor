@@ -1,7 +1,7 @@
 package processor.stages
 import chisel3._
 import chisel3.util._
-import processor.components.{ALU, ControlUnit, ImmediateGenerator, RegisterFile}
+import processor.components.{ALU, ControlUnit, ImmediateGenerator, Opcode, RegisterFile}
 class EXStage extends Module {
   val io = IO(new Bundle {
     //------------Input-------------//
@@ -97,7 +97,7 @@ class EXStage extends Module {
 
 
   // Logic for memory-mapped IO: address in memory or IO
-  when(ALU.io.ALURes >= 1024.U) {  // if requested address is in IO space
+  when(ALU.io.ALURes >= 1024.U && opcodeReg =/= Opcode.lui && opcodeReg =/= Opcode.auipc) {  // if requested address is in IO space
     io.MemWriteEnable := false.B   // Don't write to normal memory
     io.readIsIO := RegNext(true.B) // DELAYED ONE CLOCK CYCLE FOR READS
     io.IOWriteEnable := controlUnit.io.MemWriteEnable
@@ -106,6 +106,14 @@ class EXStage extends Module {
 
   //Connect rdReg
   io.rdRegIn := rdReg
+
+  //LUI logic
+  when(opcodeReg === Opcode.lui){
+    io.ALURes := immGen.io.immediate
+  }
+  when(opcodeReg === Opcode.auipc){
+    io.ALURes := io.BranchAddressIn + immGen.io.immediate
+  }
 
   //BranchAddress Logic:
   io.BranchAddressOut := branchAddrReg + (immGen.io.immediate << 1)
