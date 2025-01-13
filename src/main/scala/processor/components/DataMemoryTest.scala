@@ -14,7 +14,7 @@ class DataMemoryTest(val size: Int, val addrWidth: Int) extends Module {
     val dataOut = Output(UInt(width.W))
   })
 
-  val commonAddr = io.addr(addrWidth-2, 2)
+  val commonAddr = io.addr(addrWidth-1, 2)
   val specAddr = io.addr(1,0)
   val dataOut = WireDefault(0.U(32.W))
 
