@@ -22,7 +22,6 @@ class MEMStage extends Module {
     val readIsIO = Input(Bool())
     val IOWriteEnable = Input(Bool())
     val takeBranchIn = Input(Bool())
-    val memSel = Input(UInt(8.W))
     //------ OUTPUTS ---------//
     val writeData = Output(UInt(32.W))
     val registerWriteEnableOut = Output(Bool())
