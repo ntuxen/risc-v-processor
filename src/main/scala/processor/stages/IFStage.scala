@@ -26,6 +26,6 @@ class IFStage(val program: Seq[UInt]) extends Module {
   instrMem.io.addr := NextInstrAdd >> 2.U
   io.instruction := instrMem.io.dataOut
   //Connect PC to output so it propagates to next stage
-  io.PC := PC
+  io.PC := NextInstrAdd
 
 }

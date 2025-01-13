@@ -115,18 +115,16 @@ class EXStage extends Module {
   }
   //AUIPC Logic
   when(opcodeReg === Opcode.auipc){
-    io.ALURes := io.BranchAddressIn + immGen.io.immediate
+    io.ALURes := branchAddrReg + immGen.io.immediate
   }
 
 
   //PC logic for Jal and Jalr
   when(opcodeReg === Opcode.jal){
-    //io.BranchAddressOut := branchAddrReg + (immGen.io.immediate << 1)
-    //io.BranchAddressOut := 17.U
+    io.BranchAddressOut := branchAddrReg + (immGen.io.immediate) //
     io.ALURes := branchAddrReg + 4.U
-    printf("opcodeReg: %d\n", opcodeReg) // Add debugging output
   }
-  when(opcodeReg === Opcode.jalr){
+  when(opcodeReg === Opcode.jalr){ //TODO: Test Jalr (Maybe dont shift with 2?)
     io.BranchAddressOut := RegFile.io.operand1 + (immGen.io.immediate << 2)
     io.ALURes := branchAddrReg + 4.U
   }
