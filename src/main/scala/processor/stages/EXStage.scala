@@ -115,6 +115,18 @@ class EXStage extends Module {
     io.ALURes := io.BranchAddressIn + immGen.io.immediate
   }
 
+  //rd logic for Jal and Jalr
+  when(opcodeReg === Opcode.jal || opcodeReg === Opcode.jalr){
+    io.rdRegIn := branchAddrReg + 4.U
+  }
+  //PC logic for Jal and Jalr
+  when(opcodeReg === Opcode.jal){
+    io.BranchAddressOut := branchAddrReg + (immGen.io.immediate << 1)
+  }
+  when(opcodeReg === Opcode.jalr){
+    io.BranchAddressOut := RegNext(io.rs1) + (immGen.io.immediate << 2)
+  }
+
   //BranchAddress Logic:
   io.BranchAddressOut := branchAddrReg + (immGen.io.immediate << 1)
 }
