@@ -60,6 +60,8 @@ class EXStage extends Module {
   io.readIsIO := false.B
   io.IOWriteEnable := false.B
   io.memSel := 0.U
+  //BranchAddress Logic: (Standard for jal and branch instructions)
+  io.BranchAddressOut := branchAddrReg + (immGen.io.immediate << 1)
 
   //Connect RegFile
   RegFile.io.rs1 := io.rs1
@@ -107,26 +109,28 @@ class EXStage extends Module {
   //Connect rdReg
   io.rdRegIn := rdReg
 
-  //LUI logic
+  //LUI Logic
   when(opcodeReg === Opcode.lui){
     io.ALURes := immGen.io.immediate
   }
+  //AUIPC Logic
   when(opcodeReg === Opcode.auipc){
     io.ALURes := io.BranchAddressIn + immGen.io.immediate
   }
 
-  //rd logic for Jal and Jalr
-  when(opcodeReg === Opcode.jal || opcodeReg === Opcode.jalr){
-    io.rdRegIn := branchAddrReg + 4.U
-  }
+
   //PC logic for Jal and Jalr
   when(opcodeReg === Opcode.jal){
-    io.BranchAddressOut := branchAddrReg + (immGen.io.immediate << 1)
+    //io.BranchAddressOut := branchAddrReg + (immGen.io.immediate << 1)
+    //io.BranchAddressOut := 17.U
+    io.ALURes := branchAddrReg + 4.U
+    printf("opcodeReg: %d\n", opcodeReg) // Add debugging output
   }
   when(opcodeReg === Opcode.jalr){
-    io.BranchAddressOut := RegNext(io.rs1) + (immGen.io.immediate << 2)
+    io.BranchAddressOut := RegFile.io.operand1 + (immGen.io.immediate << 2)
+    io.ALURes := branchAddrReg + 4.U
   }
 
-  //BranchAddress Logic:
-  io.BranchAddressOut := branchAddrReg + (immGen.io.immediate << 1)
+
+
 }

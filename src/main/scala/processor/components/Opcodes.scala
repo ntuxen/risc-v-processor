@@ -13,6 +13,7 @@ object Opcode {
   val auipc = "b0010111".U
 }
 
+
 object AluFunct3 {
   val add = 0x0
   val sub = 0x0
