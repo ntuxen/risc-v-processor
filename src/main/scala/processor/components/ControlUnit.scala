@@ -94,6 +94,11 @@ class ControlUnit extends Module {
     is(Opcode.auipc){
       io.RegWriteEnable := true.B
     }
-
+    is(Opcode.jal){
+      io.RegWriteEnable := true.B
+    }
+    is(Opcode.jalr){
+      io.RegWriteEnable := true.B
+    }
   }
 }

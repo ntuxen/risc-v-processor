@@ -1,0 +1,49 @@
+    .text
+    .globl _start
+
+_start:
+    # Test JAL (Jump and Link)
+    jal x1, target1   # Jump to target1 and link return address (PC + 4) to x1
+    nop
+    nop
+    nop
+    nop
+    addi x6, x0, 1    # This should be skipped (this is part of the JAL test)
+
+target1:
+    addi x2, x0, 5    # Set x2 to 5
+    jal x1, target2   # Jump to target2 and link return address (PC + 4) to x1
+    nop
+    nop
+    nop
+    nop
+    addi x7, x0, 1    # This should be skipped (this is part of the JAL test)
+
+target2:
+    addi x3, x0, 10   # Set x3 to 10
+    jal x1, target3   # Jump to target3 and link return address (PC + 4) to x1
+    nop
+    nop
+    nop
+    nop
+    addi x8, x0, 1    # This should be skipped (this is part of the JAL test)
+
+target3:
+    addi x4, x0, 15   # Set x4 to 15
+    jal x1, target_end  # Jump to target_end and link return address (PC + 4) to x1
+
+target_end:
+    addi x5, x0, 20   # Set x5 to 20
+
+    # Test JALR (Jump and Link Register)
+    la x9, target_jalr    # Load address of target_jalr into x9
+    jalr x1, 0(x9)         # Jump to target_jalr using address in x9, save return address in x1
+    nop
+    nop
+    nop
+    nop
+    # The code here won't be executed due to the jump (part of the JALR test)
+    addi x10, x0, 1        # This should be skipped (this is part of the JALR test)
+
+target_jalr:
+    addi x11, x0, 25       # Set x11 to 25
