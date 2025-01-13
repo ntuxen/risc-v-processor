@@ -1,0 +1,19 @@
+addi x1 x0 -5   //Load value -5
+addi x2 x0 -19  //Load value -19
+addi x3 x0 -256 //Load value -256
+nop
+nop
+nop
+nop
+sb x1 0x4 x0 //Store x1 value in dataMem position 0 + 0x4
+sh x2 0x8 x0 //Store x2 value in dataMem position 0 + 0x8
+sw x3 0xC x0 //Store x3 value in dataMem position 0 + 0xC
+nop
+nop
+nop
+nop
+lb  x4 0x4 x0 //Load byte into x4
+lbu x5 0x4 x0 //Load byte (unsigned) into x5
+lh  x6 0x8 x0 //Load half into x6
+lhu x7 0x8 x0 //Load half (unsigned) into x7
+lw  x8 0xC x0 //Load word into x8

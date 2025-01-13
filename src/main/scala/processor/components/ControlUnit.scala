@@ -88,5 +88,12 @@ class ControlUnit extends Module {
         StoreFunct3.sw.U -> AluOperation.Sw.id.U
       ))
     }
+    is(Opcode.lui){
+      io.RegWriteEnable := true.B
+    }
+    is(Opcode.auipc){
+      io.RegWriteEnable := true.B
+    }
+
   }
 }
