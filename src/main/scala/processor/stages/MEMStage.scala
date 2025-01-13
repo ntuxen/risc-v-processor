@@ -14,6 +14,7 @@ class MEMStage extends Module {
     val dataWriteMem = Input(UInt(32.W))
     val memWriteEnable = Input(UInt(1.W))
     //val memReadEnable = Input(UInt(1.W))
+    val memSel = Input(UInt(8.W))
     val registerWriteEnableIn = Input(UInt(1.W))
     val writeDataMux = Input(UInt(1.W))
     val rdRegIn = Input(UInt(5.W))

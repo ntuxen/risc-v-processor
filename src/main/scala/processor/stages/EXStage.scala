@@ -59,6 +59,7 @@ class EXStage extends Module {
   io.MemWriteEnable := 0.U
   io.readIsIO := false.B
   io.IOWriteEnable := false.B
+  io.memSel := 0.U
 
   //Connect RegFile
   RegFile.io.rs1 := io.rs1
@@ -71,7 +72,7 @@ class EXStage extends Module {
   //ALU and RegFile connections
   ALU.io.operand1 := RegFile.io.operand1
   ALU.io.operand2 := Mux(controlUnit.io.MuxAluSel === 1.U, immGen.io.immediate, RegFile.io.operand2)
-    io.ALURes := ALU.io.ALURes
+  io.ALURes := ALU.io.ALURes
   io.address := ALU.io.ALURes
   io.takeBranchOut := ALU.io.takeBranch
 
@@ -85,6 +86,7 @@ class EXStage extends Module {
   controlUnit.io.funct7 := funct7Reg
   controlUnit.io.instrType := instrTypeReg
   controlUnit.io.opcode := opcodeReg
+
   //------------Output-------------//
   io.RegWriteEnable := controlUnit.io.RegWriteEnable
   io.WriteDataMux := controlUnit.io.WriteDataMux

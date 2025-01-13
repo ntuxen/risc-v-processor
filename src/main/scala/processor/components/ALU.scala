@@ -62,22 +62,22 @@ class ALU extends Module {
     }
     // --------  BRANCHES --------------//
     is(AluOperation.Beq.id.U){
-      when(io.operand1 === io.operand2){
+      when(signedOperand1 === signedOperand2){
         io.takeBranch := true.B
       }
     }
     is(AluOperation.Bne.id.U){
-      when(io.operand1 =/= io.operand2){
+      when(signedOperand1 =/= signedOperand2){
         io.takeBranch := true.B
       }
     }
     is(AluOperation.Blt.id.U){
-      when(io.operand1.asSInt < io.operand2.asSInt){
+      when(signedOperand1 < signedOperand2){
         io.takeBranch := true.B
       }
     }
     is(AluOperation.Bge.id.U){
-      when(io.operand1.asSInt >= io.operand2.asSInt){
+      when(signedOperand1 >= signedOperand2){
         io.takeBranch := true.B
       }
     }

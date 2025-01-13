@@ -63,12 +63,15 @@ object AluOperation extends Enumeration {
   type AluOperation = Value
 
   // Arithmetic and Logical Operations
+  //  0    1    2    3   4    5    6    7    8    9
   val Add, Sub, And, Or, Xor, Sll, Srl, Sra, Slt, Sltu = Value
 
   // Branch Operations
+  //  10   11   12   13   14     15
   val Beq, Bne, Blt, Bge, Bltu, Bgeu = Value
 
   // Load Operations
+  //  16  17  18  19  20
   val Lb, Lh, Lw, Lbu, Lhu = Value
 
   // Store Operations

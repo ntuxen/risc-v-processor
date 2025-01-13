@@ -58,8 +58,6 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   //---MEMORY MAPPED IO---//
   io.LEDs := MEM.io.leds
 
-  //--- Temporary Connection ---//
-  IF.io.EnableJump := false.B
 
 }
 
