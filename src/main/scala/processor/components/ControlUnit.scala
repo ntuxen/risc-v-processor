@@ -68,7 +68,7 @@ class ControlUnit extends Module {
 
     is(Opcode.load) { // Load Operations
       io.RegWriteEnable := RegNext(true.B) //TODO: This might break stuff "RegNext"
-      io.WriteDataMux := true.B
+      io.WriteDataMux := RegNext(true.B)   // Delays signal one cycle because reads are slower
       io.AluSel := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
         LoadFunct3.lb.U -> AluOperation.Lb.id.U,
         LoadFunct3.lh.U -> AluOperation.Lh.id.U,

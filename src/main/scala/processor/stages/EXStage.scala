@@ -30,6 +30,7 @@ class EXStage extends Module {
     val takeBranchOut = Output(Bool())
     val readIsIO = Output(Bool())
     val IOWriteEnable = Output(Bool())
+    val memSel = Output(UInt(8.W))
   })
   //Load needed modules/components
   val RegFile = Module(new RegisterFile)
@@ -90,12 +91,13 @@ class EXStage extends Module {
   io.MemReadEnable := controlUnit.io.MemReadEnable
   io.MemWriteEnable := controlUnit.io.MemWriteEnable
   ALU.io.ALUSel := controlUnit.io.AluSel
+  io.memSel := controlUnit.io.AluSel
 
 
   // Logic for memory-mapped IO: address in memory or IO
-  when(ALU.io.ALURes >= 1024.U) { // if requested address is in IO space
-    io.MemWriteEnable := false.B // Don't write to normal memory
-    io.readIsIO := true.B
+  when(ALU.io.ALURes >= 1024.U) {  // if requested address is in IO space
+    io.MemWriteEnable := false.B   // Don't write to normal memory
+    io.readIsIO := RegNext(true.B) // DELAYED ONE CLOCK CYCLE FOR READS
     io.IOWriteEnable := controlUnit.io.MemWriteEnable
   }
 

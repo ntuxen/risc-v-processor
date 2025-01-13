@@ -19,10 +19,10 @@ class DataMemoryTest(val size: Int, val addrWidth: Int) extends Module {
   val dataOut = WireDefault(0.U(32.W))
 
   // Make memory with RegInit
-  val mem0 = RegInit(VecInit(Seq.fill(size >> 2)(0.U((width-2).W))))
-  val mem1 = RegInit(VecInit(Seq.fill(size >> 2)(0.U((width-2).W))))
-  val mem2 = RegInit(VecInit(Seq.fill(size >> 2)(0.U((width-2).W))))
-  val mem3 = RegInit(VecInit(Seq.fill(size >> 2)(0.U((width-2).W))))
+  val mem0 = RegInit(VecInit(Seq.fill(size >> 2)(0.U((width >> 2).W))))
+  val mem1 = RegInit(VecInit(Seq.fill(size >> 2)(0.U((width >> 2).W))))
+  val mem2 = RegInit(VecInit(Seq.fill(size >> 2)(0.U((width >> 2).W))))
+  val mem3 = RegInit(VecInit(Seq.fill(size >> 2)(0.U((width >> 2).W))))
 
   // Default values (Maybe unnecessary?)
   mem0(commonAddr) := mem0(commonAddr)
