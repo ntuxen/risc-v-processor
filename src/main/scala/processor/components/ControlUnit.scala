@@ -56,6 +56,7 @@ class ControlUnit extends Module {
 
     is(Opcode.branch) { // Branch Operations
       io.RegWriteEnable := false.B
+      io.MuxAluSel := 0.U
       io.AluSel := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
         BranchFunct3.beq.U -> AluOperation.Beq.id.U,
         BranchFunct3.bne.U -> AluOperation.Bne.id.U,

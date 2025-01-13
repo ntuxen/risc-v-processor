@@ -1,0 +1,31 @@
+li x1, 0
+li x2, 1
+li x3, 2
+li x7, -10
+nop
+nop
+add x3, x1, x3
+blt x2, x4, end
+nop
+nop
+bge x2, x3, end
+nop
+nop
+li x4, 6
+bltu x7, x4, end
+nop
+nop
+li x4, 0
+nop
+bgeu x7, x4, end
+nop
+nop
+li x5, 1
+nop
+nop
+end:
+nop
+nop
+li x6, 1
+nop
+nop
