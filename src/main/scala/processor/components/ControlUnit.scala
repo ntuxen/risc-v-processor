@@ -11,21 +11,21 @@ class ControlUnit extends Module {
     val instrType = Input(UInt(3.W))
     val opcode = Input(UInt(7.W))
     // Outputs
-    val MuxAluSel = Output(UInt(1.W))
-    val AluSel = Output(UInt(8.W))
-    val RegWriteEnable = Output(UInt(1.W))
-    val WriteDataMux = Output(UInt(1.W))
-    val MemReadEnable = Output(UInt(1.W))
-    val MemWriteEnable = Output(UInt(1.W))
+    val alu_op2mux_select = Output(UInt(1.W))
+    val alu_operation_select = Output(UInt(8.W))
+    val register_write_enable_EXtoMEM = Output(UInt(1.W))
+    val write_back_select_EXtoMEM = Output(UInt(1.W))
+    val MemReadEnable = Output(UInt(1.W)) //TODO: Do we need this?
+    val write_memory_enable = Output(UInt(1.W))
   })
 
   // Default values for outputs
-  io.MemWriteEnable := false.B
+  io.write_memory_enable := false.B
   io.MemReadEnable := false.B
-  io.RegWriteEnable := false.B
-  io.WriteDataMux := false.B
-  io.AluSel := 0.U
-  io.MuxAluSel := 1.U // Default immediate
+  io.register_write_enable_EXtoMEM := false.B
+  io.write_back_select_EXtoMEM := false.B
+  io.alu_operation_select := 0.U
+  io.alu_op2mux_select := 1.U // Default immediate
 
   // Helper function to map ALU opcode and function decoding
   def getAluOperation(funct3: UInt, funct7: UInt): UInt = {
@@ -49,15 +49,15 @@ class ControlUnit extends Module {
   // Opcode-specific logic
   switch(io.opcode) {
     is(Opcode.Alu, Opcode.AluImm) { // ALU Operations
-      io.RegWriteEnable := true.B
-      io.AluSel := getAluOperation(io.funct3, io.funct7)
-      io.MuxAluSel := Mux(io.opcode === Opcode.Alu, 0.U, 1.U) // rs2 or immediate
+      io.register_write_enable_EXtoMEM := true.B
+      io.alu_operation_select := getAluOperation(io.funct3, io.funct7)
+      io.alu_op2mux_select := Mux(io.opcode === Opcode.Alu, 0.U, 1.U) // rs2 or immediate
     }
 
     is(Opcode.branch) { // Branch Operations
-      io.RegWriteEnable := false.B
-      io.MuxAluSel := 0.U
-      io.AluSel := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
+      io.register_write_enable_EXtoMEM := false.B
+      io.alu_op2mux_select := 0.U
+      io.alu_operation_select := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
         BranchFunct3.beq.U -> AluOperation.Beq.id.U,
         BranchFunct3.bne.U -> AluOperation.Bne.id.U,
         BranchFunct3.blt.U -> AluOperation.Blt.id.U,
@@ -68,9 +68,9 @@ class ControlUnit extends Module {
     }
 
     is(Opcode.load) { // Load Operations
-      io.RegWriteEnable := RegNext(true.B) //TODO: This might break stuff "RegNext"
-      io.WriteDataMux := RegNext(true.B)   // Delays signal one cycle because reads are slower
-      io.AluSel := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
+      io.register_write_enable_EXtoMEM := RegNext(true.B) //TODO: This might break stuff "RegNext"
+      io.write_back_select_EXtoMEM := RegNext(true.B)   // Delays signal one cycle because reads are slower
+      io.alu_operation_select := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
         LoadFunct3.lb.U -> AluOperation.Lb.id.U,
         LoadFunct3.lh.U -> AluOperation.Lh.id.U,
         LoadFunct3.lw.U -> AluOperation.Lw.id.U,
@@ -80,27 +80,27 @@ class ControlUnit extends Module {
     }
 
     is(Opcode.store) { // Store Operations
-      io.MemWriteEnable := true.B
-      io.RegWriteEnable := false.B
-      io.AluSel := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
+      io.write_memory_enable := true.B
+      io.register_write_enable_EXtoMEM := false.B
+      io.alu_operation_select := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
         StoreFunct3.sb.U -> AluOperation.Sb.id.U,
         StoreFunct3.sh.U -> AluOperation.Sh.id.U,
         StoreFunct3.sw.U -> AluOperation.Sw.id.U
       ))
     }
     is(Opcode.lui){
-      io.RegWriteEnable := true.B
+      io.register_write_enable_EXtoMEM := true.B
     }
     is(Opcode.auipc){
-      io.RegWriteEnable := true.B
+      io.register_write_enable_EXtoMEM := true.B
     }
     is(Opcode.jal){
-      io.RegWriteEnable := true.B
-      io.AluSel := Opcode.jal
+      io.register_write_enable_EXtoMEM := true.B
+      io.alu_operation_select := Opcode.jal
     }
     is(Opcode.jalr){
-      io.RegWriteEnable := true.B
-      io.AluSel := Opcode.jalr
+      io.register_write_enable_EXtoMEM := true.B
+      io.alu_operation_select := Opcode.jalr
     }
   }
 }

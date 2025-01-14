@@ -66,16 +66,16 @@ class EXStage extends Module {
   //Connect RegFile
   RegFile.io.rs1 := io.decoded_instruction_IFDtoEX.rs1
   RegFile.io.rs2 := io.decoded_instruction_IFDtoEX.rs2
-  RegFile.io.rd := io.rd_WBtoEX
-  RegFile.io.writeData := io.regfile_write_data_WBtoEX
-  RegFile.io.writeEnable := io.regfile_write_enable_WBtoEX
-  io.memory_write_data_EXtoMEM := RegFile.io.operand2
+  RegFile.io.rd_WBtoEX := io.rd_WBtoEX
+  RegFile.io.regfile_write_data_WBtoEX := io.regfile_write_data_WBtoEX
+  RegFile.io.regfile_write_enable_WBtoEX := io.regfile_write_enable_WBtoEX
+  io.memory_write_data_EXtoMEM := RegFile.io.reg_data_2
 
   //ALU and RegFile connections
-  ALU.io.operand1 := RegFile.io.operand1
-  ALU.io.operand2 := Mux(controlUnit.io.MuxAluSel === 1.U, immGen.io.immediate, RegFile.io.operand2)
-  io.alu_result_EXtoMEM := ALU.io.ALURes
-  io.take_branch_EXtoMEM := ALU.io.takeBranch
+  ALU.io.alu_operand_1 := RegFile.io.alu_operand_1
+  ALU.io.alu_operand_2 := Mux(controlUnit.io.alu_op2mux_select === 1.U, immGen.io.immediate, RegFile.io.reg_data_2)
+  io.alu_result_EXtoMEM := ALU.io.alu_result
+  io.take_branch_EXtoMEM := ALU.io.take_branch_EXtoMEM
 
   //Connect ImmGen
   immGen.io.instrType := instrTypeReg
@@ -89,18 +89,18 @@ class EXStage extends Module {
   controlUnit.io.opcode := opcodeReg
 
   //------------Output-------------//
-  io.register_write_enable_EXtoMEM := controlUnit.io.RegWriteEnable
-  io.write_back_select_EXtoMEM := controlUnit.io.WriteDataMux
-  io.data_memory_write_enable_EXtoMEM := controlUnit.io.MemWriteEnable
-  ALU.io.ALUSel := controlUnit.io.AluSel
-  io.alu_operation_select_EXtoMEM := controlUnit.io.AluSel
+  io.register_write_enable_EXtoMEM := controlUnit.io.register_write_enable_EXtoMEM
+  io.write_back_select_EXtoMEM := controlUnit.io.write_back_select_EXtoMEM
+  io.data_memory_write_enable_EXtoMEM := controlUnit.io.write_memory_enable
+  ALU.io.alu_operation_select := controlUnit.io.alu_operation_select
+  io.alu_operation_select_EXtoMEM := controlUnit.io.alu_operation_select
 
 
   // Logic for memory-mapped IO: address in memory or IO
-  when(ALU.io.ALURes >= 1024.U && opcodeReg =/= Opcode.lui && opcodeReg =/= Opcode.auipc) {  // if requested address is in IO space
+  when(ALU.io.alu_result >= 1024.U && opcodeReg =/= Opcode.lui && opcodeReg =/= Opcode.auipc) {  // if requested address is in IO space
     io.data_memory_write_enable_EXtoMEM := false.B  // Don't write to normal memory
     io.address_is_io_EXtoMEM := true.B         // DELAYED ONE CLOCK CYCLE FOR READS
-    io.io_memory_write_enable_EXtoMEM := controlUnit.io.MemWriteEnable
+    io.io_memory_write_enable_EXtoMEM := controlUnit.io.write_memory_enable
   }
 
 
@@ -123,7 +123,7 @@ class EXStage extends Module {
     io.alu_result_EXtoMEM := branchAddrReg + 4.U
   }
   when(opcodeReg === Opcode.jalr){ //TODO: Test Jalr (Maybe dont shift with 2?)
-    io.branch_address_EXtoMEM := RegFile.io.operand1 + (immGen.io.immediate << 2)
+    io.branch_address_EXtoMEM := RegFile.io.alu_operand_1 + (immGen.io.immediate << 2)
     io.alu_result_EXtoMEM := branchAddrReg + 4.U
   }
 
