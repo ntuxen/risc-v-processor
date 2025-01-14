@@ -7,10 +7,10 @@ class MemoryMappedIO(val memoryMaxAddress: Int) extends Module {
   val io = IO(new Bundle {
     //------- INPUTS --------//
     val address = Input(UInt(32.W))
-    val dataWriteMem = Input(UInt(32.W))
+    val dataIn = Input(UInt(32.W))
     val writeEnable = Input(Bool())
     //------ OUTPUTS --------//
-    val dataReadIO = Output(UInt(32.W))
+    val dataOut = Output(UInt(32.W))
     val leds = Output(UInt(16.W))
   })
 
@@ -26,11 +26,14 @@ class MemoryMappedIO(val memoryMaxAddress: Int) extends Module {
   //------ Patching/IO logic -------//
   // LEDs
   leds.io.port.write := io.writeEnable && (addressIO === IO_Adresses.LEDs) // Write when address matches
-  leds.io.port.wrData := io.dataWriteMem(15,0)
   leds.io.port.read := (!io.writeEnable) && (addressIO === IO_Adresses.LEDs) // Read when not writing
-  leds.io.port.addr := 0.U // For initialization
-  io.dataReadIO := leds.io.port.rdData // Output to register file
+  leds.io.port.addr := 0.U // Address should be fixed, we only have 16 LEDs (< 1 word)
+  leds.io.port.wrData := io.dataIn(15,0)
   io.leds := leds.io.pins // Output to LEDs
+
+  // TODO: Fix the following line! Always reads from LEDs.
+  io.dataOut := leds.io.port.rdData // Output to register file
+
   // UART
 
 
