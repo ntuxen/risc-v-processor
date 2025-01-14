@@ -11,7 +11,7 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
     val LEDs = Output(UInt(16.W))
   })
 
-  val IF = Module(new IFStage(program))
+  val IF = Module(new IFDStage(program))
   val ID = Module(new InstructionDecoder) // ID Stage
   val EX = Module(new EXStage)
   val MEM = Module (new MEMStage)
