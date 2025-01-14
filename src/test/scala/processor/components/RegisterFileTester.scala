@@ -12,7 +12,7 @@ class RegisterFileTester extends AnyFlatSpec with ChiselScalatestTester {
         dut.io.rs1.poke(rs1)
         dut.io.rs2.poke(rs2)
         dut.io.regfile_write_data_WBtoEX.poke(writeData)
-        dut.io.rd.poke(rd)
+        dut.io.rd_WBtoEX.poke(rd)
         dut.io.regfile_write_enable_WBtoEX.poke(writeEnable)
       }
 
