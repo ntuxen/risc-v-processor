@@ -4,7 +4,7 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class IFStageTester extends AnyFlatSpec with ChiselScalatestTester {
+class IFDStageTester extends AnyFlatSpec with ChiselScalatestTester {
   // Define the program
   val program: Seq[UInt] = Seq(
     "h00f00213".U(32.W), // Sample instructions
@@ -18,7 +18,7 @@ class IFStageTester extends AnyFlatSpec with ChiselScalatestTester {
   )
 
   it should "pass in test" in {
-        test(new IFStage(program)).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
+        test(new IFDStage(program)).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
           // Debug: Initial Instruction
           println(s"Initial Instruction = ${dut.io.instruction.peek()}")
 
