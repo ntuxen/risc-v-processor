@@ -8,13 +8,13 @@ class EXStage extends Module {
     val instruction_IDFtoEX = Input(UInt(32.W))
     val decoded_instruction_IFDtoEX = new Bundle(
       ){
-        val rs1 = Output(UInt(5.W))
-        val rs2 = Output(UInt(5.W))
-        val rd = Output(UInt(5.W))
-        val funct3 = Output(UInt(3.W))
-        val funct7 = Output(UInt(7.W))
-        val instrType = Output(UInt(3.W))
-        val opcode = Output(UInt(7.W))
+        val rs1 = Input(UInt(5.W))
+        val rs2 = Input(UInt(5.W))
+        val rd = Input(UInt(5.W))
+        val funct3 = Input(UInt(3.W))
+        val funct7 = Input(UInt(7.W))
+        val instrType = Input(UInt(3.W))
+        val opcode = Input(UInt(7.W))
       }
     val regfile_write_data_WBtoEX = Input(UInt(32.W))
     val regfile_write_enable_WBtoEX = Input(UInt(1.W))
