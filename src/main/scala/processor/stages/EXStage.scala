@@ -55,7 +55,7 @@ class EXStage extends Module {
   io.rd_EXtoMEM := false.B
   io.register_write_enable_EXtoMEM := false.B
   io.write_back_select_EXtoMEM := false.B
-  io.data_memory_write_enable_EXtoMEM := false.B
+  io.data_memory_write_enable_EXtoMEM := false.B //TODO: Gets overwrited later
   io. address_is_io_EXtoMEM := false.B
   io.io_memory_write_enable_EXtoMEM := false.B
   io.alu_operation_select_EXtoMEM := 0.U
