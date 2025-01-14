@@ -11,14 +11,14 @@ class RegisterFileTester extends AnyFlatSpec with ChiselScalatestTester {
       def pokeInputs(rs1: UInt, rs2: UInt, writeData: UInt, rd: UInt, writeEnable: UInt): Unit = {
         dut.io.rs1.poke(rs1)
         dut.io.rs2.poke(rs2)
-        dut.io.writeData.poke(writeData)
+        dut.io.regfile_write_data_WBtoEX.poke(writeData)
         dut.io.rd.poke(rd)
-        dut.io.writeEnable.poke(writeEnable)
+        dut.io.regfile_write_enable_WBtoEX.poke(writeEnable)
       }
 
       def checkOutputs(expectedOp1: UInt, expectedOp2: UInt, message: String): Unit = {
-        dut.io.operand1.expect(expectedOp1, message)
-        dut.io.operand2.expect(expectedOp2, message)
+        dut.io.alu_operand_1.expect(expectedOp1, message)
+        dut.io.reg_data_2.expect(expectedOp2, message)
       }
 
       // RUN 1 (Try to write a value to x1)

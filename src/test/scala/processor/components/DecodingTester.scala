@@ -17,13 +17,13 @@ class DecodingTester extends AnyFlatSpec with ChiselScalatestTester {
 
       def printDutState(): Unit = {
         println("\nDUT State:")
-        println("instrType: " + dut.io.instrType.peek().litValue()) // Print instruction type
-        println("rs1: " + dut.io.rs1.peek().litValue())            // Source register 1
-        println("rs2: " + dut.io.rs2.peek().litValue())            // Source register 2
-        println("rd: " + dut.io.rd.peek().litValue())              // Destination register
-        println("opcode: " + dut.io.opcode.peek().litValue().toInt.toBinaryString.reverse.padTo(7, '0').reverse) // Opcode in binary
-        println("funct3: " + dut.io.funct3.peek().litValue())      // Function field 3
-        println("funct7: " + dut.io.funct7.peek().litValue())      // Function field 7
+        println("instrType: " + dut.io.decoded_instruction_IFDtoEX.instrType.peek().litValue()) // Print instruction type
+        println("rs1: " + dut.io.decoded_instruction_IFDtoEX.rs1.peek().litValue())            // Source register 1
+        println("rs2: " + dut.io.decoded_instruction_IFDtoEX.rs2.peek().litValue())            // Source register 2
+        println("rd: " + dut.io.decoded_instruction_IFDtoEX.rd.peek().litValue())              // Destination register
+        println("opcode: " + dut.io.decoded_instruction_IFDtoEX.opcode.peek().litValue().toInt.toBinaryString.reverse.padTo(7, '0').reverse) // Opcode in binary
+        println("funct3: " + dut.io.decoded_instruction_IFDtoEX.funct3.peek().litValue())      // Function field 3
+        println("funct7: " + dut.io.decoded_instruction_IFDtoEX.funct7.peek().litValue())      // Function field 7
       }
 
       printDutState()

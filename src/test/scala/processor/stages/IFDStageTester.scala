@@ -20,17 +20,17 @@ class IFDStageTester extends AnyFlatSpec with ChiselScalatestTester {
   it should "pass in test" in {
         test(new IFDStage(program)).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
           // Debug: Initial Instruction
-          println(s"Initial Instruction = ${dut.io.instruction.peek()}")
+          println(s"Initial Instruction = ${dut.io.instruction_IFDtoEX.peek()}")
 
           // Test sequential fetch
           println("Testing sequential PC increment:")
           for (i <- 0 until 3) { // Test only 3 values
             // Debug: Output the fetched instruction
-            val instruction = dut.io.instruction.peek().litValue
+            val instruction = dut.io.instruction_IFDtoEX.peek().litValue
             println(f"Cycle $i: Instruction at PC=${i * 4}: 0x${instruction.toString(16)}")
 
-            dut.io.EnableJump.poke(false.B)
-            dut.io.BranchAddress.poke(0.U)
+            dut.io.take_branch_MEMtoIFD.poke(false.B)
+            dut.io.branch_address_MEMtoIFD.poke(0.U)
             dut.clock.step(1) // Step once to set PC+4
             dut.clock.step(1) // Step again to resolve SyncReadMem
 
@@ -39,13 +39,13 @@ class IFDStageTester extends AnyFlatSpec with ChiselScalatestTester {
 
           // Test jump logic
           println("\nTesting jump logic:")
-          dut.io.EnableJump.poke(true.B)     // Activate jump
-          dut.io.BranchAddress.poke(8.U)      // Jump to addr 8
+          dut.io.take_branch_MEMtoIFD.poke(true.B)     // Activate jump
+          dut.io.branch_address_MEMtoIFD.poke(8.U)      // Jump to addr 8
           dut.clock.step(1)                 // Execute the jump
           dut.clock.step(1)                 // Resolve memory access
 
           // Debug: Output the fetched instruction at jump destination
-          val instructionJumped = dut.io.instruction.peek().litValue
+          val instructionJumped = dut.io.instruction_IFDtoEX.peek().litValue
           println(f"Jumped to Instruction (${instructionJumped.toString(16)} at PC=8)")
         }
       }
