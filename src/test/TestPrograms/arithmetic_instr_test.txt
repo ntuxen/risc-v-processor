@@ -1,0 +1,68 @@
+# Initialize registers x1, x2, and x3 with some values
+li x1, 5          # x1 = 7
+nop                
+nop
+nop
+li x2, 10         # x2 = 9
+nop
+nop
+nop
+li x3, 3          # x3 = 13
+nop
+nop
+nop
+li x4, 4
+nop
+nop
+nop
+li x5, 5
+nop
+nop
+nop
+li x6, -32
+nop
+nop
+nop
+li x7, 3
+
+# Arithmetic operations using x1, x2, and x3
+add x1, x1, x2    # x1 = 16
+nop
+nop
+nop
+sub x2, x3, x2    # x2 = 4
+nop
+nop
+nop
+xor x3, x1, x2 # x3 = 20?
+nop
+nop
+nop
+or x1, x2, x3 # x1 = 20?
+nop
+nop
+nop
+and x2, x1, x3 # x2 = 20?
+nop
+nop
+nop
+sll x1, x5, x4 # x1 = 5*2^4
+nop
+nop
+nop
+srl x1, x1, x4 # x1 = 5
+nop
+nop
+nop
+sra x1, x6, x7 # x1 = -4?
+nop
+nop
+nop
+slt x3, x1, x2
+nop
+nop
+nop
+sltu x3, x1, x2
+nop
+nop
+nop
