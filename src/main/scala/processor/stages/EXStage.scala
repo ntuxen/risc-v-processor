@@ -68,7 +68,7 @@ class EXStage extends Module {
   io.EXtoMEM.io_memory_write_enable_EXtoMEM := false.B
   io.EXtoMEM.alu_operation_select_EXtoMEM := 0.U
   //BranchAddress Logic: (Standard for jal and branch instructions)
-  io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + (immGen.io.immediate << 1)
+  io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + (immGen.io.immediate)
   io.EXtoMEM.take_branch_EXtoMEM := false.B
 
   //Connect RegFile

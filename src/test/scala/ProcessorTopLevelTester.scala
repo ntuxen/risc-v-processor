@@ -6,7 +6,7 @@ import processor.components.ProgramLoader
 
 class ProcessorTopLevelTester extends AnyFlatSpec with ChiselScalatestTester {
   // Define the program
-  val program: Seq[UInt] = ProgramLoader.loadHexFile("src/test/TestPrograms/jal_jalr_Test.hex")
+  val program: Seq[UInt] = ProgramLoader.loadHexFile("src/test/TestPrograms/Blt_Bge_Test.hex")
 
   "ProcessorTopLevelTester" should "pass" in {
     test(new ProcessorTopLevel(program)).withAnnotations(Seq(WriteVcdAnnotation))

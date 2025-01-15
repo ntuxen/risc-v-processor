@@ -14,13 +14,10 @@ nop
 nop
 bne x2, x4, end
 nop
-nop
 li x5, 1
 nop
 nop
 end:
-nop
-nop
 li x6, 1
 nop
 nop
