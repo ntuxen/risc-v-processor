@@ -6,7 +6,7 @@ import chisel3.util.experimental.loadMemoryFromFile
 
 
 
-class InstrMemory(val size: Int, val addrWidth: Int) extends Module {
+class InstrMemory(val size: Int, val addrWidth: Int, val program_file: String) extends Module {
   val width: Int = 32
   val io = IO(new Bundle {
     val addr = Input(UInt(addrWidth.W))
@@ -17,7 +17,7 @@ class InstrMemory(val size: Int, val addrWidth: Int) extends Module {
   // TODO: learn how to insert data into the memory
   val mem = SyncReadMem(size,UInt(width.W))
   // Load program from a file
-  loadMemoryFromFile(mem, "src/test/TestPrograms/AddImmTest.hex")
+  loadMemoryFromFile(mem, program_file)
 
   // Fake "read" during elaboration for debugging
   //  for (i <- 0 until 5) {

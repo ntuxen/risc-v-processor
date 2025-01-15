@@ -10,7 +10,9 @@ class ImmediateGenerator extends Module {
     val immediate = Output(UInt(32.W))
   })
 
+  // Wires and inits
   io.immediate := 0.U(32.W)
+
   switch(io.instrType){
     is(InstrType.RType.id.U){
       io.immediate := 0.U(32.W)
@@ -22,7 +24,7 @@ class ImmediateGenerator extends Module {
       io.immediate := Cat(io.instruction(31, 25), io.instruction(11, 7))
     }
     is(InstrType.BType.id.U){
-      io.immediate := Cat(io.instruction(31), io.instruction(7), io.instruction(30, 25), io.instruction(11, 8), 0.U(1.W))
+      io.immediate := Cat(Fill(19, io.instruction(31)), io.instruction(31), io.instruction(7), io.instruction(30, 25), io.instruction(11, 8), 0.U(1.W))
     }
     is(InstrType.UType.id.U){
       io.immediate := Cat(io.instruction(31, 12), 0.U(12.W))

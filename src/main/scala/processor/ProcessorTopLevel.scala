@@ -6,8 +6,9 @@ import chisel3.util._
 import processor.components._
 import processor.stages._
 
-class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
+class ProcessorTopLevel(val program: String) extends Module {
   val io = IO(new Bundle {
+    val sw = Input(UInt(16.W))
     val LEDs = Output(UInt(16.W))
   })
 
@@ -57,7 +58,7 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
 //  IF.io.EnableJump := MEM.io.takeBranchOut
 
   //---MEMORY MAPPED IO---//
-  io.LEDs := MEM.io.leds
+  io.LEDs := MEM.io.leds | io.sw
 
   IFD.io.IFDtoEX <> EX.io.IFDtoEX
   IFD.io.decoded_instruction_IFDtoEX <> EX.io.decoded_instruction_IFDtoEX
@@ -69,19 +70,10 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
 }
 
 object Processor extends App {
-  // Define the program
-  val program: Seq[UInt] = Seq(
-    "h00000013".U(32.W), // Sample instructions
-    "h00000013".U(32.W),
-    "h00000013".U(32.W),
-    "h00000013".U(32.W),
-    "h00000013".U(32.W),
-    "h00000013".U(32.W),
-    "h00000013".U(32.W),
-    "h00000013".U(32.W)
-  )
-  //Example Usage of loadHexFile:
-  //val program: Seq[UInt] = ProgramLoader.loadHexFile("src/test/TestPrograms/AddImmTest.hex")
+  // Load Program (doesn't work because of different types
+  //val program: Seq[UInt] = ProgramLoader.loadHexFile("src/test/TestPrograms/BlinkingLEDsFast.hex")
+  val program = "src/test/TestPrograms/BlinkingLEDsFast.hex"
+  // Emit Verilog file
   (new chisel3.stage.ChiselStage).emitVerilog(new ProcessorTopLevel(program))
 }
 

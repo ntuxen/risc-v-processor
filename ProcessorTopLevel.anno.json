@@ -4,11 +4,27 @@
     "emitter":"firrtl.VerilogEmitter"
   },
   {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~ProcessorTopLevel|InstrMemoryTest>dataReg"
+    "class":"firrtl.annotations.LoadMemoryAnnotation",
+    "target":"ProcessorTopLevel.InstrMemory.mem",
+    "fileName":"src/test/TestPrograms/BlinkingLEDsFast.hex",
+    "hexOrBinary":"h",
+    "originalMemoryNameOpt":"mem"
   },
   {
     "class":"firrtl.transforms.BlackBoxTargetDirAnno",
     "targetDir":"."
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~ProcessorTopLevel|ProcessorTopLevel>io_LEDs",
+    "sources":[
+      "~ProcessorTopLevel|ProcessorTopLevel>io_sw"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.BlackBoxInlineAnno",
+    "target":"ProcessorTopLevel.InstrMemory",
+    "name":"ProcessorTopLevel.InstrMemory.mem.v",
+    "text":"module BindsTo_0_InstrMemory(\n  input         clock,\n  input  [9:0]  io_addr,\n  output [31:0] io_dataOut\n);\n\ninitial begin\n  $readmemh(\"src/test/TestPrograms/BlinkingLEDsFast.hex\", InstrMemory.mem);\nend\n                      endmodule\n\nbind InstrMemory BindsTo_0_InstrMemory BindsTo_0_InstrMemory_Inst(.*);"
   }
 ]

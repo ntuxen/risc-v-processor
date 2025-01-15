@@ -51,7 +51,7 @@ class MEMStage extends Module {
   })
 
   //DataMemory Module
-  val dataMem = Module(new DataMemoryTest(1024,10))
+  val dataMem = Module(new DataMemory(1024,10))
 
   // Memory-mapped IO
   val MemoryMappedIO = Module(new MemoryMappedIO(1024))
@@ -74,6 +74,6 @@ class MEMStage extends Module {
   dataMem.io.addr := io.EXtoMEM.alu_result_EXtoMEM
   dataMem.io.dataIn := io.EXtoMEM.memory_write_data_EXtoMEM
   dataMem.io.enableWrite := io.EXtoMEM.data_memory_write_enable_EXtoMEM
-  dataMem.io.memSel := io.EXtoMEM.alu_operation_select_EXtoMEM
+  dataMem.io.alu_operation_select_EXtoMEM := io.EXtoMEM.alu_operation_select_EXtoMEM
   io.MEMtoWB.data_memory_read_MEMtoWB := dataMem.io.dataOut // TODO: is this correct?
 }

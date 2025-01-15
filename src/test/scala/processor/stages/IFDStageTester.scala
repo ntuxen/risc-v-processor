@@ -5,20 +5,8 @@ import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
 class IFDStageTester extends AnyFlatSpec with ChiselScalatestTester {
-  // Define the program
-  val program: Seq[UInt] = Seq(
-    "h00f00213".U(32.W), // Sample instructions
-    "h00520213".U(32.W),
-    "hfec20213".U(32.W),
-    "h00000013".U(32.W),
-    "h00000013".U(32.W),
-    "h00000013".U(32.W),
-    "h00000013".U(32.W),
-    "h002081b3".U(32.W)
-  )
-
   it should "pass in test" in {
-        test(new IFDStage(program)).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
+        test(new IFDStage("src/test/TestPrograms/IFDStageTester.hex")).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
           // Debug: Initial Instruction
           println(s"Initial Instruction = ${dut.io.IFDtoEX.instruction_IFDtoEX.peek()}")
 

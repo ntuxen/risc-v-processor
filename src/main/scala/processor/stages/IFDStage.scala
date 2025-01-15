@@ -3,7 +3,7 @@ package processor.stages
 import chisel3._
 import processor.components._
 
-class IFDStage(val program: Seq[UInt]) extends Module {
+class IFDStage(val program: String) extends Module {
   val io = IO(new Bundle {
     //------------INPUTS--------//
     val MEMtoIFD = new Bundle {
@@ -32,18 +32,21 @@ class IFDStage(val program: Seq[UInt]) extends Module {
   // TODO: fix the above
   val PC = RegInit("hFFFFFFFC".U(32.W))
   val NextInstrAdd = WireDefault(Mux(io.MEMtoIFD.take_branch_MEMtoIFD, io.MEMtoIFD.branch_address_MEMtoIFD, PC + 4.U))
+  PC := NextInstrAdd
+
   // Instruction memory
-  val instrMem = Module(new InstrMemoryTest(1024,10,program))
+  val instrMem = Module(new InstrMemory(1024,10,program))
   instrMem.io.addr := NextInstrAdd >> 2.U
+
   //Instruction Decoder
   val instructionDecoder = Module(new InstructionDecoder)
   instructionDecoder.io.instruction := instrMem.io.dataOut
 
-  PC := NextInstrAdd
+  // Pipeline register
+  io.IFDtoEX.pc_IFDtoEX := RegNext(NextInstrAdd)
 
   
   //Connect PC to output so it propagates to next stage
-  io.IFDtoEX.pc_IFDtoEX := NextInstrAdd
   io.decoded_instruction_IFDtoEX <> instructionDecoder.io.decoded_instruction_IFDtoEX
   io.IFDtoEX.instruction_IFDtoEX := instrMem.io.dataOut
 }
