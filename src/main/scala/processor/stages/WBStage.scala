@@ -19,7 +19,7 @@ class WBStage extends Module {
     //---------- OUTPUTS -------------//
     val WBtoEX = new Bundle {
       val regfile_write_data_WBtoEX     = Output(UInt(32.W))
-      val register_write_enable_WBtoEX  = Output(Bool())
+      val regfile_write_enable_WBtoEX  = Output(Bool())
       val rd_WBtoEX                     = Output(UInt(5.W))
     }
 
@@ -29,8 +29,8 @@ class WBStage extends Module {
   val alu_result                   = RegNext(io.MEMtoWB.alu_result_MEMtoWB)
   val write_back_select            = RegNext(io.MEMtoWB.write_back_select_MEMtoWB)
   val address_is_io                = RegNext(io.MEMtoWB.address_is_io_MEMtoWB)
-  io.WBtoEX.register_write_enable_WBtoEX := RegNext(io.MEMtoWB.register_write_enable_MEMtoWB)
-  io.WBtoEX.rd_WBtoEX                    := RegNext(io.MEMtoWB.rd_MEMtoWB)
+  io.WBtoEX.regfile_write_enable_WBtoEX := RegNext(io.MEMtoWB.register_write_enable_MEMtoWB)
+  io.WBtoEX.rd_WBtoEX                   := RegNext(io.MEMtoWB.rd_MEMtoWB)
 
   // Implements multiplexers in diagram
   when(write_back_select){

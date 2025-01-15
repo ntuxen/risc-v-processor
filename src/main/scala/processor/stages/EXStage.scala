@@ -20,7 +20,7 @@ class EXStage extends Module {
     }
     val WBtoEX = new Bundle {
       val regfile_write_data_WBtoEX = Input(UInt(32.W))
-      val regfile_write_enable_WBtoEX = Input(UInt(1.W))
+      val regfile_write_enable_WBtoEX = Input(Bool())
       val rd_WBtoEX = Input(UInt(5.W))
     }
 

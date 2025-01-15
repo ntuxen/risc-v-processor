@@ -59,11 +59,11 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   //---MEMORY MAPPED IO---//
   io.LEDs := MEM.io.leds
 
-  IFD.io <> EX.io
-  IFD.io <> MEM.io
-  EX.io <> MEM.io
-  EX.io <> WB.io
-  MEM.io <> WB.io
+  IFD.io.IFDtoEX <> EX.io.IFDtoEX
+  IFD.io.MEMtoIFD <> MEM.io.MEMtoIFD
+  EX.io.EXtoMEM <> MEM.io.EXtoMEM
+  EX.io.WBtoEX <> WB.io.WBtoEX
+  MEM.io.MEMtoWB <> WB.io.MEMtoWB
 
 }
 
