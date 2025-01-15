@@ -1,0 +1,68 @@
+start:
+	li x10, 0 # Counter = 0
+    nop
+    nop
+    nop
+    lui x11 2441 # Target = 10 million
+    nop
+    nop
+    nop
+    addi x11 x11 1664 # Target = 10 million
+    nop
+    nop
+    nop
+    lui x12 16 # Turn on LEDs
+    nop
+    nop
+    nop
+   	addi x12 x12 -1 # Turn on LEDs
+    nop
+    nop
+    nop
+    li x13, 0 # Turn off LEDs
+    nop
+    nop
+    nop
+    li x14, 1024 # LED address
+    nop
+    nop
+    nop
+loop1:
+	addi x10, x10, 1 # Increment counter
+    nop
+    nop
+    nop
+    blt x10, x11, loop1 # Loop back to counter
+    nop
+    nop
+    nop
+    sw x12, 0(x14) # Turn on LEDs
+    nop
+    nop
+    nop
+    addi x10, x0, 0 # Reset counter
+    nop
+    nop
+    nop
+loop2:
+	addi x10, x10, 1 # Increment counter
+    nop
+    nop
+    nop
+    blt x10, x11, loop2 # Loop back to counter
+    nop
+    nop
+    nop
+    sw x13, 0(x14) # Turn off LEDs
+    nop
+    nop
+    nop
+    addi x10, x0, 0 # Reset counter
+    nop
+    nop
+    nop
+    j loop1
+    nop
+    nop
+    nop
+
