@@ -31,7 +31,7 @@ class DataMemoryTest(val size: Int, val addrWidth: Int) extends Module {
   mem3(commonAddr) := mem3(commonAddr)
   
   // Delay output
-  io.dataOut := RegNext(dataOut)
+  io.dataOut := RegNext(RegNext(dataOut))
 
   switch(io.memSel){
     // --------- READ/LOAD INSTRUCTIONS --------- //

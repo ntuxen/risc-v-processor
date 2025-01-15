@@ -1,31 +1,31 @@
-addi x1 x0 -5   //Load value -5
-addi x2 x0 -19  //Load value -19
-addi x3 x0 -256 //Load value -256
+addi x1 x0 -5   #Load value -5
+addi x2 x0 -19  #Load value -19
+addi x3 x0 -256 #Load value -256
 nop
 nop
 nop
 nop
-sb x1 4  x0 //Store x1 value in dataMem position 0 + 4
-sb x1 5  x0 //Store x1 value in dataMem position 0 + 5
-sb x1 6  x0 //Store x1 value in dataMem position 0 + 6
-sb x1 7  x0 //Store x1 value in dataMem position 0 + 7
-sh x2 8  x0 //Store x2 value in dataMem position 0 + 8
-sh x2 10 x2 //Store x2 value in dataMem position 0 + 10
-sw x3 12 x0 //Store x3 value in dataMem position 0 + 12
+sb x1 4  x0 #Store x1 value in dataMem position 0 + 4
+sb x1 5  x0 #Store x1 value in dataMem position 0 + 5
+sb x1 6  x0 #Store x1 value in dataMem position 0 + 6
+sb x1 7  x0 #Store x1 value in dataMem position 0 + 7
+sh x2 8  x0 #Store x2 value in dataMem position 0 + 8
+sh x2 10 x0 #Store x2 value in dataMem position 0 + 10
+sw x3 12 x0 #Store x3 value in dataMem position 0 + 12
 nop
 nop
 nop
 nop
-lb   x4 4  x0 //Load byte into x4
-lb   x5 5  x0 //Load byte into x5
-lb   x6 6  x0 //Load byte into x6
-lb   x7 7  x0 //Load byte into x7
-lbu  x8 4  x0 //Load byte (unsigned) into x8
-lbu  x9 5  x0 //Load byte (unsigned) into x9
-lbu x10 6  x0 //Load byte (unsigned) into x10
-lbu x11 7  x0 //Load byte (unsigned) into x11
-lh  x12 8  x0 //Load half into x12
-lh  x13 10 x0 //Load half into x13
-lhu x14 8  x0 //Load half (unsigned) into x14
-lhu x15 10 x0 //Load half (unsigned) into x15
-lw  x16 12 x0 //Load word into x16
+lb   x4 4  x0 #Load byte into x4
+lb   x5 5  x0 #Load byte into x5
+lb   x6 6  x0 #Load byte into x6
+lb   x7 7  x0 #Load byte into x7
+lbu  x8 4  x0 #Load byte (unsigned) into x8
+lbu  x9 5  x0 #Load byte (unsigned) into x9
+lbu x10 6  x0 #Load byte (unsigned) into x10
+lbu x11 7  x0 #Load byte (unsigned) into x11
+lh  x12 8  x0 #Load half into x12
+lh  x13 10 x0 #Load half into x13
+lhu x14 8  x0 #Load half (unsigned) into x14
+lhu x15 10 x0 #Load half (unsigned) into x15
+lw  x16 12 x0 #Load word into x16
