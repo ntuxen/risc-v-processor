@@ -60,6 +60,7 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   io.LEDs := MEM.io.leds
 
   IFD.io.IFDtoEX <> EX.io.IFDtoEX
+  IFD.io.decoded_instruction_IFDtoEX <> EX.io.decoded_instruction_IFDtoEX
   IFD.io.MEMtoIFD <> MEM.io.MEMtoIFD
   EX.io.EXtoMEM <> MEM.io.EXtoMEM
   EX.io.WBtoEX <> WB.io.WBtoEX

@@ -44,6 +44,6 @@ class IFDStage(val program: Seq[UInt]) extends Module {
   
   //Connect PC to output so it propagates to next stage
   io.IFDtoEX.pc_IFDtoEX := NextInstrAdd
-  io.decoded_instruction_IFDtoEX := instructionDecoder.io.decoded_instruction_IFDtoEX
+  io.decoded_instruction_IFDtoEX <> instructionDecoder.io.decoded_instruction_IFDtoEX
   io.IFDtoEX.instruction_IFDtoEX := instrMem.io.dataOut
 }
