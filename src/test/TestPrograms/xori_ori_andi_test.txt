@@ -1,0 +1,23 @@
+addi x1 x0 -1
+addi x3 x0 -1
+nop
+nop
+nop
+xori x2 x1 0      # Should be all ones
+xori x3 x1 -1     # Should be all zeroes
+addi x4 x0 0x00F0 
+nop
+nop
+nop
+xori x4 x4 0x030F # Should be 0000_0011_1111_1111
+nop
+nop
+nop
+ori x5 x0 -1      # Should be all ones
+ori x6 x0 0       # Should be all zeroes
+ori x7 x4 0x0002  # Should be 0000_0011_1111_1111
+nop
+nop
+nop
+andi x8 x4 0      # Should be all zeroes
+andi x9 x5 0x00F2 # Should be 0000_0000_1111_0010

@@ -1,0 +1,17 @@
+addi x1 x0 7
+addi x2 x0 -4
+nop
+nop
+nop
+slti x3 x1 6    # Should be 0
+slti x4 x1 7    # Should be 0
+slti x5 x1 8    # Should be 1
+slti x6 x2 -3   # Should be 1
+slti x7 x2 -4   # Should be 0
+slti x8 x2 -5   # Should be 0
+sltiu x9 x1 6   # Should be 0
+sltiu x10 x1 7  # Should be 0
+sltiu x11 x1 8  # Should be 1
+sltiu x12 x2 -3 # Should be 1
+sltiu x13 x2 -4 # Should be 0
+sltiu x14 x2 -5 # Should be 0

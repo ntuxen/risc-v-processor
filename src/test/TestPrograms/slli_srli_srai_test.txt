@@ -1,0 +1,7 @@
+addi x1 x0 -5
+nop
+nop
+nop
+slli x2 x1 2
+srli x3 x1 7
+srai x4 x1 3
