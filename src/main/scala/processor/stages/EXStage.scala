@@ -127,11 +127,11 @@ class EXStage extends Module {
 
   //PC logic for Jal and Jalr
   when(opcodeReg === Opcode.jal){
-    io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + (immGen.io.immediate) //
+    io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + immGen.io.immediate
     io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
   }
-  when(opcodeReg === Opcode.jalr){ //TODO: Test Jalr (Maybe dont shift with 2?)
-    io.EXtoMEM.branch_address_EXtoMEM := RegFile.io.alu_operand_1 + (immGen.io.immediate << 2)
+  when(opcodeReg === Opcode.jalr){
+    io.EXtoMEM.branch_address_EXtoMEM := RegFile.io.alu_operand_1 + immGen.io.immediate
     io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
   }
 
