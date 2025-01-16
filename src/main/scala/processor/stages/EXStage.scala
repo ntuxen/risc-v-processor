@@ -120,8 +120,6 @@ class EXStage extends Module {
   when(opcodeReg === Opcode.auipc){
     io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + immediateReg
   }
-
-
   //PC logic for Jal and Jalr
   when(opcodeReg === Opcode.jal){
     io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + immediateReg
