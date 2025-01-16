@@ -3,7 +3,7 @@ package processor.stages
 import chisel3._
 import processor.components._
 
-class IFDStage(val program: String) extends Module {
+class IFDStage(val program: Seq[UInt]) extends Module {
   val io = IO(new Bundle {
     //------------INPUTS--------//
     val MEMtoIFD = new Bundle {
