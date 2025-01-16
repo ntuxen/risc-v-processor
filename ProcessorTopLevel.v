@@ -451,7 +451,7 @@ module IFDStage(
   assign instrMem_io_addr = _instrMem_io_addr_T[9:0]; // @[IFDStage.scala 38:20]
   assign instructionDecoder_io_instruction = instrMem_io_dataOut; // @[IFDStage.scala 42:37]
   assign immediateGenerator_io_instrType = instructionDecoder_io_instrType; // @[IFDStage.scala 47:35]
-  assign immediateGenerator_io_instruction = instructionDecoder_io_instruction; // @[IFDStage.scala 46:37]
+  assign immediateGenerator_io_instruction = instrMem_io_dataOut; // @[IFDStage.scala 46:37]
   always @(posedge clock) begin
     if (reset) begin // @[IFDStage.scala 32:19]
       PC <= 32'hfffffffc; // @[IFDStage.scala 32:19]
@@ -1719,6 +1719,7 @@ module EXStage(
   reg [31:0] _RAND_2;
   reg [31:0] _RAND_3;
   reg [31:0] _RAND_4;
+  reg [31:0] _RAND_5;
 `endif // RANDOMIZE_REG_INIT
   wire  RegFile_clock; // @[EXStage.scala 44:23]
   wire  RegFile_reset; // @[EXStage.scala 44:23]
@@ -1742,19 +1743,20 @@ module EXStage(
   wire [31:0] ALU_io_alu_operand_2; // @[EXStage.scala 47:19]
   wire [31:0] ALU_io_alu_result; // @[EXStage.scala 47:19]
   wire  ALU_io_take_branch_EXtoMEM; // @[EXStage.scala 47:19]
-  reg [2:0] funct3Reg; // @[EXStage.scala 50:26]
-  reg [6:0] funct7Reg; // @[EXStage.scala 51:26]
-  reg [6:0] opcodeReg; // @[EXStage.scala 52:26]
-  reg [4:0] rdReg; // @[EXStage.scala 53:22]
-  reg [31:0] branchAddrReg; // @[EXStage.scala 54:30]
-  wire [31:0] _io_EXtoMEM_branch_address_EXtoMEM_T_1 = branchAddrReg + io_IFDtoEX_immediate_IFDtoEX; // @[EXStage.scala 68:54]
-  wire [31:0] _GEN_3 = opcodeReg == 7'h37 ? io_IFDtoEX_immediate_IFDtoEX : ALU_io_alu_result; // @[EXStage.scala 115:33 116:35 82:33]
-  wire [31:0] _GEN_4 = opcodeReg == 7'h17 ? _io_EXtoMEM_branch_address_EXtoMEM_T_1 : _GEN_3; // @[EXStage.scala 119:35 120:35]
-  wire [31:0] _io_EXtoMEM_alu_result_EXtoMEM_T_3 = branchAddrReg + 32'h4; // @[EXStage.scala 127:52]
+  reg [31:0] immediateReg; // @[EXStage.scala 50:29]
+  reg [2:0] funct3Reg; // @[EXStage.scala 51:26]
+  reg [6:0] funct7Reg; // @[EXStage.scala 52:26]
+  reg [6:0] opcodeReg; // @[EXStage.scala 53:26]
+  reg [4:0] rdReg; // @[EXStage.scala 54:22]
+  reg [31:0] branchAddrReg; // @[EXStage.scala 55:30]
+  wire [31:0] _io_EXtoMEM_branch_address_EXtoMEM_T_1 = branchAddrReg + immediateReg; // @[EXStage.scala 69:54]
+  wire [31:0] _GEN_3 = opcodeReg == 7'h37 ? immediateReg : ALU_io_alu_result; // @[EXStage.scala 116:33 117:35 83:33]
+  wire [31:0] _GEN_4 = opcodeReg == 7'h17 ? _io_EXtoMEM_branch_address_EXtoMEM_T_1 : _GEN_3; // @[EXStage.scala 120:35 121:35]
+  wire [31:0] _io_EXtoMEM_alu_result_EXtoMEM_T_3 = branchAddrReg + 32'h4; // @[EXStage.scala 128:52]
   wire [31:0] _GEN_5 = opcodeReg == 7'h6f ? _io_EXtoMEM_branch_address_EXtoMEM_T_1 :
-    _io_EXtoMEM_branch_address_EXtoMEM_T_1; // @[EXStage.scala 125:33 126:39 68:37]
-  wire [31:0] _GEN_6 = opcodeReg == 7'h6f ? _io_EXtoMEM_alu_result_EXtoMEM_T_3 : _GEN_4; // @[EXStage.scala 125:33 127:35]
-  wire [31:0] _io_EXtoMEM_branch_address_EXtoMEM_T_5 = RegFile_io_alu_operand_1 + io_IFDtoEX_immediate_IFDtoEX; // @[EXStage.scala 130:67]
+    _io_EXtoMEM_branch_address_EXtoMEM_T_1; // @[EXStage.scala 126:33 127:39 69:37]
+  wire [31:0] _GEN_6 = opcodeReg == 7'h6f ? _io_EXtoMEM_alu_result_EXtoMEM_T_3 : _GEN_4; // @[EXStage.scala 126:33 128:35]
+  wire [31:0] _io_EXtoMEM_branch_address_EXtoMEM_T_5 = RegFile_io_alu_operand_1 + immediateReg; // @[EXStage.scala 131:67]
   RegisterFile RegFile ( // @[EXStage.scala 44:23]
     .clock(RegFile_clock),
     .reset(RegFile_reset),
@@ -1783,57 +1785,62 @@ module EXStage(
     .io_alu_result(ALU_io_alu_result),
     .io_take_branch_EXtoMEM(ALU_io_take_branch_EXtoMEM)
   );
-  assign io_EXtoMEM_alu_result_EXtoMEM = opcodeReg == 7'h67 ? _io_EXtoMEM_alu_result_EXtoMEM_T_3 : _GEN_6; // @[EXStage.scala 129:34 131:35]
-  assign io_EXtoMEM_memory_write_data_EXtoMEM = RegFile_io_reg_data_2; // @[EXStage.scala 77:40]
-  assign io_EXtoMEM_rd_EXtoMEM = rdReg; // @[EXStage.scala 112:25]
-  assign io_EXtoMEM_register_write_enable_EXtoMEM = controlUnit_io_register_write_enable_EXtoMEM; // @[EXStage.scala 96:44]
-  assign io_EXtoMEM_write_back_select_EXtoMEM = controlUnit_io_write_back_select_EXtoMEM; // @[EXStage.scala 97:40]
+  assign io_EXtoMEM_alu_result_EXtoMEM = opcodeReg == 7'h67 ? _io_EXtoMEM_alu_result_EXtoMEM_T_3 : _GEN_6; // @[EXStage.scala 130:34 132:35]
+  assign io_EXtoMEM_memory_write_data_EXtoMEM = RegFile_io_reg_data_2; // @[EXStage.scala 78:40]
+  assign io_EXtoMEM_rd_EXtoMEM = rdReg; // @[EXStage.scala 113:25]
+  assign io_EXtoMEM_register_write_enable_EXtoMEM = controlUnit_io_register_write_enable_EXtoMEM; // @[EXStage.scala 97:44]
+  assign io_EXtoMEM_write_back_select_EXtoMEM = controlUnit_io_write_back_select_EXtoMEM; // @[EXStage.scala 98:40]
   assign io_EXtoMEM_data_memory_write_enable_EXtoMEM = ALU_io_alu_result >= 32'h400 & opcodeReg != 7'h37 & opcodeReg != 7'h17
-     ? 1'h0 : controlUnit_io_write_memory_enable; // @[EXStage.scala 104:95 105:49 98:47]
+     ? 1'h0 : controlUnit_io_write_memory_enable; // @[EXStage.scala 105:95 106:49 99:47]
   assign io_EXtoMEM_io_memory_write_enable_EXtoMEM = ALU_io_alu_result >= 32'h400 & opcodeReg != 7'h37 & opcodeReg != 7'h17
-     & controlUnit_io_write_memory_enable; // @[EXStage.scala 104:95 107:47 65:45]
-  assign io_EXtoMEM_branch_address_EXtoMEM = opcodeReg == 7'h67 ? _io_EXtoMEM_branch_address_EXtoMEM_T_5 : _GEN_5; // @[EXStage.scala 129:34 130:39]
-  assign io_EXtoMEM_take_branch_EXtoMEM = ALU_io_take_branch_EXtoMEM; // @[EXStage.scala 83:34]
-  assign io_EXtoMEM_address_is_io_EXtoMEM = ALU_io_alu_result >= 32'h400 & opcodeReg != 7'h37 & opcodeReg != 7'h17; // @[EXStage.scala 104:64]
-  assign io_EXtoMEM_alu_operation_select_EXtoMEM = controlUnit_io_alu_operation_select; // @[EXStage.scala 100:43]
+     & controlUnit_io_write_memory_enable; // @[EXStage.scala 105:95 108:47 66:45]
+  assign io_EXtoMEM_branch_address_EXtoMEM = opcodeReg == 7'h67 ? _io_EXtoMEM_branch_address_EXtoMEM_T_5 : _GEN_5; // @[EXStage.scala 130:34 131:39]
+  assign io_EXtoMEM_take_branch_EXtoMEM = ALU_io_take_branch_EXtoMEM; // @[EXStage.scala 84:34]
+  assign io_EXtoMEM_address_is_io_EXtoMEM = ALU_io_alu_result >= 32'h400 & opcodeReg != 7'h37 & opcodeReg != 7'h17; // @[EXStage.scala 105:64]
+  assign io_EXtoMEM_alu_operation_select_EXtoMEM = controlUnit_io_alu_operation_select; // @[EXStage.scala 101:43]
   assign RegFile_clock = clock;
   assign RegFile_reset = reset;
-  assign RegFile_io_rs1 = io_decoded_instruction_IFDtoEX_rs1; // @[EXStage.scala 72:18]
-  assign RegFile_io_rs2 = io_decoded_instruction_IFDtoEX_rs2; // @[EXStage.scala 73:18]
-  assign RegFile_io_regfile_write_data_WBtoEX = io_WBtoEX_regfile_write_data_WBtoEX; // @[EXStage.scala 75:40]
-  assign RegFile_io_rd_WBtoEX = io_WBtoEX_rd_WBtoEX; // @[EXStage.scala 74:24]
-  assign RegFile_io_regfile_write_enable_WBtoEX = io_WBtoEX_regfile_write_enable_WBtoEX; // @[EXStage.scala 76:42]
-  assign controlUnit_io_funct3 = funct3Reg; // @[EXStage.scala 91:25]
-  assign controlUnit_io_funct7 = funct7Reg; // @[EXStage.scala 92:25]
-  assign controlUnit_io_opcode = opcodeReg; // @[EXStage.scala 93:25]
-  assign ALU_io_alu_operation_select = controlUnit_io_alu_operation_select; // @[EXStage.scala 99:31]
-  assign ALU_io_alu_operand_1 = RegFile_io_alu_operand_1; // @[EXStage.scala 80:24]
-  assign ALU_io_alu_operand_2 = controlUnit_io_alu_op2mux_select ? io_IFDtoEX_immediate_IFDtoEX : RegFile_io_reg_data_2; // @[EXStage.scala 81:30]
+  assign RegFile_io_rs1 = io_decoded_instruction_IFDtoEX_rs1; // @[EXStage.scala 73:18]
+  assign RegFile_io_rs2 = io_decoded_instruction_IFDtoEX_rs2; // @[EXStage.scala 74:18]
+  assign RegFile_io_regfile_write_data_WBtoEX = io_WBtoEX_regfile_write_data_WBtoEX; // @[EXStage.scala 76:40]
+  assign RegFile_io_rd_WBtoEX = io_WBtoEX_rd_WBtoEX; // @[EXStage.scala 75:24]
+  assign RegFile_io_regfile_write_enable_WBtoEX = io_WBtoEX_regfile_write_enable_WBtoEX; // @[EXStage.scala 77:42]
+  assign controlUnit_io_funct3 = funct3Reg; // @[EXStage.scala 92:25]
+  assign controlUnit_io_funct7 = funct7Reg; // @[EXStage.scala 93:25]
+  assign controlUnit_io_opcode = opcodeReg; // @[EXStage.scala 94:25]
+  assign ALU_io_alu_operation_select = controlUnit_io_alu_operation_select; // @[EXStage.scala 100:31]
+  assign ALU_io_alu_operand_1 = RegFile_io_alu_operand_1; // @[EXStage.scala 81:24]
+  assign ALU_io_alu_operand_2 = controlUnit_io_alu_op2mux_select ? immediateReg : RegFile_io_reg_data_2; // @[EXStage.scala 82:30]
   always @(posedge clock) begin
-    if (reset) begin // @[EXStage.scala 50:26]
-      funct3Reg <= 3'h0; // @[EXStage.scala 50:26]
+    if (reset) begin // @[EXStage.scala 50:29]
+      immediateReg <= 32'h0; // @[EXStage.scala 50:29]
     end else begin
-      funct3Reg <= io_decoded_instruction_IFDtoEX_funct3; // @[EXStage.scala 50:26]
+      immediateReg <= io_IFDtoEX_immediate_IFDtoEX; // @[EXStage.scala 50:29]
     end
     if (reset) begin // @[EXStage.scala 51:26]
-      funct7Reg <= 7'h0; // @[EXStage.scala 51:26]
+      funct3Reg <= 3'h0; // @[EXStage.scala 51:26]
     end else begin
-      funct7Reg <= io_decoded_instruction_IFDtoEX_funct7; // @[EXStage.scala 51:26]
+      funct3Reg <= io_decoded_instruction_IFDtoEX_funct3; // @[EXStage.scala 51:26]
     end
     if (reset) begin // @[EXStage.scala 52:26]
-      opcodeReg <= 7'h0; // @[EXStage.scala 52:26]
+      funct7Reg <= 7'h0; // @[EXStage.scala 52:26]
     end else begin
-      opcodeReg <= io_decoded_instruction_IFDtoEX_opcode; // @[EXStage.scala 52:26]
+      funct7Reg <= io_decoded_instruction_IFDtoEX_funct7; // @[EXStage.scala 52:26]
     end
-    if (reset) begin // @[EXStage.scala 53:22]
-      rdReg <= 5'h0; // @[EXStage.scala 53:22]
+    if (reset) begin // @[EXStage.scala 53:26]
+      opcodeReg <= 7'h0; // @[EXStage.scala 53:26]
     end else begin
-      rdReg <= io_decoded_instruction_IFDtoEX_rd; // @[EXStage.scala 53:22]
+      opcodeReg <= io_decoded_instruction_IFDtoEX_opcode; // @[EXStage.scala 53:26]
     end
-    if (reset) begin // @[EXStage.scala 54:30]
-      branchAddrReg <= 32'h0; // @[EXStage.scala 54:30]
+    if (reset) begin // @[EXStage.scala 54:22]
+      rdReg <= 5'h0; // @[EXStage.scala 54:22]
     end else begin
-      branchAddrReg <= io_IFDtoEX_pc_IFDtoEX; // @[EXStage.scala 54:30]
+      rdReg <= io_decoded_instruction_IFDtoEX_rd; // @[EXStage.scala 54:22]
+    end
+    if (reset) begin // @[EXStage.scala 55:30]
+      branchAddrReg <= 32'h0; // @[EXStage.scala 55:30]
+    end else begin
+      branchAddrReg <= io_IFDtoEX_pc_IFDtoEX; // @[EXStage.scala 55:30]
     end
   end
 // Register and memory initialization
@@ -1873,15 +1880,17 @@ initial begin
     `endif
 `ifdef RANDOMIZE_REG_INIT
   _RAND_0 = {1{`RANDOM}};
-  funct3Reg = _RAND_0[2:0];
+  immediateReg = _RAND_0[31:0];
   _RAND_1 = {1{`RANDOM}};
-  funct7Reg = _RAND_1[6:0];
+  funct3Reg = _RAND_1[2:0];
   _RAND_2 = {1{`RANDOM}};
-  opcodeReg = _RAND_2[6:0];
+  funct7Reg = _RAND_2[6:0];
   _RAND_3 = {1{`RANDOM}};
-  rdReg = _RAND_3[4:0];
+  opcodeReg = _RAND_3[6:0];
   _RAND_4 = {1{`RANDOM}};
-  branchAddrReg = _RAND_4[31:0];
+  rdReg = _RAND_4[4:0];
+  _RAND_5 = {1{`RANDOM}};
+  branchAddrReg = _RAND_5[31:0];
 `endif // RANDOMIZE_REG_INIT
   `endif // RANDOMIZE
 end // initial

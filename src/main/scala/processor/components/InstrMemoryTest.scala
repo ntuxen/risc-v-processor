@@ -1,8 +1,7 @@
 package processor.components
 
 import chisel3._
-import chisel3.experimental.{ChiselAnnotation, annotate}
-import firrtl.transforms.DontTouchAnnotation
+
 
 class InstrMemoryTest(val size: Int, val addrWidth: Int, val program: Seq[UInt]) extends Module {
   val width: Int = 32
@@ -18,9 +17,7 @@ class InstrMemoryTest(val size: Int, val addrWidth: Int, val program: Seq[UInt])
 
   // Explicit register with DontTouchAnnotation
   val dataReg = RegNext(mem(io.addr), init = 0.U) // Equivalent to using RegInit for init
-  annotate(new ChiselAnnotation {
-    def toFirrtl = DontTouchAnnotation(dataReg.toTarget) // Keep register from being optimized
-  })
+
 
   //io.dataOut := dataReg // Assign register value to output
   io.dataOut := mem(io.addr)

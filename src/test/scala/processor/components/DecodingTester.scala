@@ -17,7 +17,7 @@ class DecodingTester extends AnyFlatSpec with ChiselScalatestTester {
 
       def printDutState(): Unit = {
         println("\nDUT State:")
-        println("instrType: " + dut.io.decoded_instruction_IFDtoEX.instrType.peek().litValue()) // Print instruction type
+        //println("instrType: " + dut.io.decoded_instruction_IFDtoEX.instrType.peek().litValue()) // Print instruction type
         println("rs1: " + dut.io.decoded_instruction_IFDtoEX.rs1.peek().litValue())            // Source register 1
         println("rs2: " + dut.io.decoded_instruction_IFDtoEX.rs2.peek().litValue())            // Source register 2
         println("rd: " + dut.io.decoded_instruction_IFDtoEX.rd.peek().litValue())              // Destination register

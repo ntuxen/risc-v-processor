@@ -47,6 +47,7 @@ class EXStage extends Module {
   val ALU = Module(new ALU)
 
   //Pipeline Registers
+  val immediateReg = RegNext(io.IFDtoEX.immediate_IFDtoEX, 0.U)
   val funct3Reg = RegNext(io.decoded_instruction_IFDtoEX.funct3, 0.U)
   val funct7Reg = RegNext(io.decoded_instruction_IFDtoEX.funct7, 0.U)
   val opcodeReg = RegNext(io.decoded_instruction_IFDtoEX.opcode, 0.U)
@@ -65,7 +66,7 @@ class EXStage extends Module {
   io.EXtoMEM.io_memory_write_enable_EXtoMEM := false.B
   io.EXtoMEM.alu_operation_select_EXtoMEM := 0.U
   //BranchAddress Logic: (Standard for jal and branch instructions)
-  io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + (io.IFDtoEX.immediate_IFDtoEX)
+  io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + (immediateReg)
   io.EXtoMEM.take_branch_EXtoMEM := false.B
 
   //Connect RegFile
@@ -78,7 +79,7 @@ class EXStage extends Module {
 
   //ALU and RegFile connections
   ALU.io.alu_operand_1 := RegFile.io.alu_operand_1
-  ALU.io.alu_operand_2 := Mux(controlUnit.io.alu_op2mux_select === 1.U, io.IFDtoEX.immediate_IFDtoEX, RegFile.io.reg_data_2)
+  ALU.io.alu_operand_2 := Mux(controlUnit.io.alu_op2mux_select === 1.U, immediateReg, RegFile.io.reg_data_2)
   io.EXtoMEM.alu_result_EXtoMEM := ALU.io.alu_result
   io.EXtoMEM.take_branch_EXtoMEM := ALU.io.take_branch_EXtoMEM
 
@@ -113,21 +114,21 @@ class EXStage extends Module {
 
   //LUI Logic
   when(opcodeReg === Opcode.lui){
-    io.EXtoMEM.alu_result_EXtoMEM := io.IFDtoEX.immediate_IFDtoEX
+    io.EXtoMEM.alu_result_EXtoMEM := immediateReg
   }
   //AUIPC Logic
   when(opcodeReg === Opcode.auipc){
-    io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + io.IFDtoEX.immediate_IFDtoEX
+    io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + immediateReg
   }
 
 
   //PC logic for Jal and Jalr
   when(opcodeReg === Opcode.jal){
-    io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + io.IFDtoEX.immediate_IFDtoEX
+    io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + immediateReg
     io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
   }
   when(opcodeReg === Opcode.jalr){
-    io.EXtoMEM.branch_address_EXtoMEM := RegFile.io.alu_operand_1 + io.IFDtoEX.immediate_IFDtoEX
+    io.EXtoMEM.branch_address_EXtoMEM := RegFile.io.alu_operand_1 + immediateReg
     io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
   }
 

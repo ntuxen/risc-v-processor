@@ -43,7 +43,7 @@ class IFDStage(val program: Seq[UInt]) extends Module {
 
   //Immediate Generator
   val immediateGenerator = Module(new ImmediateGenerator)
-  immediateGenerator.io.instruction := instructionDecoder.io.instruction
+  immediateGenerator.io.instruction := instrMem.io.dataOut
   immediateGenerator.io.instrType := instructionDecoder.io.instrType
 
 
