@@ -27,8 +27,18 @@ class InstrMemory(val size: Int, val addrWidth: Int, val program: Seq[UInt]) ext
 //  // Read/write
 //  io.dataOut := mem.read(io.addr)
 
-    val mem = Wire(VecInit(program.padTo(size, "h13".U(32.W)))) // Pad with nops to reach the required size
+  // Create memory with Wire (read-only, constant values)
+  val mem = Wire(Vec(size, UInt(width.W)))  // Read-only memory
 
+  // Initialize the memory with the given program, pad with NOPs if necessary
+  val programPadded = program.padTo(size, "h00000013".U(32.W))
+
+  // Initialize the memory (constant values)
+  for (i <- 0 until size) {
+    mem(i) := programPadded(i)
+  }
+
+  // Read from the memory (this does not modify it)
   io.dataOut := RegNext(mem(io.addr))
 
 }

@@ -18,12 +18,11 @@ class IFDStage(val program: Seq[UInt]) extends Module {
       val rd = Output(UInt(5.W))
       val funct3 = Output(UInt(3.W))
       val funct7 = Output(UInt(7.W))
-      val instrType = Output(UInt(3.W))
       val opcode = Output(UInt(7.W))
     }
     val IFDtoEX = new Bundle {
       val pc_IFDtoEX = Output(UInt(32.W))
-      val instruction_IFDtoEX = Output(UInt(32.W))
+      val immediate_IFDtoEX = Output(UInt(32.W))
     }
   })
 
@@ -35,12 +34,18 @@ class IFDStage(val program: Seq[UInt]) extends Module {
   PC := NextInstrAdd
 
   // Instruction memory
-  val instrMem = Module(new InstrMemory(1024,10,program))
+  val instrMem = Module(new InstrMemory(256,10,program))
   instrMem.io.addr := NextInstrAdd >> 2.U
 
   //Instruction Decoder
   val instructionDecoder = Module(new InstructionDecoder)
   instructionDecoder.io.instruction := instrMem.io.dataOut
+
+  //Immediate Generator
+  val immediateGenerator = Module(new ImmediateGenerator)
+  immediateGenerator.io.instruction := instructionDecoder.io.instruction
+  immediateGenerator.io.instrType := instructionDecoder.io.instrType
+
 
   // Pipeline register
   io.IFDtoEX.pc_IFDtoEX := RegNext(NextInstrAdd)
@@ -48,5 +53,6 @@ class IFDStage(val program: Seq[UInt]) extends Module {
   
   //Connect PC to output so it propagates to next stage
   io.decoded_instruction_IFDtoEX <> instructionDecoder.io.decoded_instruction_IFDtoEX
-  io.IFDtoEX.instruction_IFDtoEX := instrMem.io.dataOut
+
+  io.IFDtoEX.immediate_IFDtoEX := immediateGenerator.io.immediate
 }

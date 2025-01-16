@@ -14,9 +14,9 @@ class InstructionDecoder extends Module {
       val rd = Output(UInt(5.W))
       val funct3 = Output(UInt(3.W))
       val funct7 = Output(UInt(7.W))
-      val instrType = Output(UInt(3.W))
       val opcode = Output(UInt(7.W))
     }
+    val instrType = Output(UInt(3.W))
   })
   // Default values for outputs
   io.decoded_instruction_IFDtoEX.rs1 := 0.U
@@ -24,40 +24,40 @@ class InstructionDecoder extends Module {
   io.decoded_instruction_IFDtoEX.rd := 0.U
   io.decoded_instruction_IFDtoEX.funct3 := 0.U
   io.decoded_instruction_IFDtoEX.funct7 := 0.U
-  io.decoded_instruction_IFDtoEX.instrType := 0.U
+  io.instrType := 0.U
   io.decoded_instruction_IFDtoEX.opcode := io.instruction(6, 0)
   //Find instruction type from opcode
   switch(io.decoded_instruction_IFDtoEX.opcode) {
     is(Opcode.Alu) {
-      io.decoded_instruction_IFDtoEX.instrType := InstrType.RType.id.U
+      io.instrType := InstrType.RType.id.U
     }
     is(Opcode.AluImm) {
-      io.decoded_instruction_IFDtoEX.instrType := InstrType.IType.id.U
+      io.instrType := InstrType.IType.id.U
     }
     is(Opcode.load) {
-      io.decoded_instruction_IFDtoEX.instrType := InstrType.IType.id.U
+      io.instrType := InstrType.IType.id.U
     }
     is(Opcode.store) {
-      io.decoded_instruction_IFDtoEX.instrType := InstrType.SType.id.U
+      io.instrType := InstrType.SType.id.U
     }
     is(Opcode.branch) {
-      io.decoded_instruction_IFDtoEX.instrType := InstrType.BType.id.U
+      io.instrType := InstrType.BType.id.U
     }
     is(Opcode.jal) {
-      io.decoded_instruction_IFDtoEX.instrType := InstrType.JType.id.U
+      io.instrType := InstrType.JType.id.U
     }
     is(Opcode.jalr) {
-      io.decoded_instruction_IFDtoEX.instrType := InstrType.IType.id.U
+      io.instrType := InstrType.IType.id.U
     }
     is(Opcode.auipc) {
-      io.decoded_instruction_IFDtoEX.instrType := InstrType.UType.id.U
+      io.instrType := InstrType.UType.id.U
     }
     is(Opcode.lui) {
-      io.decoded_instruction_IFDtoEX.instrType := InstrType.UType.id.U
+      io.instrType := InstrType.UType.id.U
     }
   }
   // Decode the instruction based on type
-  switch(io.decoded_instruction_IFDtoEX.instrType) {
+  switch(io.instrType) {
     is(InstrType.RType.id.U) {
       io.decoded_instruction_IFDtoEX.rs1 := io.instruction(19, 15)
       io.decoded_instruction_IFDtoEX.rs2 := io.instruction(24, 20)

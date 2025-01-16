@@ -11,12 +11,11 @@ class EXStage extends Module {
       val rd = Input(UInt(5.W))
       val funct3 = Input(UInt(3.W))
       val funct7 = Input(UInt(7.W))
-      val instrType = Input(UInt(3.W))
       val opcode = Input(UInt(7.W))
       }
     val IFDtoEX = new Bundle {
       val pc_IFDtoEX = Input(UInt(32.W))
-      val instruction_IFDtoEX = Input(UInt(32.W))
+      val immediate_IFDtoEX = Input(UInt(32.W))
     }
     val WBtoEX = new Bundle {
       val regfile_write_data_WBtoEX = Input(UInt(32.W))
@@ -43,13 +42,11 @@ class EXStage extends Module {
 
   //Load needed modules/components
   val RegFile = Module(new RegisterFile)
-  val immGen = Module(new ImmediateGenerator)
+  //val immGen = Module(new ImmediateGenerator)
   val controlUnit = Module(new ControlUnit)
   val ALU = Module(new ALU)
 
   //Pipeline Registers
-  val instructionReg = RegNext(io.IFDtoEX.instruction_IFDtoEX, 0.U)
-  val instrTypeReg = RegNext(io.decoded_instruction_IFDtoEX.instrType, 0.U)
   val funct3Reg = RegNext(io.decoded_instruction_IFDtoEX.funct3, 0.U)
   val funct7Reg = RegNext(io.decoded_instruction_IFDtoEX.funct7, 0.U)
   val opcodeReg = RegNext(io.decoded_instruction_IFDtoEX.opcode, 0.U)
@@ -68,7 +65,7 @@ class EXStage extends Module {
   io.EXtoMEM.io_memory_write_enable_EXtoMEM := false.B
   io.EXtoMEM.alu_operation_select_EXtoMEM := 0.U
   //BranchAddress Logic: (Standard for jal and branch instructions)
-  io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + (immGen.io.immediate)
+  io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + (io.IFDtoEX.immediate_IFDtoEX)
   io.EXtoMEM.take_branch_EXtoMEM := false.B
 
   //Connect RegFile
@@ -81,19 +78,18 @@ class EXStage extends Module {
 
   //ALU and RegFile connections
   ALU.io.alu_operand_1 := RegFile.io.alu_operand_1
-  ALU.io.alu_operand_2 := Mux(controlUnit.io.alu_op2mux_select === 1.U, immGen.io.immediate, RegFile.io.reg_data_2)
+  ALU.io.alu_operand_2 := Mux(controlUnit.io.alu_op2mux_select === 1.U, io.IFDtoEX.immediate_IFDtoEX, RegFile.io.reg_data_2)
   io.EXtoMEM.alu_result_EXtoMEM := ALU.io.alu_result
   io.EXtoMEM.take_branch_EXtoMEM := ALU.io.take_branch_EXtoMEM
 
   //Connect ImmGen
-  immGen.io.instrType := instrTypeReg
-  immGen.io.instruction := instructionReg
+//  immGen.io.instrType := instrTypeReg
+//  immGen.io.instruction := instructionReg
 
   //Connect ControlUnit
   //------------Input-------------//
   controlUnit.io.funct3 := funct3Reg
   controlUnit.io.funct7 := funct7Reg
-  controlUnit.io.instrType := instrTypeReg
   controlUnit.io.opcode := opcodeReg
 
   //------------Output-------------//
@@ -117,21 +113,21 @@ class EXStage extends Module {
 
   //LUI Logic
   when(opcodeReg === Opcode.lui){
-    io.EXtoMEM.alu_result_EXtoMEM := immGen.io.immediate
+    io.EXtoMEM.alu_result_EXtoMEM := io.IFDtoEX.immediate_IFDtoEX
   }
   //AUIPC Logic
   when(opcodeReg === Opcode.auipc){
-    io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + immGen.io.immediate
+    io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + io.IFDtoEX.immediate_IFDtoEX
   }
 
 
   //PC logic for Jal and Jalr
   when(opcodeReg === Opcode.jal){
-    io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + immGen.io.immediate
+    io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + io.IFDtoEX.immediate_IFDtoEX
     io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
   }
   when(opcodeReg === Opcode.jalr){
-    io.EXtoMEM.branch_address_EXtoMEM := RegFile.io.alu_operand_1 + immGen.io.immediate
+    io.EXtoMEM.branch_address_EXtoMEM := RegFile.io.alu_operand_1 + io.IFDtoEX.immediate_IFDtoEX
     io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
   }
 

@@ -8,7 +8,6 @@ class ControlUnit extends Module {
     // Inputs
     val funct3 = Input(UInt(3.W))
     val funct7 = Input(UInt(7.W))
-    val instrType = Input(UInt(3.W))
     val opcode = Input(UInt(7.W))
     // Outputs
     val alu_op2mux_select = Output(UInt(1.W))
