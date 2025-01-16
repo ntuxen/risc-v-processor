@@ -102,7 +102,7 @@ class EXStage extends Module {
 
 
   // Logic for memory-mapped IO: address in memory or IO
-  when(ALU.io.alu_result >= 1024.U && opcodeReg =/= Opcode.lui && opcodeReg =/= Opcode.auipc) {  // if requested address is in IO space
+  when(ALU.io.alu_result >= 1024.U /*&& opcodeReg =/= Opcode.lui && opcodeReg =/= Opcode.auipc*/) {  // if requested address is in IO space
     io.EXtoMEM.data_memory_write_enable_EXtoMEM := false.B  // Don't write to normal memory
     io.EXtoMEM.address_is_io_EXtoMEM := true.B         // DELAYED ONE CLOCK CYCLE FOR READS
     io.EXtoMEM.io_memory_write_enable_EXtoMEM := controlUnit.io.write_memory_enable

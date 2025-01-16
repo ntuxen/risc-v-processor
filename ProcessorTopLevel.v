@@ -1790,13 +1790,12 @@ module EXStage(
   assign io_EXtoMEM_rd_EXtoMEM = rdReg; // @[EXStage.scala 113:25]
   assign io_EXtoMEM_register_write_enable_EXtoMEM = controlUnit_io_register_write_enable_EXtoMEM; // @[EXStage.scala 97:44]
   assign io_EXtoMEM_write_back_select_EXtoMEM = controlUnit_io_write_back_select_EXtoMEM; // @[EXStage.scala 98:40]
-  assign io_EXtoMEM_data_memory_write_enable_EXtoMEM = ALU_io_alu_result >= 32'h400 & opcodeReg != 7'h37 & opcodeReg != 7'h17
-     ? 1'h0 : controlUnit_io_write_memory_enable; // @[EXStage.scala 105:95 106:49 99:47]
-  assign io_EXtoMEM_io_memory_write_enable_EXtoMEM = ALU_io_alu_result >= 32'h400 & opcodeReg != 7'h37 & opcodeReg != 7'h17
-     & controlUnit_io_write_memory_enable; // @[EXStage.scala 105:95 108:47 66:45]
+  assign io_EXtoMEM_data_memory_write_enable_EXtoMEM = ALU_io_alu_result >= 32'h400 ? 1'h0 :
+    controlUnit_io_write_memory_enable; // @[EXStage.scala 105:99 106:49 99:47]
+  assign io_EXtoMEM_io_memory_write_enable_EXtoMEM = ALU_io_alu_result >= 32'h400 & controlUnit_io_write_memory_enable; // @[EXStage.scala 105:99 108:47 66:45]
   assign io_EXtoMEM_branch_address_EXtoMEM = opcodeReg == 7'h67 ? _io_EXtoMEM_branch_address_EXtoMEM_T_5 : _GEN_5; // @[EXStage.scala 130:34 131:39]
   assign io_EXtoMEM_take_branch_EXtoMEM = ALU_io_take_branch_EXtoMEM; // @[EXStage.scala 84:34]
-  assign io_EXtoMEM_address_is_io_EXtoMEM = ALU_io_alu_result >= 32'h400 & opcodeReg != 7'h37 & opcodeReg != 7'h17; // @[EXStage.scala 105:64]
+  assign io_EXtoMEM_address_is_io_EXtoMEM = ALU_io_alu_result >= 32'h400; // @[EXStage.scala 105:26]
   assign io_EXtoMEM_alu_operation_select_EXtoMEM = controlUnit_io_alu_operation_select; // @[EXStage.scala 101:43]
   assign RegFile_clock = clock;
   assign RegFile_reset = reset;
