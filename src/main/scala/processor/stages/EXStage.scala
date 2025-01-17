@@ -9,13 +9,20 @@ class EXStage extends Module {
       val rs1 = Input(UInt(5.W))
       val rs2 = Input(UInt(5.W))
       val rd = Input(UInt(5.W))
-      val funct3 = Input(UInt(3.W))
-      val funct7 = Input(UInt(7.W))
+//      val funct3 = Input(UInt(3.W))
+//      val funct7 = Input(UInt(7.W))
       val opcode = Input(UInt(7.W))
       }
     val IFDtoEX = new Bundle {
       val pc_IFDtoEX = Input(UInt(32.W))
       val immediate_IFDtoEX = Input(UInt(32.W))
+      val alu_op2mux_select_IFDtoEX = Input(UInt(1.W))
+      val alu_operation_select_IFDtoEX = Input(UInt(8.W))
+      val register_write_enable_IFDtoEX = Input(UInt(1.W))
+      val write_back_select_IFDtoEX = Input(UInt(1.W))
+      val MemReadEnable_IFDtoEX = Input(UInt(1.W)) //TODO: Do we need this?
+      val write_memory_enable_IFDtoEX = Input(UInt(1.W))
+      
     }
     val WBtoEX = new Bundle {
       val regfile_write_data_WBtoEX = Input(UInt(32.W))
@@ -43,18 +50,21 @@ class EXStage extends Module {
   //Load needed modules/components
   val RegFile = Module(new RegisterFile)
   //val immGen = Module(new ImmediateGenerator)
-  val controlUnit = Module(new ControlUnit)
+  //val controlUnit = Module(new ControlUnit)
   val ALU = Module(new ALU)
 
   //Pipeline Registers
   val immediateReg = RegNext(io.IFDtoEX.immediate_IFDtoEX, 0.U)
-  val funct3Reg = RegNext(io.decoded_instruction_IFDtoEX.funct3, 0.U)
-  val funct7Reg = RegNext(io.decoded_instruction_IFDtoEX.funct7, 0.U)
+//  val funct3Reg = RegNext(io.decoded_instruction_IFDtoEX.funct3, 0.U)
+//  val funct7Reg = RegNext(io.decoded_instruction_IFDtoEX.funct7, 0.U)
   val opcodeReg = RegNext(io.decoded_instruction_IFDtoEX.opcode, 0.U)
   val rdReg = RegNext(io.decoded_instruction_IFDtoEX.rd, 0.U)
   val branchAddrReg = RegNext(io.IFDtoEX.pc_IFDtoEX, 0.U)
-  
-
+  val alu_operation_Reg = RegNext(io.IFDtoEX.alu_operation_select_IFDtoEX, 0.U)
+  val register_write_Reg = RegNext(io.IFDtoEX.register_write_enable_IFDtoEX, 0.U)
+  val write_back_Reg = RegNext(io.IFDtoEX.write_back_select_IFDtoEX, 0.U)
+  val write_memory_Reg = RegNext(io.IFDtoEX.write_memory_enable_IFDtoEX, 0.U)
+  val alu_op2mux_Reg = RegNext(io.IFDtoEX.alu_op2mux_select_IFDtoEX, 0.U)
   //Initialize outputs
   io.EXtoMEM.alu_result_EXtoMEM := 0.U(32.W)
   io.EXtoMEM.memory_write_data_EXtoMEM := 0.U
@@ -79,7 +89,7 @@ class EXStage extends Module {
 
   //ALU and RegFile connections
   ALU.io.alu_operand_1 := RegFile.io.alu_operand_1
-  ALU.io.alu_operand_2 := Mux(controlUnit.io.alu_op2mux_select === 1.U, immediateReg, RegFile.io.reg_data_2)
+  ALU.io.alu_operand_2 := Mux(alu_op2mux_Reg === 1.U, immediateReg, RegFile.io.reg_data_2)
   io.EXtoMEM.alu_result_EXtoMEM := ALU.io.alu_result
   io.EXtoMEM.take_branch_EXtoMEM := ALU.io.take_branch_EXtoMEM
 
@@ -89,23 +99,23 @@ class EXStage extends Module {
 
   //Connect ControlUnit
   //------------Input-------------//
-  controlUnit.io.funct3 := funct3Reg
-  controlUnit.io.funct7 := funct7Reg
-  controlUnit.io.opcode := opcodeReg
+//  controlUnit.io.funct3 := funct3Reg
+//  controlUnit.io.funct7 := funct7Reg
+//  controlUnit.io.opcode := opcodeReg
 
   //------------Output-------------//
-  io.EXtoMEM.register_write_enable_EXtoMEM := controlUnit.io.register_write_enable_EXtoMEM
-  io.EXtoMEM.write_back_select_EXtoMEM := controlUnit.io.write_back_select_EXtoMEM
-  io.EXtoMEM.data_memory_write_enable_EXtoMEM := controlUnit.io.write_memory_enable
-  ALU.io.alu_operation_select := controlUnit.io.alu_operation_select
-  io.EXtoMEM.alu_operation_select_EXtoMEM := controlUnit.io.alu_operation_select
+  io.EXtoMEM.register_write_enable_EXtoMEM := register_write_Reg
+  io.EXtoMEM.write_back_select_EXtoMEM := write_back_Reg
+  io.EXtoMEM.data_memory_write_enable_EXtoMEM := write_memory_Reg
+  ALU.io.alu_operation_select := alu_operation_Reg
+  io.EXtoMEM.alu_operation_select_EXtoMEM := alu_operation_Reg
 
 
   // Logic for memory-mapped IO: address in memory or IO
   when(ALU.io.alu_result >= 1024.U /*&& opcodeReg =/= Opcode.lui && opcodeReg =/= Opcode.auipc*/) {  // if requested address is in IO space
     io.EXtoMEM.data_memory_write_enable_EXtoMEM := false.B  // Don't write to normal memory
     io.EXtoMEM.address_is_io_EXtoMEM := true.B         // DELAYED ONE CLOCK CYCLE FOR READS
-    io.EXtoMEM.io_memory_write_enable_EXtoMEM := controlUnit.io.write_memory_enable
+    io.EXtoMEM.io_memory_write_enable_EXtoMEM := write_memory_Reg
   }
 
 
@@ -129,7 +139,4 @@ class EXStage extends Module {
     io.EXtoMEM.branch_address_EXtoMEM := RegFile.io.alu_operand_1 + immediateReg
     io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
   }
-
-
-
 }

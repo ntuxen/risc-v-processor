@@ -12,8 +12,8 @@ class ControlUnit extends Module {
     // Outputs
     val alu_op2mux_select = Output(UInt(1.W))
     val alu_operation_select = Output(UInt(8.W))
-    val register_write_enable_EXtoMEM = Output(UInt(1.W))
-    val write_back_select_EXtoMEM = Output(UInt(1.W))
+    val register_write_enable = Output(UInt(1.W))
+    val write_back_select = Output(UInt(1.W))
     val MemReadEnable = Output(UInt(1.W)) //TODO: Do we need this?
     val write_memory_enable = Output(UInt(1.W))
   })
@@ -21,8 +21,8 @@ class ControlUnit extends Module {
   // Default values for outputs
   io.write_memory_enable := false.B
   io.MemReadEnable := false.B
-  io.register_write_enable_EXtoMEM := false.B
-  io.write_back_select_EXtoMEM := false.B
+  io.register_write_enable := false.B
+  io.write_back_select := false.B
   io.alu_operation_select := 0.U
   io.alu_op2mux_select := 1.U // Default immediate
 
@@ -48,13 +48,13 @@ class ControlUnit extends Module {
   // Opcode-specific logic
   switch(io.opcode) {
     is(Opcode.Alu, Opcode.AluImm) { // ALU Operations
-      io.register_write_enable_EXtoMEM := true.B
+      io.register_write_enable := true.B
       io.alu_operation_select := getAluOperation(io.funct3, io.funct7)
       io.alu_op2mux_select := Mux(io.opcode === Opcode.Alu, 0.U, 1.U) // rs2 or immediate
     }
 
     is(Opcode.branch) { // Branch Operations
-      io.register_write_enable_EXtoMEM := false.B
+      io.register_write_enable := false.B
       io.alu_op2mux_select := 0.U
       io.alu_operation_select := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
         BranchFunct3.beq.U -> AluOperation.Beq.id.U,
@@ -67,8 +67,8 @@ class ControlUnit extends Module {
     }
 
     is(Opcode.load) { // Load Operations
-      io.register_write_enable_EXtoMEM := RegNext(true.B) //TODO: This might break stuff "RegNext"
-      io.write_back_select_EXtoMEM := RegNext(true.B)   // Delays signal one cycle because reads are slower
+      io.register_write_enable := RegNext(true.B) //TODO: This might break stuff "RegNext"
+      io.write_back_select := RegNext(true.B)   // Delays signal one cycle because reads are slower
       io.alu_operation_select := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
         LoadFunct3.lb.U -> AluOperation.Lb.id.U,
         LoadFunct3.lh.U -> AluOperation.Lh.id.U,
@@ -80,7 +80,7 @@ class ControlUnit extends Module {
 
     is(Opcode.store) { // Store Operations
       io.write_memory_enable := true.B
-      io.register_write_enable_EXtoMEM := false.B
+      io.register_write_enable := false.B
       io.alu_operation_select := MuxLookup(io.funct3, 0.U, Seq( //Default to 0.U
         StoreFunct3.sb.U -> AluOperation.Sb.id.U,
         StoreFunct3.sh.U -> AluOperation.Sh.id.U,
@@ -88,17 +88,17 @@ class ControlUnit extends Module {
       ))
     }
     is(Opcode.lui){
-      io.register_write_enable_EXtoMEM := true.B
+      io.register_write_enable := true.B
     }
     is(Opcode.auipc){
-      io.register_write_enable_EXtoMEM := true.B
+      io.register_write_enable := true.B
     }
     is(Opcode.jal){
-      io.register_write_enable_EXtoMEM := true.B
+      io.register_write_enable := true.B
       io.alu_operation_select := Opcode.jal
     }
     is(Opcode.jalr){
-      io.register_write_enable_EXtoMEM := true.B
+      io.register_write_enable := true.B
       io.alu_operation_select := Opcode.jalr
     }
   }

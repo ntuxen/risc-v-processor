@@ -12,18 +12,18 @@ class InstructionDecoder extends Module {
       val rs1 = Output(UInt(5.W))
       val rs2 = Output(UInt(5.W))
       val rd = Output(UInt(5.W))
-      val funct3 = Output(UInt(3.W))
-      val funct7 = Output(UInt(7.W))
       val opcode = Output(UInt(7.W))
     }
+    val funct3 = Output(UInt(3.W))
+    val funct7 = Output(UInt(7.W))
     val instrType = Output(UInt(3.W))
   })
   // Default values for outputs
   io.decoded_instruction_IFDtoEX.rs1 := 0.U
   io.decoded_instruction_IFDtoEX.rs2 := 0.U
   io.decoded_instruction_IFDtoEX.rd := 0.U
-  io.decoded_instruction_IFDtoEX.funct3 := 0.U
-  io.decoded_instruction_IFDtoEX.funct7 := 0.U
+  io.funct3 := 0.U
+  io.funct7 := 0.U
   io.instrType := 0.U
   io.decoded_instruction_IFDtoEX.opcode := io.instruction(6, 0)
   //Find instruction type from opcode
@@ -62,27 +62,27 @@ class InstructionDecoder extends Module {
       io.decoded_instruction_IFDtoEX.rs1 := io.instruction(19, 15)
       io.decoded_instruction_IFDtoEX.rs2 := io.instruction(24, 20)
       io.decoded_instruction_IFDtoEX.rd := io.instruction(11, 7)
-      io.decoded_instruction_IFDtoEX.funct3 := io.instruction(14, 12)
-      io.decoded_instruction_IFDtoEX.funct7 := io.instruction(31, 25)
+      io.funct3 := io.instruction(14, 12)
+      io.funct7 := io.instruction(31, 25)
     }
     is(InstrType.IType.id.U) {
       io.decoded_instruction_IFDtoEX.rs1 := io.instruction(19, 15)
-      io.decoded_instruction_IFDtoEX.funct3 := io.instruction(14, 12)
+      io.funct3 := io.instruction(14, 12)
       io.decoded_instruction_IFDtoEX.rd := io.instruction(11, 7)
-      when(io.decoded_instruction_IFDtoEX.funct3 === AluFunct3.sll.U || io.decoded_instruction_IFDtoEX.funct3 === AluFunct3.srl.U || io.decoded_instruction_IFDtoEX.funct3 === AluFunct3.sra.U){
+      when(io.funct3 === AluFunct3.sll.U || io.funct3 === AluFunct3.srl.U || io.funct3 === AluFunct3.sra.U){
         //funct7 set to imm[5:11]
-        io.decoded_instruction_IFDtoEX.funct7 := io.instruction(31, 25)
+        io.funct7 := io.instruction(31, 25)
       }
     }
     is(InstrType.SType.id.U) {
       io.decoded_instruction_IFDtoEX.rs1 := io.instruction(19, 15)
       io.decoded_instruction_IFDtoEX.rs2 := io.instruction(24, 20)
-      io.decoded_instruction_IFDtoEX.funct3 := io.instruction(14, 12)
+      io.funct3 := io.instruction(14, 12)
     }
     is(InstrType.BType.id.U) {
       io.decoded_instruction_IFDtoEX.rs1 := io.instruction(19, 15)
       io.decoded_instruction_IFDtoEX.rs2 := io.instruction(24, 20)
-      io.decoded_instruction_IFDtoEX.funct3 := io.instruction(14, 12)
+      io.funct3 := io.instruction(14, 12)
     }
     is(InstrType.JType.id.U) {
       io.decoded_instruction_IFDtoEX.rd := io.instruction(11, 7)
