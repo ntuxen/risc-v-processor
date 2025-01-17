@@ -9,6 +9,7 @@ class ControlUnit extends Module {
     val funct3 = Input(UInt(3.W))
     val funct7 = Input(UInt(7.W))
     val opcode = Input(UInt(7.W))
+    val take_branch = Input(Bool())
     // Outputs
     val alu_op2mux_select = Output(UInt(1.W))
     val alu_operation_select = Output(UInt(8.W))
@@ -101,5 +102,14 @@ class ControlUnit extends Module {
       io.register_write_enable := true.B
       io.alu_operation_select := Opcode.jalr
     }
+  }
+
+  // This is hazard detection for branches
+  // it disables writes to memory and registers
+  // and sets the alu operation to default
+  when(io.take_branch){
+    io.write_memory_enable := false.B
+    io.register_write_enable := false.B
+    io.alu_operation_select := 0.U
   }
 }

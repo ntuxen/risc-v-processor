@@ -58,6 +58,7 @@ class IFDStage(val program: Seq[UInt]) extends Module {
   controlUnit.io.funct3 := instructionDecoder.io.funct3
   controlUnit.io.funct7 := instructionDecoder.io.funct7
   controlUnit.io.opcode := instructionDecoder.io.decoded_instruction_IFDtoEX.opcode
+  controlUnit.io.take_branch := io.EXtoIFD.take_branch_EXtoIFD
   io.IFDtoEX.write_back_select_IFDtoEX := controlUnit.io.write_back_select
   io.IFDtoEX.write_memory_enable_IFDtoEX := controlUnit.io.write_memory_enable
   io.IFDtoEX.alu_operation_select_IFDtoEX := controlUnit.io.alu_operation_select

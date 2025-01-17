@@ -385,6 +385,7 @@ module ControlUnit(
   input  [2:0] io_funct3,
   input  [6:0] io_funct7,
   input  [6:0] io_opcode,
+  input        io_take_branch,
   output       io_alu_op2mux_select,
   output [7:0] io_alu_operation_select,
   output       io_register_write_enable,
@@ -408,7 +409,7 @@ module ControlUnit(
     _io_alu_operation_select_T_25; // @[Mux.scala 81:58]
   wire [3:0] _io_alu_operation_select_T_29 = 10'h2a0 == io_alu_operation_select_compositeKey ? 4'h7 :
     _io_alu_operation_select_T_27; // @[Mux.scala 81:58]
-  wire  _io_alu_op2mux_select_T_1 = io_opcode == 7'h33 ? 1'h0 : 1'h1; // @[ControlUnit.scala 53:34]
+  wire  _io_alu_op2mux_select_T_1 = io_opcode == 7'h33 ? 1'h0 : 1'h1; // @[ControlUnit.scala 54:34]
   wire [3:0] _io_alu_operation_select_T_31 = 3'h0 == io_funct3 ? 4'ha : 4'h0; // @[Mux.scala 81:58]
   wire [3:0] _io_alu_operation_select_T_33 = 3'h1 == io_funct3 ? 4'hb : _io_alu_operation_select_T_31; // @[Mux.scala 81:58]
   wire [3:0] _io_alu_operation_select_T_35 = 3'h4 == io_funct3 ? 4'hc : _io_alu_operation_select_T_33; // @[Mux.scala 81:58]
@@ -423,29 +424,32 @@ module ControlUnit(
   wire [4:0] _io_alu_operation_select_T_53 = 3'h0 == io_funct3 ? 5'h15 : 5'h0; // @[Mux.scala 81:58]
   wire [4:0] _io_alu_operation_select_T_55 = 3'h1 == io_funct3 ? 5'h16 : _io_alu_operation_select_T_53; // @[Mux.scala 81:58]
   wire [4:0] _io_alu_operation_select_T_57 = 3'h2 == io_funct3 ? 5'h17 : _io_alu_operation_select_T_55; // @[Mux.scala 81:58]
-  wire [6:0] _GEN_1 = 7'h67 == io_opcode ? 7'h67 : 7'h0; // @[ControlUnit.scala 49:21 102:31 26:27]
-  wire  _GEN_2 = 7'h6f == io_opcode | 7'h67 == io_opcode; // @[ControlUnit.scala 49:21 97:32]
-  wire [6:0] _GEN_3 = 7'h6f == io_opcode ? 7'h6f : _GEN_1; // @[ControlUnit.scala 49:21 98:31]
-  wire  _GEN_4 = 7'h17 == io_opcode | _GEN_2; // @[ControlUnit.scala 49:21 94:32]
-  wire [6:0] _GEN_5 = 7'h17 == io_opcode ? 7'h0 : _GEN_3; // @[ControlUnit.scala 49:21 26:27]
-  wire  _GEN_6 = 7'h37 == io_opcode | _GEN_4; // @[ControlUnit.scala 49:21 91:32]
-  wire [6:0] _GEN_7 = 7'h37 == io_opcode ? 7'h0 : _GEN_5; // @[ControlUnit.scala 49:21 26:27]
-  wire  _GEN_9 = 7'h23 == io_opcode ? 1'h0 : _GEN_6; // @[ControlUnit.scala 49:21 83:32]
-  wire [6:0] _GEN_10 = 7'h23 == io_opcode ? {{2'd0}, _io_alu_operation_select_T_57} : _GEN_7; // @[ControlUnit.scala 49:21 84:31]
-  wire  _GEN_11 = 7'h3 == io_opcode | _GEN_9; // @[ControlUnit.scala 49:21 70:32]
-  wire [6:0] _GEN_13 = 7'h3 == io_opcode ? {{2'd0}, _io_alu_operation_select_T_51} : _GEN_10; // @[ControlUnit.scala 49:21 72:31]
-  wire  _GEN_14 = 7'h3 == io_opcode ? 1'h0 : 7'h23 == io_opcode; // @[ControlUnit.scala 49:21 22:26]
-  wire  _GEN_15 = 7'h63 == io_opcode ? 1'h0 : _GEN_11; // @[ControlUnit.scala 49:21 57:32]
-  wire  _GEN_16 = 7'h63 == io_opcode ? 1'h0 : 1'h1; // @[ControlUnit.scala 49:21 27:24 58:28]
-  wire [6:0] _GEN_17 = 7'h63 == io_opcode ? {{3'd0}, _io_alu_operation_select_T_41} : _GEN_13; // @[ControlUnit.scala 49:21 59:31]
-  wire  _GEN_18 = 7'h63 == io_opcode ? 1'h0 : 7'h3 == io_opcode; // @[ControlUnit.scala 49:21 25:24]
-  wire  _GEN_19 = 7'h63 == io_opcode ? 1'h0 : _GEN_14; // @[ControlUnit.scala 49:21 22:26]
-  wire [6:0] _GEN_21 = 7'h33 == io_opcode | 7'h13 == io_opcode ? {{3'd0}, _io_alu_operation_select_T_29} : _GEN_17; // @[ControlUnit.scala 49:21 52:31]
-  assign io_alu_op2mux_select = 7'h33 == io_opcode | 7'h13 == io_opcode ? _io_alu_op2mux_select_T_1 : _GEN_16; // @[ControlUnit.scala 49:21 53:28]
-  assign io_alu_operation_select = {{1'd0}, _GEN_21};
-  assign io_register_write_enable = 7'h33 == io_opcode | 7'h13 == io_opcode | _GEN_15; // @[ControlUnit.scala 49:21 51:32]
-  assign io_write_back_select = 7'h33 == io_opcode | 7'h13 == io_opcode ? 1'h0 : _GEN_18; // @[ControlUnit.scala 49:21 25:24]
-  assign io_write_memory_enable = 7'h33 == io_opcode | 7'h13 == io_opcode ? 1'h0 : _GEN_19; // @[ControlUnit.scala 49:21 22:26]
+  wire [6:0] _GEN_1 = 7'h67 == io_opcode ? 7'h67 : 7'h0; // @[ControlUnit.scala 50:21 103:31 27:27]
+  wire  _GEN_2 = 7'h6f == io_opcode | 7'h67 == io_opcode; // @[ControlUnit.scala 50:21 98:32]
+  wire [6:0] _GEN_3 = 7'h6f == io_opcode ? 7'h6f : _GEN_1; // @[ControlUnit.scala 50:21 99:31]
+  wire  _GEN_4 = 7'h17 == io_opcode | _GEN_2; // @[ControlUnit.scala 50:21 95:32]
+  wire [6:0] _GEN_5 = 7'h17 == io_opcode ? 7'h0 : _GEN_3; // @[ControlUnit.scala 50:21 27:27]
+  wire  _GEN_6 = 7'h37 == io_opcode | _GEN_4; // @[ControlUnit.scala 50:21 92:32]
+  wire [6:0] _GEN_7 = 7'h37 == io_opcode ? 7'h0 : _GEN_5; // @[ControlUnit.scala 50:21 27:27]
+  wire  _GEN_9 = 7'h23 == io_opcode ? 1'h0 : _GEN_6; // @[ControlUnit.scala 50:21 84:32]
+  wire [6:0] _GEN_10 = 7'h23 == io_opcode ? {{2'd0}, _io_alu_operation_select_T_57} : _GEN_7; // @[ControlUnit.scala 50:21 85:31]
+  wire  _GEN_11 = 7'h3 == io_opcode | _GEN_9; // @[ControlUnit.scala 50:21 71:32]
+  wire [6:0] _GEN_13 = 7'h3 == io_opcode ? {{2'd0}, _io_alu_operation_select_T_51} : _GEN_10; // @[ControlUnit.scala 50:21 73:31]
+  wire  _GEN_14 = 7'h3 == io_opcode ? 1'h0 : 7'h23 == io_opcode; // @[ControlUnit.scala 50:21 23:26]
+  wire  _GEN_15 = 7'h63 == io_opcode ? 1'h0 : _GEN_11; // @[ControlUnit.scala 50:21 58:32]
+  wire  _GEN_16 = 7'h63 == io_opcode ? 1'h0 : 1'h1; // @[ControlUnit.scala 50:21 28:24 59:28]
+  wire [6:0] _GEN_17 = 7'h63 == io_opcode ? {{3'd0}, _io_alu_operation_select_T_41} : _GEN_13; // @[ControlUnit.scala 50:21 60:31]
+  wire  _GEN_18 = 7'h63 == io_opcode ? 1'h0 : 7'h3 == io_opcode; // @[ControlUnit.scala 50:21 26:24]
+  wire  _GEN_19 = 7'h63 == io_opcode ? 1'h0 : _GEN_14; // @[ControlUnit.scala 50:21 23:26]
+  wire  _GEN_20 = 7'h33 == io_opcode | 7'h13 == io_opcode | _GEN_15; // @[ControlUnit.scala 50:21 52:32]
+  wire [6:0] _GEN_21 = 7'h33 == io_opcode | 7'h13 == io_opcode ? {{3'd0}, _io_alu_operation_select_T_29} : _GEN_17; // @[ControlUnit.scala 50:21 53:31]
+  wire  _GEN_24 = 7'h33 == io_opcode | 7'h13 == io_opcode ? 1'h0 : _GEN_19; // @[ControlUnit.scala 50:21 23:26]
+  wire [6:0] _GEN_27 = io_take_branch ? 7'h0 : _GEN_21; // @[ControlUnit.scala 108:23 111:29]
+  assign io_alu_op2mux_select = 7'h33 == io_opcode | 7'h13 == io_opcode ? _io_alu_op2mux_select_T_1 : _GEN_16; // @[ControlUnit.scala 50:21 54:28]
+  assign io_alu_operation_select = {{1'd0}, _GEN_27};
+  assign io_register_write_enable = io_take_branch ? 1'h0 : _GEN_20; // @[ControlUnit.scala 108:23 110:30]
+  assign io_write_back_select = 7'h33 == io_opcode | 7'h13 == io_opcode ? 1'h0 : _GEN_18; // @[ControlUnit.scala 50:21 26:24]
+  assign io_write_memory_enable = io_take_branch ? 1'h0 : _GEN_24; // @[ControlUnit.scala 108:23 109:28]
 endmodule
 module IFDStage(
   input         clock,
@@ -485,6 +489,7 @@ module IFDStage(
   wire [2:0] controlUnit_io_funct3; // @[IFDStage.scala 57:27]
   wire [6:0] controlUnit_io_funct7; // @[IFDStage.scala 57:27]
   wire [6:0] controlUnit_io_opcode; // @[IFDStage.scala 57:27]
+  wire  controlUnit_io_take_branch; // @[IFDStage.scala 57:27]
   wire  controlUnit_io_alu_op2mux_select; // @[IFDStage.scala 57:27]
   wire [7:0] controlUnit_io_alu_operation_select; // @[IFDStage.scala 57:27]
   wire  controlUnit_io_register_write_enable; // @[IFDStage.scala 57:27]
@@ -494,7 +499,7 @@ module IFDStage(
   wire [31:0] _NextInstrAdd_T_1 = PC + 32'h4; // @[IFDStage.scala 40:108]
   wire [31:0] NextInstrAdd = io_EXtoIFD_take_branch_EXtoIFD ? io_EXtoIFD_branch_address_EXtoIFD : _NextInstrAdd_T_1; // @[IFDStage.scala 40:37]
   wire [31:0] _instrMem_io_addr_T = {{2'd0}, NextInstrAdd[31:2]}; // @[IFDStage.scala 45:36]
-  reg [31:0] io_IFDtoEX_pc_IFDtoEX_REG; // @[IFDStage.scala 69:35]
+  reg [31:0] io_IFDtoEX_pc_IFDtoEX_REG; // @[IFDStage.scala 70:35]
   InstrMemory instrMem ( // @[IFDStage.scala 44:24]
     .clock(instrMem_clock),
     .io_addr(instrMem_io_addr),
@@ -519,23 +524,24 @@ module IFDStage(
     .io_funct3(controlUnit_io_funct3),
     .io_funct7(controlUnit_io_funct7),
     .io_opcode(controlUnit_io_opcode),
+    .io_take_branch(controlUnit_io_take_branch),
     .io_alu_op2mux_select(controlUnit_io_alu_op2mux_select),
     .io_alu_operation_select(controlUnit_io_alu_operation_select),
     .io_register_write_enable(controlUnit_io_register_write_enable),
     .io_write_back_select(controlUnit_io_write_back_select),
     .io_write_memory_enable(controlUnit_io_write_memory_enable)
   );
-  assign io_decoded_instruction_IFDtoEX_rs1 = instructionDecoder_io_decoded_instruction_IFDtoEX_rs1; // @[IFDStage.scala 73:34]
-  assign io_decoded_instruction_IFDtoEX_rs2 = instructionDecoder_io_decoded_instruction_IFDtoEX_rs2; // @[IFDStage.scala 73:34]
-  assign io_decoded_instruction_IFDtoEX_rd = instructionDecoder_io_decoded_instruction_IFDtoEX_rd; // @[IFDStage.scala 73:34]
-  assign io_decoded_instruction_IFDtoEX_opcode = instructionDecoder_io_decoded_instruction_IFDtoEX_opcode; // @[IFDStage.scala 73:34]
-  assign io_IFDtoEX_pc_IFDtoEX = io_IFDtoEX_pc_IFDtoEX_REG; // @[IFDStage.scala 69:25]
-  assign io_IFDtoEX_immediate_IFDtoEX = immediateGenerator_io_immediate; // @[IFDStage.scala 75:32]
-  assign io_IFDtoEX_alu_op2mux_select_IFDtoEX = controlUnit_io_alu_op2mux_select; // @[IFDStage.scala 64:40]
-  assign io_IFDtoEX_alu_operation_select_IFDtoEX = controlUnit_io_alu_operation_select; // @[IFDStage.scala 63:43]
-  assign io_IFDtoEX_register_write_enable_IFDtoEX = controlUnit_io_register_write_enable; // @[IFDStage.scala 66:44]
-  assign io_IFDtoEX_write_back_select_IFDtoEX = controlUnit_io_write_back_select; // @[IFDStage.scala 61:40]
-  assign io_IFDtoEX_write_memory_enable_IFDtoEX = controlUnit_io_write_memory_enable; // @[IFDStage.scala 62:42]
+  assign io_decoded_instruction_IFDtoEX_rs1 = instructionDecoder_io_decoded_instruction_IFDtoEX_rs1; // @[IFDStage.scala 74:34]
+  assign io_decoded_instruction_IFDtoEX_rs2 = instructionDecoder_io_decoded_instruction_IFDtoEX_rs2; // @[IFDStage.scala 74:34]
+  assign io_decoded_instruction_IFDtoEX_rd = instructionDecoder_io_decoded_instruction_IFDtoEX_rd; // @[IFDStage.scala 74:34]
+  assign io_decoded_instruction_IFDtoEX_opcode = instructionDecoder_io_decoded_instruction_IFDtoEX_opcode; // @[IFDStage.scala 74:34]
+  assign io_IFDtoEX_pc_IFDtoEX = io_IFDtoEX_pc_IFDtoEX_REG; // @[IFDStage.scala 70:25]
+  assign io_IFDtoEX_immediate_IFDtoEX = immediateGenerator_io_immediate; // @[IFDStage.scala 76:32]
+  assign io_IFDtoEX_alu_op2mux_select_IFDtoEX = controlUnit_io_alu_op2mux_select; // @[IFDStage.scala 65:40]
+  assign io_IFDtoEX_alu_operation_select_IFDtoEX = controlUnit_io_alu_operation_select; // @[IFDStage.scala 64:43]
+  assign io_IFDtoEX_register_write_enable_IFDtoEX = controlUnit_io_register_write_enable; // @[IFDStage.scala 67:44]
+  assign io_IFDtoEX_write_back_select_IFDtoEX = controlUnit_io_write_back_select; // @[IFDStage.scala 62:40]
+  assign io_IFDtoEX_write_memory_enable_IFDtoEX = controlUnit_io_write_memory_enable; // @[IFDStage.scala 63:42]
   assign instrMem_clock = clock;
   assign instrMem_io_addr = _instrMem_io_addr_T[9:0]; // @[IFDStage.scala 45:20]
   assign instructionDecoder_io_instruction = instrMem_io_dataOut; // @[IFDStage.scala 49:37]
@@ -544,6 +550,7 @@ module IFDStage(
   assign controlUnit_io_funct3 = instructionDecoder_io_funct3; // @[IFDStage.scala 58:25]
   assign controlUnit_io_funct7 = instructionDecoder_io_funct7; // @[IFDStage.scala 59:25]
   assign controlUnit_io_opcode = instructionDecoder_io_decoded_instruction_IFDtoEX_opcode; // @[IFDStage.scala 60:25]
+  assign controlUnit_io_take_branch = io_EXtoIFD_take_branch_EXtoIFD; // @[IFDStage.scala 61:30]
   always @(posedge clock) begin
     if (reset) begin // @[IFDStage.scala 39:19]
       PC <= 32'hfffffffc; // @[IFDStage.scala 39:19]

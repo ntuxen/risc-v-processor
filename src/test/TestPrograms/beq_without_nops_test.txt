@@ -1,0 +1,11 @@
+addi x1 x0 17
+addi x2 x0 17
+nop                # No nops after a branch instruction*
+nop
+nop
+beq x1 x2 jumpHere
+add x1 x1 x1       # No nop here would normally fail
+add x2 x2 x2
+jumpHere:
+addi x1 x1 -17     # r1 should be 0
+addi x2 x2 -17     # r2 should be 0

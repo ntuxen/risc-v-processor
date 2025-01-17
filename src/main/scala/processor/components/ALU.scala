@@ -10,7 +10,7 @@ class ALU extends Module {
     val alu_operand_2 = Input(UInt(32.W))
     //------------Output-------------//
     val alu_result = Output(UInt(32.W))
-    val take_branch_EXtoMEM = Output(Bool())
+    val take_branch_EXtoIFD = Output(Bool())
   })
 
   // Typecast operands to SInt for all ALU operations
@@ -19,7 +19,7 @@ class ALU extends Module {
 
   // ALU Operations, using signed operands directly
   io.alu_result := 42.U // Default assignment (should only be true if io.alu_operation_select is undefined)
-  io.take_branch_EXtoMEM := false.B
+  io.take_branch_EXtoIFD := false.B
   switch(io.alu_operation_select) {
     is(AluOperation.Add.id.U) {
       io.alu_result := (signedOperand1 + signedOperand2).asUInt
@@ -63,32 +63,32 @@ class ALU extends Module {
     // --------  BRANCHES --------------//
     is(AluOperation.Beq.id.U){
       when(signedOperand1 === signedOperand2){
-        io.take_branch_EXtoMEM := true.B
+        io.take_branch_EXtoIFD := true.B
       }
     }
     is(AluOperation.Bne.id.U){
       when(signedOperand1 =/= signedOperand2){
-        io.take_branch_EXtoMEM := true.B
+        io.take_branch_EXtoIFD := true.B
       }
     }
     is(AluOperation.Blt.id.U){
       when(signedOperand1 < signedOperand2){
-        io.take_branch_EXtoMEM := true.B
+        io.take_branch_EXtoIFD := true.B
       }
     }
     is(AluOperation.Bge.id.U){
       when(signedOperand1 >= signedOperand2){
-        io.take_branch_EXtoMEM := true.B
+        io.take_branch_EXtoIFD := true.B
       }
     }
     is(AluOperation.Bltu.id.U){
       when(io.alu_operand_1 < io.alu_operand_2){
-        io.take_branch_EXtoMEM := true.B
+        io.take_branch_EXtoIFD := true.B
       }
     }
     is(AluOperation.Bgeu.id.U){
       when(io.alu_operand_1 >= io.alu_operand_2){
-        io.take_branch_EXtoMEM := true.B
+        io.take_branch_EXtoIFD := true.B
       }
     }
     //------- ----- LOAD & STORE -----------//
@@ -96,7 +96,7 @@ class ALU extends Module {
       io.alu_result := io.alu_operand_1 + io.alu_operand_2
     }
     is(Opcode.jal, Opcode.jalr){
-      io.take_branch_EXtoMEM := true.B
+      io.take_branch_EXtoIFD := true.B
     }
   }
 

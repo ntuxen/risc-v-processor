@@ -39,6 +39,7 @@ class InstrMemory(val size: Int, val addrWidth: Int, val program: Seq[UInt]) ext
   }
 
   // Read from the memory (this does not modify it)
-  io.dataOut := RegNext(mem(io.addr))
+  // initialised to nop, so first instruction is always nop
+  io.dataOut := RegNext(mem(io.addr), "h00000013".U)
 
 }

@@ -94,7 +94,7 @@ class EXStage extends Module {
   ALU.io.alu_operand_1 := RegFile.io.alu_operand_1
   ALU.io.alu_operand_2 := Mux(alu_op2mux_Reg === 1.U, immediateReg, RegFile.io.reg_data_2)
   io.EXtoMEM.alu_result_EXtoMEM := ALU.io.alu_result
-  io.EXtoIFD.take_branch_EXtoIFD := ALU.io.take_branch_EXtoMEM
+  io.EXtoIFD.take_branch_EXtoIFD := ALU.io.take_branch_EXtoIFD
 
   //Connect ImmGen
 //  immGen.io.instrType := instrTypeReg
