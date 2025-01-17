@@ -40,10 +40,13 @@ class EXStage extends Module {
       val write_back_select_EXtoMEM = Output(Bool())
       val data_memory_write_enable_EXtoMEM = Output(Bool())
       val io_memory_write_enable_EXtoMEM = Output(Bool())
-      val branch_address_EXtoMEM = Output(UInt(32.W))
-      val take_branch_EXtoMEM = Output(Bool())
       val address_is_io_EXtoMEM = Output(Bool())
       val alu_operation_select_EXtoMEM = Output(UInt(8.W))
+    }
+
+    val EXtoIFD = new Bundle {
+      val branch_address_EXtoIFD = Output(UInt(32.W))
+      val take_branch_EXtoIFD = Output(Bool())
     }
   })
 
@@ -76,8 +79,8 @@ class EXStage extends Module {
   io.EXtoMEM.io_memory_write_enable_EXtoMEM := false.B
   io.EXtoMEM.alu_operation_select_EXtoMEM := 0.U
   //BranchAddress Logic: (Standard for jal and branch instructions)
-  io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + (immediateReg)
-  io.EXtoMEM.take_branch_EXtoMEM := false.B
+  io.EXtoIFD.branch_address_EXtoIFD := branchAddrReg + (immediateReg)
+  io.EXtoIFD.take_branch_EXtoIFD := false.B
 
   //Connect RegFile
   RegFile.io.rs1 := io.decoded_instruction_IFDtoEX.rs1
@@ -91,7 +94,7 @@ class EXStage extends Module {
   ALU.io.alu_operand_1 := RegFile.io.alu_operand_1
   ALU.io.alu_operand_2 := Mux(alu_op2mux_Reg === 1.U, immediateReg, RegFile.io.reg_data_2)
   io.EXtoMEM.alu_result_EXtoMEM := ALU.io.alu_result
-  io.EXtoMEM.take_branch_EXtoMEM := ALU.io.take_branch_EXtoMEM
+  io.EXtoIFD.take_branch_EXtoIFD := ALU.io.take_branch_EXtoMEM
 
   //Connect ImmGen
 //  immGen.io.instrType := instrTypeReg
@@ -132,11 +135,11 @@ class EXStage extends Module {
   }
   //PC logic for Jal and Jalr
   when(opcodeReg === Opcode.jal){
-    io.EXtoMEM.branch_address_EXtoMEM := branchAddrReg + immediateReg
+    io.EXtoIFD.branch_address_EXtoIFD := branchAddrReg + immediateReg
     io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
   }
   when(opcodeReg === Opcode.jalr){
-    io.EXtoMEM.branch_address_EXtoMEM := RegFile.io.alu_operand_1 + immediateReg
+    io.EXtoIFD.branch_address_EXtoIFD := RegFile.io.alu_operand_1 + immediateReg
     io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
   }
 }

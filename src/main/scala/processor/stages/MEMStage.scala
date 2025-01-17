@@ -11,8 +11,6 @@ class MEMStage extends Module {
     //---------- INPUTS -------------//
     val EXtoMEM = new Bundle {
       // Control signals
-      val branch_address_EXtoMEM        = Input(UInt(32.W))
-      val take_branch_EXtoMEM           = Input(Bool())
       val register_write_enable_EXtoMEM = Input(Bool())
       val write_back_select_EXtoMEM     = Input(Bool())
       val rd_EXtoMEM                    = Input(UInt(5.W))
@@ -29,10 +27,6 @@ class MEMStage extends Module {
     }
 
     //---------- OUTPUTS -------------//
-    val MEMtoIFD = new Bundle {
-      val branch_address_MEMtoIFD         = Output(UInt(32.W))
-      val take_branch_MEMtoIFD            = Output(Bool())
-    }
     val MEMtoWB = new Bundle {
       // Other control signals
       val alu_result_MEMtoWB              = Output(UInt(32.W))
@@ -66,8 +60,6 @@ class MEMStage extends Module {
   io.MEMtoWB.register_write_enable_MEMtoWB:= RegNext(io.EXtoMEM.register_write_enable_EXtoMEM)
   io.MEMtoWB.write_back_select_MEMtoWB    := RegNext(io.EXtoMEM.write_back_select_EXtoMEM)
   io.MEMtoWB.rd_MEMtoWB                   := RegNext(io.EXtoMEM.rd_EXtoMEM)
-  io.MEMtoIFD.branch_address_MEMtoIFD     := RegNext(io.EXtoMEM.branch_address_EXtoMEM)
-  io.MEMtoIFD.take_branch_MEMtoIFD        := RegNext(io.EXtoMEM.take_branch_EXtoMEM)
   io.MEMtoWB.address_is_io_MEMtoWB        := RegNext(io.EXtoMEM.address_is_io_EXtoMEM)
 
   // MEMORY RELATED

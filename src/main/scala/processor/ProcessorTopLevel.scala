@@ -62,7 +62,7 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
 
   IFD.io.IFDtoEX <> EX.io.IFDtoEX
   IFD.io.decoded_instruction_IFDtoEX <> EX.io.decoded_instruction_IFDtoEX
-  IFD.io.MEMtoIFD <> MEM.io.MEMtoIFD
+  IFD.io.EXtoIFD <> EX.io.EXtoIFD
   EX.io.EXtoMEM <> MEM.io.EXtoMEM
   EX.io.WBtoEX <> WB.io.WBtoEX
   MEM.io.MEMtoWB <> WB.io.MEMtoWB

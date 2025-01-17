@@ -6,10 +6,11 @@ import processor.components._
 class IFDStage(val program: Seq[UInt]) extends Module {
   val io = IO(new Bundle {
     //------------INPUTS--------//
-    val MEMtoIFD = new Bundle {
-      val take_branch_MEMtoIFD = Input(Bool())
-      val branch_address_MEMtoIFD = Input(UInt(32.W))
+    val EXtoIFD = new Bundle {
+      val take_branch_EXtoIFD = Input(Bool())
+      val branch_address_EXtoIFD = Input(UInt(32.W))
     }
+
     //-----------OUTPUTS---------------//
     val decoded_instruction_IFDtoEX = new Bundle(
     ){
@@ -36,7 +37,7 @@ class IFDStage(val program: Seq[UInt]) extends Module {
   // Remember that the PC implicitly starts at an instruction address 4 higher
   // TODO: fix the above
   val PC = RegInit("hFFFFFFFC".U(32.W))
-  val NextInstrAdd = WireDefault(Mux(io.MEMtoIFD.take_branch_MEMtoIFD, io.MEMtoIFD.branch_address_MEMtoIFD, PC + 4.U))
+  val NextInstrAdd = WireDefault(Mux(io.EXtoIFD.take_branch_EXtoIFD, io.EXtoIFD.branch_address_EXtoIFD, PC + 4.U))
   PC := NextInstrAdd
 
   // Instruction memory
