@@ -47,6 +47,7 @@ class EXStage extends Module {
     val EXtoIFD = new Bundle {
       val branch_address_EXtoIFD = Output(UInt(32.W))
       val take_branch_EXtoIFD = Output(Bool())
+      val rd_previous_EXtoIFD = Output(UInt(5.W))
     }
   })
 
@@ -142,4 +143,12 @@ class EXStage extends Module {
     io.EXtoIFD.branch_address_EXtoIFD := RegFile.io.alu_operand_1 + immediateReg
     io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
   }
+
+  //Forwarding Logic
+  val forward_enable = Wire(Bool())
+  forward_enable := (rdReg === io.decoded_instruction_IFDtoEX.rs1 && io.decoded_instruction_IFDtoEX.rs1 =/= 0.U) || (rdReg === io.decoded_instruction_IFDtoEX.rs2 && io.decoded_instruction_IFDtoEX.rs2 =/= 0.U)
+  when(forward_enable){
+
+  }
+
 }
