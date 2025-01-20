@@ -1,6 +1,7 @@
 package processor.stages
 
 import chisel3._
+import chisel3.util._
 import processor.components._
 
 class IFDStage(val program: Seq[UInt]) extends Module {
@@ -9,8 +10,11 @@ class IFDStage(val program: Seq[UInt]) extends Module {
     val EXtoIFD = new Bundle {
       val take_branch_EXtoIFD = Input(Bool())
       val branch_address_EXtoIFD = Input(UInt(32.W))
+      val rd_EXtoIFD = Input(UInt(5.W))
     }
-
+    val MEMtoIFD = new Bundle() {
+      val rd_MEMtoIFD = Input(UInt(5.W))
+    }
     //-----------OUTPUTS---------------//
     val decoded_instruction_IFDtoEX = new Bundle(
     ){
@@ -30,6 +34,11 @@ class IFDStage(val program: Seq[UInt]) extends Module {
       val write_back_select_IFDtoEX = Output(UInt(1.W))
       val MemReadEnable_IFDtoEX = Output(UInt(1.W)) //TODO: Do we need this?
       val write_memory_enable_IFDtoEX = Output(UInt(1.W))
+      val forward_enable_rs1_IFDtoEX = Output(UInt(3.W))
+      val forward_enable_rs2_IFDtoEX = Output(UInt(3.W))
+    }
+    val WBtoIFD = new Bundle() {
+      val rd_WBtoIFD = Input(UInt(5.W))
     }
   })
 
@@ -74,6 +83,23 @@ class IFDStage(val program: Seq[UInt]) extends Module {
   io.decoded_instruction_IFDtoEX <> instructionDecoder.io.decoded_instruction_IFDtoEX
 
   io.IFDtoEX.immediate_IFDtoEX := immediateGenerator.io.immediate
+
+  //Forwarding Logic
+  // Forwarding enable for rs1
+  io.IFDtoEX.forward_enable_rs1_IFDtoEX := Cat(
+    (io.EXtoIFD.rd_EXtoIFD === io.decoded_instruction_IFDtoEX.rs1) && io.decoded_instruction_IFDtoEX.rs1 =/= 0.U, // EX stage forwarding
+    (io.MEMtoIFD.rd_MEMtoIFD === io.decoded_instruction_IFDtoEX.rs1) && io.decoded_instruction_IFDtoEX.rs1 =/= 0.U, // MEM stage forwarding
+    (io.WBtoIFD.rd_WBtoIFD === io.decoded_instruction_IFDtoEX.rs1) && io.decoded_instruction_IFDtoEX.rs1 =/= 0.U //WB stage forwarding
+  )
+
+  // Forwarding enable for rs2
+  io.IFDtoEX.forward_enable_rs2_IFDtoEX := Cat(
+    (io.EXtoIFD.rd_EXtoIFD === io.decoded_instruction_IFDtoEX.rs2) && io.decoded_instruction_IFDtoEX.rs2 =/= 0.U, // EX stage forwarding
+    (io.MEMtoIFD.rd_MEMtoIFD === io.decoded_instruction_IFDtoEX.rs2) && io.decoded_instruction_IFDtoEX.rs2 =/= 0.U, // MEM stage forwarding
+    (io.WBtoIFD.rd_WBtoIFD === io.decoded_instruction_IFDtoEX.rs2) && io.decoded_instruction_IFDtoEX.rs2 =/= 0.U
+
+  )
+
 
 
 }

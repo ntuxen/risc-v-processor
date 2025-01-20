@@ -39,7 +39,12 @@ class MEMStage extends Module {
       val data_memory_read_MEMtoWB        = Output(UInt(32.W))
       val io_memory_read_MEMtoWB          = Output(UInt(32.W))
     }
-
+    val MEMtoEX = new Bundle() {
+      val alu_result_MEMtoEX = Output(UInt(32.W))
+    }
+    val MEMtoIFD = new Bundle{
+      val rd_MEMtoIFD = Output(UInt(5.W))
+    }
     //------ PERIPHERALS ---------//
     val leds                            = Output(UInt(16.W))
   })
@@ -68,4 +73,8 @@ class MEMStage extends Module {
   dataMem.io.enableWrite := io.EXtoMEM.data_memory_write_enable_EXtoMEM
   dataMem.io.alu_operation_select_EXtoMEM := io.EXtoMEM.alu_operation_select_EXtoMEM
   io.MEMtoWB.data_memory_read_MEMtoWB := dataMem.io.dataOut // TODO: is this correct?
+
+  io.MEMtoEX.alu_result_MEMtoEX := RegNext(io.EXtoMEM.alu_result_EXtoMEM)
+  io.MEMtoIFD.rd_MEMtoIFD := RegNext(io.EXtoMEM.rd_EXtoMEM)
+
 }

@@ -66,6 +66,9 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   EX.io.EXtoMEM <> MEM.io.EXtoMEM
   EX.io.WBtoEX <> WB.io.WBtoEX
   MEM.io.MEMtoWB <> WB.io.MEMtoWB
+  EX.io.MEMtoEX <> MEM.io.MEMtoEX
+  IFD.io.MEMtoIFD <> MEM.io.MEMtoIFD
+  IFD.io.WBtoIFD <> WB.io.WBtoIFD
 
 }
 

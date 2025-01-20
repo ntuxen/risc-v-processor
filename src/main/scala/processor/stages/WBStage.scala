@@ -21,6 +21,11 @@ class WBStage extends Module {
       val regfile_write_data_WBtoEX     = Output(UInt(32.W))
       val regfile_write_enable_WBtoEX  = Output(Bool())
       val rd_WBtoEX                     = Output(UInt(5.W))
+      val alu_result_WBtoEX = Output(UInt(32.W))
+    }
+
+    val WBtoIFD = new Bundle{
+      val rd_WBtoIFD = Output(UInt(5.W))
     }
 
   })
@@ -38,4 +43,8 @@ class WBStage extends Module {
   } .otherwise {
     io.WBtoEX.regfile_write_data_WBtoEX := alu_result
   }
+
+  io.WBtoEX.alu_result_WBtoEX := alu_result
+  io.WBtoIFD.rd_WBtoIFD := RegNext(io.MEMtoWB.rd_MEMtoWB)
+
 }
