@@ -41,7 +41,12 @@ class MEMStage extends Module {
     }
 
     //------ PERIPHERALS ---------//
+    val switches                        = Input(UInt(16.W))
     val leds                            = Output(UInt(16.W))
+    val display = new Bundle {
+      val seg = Output(UInt(7.W))
+      val an = Output(UInt(4.W))
+    }
   })
 
   //DataMemory Module
@@ -53,7 +58,12 @@ class MEMStage extends Module {
   MemoryMappedIO.io.dataIn := io.EXtoMEM.memory_write_data_EXtoMEM
   MemoryMappedIO.io.address := io.EXtoMEM.alu_result_EXtoMEM
   io.MEMtoWB.io_memory_read_MEMtoWB := MemoryMappedIO.io.dataOut
-  io.leds := MemoryMappedIO.io.leds // LED signal for top level output pins
+  // IO
+  io.leds := MemoryMappedIO.io.leds // LED signal to top level output pins
+  MemoryMappedIO.io.switches := io.switches// Switches signal from top level input pins
+  io.display.seg := MemoryMappedIO.io.display.seg
+  io.display.an := MemoryMappedIO.io.display.an
+
 
   //Pipeline Registers
   io.MEMtoWB.alu_result_MEMtoWB           := RegNext(io.EXtoMEM.alu_result_EXtoMEM)
