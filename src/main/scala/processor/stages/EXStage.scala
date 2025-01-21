@@ -22,12 +22,16 @@ class EXStage extends Module {
       val write_back_select_IFDtoEX = Input(UInt(1.W))
       val MemReadEnable_IFDtoEX = Input(UInt(1.W)) //TODO: Do we need this?
       val write_memory_enable_IFDtoEX = Input(UInt(1.W))
-      
+      val forward_enable_rs1_IFDtoEX = Input(UInt(3.W))
+      val forward_enable_rs2_IFDtoEX = Input(UInt(3.W))
+      val forward_enable_memory_data_IFDtoEX = Input(UInt(3.W))
+//      val forward_choose_data = Input(UInt(3.W))
     }
     val WBtoEX = new Bundle {
       val regfile_write_data_WBtoEX = Input(UInt(32.W))
       val regfile_write_enable_WBtoEX = Input(Bool())
       val rd_WBtoEX = Input(UInt(5.W))
+      val alu_result_WBtoEX = Input(UInt(32.W))
     }
 
 
@@ -42,12 +46,20 @@ class EXStage extends Module {
       val io_memory_write_enable_EXtoMEM = Output(Bool())
       val address_is_io_EXtoMEM = Output(Bool())
       val alu_operation_select_EXtoMEM = Output(UInt(8.W))
+      val opcode_EXtoMEM = Output(UInt(7.W))
     }
 
     val EXtoIFD = new Bundle {
       val branch_address_EXtoIFD = Output(UInt(32.W))
       val take_branch_EXtoIFD = Output(Bool())
+      val rd_EXtoIFD = Output(UInt(5.W))
+      val opcode_EXtoIFD = Output(UInt(7.W))
     }
+
+    val MEMtoEX = new Bundle() {
+      val alu_result_MEMtoEX = Input(UInt(32.W))
+    }
+
   })
 
   //Load needed modules/components
@@ -68,6 +80,11 @@ class EXStage extends Module {
   val write_back_Reg = RegNext(io.IFDtoEX.write_back_select_IFDtoEX, 0.U)
   val write_memory_Reg = RegNext(io.IFDtoEX.write_memory_enable_IFDtoEX, 0.U)
   val alu_op2mux_Reg = RegNext(io.IFDtoEX.alu_op2mux_select_IFDtoEX, 0.U)
+  val forward_enable_rs1_Reg = RegNext(io.IFDtoEX.forward_enable_rs1_IFDtoEX, 0.U(3.W))
+  val forward_enable_rs2_Reg = RegNext(io.IFDtoEX.forward_enable_rs2_IFDtoEX, 0.U(3.W))
+  val forward_enable_memory_data_Reg = RegNext(io.IFDtoEX.forward_enable_memory_data_IFDtoEX, 0.U(3.W))
+//  val forward_choose_data_Reg = RegNext(io.IFDtoEX.forward_choose_data, 0.U(3.W))
+  val alu_result_WBtoEX_Reg = RegNext(io.WBtoEX.alu_result_WBtoEX, 0.U)
   //Initialize outputs
   io.EXtoMEM.alu_result_EXtoMEM := 0.U(32.W)
   io.EXtoMEM.memory_write_data_EXtoMEM := 0.U
@@ -88,11 +105,34 @@ class EXStage extends Module {
   RegFile.io.rd_WBtoEX := io.WBtoEX.rd_WBtoEX
   RegFile.io.regfile_write_data_WBtoEX := io.WBtoEX.regfile_write_data_WBtoEX
   RegFile.io.regfile_write_enable_WBtoEX := io.WBtoEX.regfile_write_enable_WBtoEX
-  io.EXtoMEM.memory_write_data_EXtoMEM := RegFile.io.reg_data_2
+  io.EXtoMEM.memory_write_data_EXtoMEM := MuxCase(RegFile.io.reg_data_2,
+    Array(
+      (forward_enable_memory_data_Reg === Cat(1.U, 0.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX,
+      (forward_enable_memory_data_Reg === Cat(0.U, 1.U, 0.U)) -> io.WBtoEX.alu_result_WBtoEX,
+      (forward_enable_memory_data_Reg === Cat(0.U, 0.U, 1.U)) -> alu_result_WBtoEX_Reg,
+      (forward_enable_memory_data_Reg === Cat(1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //TODO: Not sure about this case
+    )
+  )
 
-  //ALU and RegFile connections
-  ALU.io.alu_operand_1 := RegFile.io.alu_operand_1
-  ALU.io.alu_operand_2 := Mux(alu_op2mux_Reg === 1.U, immediateReg, RegFile.io.reg_data_2)
+  //ALU and RegFile connections (And Forward logic)
+  ALU.io.alu_operand_1 := MuxCase(RegFile.io.alu_operand_1,
+    Array(
+      (forward_enable_rs1_Reg === Cat(1.U, 0.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX,
+      (forward_enable_rs1_Reg === Cat(0.U, 1.U, 0.U)) -> io.WBtoEX.alu_result_WBtoEX,
+      (forward_enable_rs1_Reg === Cat(0.U, 0.U, 1.U)) -> alu_result_WBtoEX_Reg,
+    (forward_enable_rs1_Reg === Cat(1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //TODO: Not sure about this case
+  ))
+
+  ALU.io.alu_operand_2 := MuxCase(
+    Mux(alu_op2mux_Reg === 1.U, immediateReg, RegFile.io.reg_data_2),
+    Array(
+      (forward_enable_rs2_Reg === Cat(1.U, 0.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX,
+      (forward_enable_rs2_Reg === Cat(0.U, 1.U, 0.U)) -> io.WBtoEX.alu_result_WBtoEX,
+      (forward_enable_rs2_Reg === Cat(0.U, 0.U, 1.U)) -> alu_result_WBtoEX_Reg,
+      (forward_enable_rs2_Reg === Cat(1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //TODO: Not sure about this case
+    )
+  )
+
   io.EXtoMEM.alu_result_EXtoMEM := ALU.io.alu_result
   io.EXtoIFD.take_branch_EXtoIFD := ALU.io.take_branch_EXtoIFD
 
@@ -112,8 +152,9 @@ class EXStage extends Module {
   io.EXtoMEM.data_memory_write_enable_EXtoMEM := write_memory_Reg
   ALU.io.alu_operation_select := alu_operation_Reg
   io.EXtoMEM.alu_operation_select_EXtoMEM := alu_operation_Reg
-
-
+  io.EXtoIFD.rd_EXtoIFD := rdReg
+  io.EXtoIFD.opcode_EXtoIFD := opcodeReg
+  io.EXtoMEM.opcode_EXtoMEM := opcodeReg
   // Logic for memory-mapped IO: address in memory or IO
   when(ALU.io.alu_result >= 1024.U /*&& opcodeReg =/= Opcode.lui && opcodeReg =/= Opcode.auipc*/) {  // if requested address is in IO space
     io.EXtoMEM.data_memory_write_enable_EXtoMEM := false.B  // Don't write to normal memory
@@ -142,4 +183,9 @@ class EXStage extends Module {
       io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
     }
   }
+
+
+
+
+
 }

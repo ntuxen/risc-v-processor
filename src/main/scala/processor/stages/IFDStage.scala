@@ -1,6 +1,7 @@
 package processor.stages
 
 import chisel3._
+import chisel3.util._
 import processor.components._
 
 class IFDStage(val program: Seq[UInt]) extends Module {
@@ -9,16 +10,21 @@ class IFDStage(val program: Seq[UInt]) extends Module {
     val EXtoIFD = new Bundle {
       val take_branch_EXtoIFD = Input(Bool())
       val branch_address_EXtoIFD = Input(UInt(32.W))
+      val rd_EXtoIFD = Input(UInt(5.W))
+      val opcode_EXtoIFD = Input(UInt(7.W))
     }
-
+    val MEMtoIFD = new Bundle() {
+      val rd_MEMtoIFD = Input(UInt(5.W))
+      val opcode_MEMtoIFD = Input(UInt(7.W))
+    }
     //-----------OUTPUTS---------------//
     val decoded_instruction_IFDtoEX = new Bundle(
     ){
       val rs1 = Output(UInt(5.W))
       val rs2 = Output(UInt(5.W))
       val rd = Output(UInt(5.W))
-//      val funct3 = Output(UInt(3.W))
-//      val funct7 = Output(UInt(7.W))
+      //      val funct3 = Output(UInt(3.W))
+      //      val funct7 = Output(UInt(7.W))
       val opcode = Output(UInt(7.W))
     }
     val IFDtoEX = new Bundle {
@@ -30,6 +36,14 @@ class IFDStage(val program: Seq[UInt]) extends Module {
       val write_back_select_IFDtoEX = Output(UInt(1.W))
       val MemReadEnable_IFDtoEX = Output(UInt(1.W)) //TODO: Do we need this?
       val write_memory_enable_IFDtoEX = Output(UInt(1.W))
+      val forward_enable_rs1_IFDtoEX = Output(UInt(3.W))
+      val forward_enable_rs2_IFDtoEX = Output(UInt(3.W))
+      val forward_enable_memory_data_IFDtoEX = Output(UInt(3.W))
+//      val forward_choose_data = Output(UInt(3.W))
+    }
+    val WBtoIFD = new Bundle() {
+      val rd_WBtoIFD = Input(UInt(5.W))
+      val opcode_WBtoIFD = Input(UInt(7.W))
     }
   })
 
@@ -69,11 +83,44 @@ class IFDStage(val program: Seq[UInt]) extends Module {
   // Pipeline register
   io.IFDtoEX.pc_IFDtoEX := RegNext(NextInstrAdd)
 
-  
+
   //Connect PC to output so it propagates to next stage
   io.decoded_instruction_IFDtoEX <> instructionDecoder.io.decoded_instruction_IFDtoEX
 
   io.IFDtoEX.immediate_IFDtoEX := immediateGenerator.io.immediate
 
+  val rs1 = io.decoded_instruction_IFDtoEX.rs1
+  val rs2 = io.decoded_instruction_IFDtoEX.rs2
+  val opcode = io.decoded_instruction_IFDtoEX.opcode
 
+  //Forwarding Logic
+  // Forwarding enable for rs1
+  io.IFDtoEX.forward_enable_rs1_IFDtoEX := Cat(
+    (io.EXtoIFD.rd_EXtoIFD === rs1) && rs1 =/= 0.U && io.EXtoIFD.opcode_EXtoIFD =/= Opcode.load, // EX stage forwarding
+    (io.MEMtoIFD.rd_MEMtoIFD === rs1) && rs1 =/= 0.U && io.MEMtoIFD.opcode_MEMtoIFD =/= Opcode.load, // MEM stage forwarding
+    (io.WBtoIFD.rd_WBtoIFD === rs1) && rs1 =/= 0.U && io.WBtoIFD.opcode_WBtoIFD =/= Opcode.load //WB stage forwarding
+  )
+  // Forwarding enable for rs2
+  io.IFDtoEX.forward_enable_rs2_IFDtoEX := Cat(
+    (io.EXtoIFD.rd_EXtoIFD === rs2) && rs2 =/= 0.U && opcode =/= Opcode.load && opcode =/= Opcode.store, // EX stage forwarding
+    (io.MEMtoIFD.rd_MEMtoIFD === rs2) && rs2 =/= 0.U && opcode =/= Opcode.load && opcode =/= Opcode.store, // MEM stage forwarding
+    (io.WBtoIFD.rd_WBtoIFD === rs2) && rs2 =/= 0.U && opcode =/= Opcode.load && opcode =/= Opcode.store
+  )
+  //Forwarding enable for memory data
+  io.IFDtoEX.forward_enable_memory_data_IFDtoEX := Cat(
+    (io.EXtoIFD.rd_EXtoIFD === rs2) && rs2 =/= 0.U, // EX stage forwarding
+    (io.MEMtoIFD.rd_MEMtoIFD === rs2) && rs2 =/= 0.U, // MEM stage forwarding
+    (io.WBtoIFD.rd_WBtoIFD === rs2) && rs2 =/= 0.U
+  )
+//  io.IFDtoEX.forward_choose_data := Cat(
+//    (io.EXtoIFD.opcode_EXtoIFD === Opcode.load), // EX stage forwarding
+//    (io.MEMtoIFD.opcode_MEMtoIFD === Opcode.load), // MEM stage forwarding
+//    (io.WBtoIFD.opcode_WBtoIFD === Opcode.load)
+//  )
 }
+
+
+
+
+
+

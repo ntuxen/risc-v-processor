@@ -11,7 +11,7 @@ class WBStage extends Module {
       val write_back_select_MEMtoWB     = Input(Bool())
       val rd_MEMtoWB                    = Input(UInt(5.W))
       val address_is_io_MEMtoWB         = Input(Bool())
-
+      val opcode_MEMtoWB = Input(UInt(7.W))
       // IO and Data memory
       val data_memory_read_MEMtoWB      = Input(UInt(32.W))
       val io_memory_read_MEMtoWB        = Input(UInt(32.W))
@@ -21,6 +21,12 @@ class WBStage extends Module {
       val regfile_write_data_WBtoEX     = Output(UInt(32.W))
       val regfile_write_enable_WBtoEX  = Output(Bool())
       val rd_WBtoEX                     = Output(UInt(5.W))
+      val alu_result_WBtoEX = Output(UInt(32.W))
+    }
+
+    val WBtoIFD = new Bundle{
+      val rd_WBtoIFD = Output(UInt(5.W))
+      val opcode_WBtoIFD = Output(UInt(7.W))
     }
 
   })
@@ -38,4 +44,8 @@ class WBStage extends Module {
   } .otherwise {
     io.WBtoEX.regfile_write_data_WBtoEX := alu_result
   }
+
+  io.WBtoEX.alu_result_WBtoEX := alu_result
+  io.WBtoIFD.rd_WBtoIFD := RegNext(io.MEMtoWB.rd_MEMtoWB)
+  io.WBtoIFD.opcode_WBtoIFD := RegNext(io.MEMtoWB.opcode_MEMtoWB)
 }
