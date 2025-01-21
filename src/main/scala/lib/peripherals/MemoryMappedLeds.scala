@@ -25,7 +25,7 @@ class MemoryMappedLeds(cnt: Int) extends Module {
     val pins = Output(UInt(cnt.W))
   })
 
-  val led_reg = RegInit(15.U(cnt.W))
+  val led_reg = RegInit(0.U(cnt.W))
   val pwm_reg = RegInit("hFF".U(8.W)) // PWM width is one byte wide
   val pwm_counter = RegInit(0.U(8.W))
   val clk_prescaler = RegInit(0.U(12.W)) // Clock prescaler

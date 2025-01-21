@@ -71,7 +71,7 @@ class MemoryMappedIO(
   uart.io.pins.rx := 0.U
 
   // Display
-  val is_display = IO_Addresses.display <= address_io && address_io <= (IO_Addresses.display + 16.U)
+  val is_display = (IO_Addresses.display <= address_io) && (address_io <= (IO_Addresses.display + 16.U(8.W))) // Evil error happened here: Can You See Spot The Fix?
   display.io.port.write := io.writeEnable && is_display
   display.io.port.read := io.readEnable && is_display
   display.io.port.addr := address_io // Address input

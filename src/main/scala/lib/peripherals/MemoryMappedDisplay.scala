@@ -49,7 +49,7 @@ class MemoryMappedDisplay(val freq: Int) extends Module {
   // Slower clock for display shifting
   val tick_counter_shift_reg = RegInit(0.U(32.W))         // Counter
   tick_counter_shift_reg := tick_counter_shift_reg + 1.U  // Increment once every clock cycle
-  val FREQ_SHIFT = 500                                      // Frequency of shifting
+  val FREQ_SHIFT = 4                                      // Frequency of shifting
   val MAX_COUNT_SHIFT = ((freq/FREQ_SHIFT)-1).U           // What to count up to
   val tick_shift = tick_counter_shift_reg === MAX_COUNT_SHIFT // Tick condition
   // Shifting logic
@@ -78,10 +78,10 @@ class MemoryMappedDisplay(val freq: Int) extends Module {
   // Switch between input for decoder
   sevSegDecoder.io.in := 0.U
   switch(select) { // Use display_shift_reg to index into display_reg
-    is("b0001".U) { sevSegDecoder.io.in := display_reg((display_shift_reg + 0.U)(3,0))}
-    is("b0010".U) { sevSegDecoder.io.in := display_reg((display_shift_reg + 1.U)(3,0))}
-    is("b0100".U) { sevSegDecoder.io.in := display_reg((display_shift_reg + 2.U)(3,0))}
-    is("b1000".U) { sevSegDecoder.io.in := display_reg((display_shift_reg + 3.U)(3,0))}
+    is("b1000".U) { sevSegDecoder.io.in := display_reg((display_shift_reg + 0.U)(3,0))}
+    is("b0100".U) { sevSegDecoder.io.in := display_reg((display_shift_reg + 1.U)(3,0))}
+    is("b0010".U) { sevSegDecoder.io.in := display_reg((display_shift_reg + 2.U)(3,0))}
+    is("b0001".U) { sevSegDecoder.io.in := display_reg((display_shift_reg + 3.U)(3,0))}
   }
 
   // Output

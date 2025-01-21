@@ -57,6 +57,7 @@ class MEMStage(clock_freq: Int) extends Module {
   MemoryMappedIO.io.writeEnable := io.EXtoMEM.io_memory_write_enable_EXtoMEM
   MemoryMappedIO.io.dataIn := io.EXtoMEM.memory_write_data_EXtoMEM
   MemoryMappedIO.io.address := io.EXtoMEM.alu_result_EXtoMEM
+  MemoryMappedIO.io.readEnable := !io.EXtoMEM.io_memory_write_enable_EXtoMEM
   io.MEMtoWB.io_memory_read_MEMtoWB := MemoryMappedIO.io.dataOut
   // IO
   io.leds := MemoryMappedIO.io.leds // LED signal to top level output pins
