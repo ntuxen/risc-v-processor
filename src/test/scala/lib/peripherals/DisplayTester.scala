@@ -7,7 +7,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class DisplayTester extends AnyFlatSpec with ChiselScalatestTester {
   "DisplayTester" should "pass" in {
-    test(new MemoryMappedDisplay(2000,0.U)).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
+    test(new MemoryMappedDisplay(2000)).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
       // Helper functions
       def writeCharacter(char: Char, addr: Int): Unit = {
         val ascii = char.toInt

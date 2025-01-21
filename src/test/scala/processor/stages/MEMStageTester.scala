@@ -6,7 +6,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class MEMStageTester extends AnyFlatSpec with ChiselScalatestTester {
   "MEMStage test" should "pass" in {
-    test(new MEMStage).withAnnotations(Seq(WriteVcdAnnotation))
+    test(new MEMStage(2000)).withAnnotations(Seq(WriteVcdAnnotation))
     { dut =>
 //      // RUN 1
 //      dut.io.alu_result_EXtoMEM.poke(42.U)

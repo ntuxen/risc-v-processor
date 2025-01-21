@@ -1,0 +1,41 @@
+_start:
+addi x10 x0 0x410 # Address of IO::display
+
+    # Store each character in the string "RISCYwBUSINESS"
+    li t0 0x52
+    li t1 0x49
+    li t2 0x53
+    li t3 0x43
+    li t4 0x59
+    li t5 0x77
+    sb t0, 0(x10)        # 'R' -> 0x52
+    sb t1, 1(x10)        # 'I' -> 0x49
+    sb t2, 2(x10)        # 'S' -> 0x53
+    sb t3, 3(x10)        # 'C' -> 0x43
+    sb t4, 4(x10)        # 'Y' -> 0x59
+    sb t5, 5(x10)        # 'w' -> 0x77
+    li t0 0x42
+    li t1 0x55
+    li t2 0x53
+    li t3 0x49
+    li t4 0x4E
+    li t5 0x45
+    sb t0, 6(x10)        # 'B' -> 0x42
+    sb t1, 7(x10)        # 'U' -> 0x55
+    sb t2, 8(x10)        # 'S' -> 0x53
+    sb t3, 9(x10)        # 'I' -> 0x49
+    sb t4, 10(x10)       # 'N' -> 0x4E
+    sb t5, 11(x10)       # 'E' -> 0x45
+    li t0 0x53
+    li t1 0x53
+    nop
+    nop
+    sb t0, 12(x10)       # 'S' -> 0x53
+    sb t1, 13(x10)       # 'S' -> 0x53
+
+
+
+
+
+
+
