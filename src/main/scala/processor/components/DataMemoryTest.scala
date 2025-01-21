@@ -9,7 +9,7 @@ class DataMemoryTest(val size: Int, val addrWidth: Int) extends Module {
     val addr = Input(UInt(addrWidth.W))
     val enableWrite = Input(Bool())
     val dataIn = Input(UInt(32.W))
-    val memSel = Input(UInt(8.W)) // Connect to ALUSel
+    val alu_operation_select_EXtoMEM = Input(UInt(8.W)) // Connect to ALUSel
 
     val dataOut = Output(UInt(width.W))
   })
@@ -33,7 +33,7 @@ class DataMemoryTest(val size: Int, val addrWidth: Int) extends Module {
   // Delay output
   io.dataOut := RegNext(RegNext(dataOut))
 
-  switch(io.memSel){
+  switch(io.alu_operation_select_EXtoMEM){
     // --------- READ/LOAD INSTRUCTIONS --------- //
     is(AluOperation.Lb.id.U){ // Lb
       switch(specAddr){

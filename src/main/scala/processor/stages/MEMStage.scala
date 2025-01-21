@@ -24,6 +24,7 @@ class MEMStage extends Module {
       val alu_operation_select_EXtoMEM  = Input(UInt(8.W))
       // Memory-mapped IO
       val io_memory_write_enable_EXtoMEM = Input(Bool())
+      val opcode_EXtoMEM = Input(UInt(7.W))
     }
 
     //---------- OUTPUTS -------------//
@@ -34,6 +35,7 @@ class MEMStage extends Module {
       val write_back_select_MEMtoWB       = Output(Bool())
       val rd_MEMtoWB                      = Output(UInt(5.W))
       val address_is_io_MEMtoWB           = Output(Bool())
+      val opcode_MEMtoWB = Output(UInt(7.W))
 
       // Memory
       val data_memory_read_MEMtoWB        = Output(UInt(32.W))
@@ -44,13 +46,14 @@ class MEMStage extends Module {
     }
     val MEMtoIFD = new Bundle{
       val rd_MEMtoIFD = Output(UInt(5.W))
+      val opcode_MEMtoIFD = Output(UInt(7.W))
     }
     //------ PERIPHERALS ---------//
     val leds                            = Output(UInt(16.W))
   })
 
   //DataMemory Module
-  val dataMem = Module(new DataMemory(1024,10))
+  val dataMem = Module(new DataMemoryTest(1024,10))
 
   // Memory-mapped IO
   val MemoryMappedIO = Module(new MemoryMappedIO(1024))
@@ -76,5 +79,6 @@ class MEMStage extends Module {
 
   io.MEMtoEX.alu_result_MEMtoEX := RegNext(io.EXtoMEM.alu_result_EXtoMEM)
   io.MEMtoIFD.rd_MEMtoIFD := RegNext(io.EXtoMEM.rd_EXtoMEM)
-
+  io.MEMtoIFD.opcode_MEMtoIFD := RegNext(io.EXtoMEM.opcode_EXtoMEM)
+  io.MEMtoWB.opcode_MEMtoWB := RegNext(io.EXtoMEM.opcode_EXtoMEM)
 }
