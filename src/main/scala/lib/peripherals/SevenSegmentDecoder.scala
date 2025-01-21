@@ -115,6 +115,6 @@ val decoding_table = VecInit(
 )
 
 // Assign output
-io.out := decoding_table(io.in)
+io.out := decoding_table(io.in - 32.U) // The first 32 ASCII chars are omitted in this table (control sequences)
 
 }
