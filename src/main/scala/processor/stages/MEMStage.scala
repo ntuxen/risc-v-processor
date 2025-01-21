@@ -6,7 +6,7 @@ import processor.components.DataMemoryTest
 import processor.components.DataMemory
 import processor.components.MemoryMappedIO
 
-class MEMStage extends Module {
+class MEMStage(clock_freq: Int) extends Module {
   val io = IO(new Bundle {
     //---------- INPUTS -------------//
     val EXtoMEM = new Bundle {
@@ -49,19 +49,30 @@ class MEMStage extends Module {
       val opcode_MEMtoIFD = Output(UInt(7.W))
     }
     //------ PERIPHERALS ---------//
+    val switches                        = Input(UInt(16.W))
     val leds                            = Output(UInt(16.W))
+    val display = new Bundle {
+      val seg = Output(UInt(7.W))
+      val an = Output(UInt(4.W))
+    }
   })
 
   //DataMemory Module
   val dataMem = Module(new DataMemoryTest(1024,10))
 
   // Memory-mapped IO
-  val MemoryMappedIO = Module(new MemoryMappedIO(1024))
+  val MemoryMappedIO = Module(new MemoryMappedIO(1024,clock_freq))
   MemoryMappedIO.io.writeEnable := io.EXtoMEM.io_memory_write_enable_EXtoMEM
   MemoryMappedIO.io.dataIn := io.EXtoMEM.memory_write_data_EXtoMEM
   MemoryMappedIO.io.address := io.EXtoMEM.alu_result_EXtoMEM
+  MemoryMappedIO.io.readEnable := !io.EXtoMEM.io_memory_write_enable_EXtoMEM
   io.MEMtoWB.io_memory_read_MEMtoWB := MemoryMappedIO.io.dataOut
-  io.leds := MemoryMappedIO.io.leds // LED signal for top level output pins
+  // IO
+  io.leds := MemoryMappedIO.io.leds // LED signal to top level output pins
+  MemoryMappedIO.io.switches := io.switches// Switches signal from top level input pins
+  io.display.seg := MemoryMappedIO.io.display.seg
+  io.display.an := MemoryMappedIO.io.display.an
+
 
   //Pipeline Registers
   io.MEMtoWB.alu_result_MEMtoWB           := RegNext(io.EXtoMEM.alu_result_EXtoMEM)

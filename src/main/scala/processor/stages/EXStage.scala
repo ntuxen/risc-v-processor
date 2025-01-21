@@ -166,22 +166,22 @@ class EXStage extends Module {
   //Connect rdReg
   io.EXtoMEM.rd_EXtoMEM := rdReg
 
-  //LUI Logic
-  when(opcodeReg === Opcode.lui){
-    io.EXtoMEM.alu_result_EXtoMEM := immediateReg
-  }
-  //AUIPC Logic
-  when(opcodeReg === Opcode.auipc){
-    io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + immediateReg
-  }
-  //PC logic for Jal and Jalr
-  when(opcodeReg === Opcode.jal){
-    io.EXtoIFD.branch_address_EXtoIFD := branchAddrReg + immediateReg
-    io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
-  }
-  when(opcodeReg === Opcode.jalr){
-    io.EXtoIFD.branch_address_EXtoIFD := RegFile.io.alu_operand_1 + immediateReg
-    io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
+  // Additional logic for special instructions
+  switch(opcodeReg) {
+    is(Opcode.lui) { // LUI Logic
+      io.EXtoMEM.alu_result_EXtoMEM := immediateReg
+    }
+    is(Opcode.auipc) { // AUIPC Logic
+      io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + immediateReg
+    }
+    is(Opcode.jal) { // PC Logic for JAL
+      io.EXtoIFD.branch_address_EXtoIFD := branchAddrReg + immediateReg
+      io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
+    }
+    is(Opcode.jalr) { // PC Logic for JALR
+      io.EXtoIFD.branch_address_EXtoIFD := RegFile.io.alu_operand_1 + immediateReg
+      io.EXtoMEM.alu_result_EXtoMEM := branchAddrReg + 4.U
+    }
   }
 
 

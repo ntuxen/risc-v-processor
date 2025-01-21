@@ -1,0 +1,44 @@
+# Testing all immediate ALU instructions
+# Memory mapped io LEDs should be b0000_0000_1001_1111 in the end
+addi x1 x0 -1 #x1 should be -1
+addi x2 x0 15 #x2 should be 15
+nop
+nop
+nop
+sltiu x3 x1 5 #x3 should be 0
+slti x4 x1 5  #x4 should be 1
+nop
+nop
+nop
+addi x5 x3 9 #x5 should be 9
+nop
+nop
+nop
+slli x6 x1 2 #x6 should be -4
+nop
+nop
+nop
+srai x6 x6 1 #x6 should be -2
+nop
+nop
+nop
+srli x6 x6 1 #x6 should be 2147483647: b0111_1111_1111_1111_1111_1111_1111_1111
+nop
+nop
+nop
+andi x7 x6 15 #x7 should be 15
+nop
+nop
+nop
+ori x7 x7 16 #x7 should be 31
+nop
+nop
+nop
+xori x7 x7 128 #x7 should be 159: b1001_1111
+nop
+nop
+nop
+sh x7 1072 x0 #Store b0000_0000_1001_1111 in LED memory mapped io
+
+
+
