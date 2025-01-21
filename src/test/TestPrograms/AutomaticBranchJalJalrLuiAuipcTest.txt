@@ -1,0 +1,82 @@
+# Testing all branches, jal, jalr, lui, auipc
+addi x1 x0 1
+addi x2 x0 2
+nop
+nop
+nop
+beq x1 x2 wrong    # Should not branch here
+beq x0 x0 correct1 # Should branch here
+beq x0 x0 wrong    # Should never reach here
+
+correct1:
+bne x0 x0 wrong    # Should not branch here
+bne x1 x2 correct2 # Should branch here
+bne x1 x2 wrong    # Should never reach here
+
+correct2:
+blt x2 x1 wrong    # Should not branch here
+blt x1 x2 correct3 # Should branch here
+blt x1 x2 wrong    # Should never reach here
+
+correct3:
+bge x1 x2 wrong    # Should not branch here
+bge x2 x1 correct4 # Should branch here
+bge x2 x1 wrong    # Should never reach here
+
+correct4:
+bge x1 x2 wrong    # Should not branch here
+bge x0 x0 correct5 # Should branch here
+bge x0 x0 wrong    # Should never reach here
+
+correct5:
+bltu x2 x1 wrong    # Should not branch here
+bltu x1 x2 correct6 # Should branch here
+bltu x1 x2 wrong    # Should never reach here
+
+correct6:
+bgeu x1 x2 wrong    # Should not branch here
+bgeu x2 x1 correct7 # Should branch here
+bgeu x2 x1 wrong    # Should never reach here
+
+correct7:
+bgeu x1 x2 wrong    # Should not branch here
+bgeu x0 x0 correct8 # Should branch here
+bgeu x0 x0 wrong    # Should never reach here
+
+correct9:
+addi x4 x0 1 # Count
+addi x4 x4 1
+addi x4 x4 1
+addi x4 x4 1
+jalr x3 x3 0 # Jump back
+
+correct8:
+jal x3 correct9
+addi x5 x0 1 # x5 should be 1
+nop
+nop
+nop
+lui  x5 2    # x5 should be 1 + (2 << 12)
+nop
+nop
+nop
+auipc x5 1   # x5 should be PC + (1 << 12)
+nop
+nop
+nop
+sh x5 1072 x0 # LEDs should take value 0x10AC
+nop
+nop
+nop
+beq x0 x0 end
+
+wrong:
+addi x1 x0 -1
+sh x1 1072 x0 # LEDs should never take this value
+nop
+nop
+nop
+beq x0 x0 end
+
+end:
+beq x0 x0 end
