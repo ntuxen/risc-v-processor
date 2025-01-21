@@ -100,7 +100,7 @@ class IFDStage(val program: Seq[UInt]) extends Module {
     (io.MEMtoIFD.rd_MEMtoIFD === rs1) && rs1 =/= 0.U && io.MEMtoIFD.opcode_MEMtoIFD =/= Opcode.load, // MEM stage forwarding
     (io.WBtoIFD.rd_WBtoIFD === rs1) && rs1 =/= 0.U && io.WBtoIFD.opcode_WBtoIFD =/= Opcode.load //WB stage forwarding
   )
-  // Forwarding enable for rs2
+  // Forwarding enable for rs2 (When the current opcode is a load or store then we want the immediate value)
   io.IFDtoEX.forward_enable_rs2_IFDtoEX := Cat(
     (io.EXtoIFD.rd_EXtoIFD === rs2) && rs2 =/= 0.U && opcode =/= Opcode.load && opcode =/= Opcode.store, // EX stage forwarding
     (io.MEMtoIFD.rd_MEMtoIFD === rs2) && rs2 =/= 0.U && opcode =/= Opcode.load && opcode =/= Opcode.store, // MEM stage forwarding
