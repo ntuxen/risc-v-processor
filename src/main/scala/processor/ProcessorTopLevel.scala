@@ -31,7 +31,7 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   MEM.io.MEMtoWB <> WB.io.MEMtoWB
 
   //---MEMORY MAPPED IO---//
-  io.LEDs := MEM.io.leds ^ io.sw
+  io.LEDs := MEM.io.leds
   MEM.io.switches := io.sw
   io.display.seg := MEM.io.display.seg
   io.display.an := MEM.io.display.an
