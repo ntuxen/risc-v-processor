@@ -3,8 +3,9 @@ package lib.peripherals
 import chisel3._
 import chisel3.util._
 import lib.Bus
+import processor.components.IO_Addresses
 
-class MemoryMappedDisplay(val freq: Int, val addr: UInt) extends Module {
+class MemoryMappedDisplay(val freq: Int) extends Module {
   val io = IO(new Bundle {
     val port = Bus.RespondPort()
     val display = new Bundle {
@@ -15,7 +16,7 @@ class MemoryMappedDisplay(val freq: Int, val addr: UInt) extends Module {
 
   // Declarations
   val size = 16
-  val relative_address = io.port.addr - addr // Address relative to assigned IO address.
+  val relative_address = io.port.addr - IO_Addresses.display // Address relative to assigned IO address.
   val sevSegDecoder = Module(new SevenSegmentDecoder) // Decoder
   val select = RegInit(1.U(4.W)) // Select signal for choosing the display digit
   val rdData = WireDefault(0.U(8.W))

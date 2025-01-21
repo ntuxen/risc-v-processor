@@ -16,10 +16,10 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
     }
   })
 
+  val clock_freq = 100000000 // Clock frequency
   val IFD = Module(new IFDStage(program))
-  //val ID = Module(new InstructionDecoder) // ID Stage
   val EX = Module(new EXStage)
-  val MEM = Module (new MEMStage)
+  val MEM = Module (new MEMStage(clock_freq))
   val WB = Module (new WBStage)
 
   //-------------Connections-------------//
@@ -40,7 +40,7 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
 
 object Processor extends App {
   // Load Program (doesn't work because of different types
-  val program: Seq[UInt] = ProgramLoader.loadHexFile("src/test/TestPrograms/BlinkingLEDsFast.hex")
+  val program: Seq[UInt] = ProgramLoader.loadHexFile("src/test/TestPrograms/RISCYwBUSINESS.hex")
   //val program = "src/test/TestPrograms/BlinkingLEDsFast.hex"
   // Emit Verilog file
   (new chisel3.stage.ChiselStage).emitVerilog(new ProcessorTopLevel(program))
