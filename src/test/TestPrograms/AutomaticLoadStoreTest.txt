@@ -1,0 +1,32 @@
+# Testing all loads and stores (also some alu instructions, but if alu instructions work, this should also work)
+# Memory mapped io LEDs should be ?????????? in the end
+addi x1 x0 -1
+nop
+nop
+nop
+sb x1 256 x0
+sh x1 258 x0
+sw x1 260 x0
+nop
+nop
+nop
+lb  x2 256 x0
+lbu x3 256 x0
+lh  x4 258 x0
+lhu x5 258 x0
+lw  x6 260 x0
+xor x7 x2 x3 #x7 should be b1111_1111_1111_1111_1111_1111_0000_0000
+nop
+xor x8 x4 x5 #x8 should be b1111_1111_1111_1111_0000_0000_0000_0000
+nop
+nop
+nop
+xor x9 x8 x6 #x9 should be b0000_0000_0000_0000_1111_1111_1111_1111
+nop
+nop
+nop
+and x9 x9 x7 #x9 should be b0000_0000_0000_0000_1111_1111_0000_0000
+nop
+nop
+nop
+sh x9 1072 x0 #Store b1111_1111_0000_0000 in LED memory mapped io
