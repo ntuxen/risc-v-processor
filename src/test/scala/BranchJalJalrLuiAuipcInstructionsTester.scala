@@ -17,7 +17,7 @@ class BranchJalJalrLuiAuipcInstructionsTester extends AnyFlatSpec with ChiselSca
 
       dut.clock.step(100) // Run through the program
 
-      checkOutputs("h10AC".U, "A branch, jal, jalr, lui, or auipc instruction went wrong, check VCD file 'BranchJalJalrLuiAuipcInstructionsTester_should_pass/ProcessorTopLevel.vcd' for more information")
+      checkOutputs("h1088".U, "A branch, jal, jalr, lui, or auipc instruction went wrong, check VCD file 'BranchJalJalrLuiAuipcInstructionsTester_should_pass/ProcessorTopLevel.vcd' for more information")
 
     }
   }

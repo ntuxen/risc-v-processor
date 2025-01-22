@@ -110,7 +110,10 @@ class EXStage extends Module {
       (forward_enable_memory_data_Reg === Cat(1.U, 0.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX,
       (forward_enable_memory_data_Reg === Cat(0.U, 1.U, 0.U)) -> io.WBtoEX.alu_result_WBtoEX,
       (forward_enable_memory_data_Reg === Cat(0.U, 0.U, 1.U)) -> alu_result_WBtoEX_Reg,
-      (forward_enable_memory_data_Reg === Cat(1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //TODO: Not sure about this case
+      (forward_enable_memory_data_Reg === Cat(1.U, 1.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX, //Take most recent value
+      (forward_enable_memory_data_Reg === Cat(1.U, 1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX, //Take most recent value
+      (forward_enable_memory_data_Reg === Cat(0.U, 1.U, 1.U)) -> io.WBtoEX.alu_result_WBtoEX, //Take most recent value
+      (forward_enable_memory_data_Reg === Cat(1.U, 0.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //Take most recent value
     )
   )
 
@@ -120,7 +123,10 @@ class EXStage extends Module {
       (forward_enable_rs1_Reg === Cat(1.U, 0.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX,
       (forward_enable_rs1_Reg === Cat(0.U, 1.U, 0.U)) -> io.WBtoEX.alu_result_WBtoEX,
       (forward_enable_rs1_Reg === Cat(0.U, 0.U, 1.U)) -> alu_result_WBtoEX_Reg,
-    (forward_enable_rs1_Reg === Cat(1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //TODO: Not sure about this case
+      (forward_enable_rs1_Reg === Cat(1.U, 1.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX, //Take most recent value
+      (forward_enable_rs1_Reg === Cat(1.U, 1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX, //Take most recent value
+      (forward_enable_rs1_Reg === Cat(0.U, 1.U, 1.U)) -> io.WBtoEX.alu_result_WBtoEX, //Take most recent value
+      (forward_enable_rs1_Reg === Cat(1.U, 0.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //Take most recent value
   ))
 
   ALU.io.alu_operand_2 := MuxCase(
@@ -129,7 +135,10 @@ class EXStage extends Module {
       (forward_enable_rs2_Reg === Cat(1.U, 0.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX,
       (forward_enable_rs2_Reg === Cat(0.U, 1.U, 0.U)) -> io.WBtoEX.alu_result_WBtoEX,
       (forward_enable_rs2_Reg === Cat(0.U, 0.U, 1.U)) -> alu_result_WBtoEX_Reg,
-      (forward_enable_rs2_Reg === Cat(1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //TODO: Not sure about this case
+      (forward_enable_rs2_Reg === Cat(1.U, 1.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX, //Take most recent value
+      (forward_enable_rs2_Reg === Cat(1.U, 1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX, //Take most recent value
+      (forward_enable_rs2_Reg === Cat(0.U, 1.U, 1.U)) -> io.WBtoEX.alu_result_WBtoEX, //Take most recent value
+      (forward_enable_rs2_Reg === Cat(1.U, 0.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX
     )
   )
 
