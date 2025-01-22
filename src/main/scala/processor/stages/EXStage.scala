@@ -25,7 +25,7 @@ class EXStage extends Module {
       val forward_enable_rs1_IFDtoEX = Input(UInt(3.W))
       val forward_enable_rs2_IFDtoEX = Input(UInt(3.W))
       val forward_enable_memory_data_IFDtoEX = Input(UInt(3.W))
-      val forward_choose_data = Input(UInt(2.W))
+      val forward_choose_data_IFDtoEX = Input(UInt(2.W))
     }
     val WBtoEX = new Bundle {
       val regfile_write_data_WBtoEX = Input(UInt(32.W))
@@ -53,7 +53,6 @@ class EXStage extends Module {
       val branch_address_EXtoIFD = Output(UInt(32.W))
       val take_branch_EXtoIFD = Output(Bool())
       val rd_EXtoIFD = Output(UInt(5.W))
-      val opcode_EXtoIFD = Output(UInt(7.W))
     }
 
     val MEMtoEX = new Bundle() {
@@ -84,7 +83,7 @@ class EXStage extends Module {
   val forward_enable_rs1_Reg = RegNext(io.IFDtoEX.forward_enable_rs1_IFDtoEX, 0.U(3.W))
   val forward_enable_rs2_Reg = RegNext(io.IFDtoEX.forward_enable_rs2_IFDtoEX, 0.U(3.W))
   val forward_enable_memory_data_Reg = RegNext(io.IFDtoEX.forward_enable_memory_data_IFDtoEX, 0.U(3.W))
-  val forward_choose_data_Reg = RegNext(io.IFDtoEX.forward_choose_data, 0.U(2.W))
+  val forward_choose_data_Reg = RegNext(io.IFDtoEX.forward_choose_data_IFDtoEX, 0.U(2.W))
   val alu_result_WBtoEX_Reg = RegNext(io.WBtoEX.alu_result_WBtoEX, 0.U)
   val memory_data_MEMtoEX_Reg = RegNext(io.MEMtoEX.memory_data_MEMtoEX, 0.U)
   //Initialize outputs
@@ -164,7 +163,6 @@ class EXStage extends Module {
   ALU.io.alu_operation_select := alu_operation_Reg
   io.EXtoMEM.alu_operation_select_EXtoMEM := alu_operation_Reg
   io.EXtoIFD.rd_EXtoIFD := rdReg
-  io.EXtoIFD.opcode_EXtoIFD := opcodeReg
   io.EXtoMEM.opcode_EXtoMEM := opcodeReg
   // Logic for memory-mapped IO: address in memory or IO
   when(ALU.io.alu_result >= 1024.U /*&& opcodeReg =/= Opcode.lui && opcodeReg =/= Opcode.auipc*/) {  // if requested address is in IO space
