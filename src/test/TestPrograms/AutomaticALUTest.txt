@@ -3,48 +3,15 @@
 addi x1 x0 1
 addi x2 x0 2
 addi x3 x0 -1
-nop
-nop
-nop
 add x4 x1 x2 #x4 should be 3
-nop
-nop
-nop
 sub x4 x1 x2 #x4 should be -1
-nop
-nop
-nop
 sltu x4 x4 x1 #x4 should be 0
-nop
-nop
-nop
 slt x5 x4 x1 #x5 should be 1
 sra x6 x3 x1 #x6 should be -1
 srl x7 x3 x2 #x7 should be 1073741823: b0011_1111_1111_1111_1111_1111_1111_1111
-nop
-nop
-nop
 sll x8 x7 x2 #x8 should be -4
-nop
-nop
-nop
 and x8 x8 x7 #x8 should be 1073741820: b0011_1111_1111_1111_1111_1111_1111_1100
-nop
-nop
-nop
 or  x8 x8 x1 #x8 should be 1073741821: b0011_1111_1111_1111_1111_1111_1111_1101
-nop
-nop
-nop
 addi x9 x0 0x00FF
-nop
-nop
-nop
 xor x9 x9 x8 #x9 should be b0011_1111_1111_1111_1111_1111_0000_0010
-nop
-nop
-nop
 sh x9 1072 x0 #Store b1111_1111_0000_0010 in LED memory mapped io
-
-
-

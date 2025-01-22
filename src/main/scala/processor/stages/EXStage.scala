@@ -25,7 +25,7 @@ class EXStage extends Module {
       val forward_enable_rs1_IFDtoEX = Input(UInt(3.W))
       val forward_enable_rs2_IFDtoEX = Input(UInt(3.W))
       val forward_enable_memory_data_IFDtoEX = Input(UInt(3.W))
-//      val forward_choose_data = Input(UInt(3.W))
+      val forward_choose_data = Input(UInt(2.W))
     }
     val WBtoEX = new Bundle {
       val regfile_write_data_WBtoEX = Input(UInt(32.W))
@@ -58,6 +58,7 @@ class EXStage extends Module {
 
     val MEMtoEX = new Bundle() {
       val alu_result_MEMtoEX = Input(UInt(32.W))
+      val memory_data_MEMtoEX = Input(UInt(32.W))
     }
 
   })
@@ -83,8 +84,9 @@ class EXStage extends Module {
   val forward_enable_rs1_Reg = RegNext(io.IFDtoEX.forward_enable_rs1_IFDtoEX, 0.U(3.W))
   val forward_enable_rs2_Reg = RegNext(io.IFDtoEX.forward_enable_rs2_IFDtoEX, 0.U(3.W))
   val forward_enable_memory_data_Reg = RegNext(io.IFDtoEX.forward_enable_memory_data_IFDtoEX, 0.U(3.W))
-//  val forward_choose_data_Reg = RegNext(io.IFDtoEX.forward_choose_data, 0.U(3.W))
+  val forward_choose_data_Reg = RegNext(io.IFDtoEX.forward_choose_data, 0.U(2.W))
   val alu_result_WBtoEX_Reg = RegNext(io.WBtoEX.alu_result_WBtoEX, 0.U)
+  val memory_data_MEMtoEX_Reg = RegNext(io.MEMtoEX.memory_data_MEMtoEX, 0.U)
   //Initialize outputs
   io.EXtoMEM.alu_result_EXtoMEM := 0.U(32.W)
   io.EXtoMEM.memory_write_data_EXtoMEM := 0.U
@@ -110,7 +112,10 @@ class EXStage extends Module {
       (forward_enable_memory_data_Reg === Cat(1.U, 0.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX,
       (forward_enable_memory_data_Reg === Cat(0.U, 1.U, 0.U)) -> io.WBtoEX.alu_result_WBtoEX,
       (forward_enable_memory_data_Reg === Cat(0.U, 0.U, 1.U)) -> alu_result_WBtoEX_Reg,
-      (forward_enable_memory_data_Reg === Cat(1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //TODO: Not sure about this case
+      (forward_enable_memory_data_Reg === Cat(1.U, 1.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX, //Take most recent value
+      (forward_enable_memory_data_Reg === Cat(1.U, 1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX, //Take most recent value
+      (forward_enable_memory_data_Reg === Cat(0.U, 1.U, 1.U)) -> io.WBtoEX.alu_result_WBtoEX, //Take most recent value
+      (forward_enable_memory_data_Reg === Cat(1.U, 0.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //Take most recent value
     )
   )
 
@@ -118,18 +123,24 @@ class EXStage extends Module {
   ALU.io.alu_operand_1 := MuxCase(RegFile.io.alu_operand_1,
     Array(
       (forward_enable_rs1_Reg === Cat(1.U, 0.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX,
-      (forward_enable_rs1_Reg === Cat(0.U, 1.U, 0.U)) -> io.WBtoEX.alu_result_WBtoEX,
-      (forward_enable_rs1_Reg === Cat(0.U, 0.U, 1.U)) -> alu_result_WBtoEX_Reg,
-    (forward_enable_rs1_Reg === Cat(1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //TODO: Not sure about this case
+      (forward_enable_rs1_Reg === Cat(0.U, 1.U, 0.U)) -> Mux(forward_choose_data_Reg(1) === 1.U,io.MEMtoEX.memory_data_MEMtoEX, io.WBtoEX.alu_result_WBtoEX),
+      (forward_enable_rs1_Reg === Cat(0.U, 0.U, 1.U)) -> Mux(forward_choose_data_Reg(0) === 1.U ,memory_data_MEMtoEX_Reg ,alu_result_WBtoEX_Reg),
+      (forward_enable_rs1_Reg === Cat(1.U, 1.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX, //Take most recent value
+      (forward_enable_rs1_Reg === Cat(1.U, 1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX, //Take most recent value
+      (forward_enable_rs1_Reg === Cat(0.U, 1.U, 1.U)) -> Mux(forward_choose_data_Reg(1) === 1.U,io.MEMtoEX.memory_data_MEMtoEX ,io.WBtoEX.alu_result_WBtoEX), //Take most recent value
+      (forward_enable_rs1_Reg === Cat(1.U, 0.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //Take most recent value
   ))
 
   ALU.io.alu_operand_2 := MuxCase(
     Mux(alu_op2mux_Reg === 1.U, immediateReg, RegFile.io.reg_data_2),
     Array(
       (forward_enable_rs2_Reg === Cat(1.U, 0.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX,
-      (forward_enable_rs2_Reg === Cat(0.U, 1.U, 0.U)) -> io.WBtoEX.alu_result_WBtoEX,
-      (forward_enable_rs2_Reg === Cat(0.U, 0.U, 1.U)) -> alu_result_WBtoEX_Reg,
-      (forward_enable_rs2_Reg === Cat(1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //TODO: Not sure about this case
+      (forward_enable_rs2_Reg === Cat(0.U, 1.U, 0.U)) -> Mux(forward_choose_data_Reg(1) === 1.U,io.MEMtoEX.memory_data_MEMtoEX, io.WBtoEX.alu_result_WBtoEX),
+      (forward_enable_rs2_Reg === Cat(0.U, 0.U, 1.U)) -> Mux(forward_choose_data_Reg(0) === 1.U ,memory_data_MEMtoEX_Reg ,alu_result_WBtoEX_Reg),
+      (forward_enable_rs2_Reg === Cat(1.U, 1.U, 0.U)) -> io.MEMtoEX.alu_result_MEMtoEX, //Take most recent value
+      (forward_enable_rs2_Reg === Cat(1.U, 1.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX, //Take most recent value
+      (forward_enable_rs2_Reg === Cat(0.U, 1.U, 1.U)) -> Mux(forward_choose_data_Reg(1) === 1.U,io.MEMtoEX.memory_data_MEMtoEX ,io.WBtoEX.alu_result_WBtoEX), //Take most recent value
+      (forward_enable_rs2_Reg === Cat(1.U, 0.U, 1.U)) -> io.MEMtoEX.alu_result_MEMtoEX //Take most recent value
     )
   )
 
