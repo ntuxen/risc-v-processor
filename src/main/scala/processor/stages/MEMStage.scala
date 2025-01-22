@@ -43,6 +43,7 @@ class MEMStage(clock_freq: Int) extends Module {
     }
     val MEMtoEX = new Bundle() {
       val alu_result_MEMtoEX = Output(UInt(32.W))
+      val memory_data_MEMtoEX = Output(UInt(32.W))
     }
     val MEMtoIFD = new Bundle{
       val rd_MEMtoIFD = Output(UInt(5.W))
@@ -89,6 +90,7 @@ class MEMStage(clock_freq: Int) extends Module {
   io.MEMtoWB.data_memory_read_MEMtoWB := dataMem.io.dataOut // TODO: is this correct?
 
   io.MEMtoEX.alu_result_MEMtoEX := RegNext(io.EXtoMEM.alu_result_EXtoMEM)
+  io.MEMtoEX.memory_data_MEMtoEX := dataMem.io.dataOut
   io.MEMtoIFD.rd_MEMtoIFD := RegNext(io.EXtoMEM.rd_EXtoMEM)
   io.MEMtoIFD.opcode_MEMtoIFD := RegNext(io.EXtoMEM.opcode_EXtoMEM)
   io.MEMtoWB.opcode_MEMtoWB := RegNext(io.EXtoMEM.opcode_EXtoMEM)
