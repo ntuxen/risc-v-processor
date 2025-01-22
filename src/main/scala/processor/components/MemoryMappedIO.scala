@@ -9,8 +9,8 @@ object IO_Addresses {
   val uart_status = "h04".U
   val display     = "h10".U
   val LEDs        = "h30".U
-  val LEDs_pwm    = "h31".U
-  val switches    = "h40".U
+  val LEDs_pwm    = "h40".U
+  val switches    = "h90".U
 }
 
 class MemoryMappedIO(
@@ -48,7 +48,7 @@ class MemoryMappedIO(
 
   //------ Patching/IO logic -------//
   // LEDs
-  val is_led = address_io === IO_Addresses.LEDs || address_io === IO_Addresses.LEDs_pwm
+  val is_led = address_io === IO_Addresses.LEDs || (IO_Addresses.LEDs_pwm <= address_io && address_io < (IO_Addresses.LEDs_pwm + 16.U(8.W)))
   leds.io.port.write := io.writeEnable && is_led
   leds.io.port.read := io.readEnable && is_led
   leds.io.port.addr := address_io
@@ -71,7 +71,7 @@ class MemoryMappedIO(
   uart.io.pins.rx := 0.U
 
   // Display
-  val is_display = (IO_Addresses.display <= address_io) && (address_io <= (IO_Addresses.display + 16.U(8.W))) // Evil error happened here: Can You See Spot The Fix?
+  val is_display = (IO_Addresses.display <= address_io) && (address_io < (IO_Addresses.display + 16.U(8.W))) // Evil error happened here: Can You See Spot The Fix?
   display.io.port.write := io.writeEnable && is_display
   display.io.port.read := io.readEnable && is_display
   display.io.port.addr := address_io // Address input
