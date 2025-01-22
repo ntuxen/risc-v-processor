@@ -1,17 +1,20 @@
 [
   {
+    "class":"firrtl.transforms.DedupedResult",
+    "original":"~ProcessorTopLevel|Queue",
+    "index":-1.0
+  },
+  {
+    "class":"firrtl.transforms.DedupedResult",
+    "original":"~ProcessorTopLevel|Queue_1",
+    "index":-1.0
+  },
+  {
     "class":"firrtl.EmitCircuitAnnotation",
     "emitter":"firrtl.VerilogEmitter"
   },
   {
     "class":"firrtl.transforms.BlackBoxTargetDirAnno",
     "targetDir":"."
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~ProcessorTopLevel|ProcessorTopLevel>io_LEDs",
-    "sources":[
-      "~ProcessorTopLevel|ProcessorTopLevel>io_sw"
-    ]
   }
 ]

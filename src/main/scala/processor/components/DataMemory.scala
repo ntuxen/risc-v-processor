@@ -26,10 +26,10 @@ class DataMemory(val size: Int, val addrWidth: Int) extends Module {
   val mem3 = SyncReadMem(size >> 2,UInt((width>>2).W))
 
   // Prepare load instructions
-  val load0 = RegNext(mem0.read(commonAddr), 0.U)
-  val load1 = RegNext(mem1.read(commonAddr), 0.U)
-  val load2 = RegNext(mem2.read(commonAddr), 0.U)
-  val load3 = RegNext(mem3.read(commonAddr), 0.U)
+  val load0 = RegNext(mem0.read(commonAddr, !io.enableWrite), 0.U)
+  val load1 = RegNext(mem1.read(commonAddr, !io.enableWrite), 0.U)
+  val load2 = RegNext(mem2.read(commonAddr, !io.enableWrite), 0.U)
+  val load3 = RegNext(mem3.read(commonAddr, !io.enableWrite), 0.U)
 
   // --------- READ/LOAD INSTRUCTIONS --------- //
   switch(delayed_alu_operation_select){
