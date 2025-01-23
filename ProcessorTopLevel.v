@@ -8,36 +8,36 @@ module InstrMemory(
   reg [31:0] _RAND_0;
 `endif // RANDOMIZE_REG_INIT
   reg [31:0] io_dataOut_REG; // @[InstrMemory.scala 43:24]
-  wire [31:0] _GEN_1 = 8'h1 == io_addr[7:0] ? 32'h5200293 : 32'h41000513; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_2 = 8'h2 == io_addr[7:0] ? 32'h4900313 : _GEN_1; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_3 = 8'h3 == io_addr[7:0] ? 32'h5300393 : _GEN_2; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_4 = 8'h4 == io_addr[7:0] ? 32'h4300e13 : _GEN_3; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_5 = 8'h5 == io_addr[7:0] ? 32'h5900e93 : _GEN_4; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_6 = 8'h6 == io_addr[7:0] ? 32'h7700f13 : _GEN_5; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_7 = 8'h7 == io_addr[7:0] ? 32'h550023 : _GEN_6; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_8 = 8'h8 == io_addr[7:0] ? 32'h6500a3 : _GEN_7; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_9 = 8'h9 == io_addr[7:0] ? 32'h750123 : _GEN_8; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_10 = 8'ha == io_addr[7:0] ? 32'h1c501a3 : _GEN_9; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_11 = 8'hb == io_addr[7:0] ? 32'h1d50223 : _GEN_10; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_12 = 8'hc == io_addr[7:0] ? 32'h1e502a3 : _GEN_11; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_13 = 8'hd == io_addr[7:0] ? 32'h4200293 : _GEN_12; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_14 = 8'he == io_addr[7:0] ? 32'h5500313 : _GEN_13; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_15 = 8'hf == io_addr[7:0] ? 32'h5300393 : _GEN_14; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_16 = 8'h10 == io_addr[7:0] ? 32'h4900e13 : _GEN_15; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_17 = 8'h11 == io_addr[7:0] ? 32'h4e00e93 : _GEN_16; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_18 = 8'h12 == io_addr[7:0] ? 32'h4500f13 : _GEN_17; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_19 = 8'h13 == io_addr[7:0] ? 32'h550323 : _GEN_18; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_20 = 8'h14 == io_addr[7:0] ? 32'h6503a3 : _GEN_19; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_21 = 8'h15 == io_addr[7:0] ? 32'h750423 : _GEN_20; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_22 = 8'h16 == io_addr[7:0] ? 32'h1c504a3 : _GEN_21; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_23 = 8'h17 == io_addr[7:0] ? 32'h1d50523 : _GEN_22; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_24 = 8'h18 == io_addr[7:0] ? 32'h1e505a3 : _GEN_23; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_25 = 8'h19 == io_addr[7:0] ? 32'h5300293 : _GEN_24; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_26 = 8'h1a == io_addr[7:0] ? 32'h5300313 : _GEN_25; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_1 = 8'h1 == io_addr[7:0] ? 32'h593 : 32'h5f5e537; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_2 = 8'h2 == io_addr[7:0] ? 32'h93 : _GEN_1; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_3 = 8'h3 == io_addr[7:0] ? 32'h100113 : _GEN_2; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_4 = 8'h4 == io_addr[7:0] ? 32'h2081b3 : _GEN_3; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_5 = 8'h5 == io_addr[7:0] ? 32'h42301823 : _GEN_4; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_6 = 8'h6 == io_addr[7:0] ? 32'h2000a6f : _GEN_5; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_7 = 8'h7 == io_addr[7:0] ? 32'h3100b3 : _GEN_6; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_8 = 8'h8 == io_addr[7:0] ? 32'h42101823 : _GEN_7; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_9 = 8'h9 == io_addr[7:0] ? 32'h1400a6f : _GEN_8; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_10 = 8'ha == io_addr[7:0] ? 32'h308133 : _GEN_9; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_11 = 8'hb == io_addr[7:0] ? 32'h42201823 : _GEN_10; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_12 = 8'hc == io_addr[7:0] ? 32'h800a6f : _GEN_11; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_13 = 8'hd == io_addr[7:0] ? 32'hfc000ee3 : _GEN_12; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_14 = 8'he == io_addr[7:0] ? 32'h158593 : _GEN_13; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_15 = 8'hf == io_addr[7:0] ? 32'hfea5cee3 : _GEN_14; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_16 = 8'h10 == io_addr[7:0] ? 32'h593 : _GEN_15; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_17 = 8'h11 == io_addr[7:0] ? 32'ha0a67 : _GEN_16; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_18 = 8'h12 == io_addr[7:0] ? 32'h13 : _GEN_17; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_19 = 8'h13 == io_addr[7:0] ? 32'h13 : _GEN_18; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_20 = 8'h14 == io_addr[7:0] ? 32'h13 : _GEN_19; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_21 = 8'h15 == io_addr[7:0] ? 32'h13 : _GEN_20; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_22 = 8'h16 == io_addr[7:0] ? 32'h13 : _GEN_21; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_23 = 8'h17 == io_addr[7:0] ? 32'h13 : _GEN_22; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_24 = 8'h18 == io_addr[7:0] ? 32'h13 : _GEN_23; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_25 = 8'h19 == io_addr[7:0] ? 32'h13 : _GEN_24; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_26 = 8'h1a == io_addr[7:0] ? 32'h13 : _GEN_25; // @[InstrMemory.scala 43:{24,24}]
   wire [31:0] _GEN_27 = 8'h1b == io_addr[7:0] ? 32'h13 : _GEN_26; // @[InstrMemory.scala 43:{24,24}]
   wire [31:0] _GEN_28 = 8'h1c == io_addr[7:0] ? 32'h13 : _GEN_27; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_29 = 8'h1d == io_addr[7:0] ? 32'h550623 : _GEN_28; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_30 = 8'h1e == io_addr[7:0] ? 32'h6506a3 : _GEN_29; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_29 = 8'h1d == io_addr[7:0] ? 32'h13 : _GEN_28; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_30 = 8'h1e == io_addr[7:0] ? 32'h13 : _GEN_29; // @[InstrMemory.scala 43:{24,24}]
   wire [31:0] _GEN_31 = 8'h1f == io_addr[7:0] ? 32'h13 : _GEN_30; // @[InstrMemory.scala 43:{24,24}]
   wire [31:0] _GEN_32 = 8'h20 == io_addr[7:0] ? 32'h13 : _GEN_31; // @[InstrMemory.scala 43:{24,24}]
   wire [31:0] _GEN_33 = 8'h21 == io_addr[7:0] ? 32'h13 : _GEN_32; // @[InstrMemory.scala 43:{24,24}]
@@ -459,7 +459,6 @@ module IFDStage(
   input         io_EXtoIFD_take_branch_EXtoIFD,
   input  [31:0] io_EXtoIFD_branch_address_EXtoIFD,
   input  [4:0]  io_EXtoIFD_rd_EXtoIFD,
-  input  [6:0]  io_EXtoIFD_opcode_EXtoIFD,
   input  [4:0]  io_MEMtoIFD_rd_MEMtoIFD,
   input  [6:0]  io_MEMtoIFD_opcode_MEMtoIFD,
   output [4:0]  io_decoded_instruction_IFDtoEX_rs1,
@@ -476,6 +475,7 @@ module IFDStage(
   output [2:0]  io_IFDtoEX_forward_enable_rs1_IFDtoEX,
   output [2:0]  io_IFDtoEX_forward_enable_rs2_IFDtoEX,
   output [2:0]  io_IFDtoEX_forward_enable_memory_data_IFDtoEX,
+  output [1:0]  io_IFDtoEX_forward_choose_data_IFDtoEX,
   input  [4:0]  io_WBtoIFD_rd_WBtoIFD,
   input  [6:0]  io_WBtoIFD_opcode_WBtoIFD
 );
@@ -483,73 +483,78 @@ module IFDStage(
   reg [31:0] _RAND_0;
   reg [31:0] _RAND_1;
 `endif // RANDOMIZE_REG_INIT
-  wire  instrMem_clock; // @[IFDStage.scala 58:24]
-  wire  instrMem_reset; // @[IFDStage.scala 58:24]
-  wire [9:0] instrMem_io_addr; // @[IFDStage.scala 58:24]
-  wire [31:0] instrMem_io_dataOut; // @[IFDStage.scala 58:24]
-  wire [31:0] instructionDecoder_io_instruction; // @[IFDStage.scala 62:34]
-  wire [4:0] instructionDecoder_io_decoded_instruction_IFDtoEX_rs1; // @[IFDStage.scala 62:34]
-  wire [4:0] instructionDecoder_io_decoded_instruction_IFDtoEX_rs2; // @[IFDStage.scala 62:34]
-  wire [4:0] instructionDecoder_io_decoded_instruction_IFDtoEX_rd; // @[IFDStage.scala 62:34]
-  wire [6:0] instructionDecoder_io_decoded_instruction_IFDtoEX_opcode; // @[IFDStage.scala 62:34]
-  wire [2:0] instructionDecoder_io_funct3; // @[IFDStage.scala 62:34]
-  wire [6:0] instructionDecoder_io_funct7; // @[IFDStage.scala 62:34]
-  wire [2:0] instructionDecoder_io_instrType; // @[IFDStage.scala 62:34]
-  wire [2:0] immediateGenerator_io_instrType; // @[IFDStage.scala 66:34]
-  wire [31:0] immediateGenerator_io_instruction; // @[IFDStage.scala 66:34]
-  wire [31:0] immediateGenerator_io_immediate; // @[IFDStage.scala 66:34]
-  wire [2:0] controlUnit_io_funct3; // @[IFDStage.scala 71:27]
-  wire [6:0] controlUnit_io_funct7; // @[IFDStage.scala 71:27]
-  wire [6:0] controlUnit_io_opcode; // @[IFDStage.scala 71:27]
-  wire  controlUnit_io_take_branch; // @[IFDStage.scala 71:27]
-  wire  controlUnit_io_alu_op2mux_select; // @[IFDStage.scala 71:27]
-  wire [7:0] controlUnit_io_alu_operation_select; // @[IFDStage.scala 71:27]
-  wire  controlUnit_io_register_write_enable; // @[IFDStage.scala 71:27]
-  wire  controlUnit_io_write_back_select; // @[IFDStage.scala 71:27]
-  wire  controlUnit_io_write_memory_enable; // @[IFDStage.scala 71:27]
-  reg [31:0] PC; // @[IFDStage.scala 53:19]
-  wire [31:0] _NextInstrAdd_T_1 = PC + 32'h4; // @[IFDStage.scala 54:108]
-  wire [31:0] NextInstrAdd = io_EXtoIFD_take_branch_EXtoIFD ? io_EXtoIFD_branch_address_EXtoIFD : _NextInstrAdd_T_1; // @[IFDStage.scala 54:37]
-  wire [31:0] _instrMem_io_addr_T = {{2'd0}, NextInstrAdd[31:2]}; // @[IFDStage.scala 59:36]
-  reg [31:0] io_IFDtoEX_pc_IFDtoEX_REG; // @[IFDStage.scala 84:35]
-  wire  _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_1 = io_decoded_instruction_IFDtoEX_rs1 != 5'h0; // @[IFDStage.scala 99:44]
-  wire  _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_4 = io_EXtoIFD_rd_EXtoIFD == io_decoded_instruction_IFDtoEX_rs1 &
-    io_decoded_instruction_IFDtoEX_rs1 != 5'h0 & io_EXtoIFD_opcode_EXtoIFD != 7'h3; // @[IFDStage.scala 99:52]
-  wire  _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_9 = io_MEMtoIFD_rd_MEMtoIFD == io_decoded_instruction_IFDtoEX_rs1 &
-    _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_1 & io_MEMtoIFD_opcode_MEMtoIFD != 7'h3; // @[IFDStage.scala 100:54]
-  wire  _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_14 = io_WBtoIFD_rd_WBtoIFD == io_decoded_instruction_IFDtoEX_rs1 &
-    _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_1 & io_WBtoIFD_opcode_WBtoIFD != 7'h3; // @[IFDStage.scala 101:52]
-  wire [1:0] io_IFDtoEX_forward_enable_rs1_IFDtoEX_hi = {_io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_4,
-    _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_9}; // @[Cat.scala 33:92]
-  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_1 = io_decoded_instruction_IFDtoEX_rs2 != 5'h0; // @[IFDStage.scala 105:44]
-  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_2 = io_EXtoIFD_rd_EXtoIFD == io_decoded_instruction_IFDtoEX_rs2 &
-    io_decoded_instruction_IFDtoEX_rs2 != 5'h0; // @[IFDStage.scala 105:37]
-  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_3 = io_decoded_instruction_IFDtoEX_opcode != 7'h3; // @[IFDStage.scala 105:62]
-  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_5 = io_decoded_instruction_IFDtoEX_opcode != 7'h23; // @[IFDStage.scala 105:88]
-  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_6 = io_EXtoIFD_rd_EXtoIFD == io_decoded_instruction_IFDtoEX_rs2 &
-    io_decoded_instruction_IFDtoEX_rs2 != 5'h0 & io_decoded_instruction_IFDtoEX_opcode != 7'h3 &
-    io_decoded_instruction_IFDtoEX_opcode != 7'h23; // @[IFDStage.scala 105:78]
-  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_9 = io_MEMtoIFD_rd_MEMtoIFD == io_decoded_instruction_IFDtoEX_rs2 &
-    _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_1; // @[IFDStage.scala 106:39]
-  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_13 = io_MEMtoIFD_rd_MEMtoIFD == io_decoded_instruction_IFDtoEX_rs2 &
-    _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_1 & _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_3 &
-    _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_5; // @[IFDStage.scala 106:80]
-  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_16 = io_WBtoIFD_rd_WBtoIFD == io_decoded_instruction_IFDtoEX_rs2 &
-    _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_1; // @[IFDStage.scala 107:37]
-  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_20 = io_WBtoIFD_rd_WBtoIFD == io_decoded_instruction_IFDtoEX_rs2 &
-    _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_1 & _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_3 &
-    _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_5; // @[IFDStage.scala 107:78]
+  wire  instrMem_clock; // @[IFDStage.scala 57:24]
+  wire  instrMem_reset; // @[IFDStage.scala 57:24]
+  wire [9:0] instrMem_io_addr; // @[IFDStage.scala 57:24]
+  wire [31:0] instrMem_io_dataOut; // @[IFDStage.scala 57:24]
+  wire [31:0] instructionDecoder_io_instruction; // @[IFDStage.scala 61:34]
+  wire [4:0] instructionDecoder_io_decoded_instruction_IFDtoEX_rs1; // @[IFDStage.scala 61:34]
+  wire [4:0] instructionDecoder_io_decoded_instruction_IFDtoEX_rs2; // @[IFDStage.scala 61:34]
+  wire [4:0] instructionDecoder_io_decoded_instruction_IFDtoEX_rd; // @[IFDStage.scala 61:34]
+  wire [6:0] instructionDecoder_io_decoded_instruction_IFDtoEX_opcode; // @[IFDStage.scala 61:34]
+  wire [2:0] instructionDecoder_io_funct3; // @[IFDStage.scala 61:34]
+  wire [6:0] instructionDecoder_io_funct7; // @[IFDStage.scala 61:34]
+  wire [2:0] instructionDecoder_io_instrType; // @[IFDStage.scala 61:34]
+  wire [2:0] immediateGenerator_io_instrType; // @[IFDStage.scala 65:34]
+  wire [31:0] immediateGenerator_io_instruction; // @[IFDStage.scala 65:34]
+  wire [31:0] immediateGenerator_io_immediate; // @[IFDStage.scala 65:34]
+  wire [2:0] controlUnit_io_funct3; // @[IFDStage.scala 70:27]
+  wire [6:0] controlUnit_io_funct7; // @[IFDStage.scala 70:27]
+  wire [6:0] controlUnit_io_opcode; // @[IFDStage.scala 70:27]
+  wire  controlUnit_io_take_branch; // @[IFDStage.scala 70:27]
+  wire  controlUnit_io_alu_op2mux_select; // @[IFDStage.scala 70:27]
+  wire [7:0] controlUnit_io_alu_operation_select; // @[IFDStage.scala 70:27]
+  wire  controlUnit_io_register_write_enable; // @[IFDStage.scala 70:27]
+  wire  controlUnit_io_write_back_select; // @[IFDStage.scala 70:27]
+  wire  controlUnit_io_write_memory_enable; // @[IFDStage.scala 70:27]
+  reg [31:0] PC; // @[IFDStage.scala 52:19]
+  wire [31:0] _NextInstrAdd_T_1 = PC + 32'h4; // @[IFDStage.scala 53:108]
+  wire [31:0] NextInstrAdd = io_EXtoIFD_take_branch_EXtoIFD ? io_EXtoIFD_branch_address_EXtoIFD : _NextInstrAdd_T_1; // @[IFDStage.scala 53:37]
+  wire [31:0] _instrMem_io_addr_T = {{2'd0}, NextInstrAdd[31:2]}; // @[IFDStage.scala 58:36]
+  reg [31:0] io_IFDtoEX_pc_IFDtoEX_REG; // @[IFDStage.scala 83:35]
+  wire  _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_1 = instructionDecoder_io_decoded_instruction_IFDtoEX_rs1 != 5'h0; // @[IFDStage.scala 103:44]
+  wire  _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_2 = io_EXtoIFD_rd_EXtoIFD ==
+    instructionDecoder_io_decoded_instruction_IFDtoEX_rs1 & instructionDecoder_io_decoded_instruction_IFDtoEX_rs1 != 5'h0
+    ; // @[IFDStage.scala 103:37]
+  wire  _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_5 = io_MEMtoIFD_rd_MEMtoIFD ==
+    instructionDecoder_io_decoded_instruction_IFDtoEX_rs1 & _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_1; // @[IFDStage.scala 104:39]
+  wire  _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_8 = io_WBtoIFD_rd_WBtoIFD ==
+    instructionDecoder_io_decoded_instruction_IFDtoEX_rs1 & _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_1; // @[IFDStage.scala 105:37]
+  wire [1:0] io_IFDtoEX_forward_enable_rs1_IFDtoEX_hi = {_io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_2,
+    _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_5}; // @[Cat.scala 33:92]
+  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_1 = instructionDecoder_io_decoded_instruction_IFDtoEX_rs2 != 5'h0; // @[IFDStage.scala 109:44]
+  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_2 = io_EXtoIFD_rd_EXtoIFD ==
+    instructionDecoder_io_decoded_instruction_IFDtoEX_rs2 & instructionDecoder_io_decoded_instruction_IFDtoEX_rs2 != 5'h0
+    ; // @[IFDStage.scala 109:37]
+  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_3 = instructionDecoder_io_decoded_instruction_IFDtoEX_opcode != 7'h3; // @[IFDStage.scala 109:62]
+  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_5 = instructionDecoder_io_decoded_instruction_IFDtoEX_opcode != 7'h23; // @[IFDStage.scala 109:88]
+  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_6 = io_EXtoIFD_rd_EXtoIFD ==
+    instructionDecoder_io_decoded_instruction_IFDtoEX_rs2 & instructionDecoder_io_decoded_instruction_IFDtoEX_rs2 != 5'h0
+     & instructionDecoder_io_decoded_instruction_IFDtoEX_opcode != 7'h3 &
+    instructionDecoder_io_decoded_instruction_IFDtoEX_opcode != 7'h23; // @[IFDStage.scala 109:78]
+  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_9 = io_MEMtoIFD_rd_MEMtoIFD ==
+    instructionDecoder_io_decoded_instruction_IFDtoEX_rs2 & _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_1; // @[IFDStage.scala 110:39]
+  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_13 = io_MEMtoIFD_rd_MEMtoIFD ==
+    instructionDecoder_io_decoded_instruction_IFDtoEX_rs2 & _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_1 &
+    _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_3 & _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_5; // @[IFDStage.scala 110:80]
+  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_16 = io_WBtoIFD_rd_WBtoIFD ==
+    instructionDecoder_io_decoded_instruction_IFDtoEX_rs2 & _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_1; // @[IFDStage.scala 111:37]
+  wire  _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_20 = io_WBtoIFD_rd_WBtoIFD ==
+    instructionDecoder_io_decoded_instruction_IFDtoEX_rs2 & _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_1 &
+    _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_3 & _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_5; // @[IFDStage.scala 111:78]
   wire [1:0] io_IFDtoEX_forward_enable_rs2_IFDtoEX_hi = {_io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_6,
     _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_13}; // @[Cat.scala 33:92]
   wire [1:0] io_IFDtoEX_forward_enable_memory_data_IFDtoEX_hi = {_io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_2,
     _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_9}; // @[Cat.scala 33:92]
-  InstrMemory instrMem ( // @[IFDStage.scala 58:24]
+  wire  _io_IFDtoEX_forward_choose_data_IFDtoEX_T = io_MEMtoIFD_opcode_MEMtoIFD == 7'h3; // @[IFDStage.scala 120:34]
+  wire  _io_IFDtoEX_forward_choose_data_IFDtoEX_T_1 = io_WBtoIFD_opcode_WBtoIFD == 7'h3; // @[IFDStage.scala 121:32]
+  InstrMemory instrMem ( // @[IFDStage.scala 57:24]
     .clock(instrMem_clock),
     .reset(instrMem_reset),
     .io_addr(instrMem_io_addr),
     .io_dataOut(instrMem_io_dataOut)
   );
-  InstructionDecoder instructionDecoder ( // @[IFDStage.scala 62:34]
+  InstructionDecoder instructionDecoder ( // @[IFDStage.scala 61:34]
     .io_instruction(instructionDecoder_io_instruction),
     .io_decoded_instruction_IFDtoEX_rs1(instructionDecoder_io_decoded_instruction_IFDtoEX_rs1),
     .io_decoded_instruction_IFDtoEX_rs2(instructionDecoder_io_decoded_instruction_IFDtoEX_rs2),
@@ -559,12 +564,12 @@ module IFDStage(
     .io_funct7(instructionDecoder_io_funct7),
     .io_instrType(instructionDecoder_io_instrType)
   );
-  ImmediateGenerator immediateGenerator ( // @[IFDStage.scala 66:34]
+  ImmediateGenerator immediateGenerator ( // @[IFDStage.scala 65:34]
     .io_instrType(immediateGenerator_io_instrType),
     .io_instruction(immediateGenerator_io_instruction),
     .io_immediate(immediateGenerator_io_immediate)
   );
-  ControlUnit controlUnit ( // @[IFDStage.scala 71:27]
+  ControlUnit controlUnit ( // @[IFDStage.scala 70:27]
     .io_funct3(controlUnit_io_funct3),
     .io_funct7(controlUnit_io_funct7),
     .io_opcode(controlUnit_io_opcode),
@@ -575,42 +580,44 @@ module IFDStage(
     .io_write_back_select(controlUnit_io_write_back_select),
     .io_write_memory_enable(controlUnit_io_write_memory_enable)
   );
-  assign io_decoded_instruction_IFDtoEX_rs1 = instructionDecoder_io_decoded_instruction_IFDtoEX_rs1; // @[IFDStage.scala 88:34]
-  assign io_decoded_instruction_IFDtoEX_rs2 = instructionDecoder_io_decoded_instruction_IFDtoEX_rs2; // @[IFDStage.scala 88:34]
-  assign io_decoded_instruction_IFDtoEX_rd = instructionDecoder_io_decoded_instruction_IFDtoEX_rd; // @[IFDStage.scala 88:34]
-  assign io_decoded_instruction_IFDtoEX_opcode = instructionDecoder_io_decoded_instruction_IFDtoEX_opcode; // @[IFDStage.scala 88:34]
-  assign io_IFDtoEX_pc_IFDtoEX = io_IFDtoEX_pc_IFDtoEX_REG; // @[IFDStage.scala 84:25]
-  assign io_IFDtoEX_immediate_IFDtoEX = immediateGenerator_io_immediate; // @[IFDStage.scala 90:32]
-  assign io_IFDtoEX_alu_op2mux_select_IFDtoEX = controlUnit_io_alu_op2mux_select; // @[IFDStage.scala 79:40]
-  assign io_IFDtoEX_alu_operation_select_IFDtoEX = controlUnit_io_alu_operation_select; // @[IFDStage.scala 78:43]
-  assign io_IFDtoEX_register_write_enable_IFDtoEX = controlUnit_io_register_write_enable; // @[IFDStage.scala 81:44]
-  assign io_IFDtoEX_write_back_select_IFDtoEX = controlUnit_io_write_back_select; // @[IFDStage.scala 76:40]
-  assign io_IFDtoEX_write_memory_enable_IFDtoEX = controlUnit_io_write_memory_enable; // @[IFDStage.scala 77:42]
+  assign io_decoded_instruction_IFDtoEX_rs1 = instructionDecoder_io_decoded_instruction_IFDtoEX_rs1; // @[IFDStage.scala 87:34]
+  assign io_decoded_instruction_IFDtoEX_rs2 = instructionDecoder_io_decoded_instruction_IFDtoEX_rs2; // @[IFDStage.scala 87:34]
+  assign io_decoded_instruction_IFDtoEX_rd = instructionDecoder_io_decoded_instruction_IFDtoEX_rd; // @[IFDStage.scala 87:34]
+  assign io_decoded_instruction_IFDtoEX_opcode = instructionDecoder_io_decoded_instruction_IFDtoEX_opcode; // @[IFDStage.scala 87:34]
+  assign io_IFDtoEX_pc_IFDtoEX = io_IFDtoEX_pc_IFDtoEX_REG; // @[IFDStage.scala 83:25]
+  assign io_IFDtoEX_immediate_IFDtoEX = immediateGenerator_io_immediate; // @[IFDStage.scala 89:32]
+  assign io_IFDtoEX_alu_op2mux_select_IFDtoEX = controlUnit_io_alu_op2mux_select; // @[IFDStage.scala 78:40]
+  assign io_IFDtoEX_alu_operation_select_IFDtoEX = controlUnit_io_alu_operation_select; // @[IFDStage.scala 77:43]
+  assign io_IFDtoEX_register_write_enable_IFDtoEX = controlUnit_io_register_write_enable; // @[IFDStage.scala 80:44]
+  assign io_IFDtoEX_write_back_select_IFDtoEX = controlUnit_io_write_back_select; // @[IFDStage.scala 75:40]
+  assign io_IFDtoEX_write_memory_enable_IFDtoEX = controlUnit_io_write_memory_enable; // @[IFDStage.scala 76:42]
   assign io_IFDtoEX_forward_enable_rs1_IFDtoEX = {io_IFDtoEX_forward_enable_rs1_IFDtoEX_hi,
-    _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_14}; // @[Cat.scala 33:92]
+    _io_IFDtoEX_forward_enable_rs1_IFDtoEX_T_8}; // @[Cat.scala 33:92]
   assign io_IFDtoEX_forward_enable_rs2_IFDtoEX = {io_IFDtoEX_forward_enable_rs2_IFDtoEX_hi,
     _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_20}; // @[Cat.scala 33:92]
   assign io_IFDtoEX_forward_enable_memory_data_IFDtoEX = {io_IFDtoEX_forward_enable_memory_data_IFDtoEX_hi,
     _io_IFDtoEX_forward_enable_rs2_IFDtoEX_T_16}; // @[Cat.scala 33:92]
+  assign io_IFDtoEX_forward_choose_data_IFDtoEX = {_io_IFDtoEX_forward_choose_data_IFDtoEX_T,
+    _io_IFDtoEX_forward_choose_data_IFDtoEX_T_1}; // @[Cat.scala 33:92]
   assign instrMem_clock = clock;
   assign instrMem_reset = reset;
-  assign instrMem_io_addr = _instrMem_io_addr_T[9:0]; // @[IFDStage.scala 59:20]
-  assign instructionDecoder_io_instruction = instrMem_io_dataOut; // @[IFDStage.scala 63:37]
-  assign immediateGenerator_io_instrType = instructionDecoder_io_instrType; // @[IFDStage.scala 68:35]
-  assign immediateGenerator_io_instruction = instrMem_io_dataOut; // @[IFDStage.scala 67:37]
-  assign controlUnit_io_funct3 = instructionDecoder_io_funct3; // @[IFDStage.scala 72:25]
-  assign controlUnit_io_funct7 = instructionDecoder_io_funct7; // @[IFDStage.scala 73:25]
-  assign controlUnit_io_opcode = instructionDecoder_io_decoded_instruction_IFDtoEX_opcode; // @[IFDStage.scala 74:25]
-  assign controlUnit_io_take_branch = io_EXtoIFD_take_branch_EXtoIFD; // @[IFDStage.scala 75:30]
+  assign instrMem_io_addr = _instrMem_io_addr_T[9:0]; // @[IFDStage.scala 58:20]
+  assign instructionDecoder_io_instruction = instrMem_io_dataOut; // @[IFDStage.scala 62:37]
+  assign immediateGenerator_io_instrType = instructionDecoder_io_instrType; // @[IFDStage.scala 67:35]
+  assign immediateGenerator_io_instruction = instrMem_io_dataOut; // @[IFDStage.scala 66:37]
+  assign controlUnit_io_funct3 = instructionDecoder_io_funct3; // @[IFDStage.scala 71:25]
+  assign controlUnit_io_funct7 = instructionDecoder_io_funct7; // @[IFDStage.scala 72:25]
+  assign controlUnit_io_opcode = instructionDecoder_io_decoded_instruction_IFDtoEX_opcode; // @[IFDStage.scala 73:25]
+  assign controlUnit_io_take_branch = io_EXtoIFD_take_branch_EXtoIFD; // @[IFDStage.scala 74:30]
   always @(posedge clock) begin
-    if (reset) begin // @[IFDStage.scala 53:19]
-      PC <= 32'hfffffffc; // @[IFDStage.scala 53:19]
-    end else if (io_EXtoIFD_take_branch_EXtoIFD) begin // @[IFDStage.scala 54:37]
+    if (reset) begin // @[IFDStage.scala 52:19]
+      PC <= 32'hfffffffc; // @[IFDStage.scala 52:19]
+    end else if (io_EXtoIFD_take_branch_EXtoIFD) begin // @[IFDStage.scala 53:37]
       PC <= io_EXtoIFD_branch_address_EXtoIFD;
     end else begin
       PC <= _NextInstrAdd_T_1;
     end
-    if (io_EXtoIFD_take_branch_EXtoIFD) begin // @[IFDStage.scala 54:37]
+    if (io_EXtoIFD_take_branch_EXtoIFD) begin // @[IFDStage.scala 53:37]
       io_IFDtoEX_pc_IFDtoEX_REG <= io_EXtoIFD_branch_address_EXtoIFD;
     end else begin
       io_IFDtoEX_pc_IFDtoEX_REG <= _NextInstrAdd_T_1;
@@ -1790,6 +1797,7 @@ module EXStage(
   input  [2:0]  io_IFDtoEX_forward_enable_rs1_IFDtoEX,
   input  [2:0]  io_IFDtoEX_forward_enable_rs2_IFDtoEX,
   input  [2:0]  io_IFDtoEX_forward_enable_memory_data_IFDtoEX,
+  input  [1:0]  io_IFDtoEX_forward_choose_data_IFDtoEX,
   input  [31:0] io_WBtoEX_regfile_write_data_WBtoEX,
   input         io_WBtoEX_regfile_write_enable_WBtoEX,
   input  [4:0]  io_WBtoEX_rd_WBtoEX,
@@ -1807,8 +1815,8 @@ module EXStage(
   output [31:0] io_EXtoIFD_branch_address_EXtoIFD,
   output        io_EXtoIFD_take_branch_EXtoIFD,
   output [4:0]  io_EXtoIFD_rd_EXtoIFD,
-  output [6:0]  io_EXtoIFD_opcode_EXtoIFD,
-  input  [31:0] io_MEMtoEX_alu_result_MEMtoEX
+  input  [31:0] io_MEMtoEX_alu_result_MEMtoEX,
+  input  [31:0] io_MEMtoEX_memory_data_MEMtoEX
 );
 `ifdef RANDOMIZE_REG_INIT
   reg [31:0] _RAND_0;
@@ -1824,6 +1832,8 @@ module EXStage(
   reg [31:0] _RAND_10;
   reg [31:0] _RAND_11;
   reg [31:0] _RAND_12;
+  reg [31:0] _RAND_13;
+  reg [31:0] _RAND_14;
 `endif // RANDOMIZE_REG_INIT
   wire  RegFile_clock; // @[EXStage.scala 66:23]
   wire  RegFile_reset; // @[EXStage.scala 66:23]
@@ -1851,15 +1861,17 @@ module EXStage(
   reg [2:0] forward_enable_rs1_Reg; // @[EXStage.scala 83:39]
   reg [2:0] forward_enable_rs2_Reg; // @[EXStage.scala 84:39]
   reg [2:0] forward_enable_memory_data_Reg; // @[EXStage.scala 85:47]
+  reg [1:0] forward_choose_data_Reg; // @[EXStage.scala 86:40]
   reg [31:0] alu_result_WBtoEX_Reg; // @[EXStage.scala 87:38]
-  wire [31:0] _io_EXtoIFD_branch_address_EXtoIFD_T_1 = branchAddrReg + immediateReg; // @[EXStage.scala 99:54]
-  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_1 = forward_enable_memory_data_Reg == 3'h4; // @[EXStage.scala 110:39]
-  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_3 = forward_enable_memory_data_Reg == 3'h2; // @[EXStage.scala 111:39]
-  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_5 = forward_enable_memory_data_Reg == 3'h1; // @[EXStage.scala 112:39]
-  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_7 = forward_enable_memory_data_Reg == 3'h6; // @[EXStage.scala 113:39]
-  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_9 = forward_enable_memory_data_Reg == 3'h7; // @[EXStage.scala 114:39]
-  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_11 = forward_enable_memory_data_Reg == 3'h3; // @[EXStage.scala 115:39]
-  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_13 = forward_enable_memory_data_Reg == 3'h5; // @[EXStage.scala 116:39]
+  reg [31:0] memory_data_MEMtoEX_Reg; // @[EXStage.scala 88:40]
+  wire [31:0] _io_EXtoIFD_branch_address_EXtoIFD_T_1 = branchAddrReg + immediateReg; // @[EXStage.scala 100:54]
+  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_1 = forward_enable_memory_data_Reg == 3'h4; // @[EXStage.scala 111:39]
+  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_3 = forward_enable_memory_data_Reg == 3'h2; // @[EXStage.scala 112:39]
+  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_5 = forward_enable_memory_data_Reg == 3'h1; // @[EXStage.scala 113:39]
+  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_7 = forward_enable_memory_data_Reg == 3'h6; // @[EXStage.scala 114:39]
+  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_9 = forward_enable_memory_data_Reg == 3'h7; // @[EXStage.scala 115:39]
+  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_11 = forward_enable_memory_data_Reg == 3'h3; // @[EXStage.scala 116:39]
+  wire  _io_EXtoMEM_memory_write_data_EXtoMEM_T_13 = forward_enable_memory_data_Reg == 3'h5; // @[EXStage.scala 117:39]
   wire [31:0] _io_EXtoMEM_memory_write_data_EXtoMEM_T_14 = _io_EXtoMEM_memory_write_data_EXtoMEM_T_13 ?
     io_MEMtoEX_alu_result_MEMtoEX : RegFile_io_reg_data_2; // @[Mux.scala 101:16]
   wire [31:0] _io_EXtoMEM_memory_write_data_EXtoMEM_T_15 = _io_EXtoMEM_memory_write_data_EXtoMEM_T_11 ?
@@ -1872,54 +1884,57 @@ module EXStage(
     alu_result_WBtoEX_Reg : _io_EXtoMEM_memory_write_data_EXtoMEM_T_17; // @[Mux.scala 101:16]
   wire [31:0] _io_EXtoMEM_memory_write_data_EXtoMEM_T_19 = _io_EXtoMEM_memory_write_data_EXtoMEM_T_3 ?
     io_WBtoEX_alu_result_WBtoEX : _io_EXtoMEM_memory_write_data_EXtoMEM_T_18; // @[Mux.scala 101:16]
-  wire  _ALU_io_alu_operand_1_T_1 = forward_enable_rs1_Reg == 3'h4; // @[EXStage.scala 123:31]
-  wire  _ALU_io_alu_operand_1_T_3 = forward_enable_rs1_Reg == 3'h2; // @[EXStage.scala 124:31]
-  wire  _ALU_io_alu_operand_1_T_5 = forward_enable_rs1_Reg == 3'h1; // @[EXStage.scala 125:31]
-  wire  _ALU_io_alu_operand_1_T_7 = forward_enable_rs1_Reg == 3'h6; // @[EXStage.scala 126:31]
-  wire  _ALU_io_alu_operand_1_T_9 = forward_enable_rs1_Reg == 3'h7; // @[EXStage.scala 127:31]
-  wire  _ALU_io_alu_operand_1_T_11 = forward_enable_rs1_Reg == 3'h3; // @[EXStage.scala 128:31]
-  wire  _ALU_io_alu_operand_1_T_13 = forward_enable_rs1_Reg == 3'h5; // @[EXStage.scala 129:31]
-  wire [31:0] _ALU_io_alu_operand_1_T_14 = _ALU_io_alu_operand_1_T_13 ? io_MEMtoEX_alu_result_MEMtoEX :
+  wire  _ALU_io_alu_operand_1_T_1 = forward_enable_rs1_Reg == 3'h4; // @[EXStage.scala 124:31]
+  wire  _ALU_io_alu_operand_1_T_3 = forward_enable_rs1_Reg == 3'h2; // @[EXStage.scala 125:31]
+  wire [31:0] _ALU_io_alu_operand_1_T_6 = forward_choose_data_Reg[1] ? io_MEMtoEX_memory_data_MEMtoEX :
+    io_WBtoEX_alu_result_WBtoEX; // @[EXStage.scala 125:61]
+  wire  _ALU_io_alu_operand_1_T_8 = forward_enable_rs1_Reg == 3'h1; // @[EXStage.scala 126:31]
+  wire [31:0] _ALU_io_alu_operand_1_T_11 = forward_choose_data_Reg[0] ? memory_data_MEMtoEX_Reg : alu_result_WBtoEX_Reg; // @[EXStage.scala 126:61]
+  wire  _ALU_io_alu_operand_1_T_13 = forward_enable_rs1_Reg == 3'h6; // @[EXStage.scala 127:31]
+  wire  _ALU_io_alu_operand_1_T_15 = forward_enable_rs1_Reg == 3'h7; // @[EXStage.scala 128:31]
+  wire  _ALU_io_alu_operand_1_T_17 = forward_enable_rs1_Reg == 3'h3; // @[EXStage.scala 129:31]
+  wire  _ALU_io_alu_operand_1_T_22 = forward_enable_rs1_Reg == 3'h5; // @[EXStage.scala 130:31]
+  wire [31:0] _ALU_io_alu_operand_1_T_23 = _ALU_io_alu_operand_1_T_22 ? io_MEMtoEX_alu_result_MEMtoEX :
     RegFile_io_alu_operand_1; // @[Mux.scala 101:16]
-  wire [31:0] _ALU_io_alu_operand_1_T_15 = _ALU_io_alu_operand_1_T_11 ? io_WBtoEX_alu_result_WBtoEX :
-    _ALU_io_alu_operand_1_T_14; // @[Mux.scala 101:16]
-  wire [31:0] _ALU_io_alu_operand_1_T_16 = _ALU_io_alu_operand_1_T_9 ? io_MEMtoEX_alu_result_MEMtoEX :
-    _ALU_io_alu_operand_1_T_15; // @[Mux.scala 101:16]
-  wire [31:0] _ALU_io_alu_operand_1_T_17 = _ALU_io_alu_operand_1_T_7 ? io_MEMtoEX_alu_result_MEMtoEX :
-    _ALU_io_alu_operand_1_T_16; // @[Mux.scala 101:16]
-  wire [31:0] _ALU_io_alu_operand_1_T_18 = _ALU_io_alu_operand_1_T_5 ? alu_result_WBtoEX_Reg :
-    _ALU_io_alu_operand_1_T_17; // @[Mux.scala 101:16]
-  wire [31:0] _ALU_io_alu_operand_1_T_19 = _ALU_io_alu_operand_1_T_3 ? io_WBtoEX_alu_result_WBtoEX :
-    _ALU_io_alu_operand_1_T_18; // @[Mux.scala 101:16]
-  wire [31:0] _ALU_io_alu_operand_2_T_1 = alu_op2mux_Reg ? immediateReg : RegFile_io_reg_data_2; // @[EXStage.scala 133:8]
-  wire  _ALU_io_alu_operand_2_T_3 = forward_enable_rs2_Reg == 3'h4; // @[EXStage.scala 135:31]
-  wire  _ALU_io_alu_operand_2_T_5 = forward_enable_rs2_Reg == 3'h2; // @[EXStage.scala 136:31]
-  wire  _ALU_io_alu_operand_2_T_7 = forward_enable_rs2_Reg == 3'h1; // @[EXStage.scala 137:31]
-  wire  _ALU_io_alu_operand_2_T_9 = forward_enable_rs2_Reg == 3'h6; // @[EXStage.scala 138:31]
-  wire  _ALU_io_alu_operand_2_T_11 = forward_enable_rs2_Reg == 3'h7; // @[EXStage.scala 139:31]
-  wire  _ALU_io_alu_operand_2_T_13 = forward_enable_rs2_Reg == 3'h3; // @[EXStage.scala 140:31]
-  wire  _ALU_io_alu_operand_2_T_15 = forward_enable_rs2_Reg == 3'h5; // @[EXStage.scala 141:31]
-  wire [31:0] _ALU_io_alu_operand_2_T_16 = _ALU_io_alu_operand_2_T_15 ? io_MEMtoEX_alu_result_MEMtoEX :
+  wire [31:0] _ALU_io_alu_operand_1_T_24 = _ALU_io_alu_operand_1_T_17 ? _ALU_io_alu_operand_1_T_6 :
+    _ALU_io_alu_operand_1_T_23; // @[Mux.scala 101:16]
+  wire [31:0] _ALU_io_alu_operand_1_T_25 = _ALU_io_alu_operand_1_T_15 ? io_MEMtoEX_alu_result_MEMtoEX :
+    _ALU_io_alu_operand_1_T_24; // @[Mux.scala 101:16]
+  wire [31:0] _ALU_io_alu_operand_1_T_26 = _ALU_io_alu_operand_1_T_13 ? io_MEMtoEX_alu_result_MEMtoEX :
+    _ALU_io_alu_operand_1_T_25; // @[Mux.scala 101:16]
+  wire [31:0] _ALU_io_alu_operand_1_T_27 = _ALU_io_alu_operand_1_T_8 ? _ALU_io_alu_operand_1_T_11 :
+    _ALU_io_alu_operand_1_T_26; // @[Mux.scala 101:16]
+  wire [31:0] _ALU_io_alu_operand_1_T_28 = _ALU_io_alu_operand_1_T_3 ? _ALU_io_alu_operand_1_T_6 :
+    _ALU_io_alu_operand_1_T_27; // @[Mux.scala 101:16]
+  wire [31:0] _ALU_io_alu_operand_2_T_1 = alu_op2mux_Reg ? immediateReg : RegFile_io_reg_data_2; // @[EXStage.scala 134:8]
+  wire  _ALU_io_alu_operand_2_T_3 = forward_enable_rs2_Reg == 3'h4; // @[EXStage.scala 136:31]
+  wire  _ALU_io_alu_operand_2_T_5 = forward_enable_rs2_Reg == 3'h2; // @[EXStage.scala 137:31]
+  wire  _ALU_io_alu_operand_2_T_10 = forward_enable_rs2_Reg == 3'h1; // @[EXStage.scala 138:31]
+  wire  _ALU_io_alu_operand_2_T_15 = forward_enable_rs2_Reg == 3'h6; // @[EXStage.scala 139:31]
+  wire  _ALU_io_alu_operand_2_T_17 = forward_enable_rs2_Reg == 3'h7; // @[EXStage.scala 140:31]
+  wire  _ALU_io_alu_operand_2_T_19 = forward_enable_rs2_Reg == 3'h3; // @[EXStage.scala 141:31]
+  wire  _ALU_io_alu_operand_2_T_24 = forward_enable_rs2_Reg == 3'h5; // @[EXStage.scala 142:31]
+  wire [31:0] _ALU_io_alu_operand_2_T_25 = _ALU_io_alu_operand_2_T_24 ? io_MEMtoEX_alu_result_MEMtoEX :
     _ALU_io_alu_operand_2_T_1; // @[Mux.scala 101:16]
-  wire [31:0] _ALU_io_alu_operand_2_T_17 = _ALU_io_alu_operand_2_T_13 ? io_WBtoEX_alu_result_WBtoEX :
-    _ALU_io_alu_operand_2_T_16; // @[Mux.scala 101:16]
-  wire [31:0] _ALU_io_alu_operand_2_T_18 = _ALU_io_alu_operand_2_T_11 ? io_MEMtoEX_alu_result_MEMtoEX :
-    _ALU_io_alu_operand_2_T_17; // @[Mux.scala 101:16]
-  wire [31:0] _ALU_io_alu_operand_2_T_19 = _ALU_io_alu_operand_2_T_9 ? io_MEMtoEX_alu_result_MEMtoEX :
-    _ALU_io_alu_operand_2_T_18; // @[Mux.scala 101:16]
-  wire [31:0] _ALU_io_alu_operand_2_T_20 = _ALU_io_alu_operand_2_T_7 ? alu_result_WBtoEX_Reg :
-    _ALU_io_alu_operand_2_T_19; // @[Mux.scala 101:16]
-  wire [31:0] _ALU_io_alu_operand_2_T_21 = _ALU_io_alu_operand_2_T_5 ? io_WBtoEX_alu_result_WBtoEX :
-    _ALU_io_alu_operand_2_T_20; // @[Mux.scala 101:16]
+  wire [31:0] _ALU_io_alu_operand_2_T_26 = _ALU_io_alu_operand_2_T_19 ? _ALU_io_alu_operand_1_T_6 :
+    _ALU_io_alu_operand_2_T_25; // @[Mux.scala 101:16]
+  wire [31:0] _ALU_io_alu_operand_2_T_27 = _ALU_io_alu_operand_2_T_17 ? io_MEMtoEX_alu_result_MEMtoEX :
+    _ALU_io_alu_operand_2_T_26; // @[Mux.scala 101:16]
+  wire [31:0] _ALU_io_alu_operand_2_T_28 = _ALU_io_alu_operand_2_T_15 ? io_MEMtoEX_alu_result_MEMtoEX :
+    _ALU_io_alu_operand_2_T_27; // @[Mux.scala 101:16]
+  wire [31:0] _ALU_io_alu_operand_2_T_29 = _ALU_io_alu_operand_2_T_10 ? _ALU_io_alu_operand_1_T_11 :
+    _ALU_io_alu_operand_2_T_28; // @[Mux.scala 101:16]
+  wire [31:0] _ALU_io_alu_operand_2_T_30 = _ALU_io_alu_operand_2_T_5 ? _ALU_io_alu_operand_1_T_6 :
+    _ALU_io_alu_operand_2_T_29; // @[Mux.scala 101:16]
   wire [31:0] _io_EXtoMEM_alu_result_EXtoMEM_T_3 = branchAddrReg + 32'h4; // @[EXStage.scala 188:54]
   wire [31:0] _io_EXtoIFD_branch_address_EXtoIFD_T_5 = RegFile_io_alu_operand_1 + immediateReg; // @[EXStage.scala 191:69]
   wire [31:0] _GEN_3 = 7'h67 == opcodeReg ? _io_EXtoIFD_branch_address_EXtoIFD_T_5 :
-    _io_EXtoIFD_branch_address_EXtoIFD_T_1; // @[EXStage.scala 179:21 191:41 99:37]
-  wire [31:0] _GEN_4 = 7'h67 == opcodeReg ? _io_EXtoMEM_alu_result_EXtoMEM_T_3 : ALU_io_alu_result; // @[EXStage.scala 179:21 145:33 192:37]
+    _io_EXtoIFD_branch_address_EXtoIFD_T_1; // @[EXStage.scala 179:21 100:37 191:41]
+  wire [31:0] _GEN_4 = 7'h67 == opcodeReg ? _io_EXtoMEM_alu_result_EXtoMEM_T_3 : ALU_io_alu_result; // @[EXStage.scala 179:21 146:33 192:37]
   wire [31:0] _GEN_5 = 7'h6f == opcodeReg ? _io_EXtoIFD_branch_address_EXtoIFD_T_1 : _GEN_3; // @[EXStage.scala 179:21 187:41]
   wire [31:0] _GEN_6 = 7'h6f == opcodeReg ? _io_EXtoMEM_alu_result_EXtoMEM_T_3 : _GEN_4; // @[EXStage.scala 179:21 188:37]
   wire [31:0] _GEN_7 = 7'h17 == opcodeReg ? _io_EXtoIFD_branch_address_EXtoIFD_T_1 : _GEN_6; // @[EXStage.scala 179:21 184:37]
-  wire [31:0] _GEN_8 = 7'h17 == opcodeReg ? _io_EXtoIFD_branch_address_EXtoIFD_T_1 : _GEN_5; // @[EXStage.scala 179:21 99:37]
+  wire [31:0] _GEN_8 = 7'h17 == opcodeReg ? _io_EXtoIFD_branch_address_EXtoIFD_T_1 : _GEN_5; // @[EXStage.scala 179:21 100:37]
   RegisterFile RegFile ( // @[EXStage.scala 66:23]
     .clock(RegFile_clock),
     .reset(RegFile_reset),
@@ -1942,27 +1957,26 @@ module EXStage(
   assign io_EXtoMEM_memory_write_data_EXtoMEM = _io_EXtoMEM_memory_write_data_EXtoMEM_T_1 ?
     io_MEMtoEX_alu_result_MEMtoEX : _io_EXtoMEM_memory_write_data_EXtoMEM_T_19; // @[Mux.scala 101:16]
   assign io_EXtoMEM_rd_EXtoMEM = rdReg; // @[EXStage.scala 176:25]
-  assign io_EXtoMEM_register_write_enable_EXtoMEM = register_write_Reg; // @[EXStage.scala 159:44]
-  assign io_EXtoMEM_write_back_select_EXtoMEM = write_back_Reg; // @[EXStage.scala 160:40]
-  assign io_EXtoMEM_data_memory_write_enable_EXtoMEM = ALU_io_alu_result >= 32'h400 ? 1'h0 : write_memory_Reg; // @[EXStage.scala 161:47 168:99 169:49]
-  assign io_EXtoMEM_io_memory_write_enable_EXtoMEM = ALU_io_alu_result >= 32'h400 & write_memory_Reg; // @[EXStage.scala 168:99 171:47 96:45]
+  assign io_EXtoMEM_register_write_enable_EXtoMEM = register_write_Reg; // @[EXStage.scala 160:44]
+  assign io_EXtoMEM_write_back_select_EXtoMEM = write_back_Reg; // @[EXStage.scala 161:40]
+  assign io_EXtoMEM_data_memory_write_enable_EXtoMEM = ALU_io_alu_result >= 32'h400 ? 1'h0 : write_memory_Reg; // @[EXStage.scala 162:47 168:99 169:49]
+  assign io_EXtoMEM_io_memory_write_enable_EXtoMEM = ALU_io_alu_result >= 32'h400 & write_memory_Reg; // @[EXStage.scala 168:99 171:47 97:45]
   assign io_EXtoMEM_address_is_io_EXtoMEM = ALU_io_alu_result >= 32'h400; // @[EXStage.scala 168:26]
-  assign io_EXtoMEM_alu_operation_select_EXtoMEM = alu_operation_Reg; // @[EXStage.scala 163:43]
+  assign io_EXtoMEM_alu_operation_select_EXtoMEM = alu_operation_Reg; // @[EXStage.scala 164:43]
   assign io_EXtoMEM_opcode_EXtoMEM = opcodeReg; // @[EXStage.scala 166:29]
-  assign io_EXtoIFD_branch_address_EXtoIFD = 7'h37 == opcodeReg ? _io_EXtoIFD_branch_address_EXtoIFD_T_1 : _GEN_8; // @[EXStage.scala 179:21 99:37]
-  assign io_EXtoIFD_take_branch_EXtoIFD = ALU_io_take_branch_EXtoIFD; // @[EXStage.scala 146:34]
-  assign io_EXtoIFD_rd_EXtoIFD = rdReg; // @[EXStage.scala 164:25]
-  assign io_EXtoIFD_opcode_EXtoIFD = opcodeReg; // @[EXStage.scala 165:29]
+  assign io_EXtoIFD_branch_address_EXtoIFD = 7'h37 == opcodeReg ? _io_EXtoIFD_branch_address_EXtoIFD_T_1 : _GEN_8; // @[EXStage.scala 179:21 100:37]
+  assign io_EXtoIFD_take_branch_EXtoIFD = ALU_io_take_branch_EXtoIFD; // @[EXStage.scala 147:34]
+  assign io_EXtoIFD_rd_EXtoIFD = rdReg; // @[EXStage.scala 165:25]
   assign RegFile_clock = clock;
   assign RegFile_reset = reset;
-  assign RegFile_io_rs1 = io_decoded_instruction_IFDtoEX_rs1; // @[EXStage.scala 103:18]
-  assign RegFile_io_rs2 = io_decoded_instruction_IFDtoEX_rs2; // @[EXStage.scala 104:18]
-  assign RegFile_io_regfile_write_data_WBtoEX = io_WBtoEX_regfile_write_data_WBtoEX; // @[EXStage.scala 106:40]
-  assign RegFile_io_rd_WBtoEX = io_WBtoEX_rd_WBtoEX; // @[EXStage.scala 105:24]
-  assign RegFile_io_regfile_write_enable_WBtoEX = io_WBtoEX_regfile_write_enable_WBtoEX; // @[EXStage.scala 107:42]
-  assign ALU_io_alu_operation_select = alu_operation_Reg; // @[EXStage.scala 162:31]
-  assign ALU_io_alu_operand_1 = _ALU_io_alu_operand_1_T_1 ? io_MEMtoEX_alu_result_MEMtoEX : _ALU_io_alu_operand_1_T_19; // @[Mux.scala 101:16]
-  assign ALU_io_alu_operand_2 = _ALU_io_alu_operand_2_T_3 ? io_MEMtoEX_alu_result_MEMtoEX : _ALU_io_alu_operand_2_T_21; // @[Mux.scala 101:16]
+  assign RegFile_io_rs1 = io_decoded_instruction_IFDtoEX_rs1; // @[EXStage.scala 104:18]
+  assign RegFile_io_rs2 = io_decoded_instruction_IFDtoEX_rs2; // @[EXStage.scala 105:18]
+  assign RegFile_io_regfile_write_data_WBtoEX = io_WBtoEX_regfile_write_data_WBtoEX; // @[EXStage.scala 107:40]
+  assign RegFile_io_rd_WBtoEX = io_WBtoEX_rd_WBtoEX; // @[EXStage.scala 106:24]
+  assign RegFile_io_regfile_write_enable_WBtoEX = io_WBtoEX_regfile_write_enable_WBtoEX; // @[EXStage.scala 108:42]
+  assign ALU_io_alu_operation_select = alu_operation_Reg; // @[EXStage.scala 163:31]
+  assign ALU_io_alu_operand_1 = _ALU_io_alu_operand_1_T_1 ? io_MEMtoEX_alu_result_MEMtoEX : _ALU_io_alu_operand_1_T_28; // @[Mux.scala 101:16]
+  assign ALU_io_alu_operand_2 = _ALU_io_alu_operand_2_T_3 ? io_MEMtoEX_alu_result_MEMtoEX : _ALU_io_alu_operand_2_T_30; // @[Mux.scala 101:16]
   always @(posedge clock) begin
     if (reset) begin // @[EXStage.scala 72:29]
       immediateReg <= 32'h0; // @[EXStage.scala 72:29]
@@ -2024,10 +2038,20 @@ module EXStage(
     end else begin
       forward_enable_memory_data_Reg <= io_IFDtoEX_forward_enable_memory_data_IFDtoEX; // @[EXStage.scala 85:47]
     end
+    if (reset) begin // @[EXStage.scala 86:40]
+      forward_choose_data_Reg <= 2'h0; // @[EXStage.scala 86:40]
+    end else begin
+      forward_choose_data_Reg <= io_IFDtoEX_forward_choose_data_IFDtoEX; // @[EXStage.scala 86:40]
+    end
     if (reset) begin // @[EXStage.scala 87:38]
       alu_result_WBtoEX_Reg <= 32'h0; // @[EXStage.scala 87:38]
     end else begin
       alu_result_WBtoEX_Reg <= io_WBtoEX_alu_result_WBtoEX; // @[EXStage.scala 87:38]
+    end
+    if (reset) begin // @[EXStage.scala 88:40]
+      memory_data_MEMtoEX_Reg <= 32'h0; // @[EXStage.scala 88:40]
+    end else begin
+      memory_data_MEMtoEX_Reg <= io_MEMtoEX_memory_data_MEMtoEX; // @[EXStage.scala 88:40]
     end
   end
 // Register and memory initialization
@@ -2091,7 +2115,11 @@ initial begin
   _RAND_11 = {1{`RANDOM}};
   forward_enable_memory_data_Reg = _RAND_11[2:0];
   _RAND_12 = {1{`RANDOM}};
-  alu_result_WBtoEX_Reg = _RAND_12[31:0];
+  forward_choose_data_Reg = _RAND_12[1:0];
+  _RAND_13 = {1{`RANDOM}};
+  alu_result_WBtoEX_Reg = _RAND_13[31:0];
+  _RAND_14 = {1{`RANDOM}};
+  memory_data_MEMtoEX_Reg = _RAND_14[31:0];
 `endif // RANDOMIZE_REG_INIT
   `endif // RANDOMIZE
 end // initial
@@ -2210,64 +2238,64 @@ module DataMemory(
   reg [7:0] delayed_alu_operation_select; // @[DataMemory.scala 19:45]
   reg [1:0] delayed_specAddr_REG; // @[DataMemory.scala 20:41]
   reg [1:0] delayed_specAddr; // @[DataMemory.scala 20:33]
-  reg [7:0] load0; // @[DataMemory.scala 33:22]
-  reg [7:0] load1; // @[DataMemory.scala 34:22]
-  reg [7:0] load2; // @[DataMemory.scala 35:22]
-  reg [7:0] load3; // @[DataMemory.scala 36:22]
-  wire  _T_1 = 2'h0 == delayed_specAddr; // @[DataMemory.scala 45:31]
+  reg [7:0] load0; // @[DataMemory.scala 29:22]
+  reg [7:0] load1; // @[DataMemory.scala 30:22]
+  reg [7:0] load2; // @[DataMemory.scala 31:22]
+  reg [7:0] load3; // @[DataMemory.scala 32:22]
+  wire  _T_1 = 2'h0 == delayed_specAddr; // @[DataMemory.scala 37:31]
   wire [23:0] _dataOut_T_2 = load0[7] ? 24'hffffff : 24'h0; // @[Bitwise.scala 77:12]
   wire [31:0] _dataOut_T_3 = {_dataOut_T_2,load0}; // @[Cat.scala 33:92]
-  wire  _T_2 = 2'h1 == delayed_specAddr; // @[DataMemory.scala 45:31]
+  wire  _T_2 = 2'h1 == delayed_specAddr; // @[DataMemory.scala 37:31]
   wire [23:0] _dataOut_T_6 = load1[7] ? 24'hffffff : 24'h0; // @[Bitwise.scala 77:12]
   wire [31:0] _dataOut_T_7 = {_dataOut_T_6,load1}; // @[Cat.scala 33:92]
-  wire  _T_3 = 2'h2 == delayed_specAddr; // @[DataMemory.scala 45:31]
+  wire  _T_3 = 2'h2 == delayed_specAddr; // @[DataMemory.scala 37:31]
   wire [23:0] _dataOut_T_10 = load2[7] ? 24'hffffff : 24'h0; // @[Bitwise.scala 77:12]
   wire [31:0] _dataOut_T_11 = {_dataOut_T_10,load2}; // @[Cat.scala 33:92]
-  wire  _T_4 = 2'h3 == delayed_specAddr; // @[DataMemory.scala 45:31]
+  wire  _T_4 = 2'h3 == delayed_specAddr; // @[DataMemory.scala 37:31]
   wire [23:0] _dataOut_T_14 = load3[7] ? 24'hffffff : 24'h0; // @[Bitwise.scala 77:12]
   wire [31:0] _dataOut_T_15 = {_dataOut_T_14,load3}; // @[Cat.scala 33:92]
-  wire [31:0] _GEN_16 = 2'h3 == delayed_specAddr ? _dataOut_T_15 : 32'h0; // @[DataMemory.scala 45:31 56:19 18:28]
-  wire [31:0] _GEN_17 = 2'h2 == delayed_specAddr ? _dataOut_T_11 : _GEN_16; // @[DataMemory.scala 45:31 53:19]
-  wire [31:0] _GEN_18 = 2'h1 == delayed_specAddr ? _dataOut_T_7 : _GEN_17; // @[DataMemory.scala 45:31 50:19]
-  wire [31:0] _GEN_19 = 2'h0 == delayed_specAddr ? _dataOut_T_3 : _GEN_18; // @[DataMemory.scala 45:31 47:19]
+  wire [31:0] _GEN_16 = 2'h3 == delayed_specAddr ? _dataOut_T_15 : 32'h0; // @[DataMemory.scala 37:31 48:19 18:28]
+  wire [31:0] _GEN_17 = 2'h2 == delayed_specAddr ? _dataOut_T_11 : _GEN_16; // @[DataMemory.scala 37:31 45:19]
+  wire [31:0] _GEN_18 = 2'h1 == delayed_specAddr ? _dataOut_T_7 : _GEN_17; // @[DataMemory.scala 37:31 42:19]
+  wire [31:0] _GEN_19 = 2'h0 == delayed_specAddr ? _dataOut_T_3 : _GEN_18; // @[DataMemory.scala 37:31 39:19]
   wire [31:0] _dataOut_T_17 = {24'h0,load0}; // @[Cat.scala 33:92]
   wire [31:0] _dataOut_T_19 = {24'h0,load1}; // @[Cat.scala 33:92]
   wire [31:0] _dataOut_T_21 = {24'h0,load2}; // @[Cat.scala 33:92]
   wire [31:0] _dataOut_T_23 = {24'h0,load3}; // @[Cat.scala 33:92]
-  wire [31:0] _GEN_20 = _T_4 ? _dataOut_T_23 : 32'h0; // @[DataMemory.scala 61:31 72:19 18:28]
-  wire [31:0] _GEN_21 = _T_3 ? _dataOut_T_21 : _GEN_20; // @[DataMemory.scala 61:31 69:19]
-  wire [31:0] _GEN_22 = _T_2 ? _dataOut_T_19 : _GEN_21; // @[DataMemory.scala 61:31 66:19]
-  wire [31:0] _GEN_23 = _T_1 ? _dataOut_T_17 : _GEN_22; // @[DataMemory.scala 61:31 63:19]
+  wire [31:0] _GEN_20 = _T_4 ? _dataOut_T_23 : 32'h0; // @[DataMemory.scala 53:31 64:19 18:28]
+  wire [31:0] _GEN_21 = _T_3 ? _dataOut_T_21 : _GEN_20; // @[DataMemory.scala 53:31 61:19]
+  wire [31:0] _GEN_22 = _T_2 ? _dataOut_T_19 : _GEN_21; // @[DataMemory.scala 53:31 58:19]
+  wire [31:0] _GEN_23 = _T_1 ? _dataOut_T_17 : _GEN_22; // @[DataMemory.scala 53:31 55:19]
   wire [15:0] _dataOut_T_26 = load1[7] ? 16'hffff : 16'h0; // @[Bitwise.scala 77:12]
   wire [31:0] _dataOut_T_27 = {_dataOut_T_26,load1,load0}; // @[Cat.scala 33:92]
   wire [15:0] _dataOut_T_30 = load3[7] ? 16'hffff : 16'h0; // @[Bitwise.scala 77:12]
   wire [31:0] _dataOut_T_31 = {_dataOut_T_30,load3,load2}; // @[Cat.scala 33:92]
-  wire [31:0] _GEN_24 = _T_3 ? _dataOut_T_31 : 32'h0; // @[DataMemory.scala 77:31 82:19 18:28]
-  wire [31:0] _GEN_25 = _T_1 ? _dataOut_T_27 : _GEN_24; // @[DataMemory.scala 77:31 79:19]
+  wire [31:0] _GEN_24 = _T_3 ? _dataOut_T_31 : 32'h0; // @[DataMemory.scala 69:31 74:19 18:28]
+  wire [31:0] _GEN_25 = _T_1 ? _dataOut_T_27 : _GEN_24; // @[DataMemory.scala 69:31 71:19]
   wire [31:0] _dataOut_T_33 = {16'h0,load1,load0}; // @[Cat.scala 33:92]
   wire [31:0] _dataOut_T_35 = {16'h0,load3,load2}; // @[Cat.scala 33:92]
-  wire [31:0] _GEN_26 = _T_3 ? _dataOut_T_35 : 32'h0; // @[DataMemory.scala 87:31 92:19 18:28]
-  wire [31:0] _GEN_27 = _T_1 ? _dataOut_T_33 : _GEN_26; // @[DataMemory.scala 87:31 89:19]
+  wire [31:0] _GEN_26 = _T_3 ? _dataOut_T_35 : 32'h0; // @[DataMemory.scala 79:31 84:19 18:28]
+  wire [31:0] _GEN_27 = _T_1 ? _dataOut_T_33 : _GEN_26; // @[DataMemory.scala 79:31 81:19]
   wire [31:0] _dataOut_T_36 = {load3,load2,load1,load0}; // @[Cat.scala 33:92]
-  wire [31:0] _GEN_28 = _T_1 ? _dataOut_T_36 : 32'h0; // @[DataMemory.scala 97:31 99:19 18:28]
-  wire [31:0] _GEN_29 = 8'h12 == delayed_alu_operation_select ? _GEN_28 : 32'h0; // @[DataMemory.scala 18:28 43:39]
-  wire [31:0] _GEN_30 = 8'h14 == delayed_alu_operation_select ? _GEN_27 : _GEN_29; // @[DataMemory.scala 43:39]
-  wire [31:0] _GEN_31 = 8'h11 == delayed_alu_operation_select ? _GEN_25 : _GEN_30; // @[DataMemory.scala 43:39]
-  wire [31:0] _GEN_32 = 8'h13 == delayed_alu_operation_select ? _GEN_23 : _GEN_31; // @[DataMemory.scala 43:39]
-  wire  _T_18 = 8'h15 == io_alu_operation_select_EXtoMEM; // @[DataMemory.scala 106:43]
-  wire  _T_19 = 2'h0 == specAddr; // @[DataMemory.scala 108:24]
-  wire  _GEN_49 = 2'h2 == specAddr & io_enableWrite; // @[DataMemory.scala 108:24 25:25]
-  wire  _GEN_54 = 2'h2 == specAddr ? 1'h0 : 2'h3 == specAddr & io_enableWrite; // @[DataMemory.scala 108:24 26:25]
-  wire  _GEN_64 = 2'h1 == specAddr ? 1'h0 : 2'h2 == specAddr & io_enableWrite; // @[DataMemory.scala 108:24 25:25]
-  wire  _GEN_69 = 2'h1 == specAddr ? 1'h0 : _GEN_54; // @[DataMemory.scala 108:24 26:25]
-  wire  _GEN_74 = 2'h0 == specAddr & io_enableWrite; // @[DataMemory.scala 108:24 23:25]
-  wire  _GEN_79 = 2'h0 == specAddr ? 1'h0 : 2'h1 == specAddr & io_enableWrite; // @[DataMemory.scala 108:24 24:25]
-  wire  _GEN_84 = 2'h0 == specAddr ? 1'h0 : _GEN_64; // @[DataMemory.scala 108:24 25:25]
-  wire  _GEN_89 = 2'h0 == specAddr ? 1'h0 : _GEN_69; // @[DataMemory.scala 108:24 26:25]
-  wire  _GEN_110 = _T_19 ? 1'h0 : _GEN_49; // @[DataMemory.scala 132:24 25:25]
-  wire  _GEN_136 = 8'h16 == io_alu_operation_select_EXtoMEM & _GEN_74; // @[DataMemory.scala 106:43 23:25]
-  wire  _GEN_142 = 8'h16 == io_alu_operation_select_EXtoMEM & _GEN_110; // @[DataMemory.scala 106:43 25:25]
-  wire  _GEN_148 = 8'h16 == io_alu_operation_select_EXtoMEM ? 1'h0 : 8'h17 == io_alu_operation_select_EXtoMEM & _GEN_74; // @[DataMemory.scala 106:43 23:25]
+  wire [31:0] _GEN_28 = _T_1 ? _dataOut_T_36 : 32'h0; // @[DataMemory.scala 89:31 91:19 18:28]
+  wire [31:0] _GEN_29 = 8'h12 == delayed_alu_operation_select ? _GEN_28 : 32'h0; // @[DataMemory.scala 18:28 35:39]
+  wire [31:0] _GEN_30 = 8'h14 == delayed_alu_operation_select ? _GEN_27 : _GEN_29; // @[DataMemory.scala 35:39]
+  wire [31:0] _GEN_31 = 8'h11 == delayed_alu_operation_select ? _GEN_25 : _GEN_30; // @[DataMemory.scala 35:39]
+  wire [31:0] _GEN_32 = 8'h13 == delayed_alu_operation_select ? _GEN_23 : _GEN_31; // @[DataMemory.scala 35:39]
+  wire  _T_18 = 8'h15 == io_alu_operation_select_EXtoMEM; // @[DataMemory.scala 98:43]
+  wire  _T_19 = 2'h0 == specAddr; // @[DataMemory.scala 100:24]
+  wire  _GEN_49 = 2'h2 == specAddr & io_enableWrite; // @[DataMemory.scala 100:24 25:25]
+  wire  _GEN_54 = 2'h2 == specAddr ? 1'h0 : 2'h3 == specAddr & io_enableWrite; // @[DataMemory.scala 100:24 26:25]
+  wire  _GEN_64 = 2'h1 == specAddr ? 1'h0 : 2'h2 == specAddr & io_enableWrite; // @[DataMemory.scala 100:24 25:25]
+  wire  _GEN_69 = 2'h1 == specAddr ? 1'h0 : _GEN_54; // @[DataMemory.scala 100:24 26:25]
+  wire  _GEN_74 = 2'h0 == specAddr & io_enableWrite; // @[DataMemory.scala 100:24 23:25]
+  wire  _GEN_79 = 2'h0 == specAddr ? 1'h0 : 2'h1 == specAddr & io_enableWrite; // @[DataMemory.scala 100:24 24:25]
+  wire  _GEN_84 = 2'h0 == specAddr ? 1'h0 : _GEN_64; // @[DataMemory.scala 100:24 25:25]
+  wire  _GEN_89 = 2'h0 == specAddr ? 1'h0 : _GEN_69; // @[DataMemory.scala 100:24 26:25]
+  wire  _GEN_110 = _T_19 ? 1'h0 : _GEN_49; // @[DataMemory.scala 124:24 25:25]
+  wire  _GEN_136 = 8'h16 == io_alu_operation_select_EXtoMEM & _GEN_74; // @[DataMemory.scala 23:25 98:43]
+  wire  _GEN_142 = 8'h16 == io_alu_operation_select_EXtoMEM & _GEN_110; // @[DataMemory.scala 25:25 98:43]
+  wire  _GEN_148 = 8'h16 == io_alu_operation_select_EXtoMEM ? 1'h0 : 8'h17 == io_alu_operation_select_EXtoMEM & _GEN_74; // @[DataMemory.scala 23:25 98:43]
   assign mem0_load0_MPORT_en = mem0_load0_MPORT_en_pipe_0;
   assign mem0_load0_MPORT_addr = mem0_load0_MPORT_addr_pipe_0;
   assign mem0_load0_MPORT_data = mem0[mem0_load0_MPORT_addr]; // @[DataMemory.scala 23:25]
@@ -2328,7 +2356,7 @@ module DataMemory(
   assign mem3_MPORT_11_addr = io_addr[14:2];
   assign mem3_MPORT_11_mask = 1'h1;
   assign mem3_MPORT_11_en = _T_18 ? 1'h0 : _GEN_148;
-  assign io_dataOut = 8'h10 == delayed_alu_operation_select ? _GEN_19 : _GEN_32; // @[DataMemory.scala 43:39]
+  assign io_dataOut = 8'h10 == delayed_alu_operation_select ? _GEN_19 : _GEN_32; // @[DataMemory.scala 35:39]
   always @(posedge clock) begin
     if (mem0_MPORT_en & mem0_MPORT_mask) begin
       mem0[mem0_MPORT_addr] <= mem0_MPORT_data; // @[DataMemory.scala 23:25]
@@ -2402,25 +2430,25 @@ module DataMemory(
     end else begin
       delayed_specAddr <= delayed_specAddr_REG; // @[DataMemory.scala 20:33]
     end
-    if (reset) begin // @[DataMemory.scala 33:22]
-      load0 <= 8'h0; // @[DataMemory.scala 33:22]
+    if (reset) begin // @[DataMemory.scala 29:22]
+      load0 <= 8'h0; // @[DataMemory.scala 29:22]
     end else begin
-      load0 <= mem0_load0_MPORT_data; // @[DataMemory.scala 33:22]
+      load0 <= mem0_load0_MPORT_data; // @[DataMemory.scala 29:22]
     end
-    if (reset) begin // @[DataMemory.scala 34:22]
-      load1 <= 8'h0; // @[DataMemory.scala 34:22]
+    if (reset) begin // @[DataMemory.scala 30:22]
+      load1 <= 8'h0; // @[DataMemory.scala 30:22]
     end else begin
-      load1 <= mem1_load1_MPORT_data; // @[DataMemory.scala 34:22]
+      load1 <= mem1_load1_MPORT_data; // @[DataMemory.scala 30:22]
     end
-    if (reset) begin // @[DataMemory.scala 35:22]
-      load2 <= 8'h0; // @[DataMemory.scala 35:22]
+    if (reset) begin // @[DataMemory.scala 31:22]
+      load2 <= 8'h0; // @[DataMemory.scala 31:22]
     end else begin
-      load2 <= mem2_load2_MPORT_data; // @[DataMemory.scala 35:22]
+      load2 <= mem2_load2_MPORT_data; // @[DataMemory.scala 31:22]
     end
-    if (reset) begin // @[DataMemory.scala 36:22]
-      load3 <= 8'h0; // @[DataMemory.scala 36:22]
+    if (reset) begin // @[DataMemory.scala 32:22]
+      load3 <= 8'h0; // @[DataMemory.scala 32:22]
     end else begin
-      load3 <= mem3_load3_MPORT_data; // @[DataMemory.scala 36:22]
+      load3 <= mem3_load3_MPORT_data; // @[DataMemory.scala 32:22]
     end
   end
 // Register and memory initialization
@@ -3310,6 +3338,7 @@ module MEMStage(
   output [31:0] io_MEMtoWB_data_memory_read_MEMtoWB,
   output [31:0] io_MEMtoWB_io_memory_read_MEMtoWB,
   output [31:0] io_MEMtoEX_alu_result_MEMtoEX,
+  output [31:0] io_MEMtoEX_memory_data_MEMtoEX,
   output [4:0]  io_MEMtoIFD_rd_MEMtoIFD,
   output [6:0]  io_MEMtoIFD_opcode_MEMtoIFD,
   input  [15:0] io_switches,
@@ -3328,34 +3357,34 @@ module MEMStage(
   reg [31:0] _RAND_7;
   reg [31:0] _RAND_8;
 `endif // RANDOMIZE_REG_INIT
-  wire  dataMem_clock; // @[MEMStage.scala 62:23]
-  wire  dataMem_reset; // @[MEMStage.scala 62:23]
-  wire [14:0] dataMem_io_addr; // @[MEMStage.scala 62:23]
-  wire  dataMem_io_enableWrite; // @[MEMStage.scala 62:23]
-  wire [31:0] dataMem_io_dataIn; // @[MEMStage.scala 62:23]
-  wire [7:0] dataMem_io_alu_operation_select_EXtoMEM; // @[MEMStage.scala 62:23]
-  wire [31:0] dataMem_io_dataOut; // @[MEMStage.scala 62:23]
-  wire  MemoryMappedIO_clock; // @[MEMStage.scala 65:30]
-  wire  MemoryMappedIO_reset; // @[MEMStage.scala 65:30]
-  wire [31:0] MemoryMappedIO_io_address; // @[MEMStage.scala 65:30]
-  wire [31:0] MemoryMappedIO_io_dataIn; // @[MEMStage.scala 65:30]
-  wire  MemoryMappedIO_io_writeEnable; // @[MEMStage.scala 65:30]
-  wire  MemoryMappedIO_io_readEnable; // @[MEMStage.scala 65:30]
-  wire [15:0] MemoryMappedIO_io_switches; // @[MEMStage.scala 65:30]
-  wire [31:0] MemoryMappedIO_io_dataOut; // @[MEMStage.scala 65:30]
-  wire [15:0] MemoryMappedIO_io_leds; // @[MEMStage.scala 65:30]
-  wire [6:0] MemoryMappedIO_io_display_seg; // @[MEMStage.scala 65:30]
-  wire [3:0] MemoryMappedIO_io_display_an; // @[MEMStage.scala 65:30]
-  reg [31:0] io_MEMtoWB_alu_result_MEMtoWB_REG; // @[MEMStage.scala 79:53]
-  reg  io_MEMtoWB_register_write_enable_MEMtoWB_REG; // @[MEMStage.scala 80:53]
-  reg  io_MEMtoWB_write_back_select_MEMtoWB_REG; // @[MEMStage.scala 81:53]
-  reg [4:0] io_MEMtoWB_rd_MEMtoWB_REG; // @[MEMStage.scala 82:53]
-  reg  io_MEMtoWB_address_is_io_MEMtoWB_REG; // @[MEMStage.scala 83:53]
-  reg [31:0] io_MEMtoEX_alu_result_MEMtoEX_REG; // @[MEMStage.scala 92:43]
-  reg [4:0] io_MEMtoIFD_rd_MEMtoIFD_REG; // @[MEMStage.scala 93:37]
-  reg [6:0] io_MEMtoIFD_opcode_MEMtoIFD_REG; // @[MEMStage.scala 94:41]
-  reg [6:0] io_MEMtoWB_opcode_MEMtoWB_REG; // @[MEMStage.scala 95:39]
-  DataMemory dataMem ( // @[MEMStage.scala 62:23]
+  wire  dataMem_clock; // @[MEMStage.scala 63:23]
+  wire  dataMem_reset; // @[MEMStage.scala 63:23]
+  wire [14:0] dataMem_io_addr; // @[MEMStage.scala 63:23]
+  wire  dataMem_io_enableWrite; // @[MEMStage.scala 63:23]
+  wire [31:0] dataMem_io_dataIn; // @[MEMStage.scala 63:23]
+  wire [7:0] dataMem_io_alu_operation_select_EXtoMEM; // @[MEMStage.scala 63:23]
+  wire [31:0] dataMem_io_dataOut; // @[MEMStage.scala 63:23]
+  wire  MemoryMappedIO_clock; // @[MEMStage.scala 66:30]
+  wire  MemoryMappedIO_reset; // @[MEMStage.scala 66:30]
+  wire [31:0] MemoryMappedIO_io_address; // @[MEMStage.scala 66:30]
+  wire [31:0] MemoryMappedIO_io_dataIn; // @[MEMStage.scala 66:30]
+  wire  MemoryMappedIO_io_writeEnable; // @[MEMStage.scala 66:30]
+  wire  MemoryMappedIO_io_readEnable; // @[MEMStage.scala 66:30]
+  wire [15:0] MemoryMappedIO_io_switches; // @[MEMStage.scala 66:30]
+  wire [31:0] MemoryMappedIO_io_dataOut; // @[MEMStage.scala 66:30]
+  wire [15:0] MemoryMappedIO_io_leds; // @[MEMStage.scala 66:30]
+  wire [6:0] MemoryMappedIO_io_display_seg; // @[MEMStage.scala 66:30]
+  wire [3:0] MemoryMappedIO_io_display_an; // @[MEMStage.scala 66:30]
+  reg [31:0] io_MEMtoWB_alu_result_MEMtoWB_REG; // @[MEMStage.scala 80:53]
+  reg  io_MEMtoWB_register_write_enable_MEMtoWB_REG; // @[MEMStage.scala 81:53]
+  reg  io_MEMtoWB_write_back_select_MEMtoWB_REG; // @[MEMStage.scala 82:53]
+  reg [4:0] io_MEMtoWB_rd_MEMtoWB_REG; // @[MEMStage.scala 83:53]
+  reg  io_MEMtoWB_address_is_io_MEMtoWB_REG; // @[MEMStage.scala 84:53]
+  reg [31:0] io_MEMtoEX_alu_result_MEMtoEX_REG; // @[MEMStage.scala 93:43]
+  reg [4:0] io_MEMtoIFD_rd_MEMtoIFD_REG; // @[MEMStage.scala 95:37]
+  reg [6:0] io_MEMtoIFD_opcode_MEMtoIFD_REG; // @[MEMStage.scala 96:41]
+  reg [6:0] io_MEMtoWB_opcode_MEMtoWB_REG; // @[MEMStage.scala 97:39]
+  DataMemory dataMem ( // @[MEMStage.scala 63:23]
     .clock(dataMem_clock),
     .reset(dataMem_reset),
     .io_addr(dataMem_io_addr),
@@ -3364,7 +3393,7 @@ module MEMStage(
     .io_alu_operation_select_EXtoMEM(dataMem_io_alu_operation_select_EXtoMEM),
     .io_dataOut(dataMem_io_dataOut)
   );
-  MemoryMappedIO MemoryMappedIO ( // @[MEMStage.scala 65:30]
+  MemoryMappedIO MemoryMappedIO ( // @[MEMStage.scala 66:30]
     .clock(MemoryMappedIO_clock),
     .reset(MemoryMappedIO_reset),
     .io_address(MemoryMappedIO_io_address),
@@ -3377,43 +3406,44 @@ module MEMStage(
     .io_display_seg(MemoryMappedIO_io_display_seg),
     .io_display_an(MemoryMappedIO_io_display_an)
   );
-  assign io_MEMtoWB_alu_result_MEMtoWB = io_MEMtoWB_alu_result_MEMtoWB_REG; // @[MEMStage.scala 79:43]
-  assign io_MEMtoWB_register_write_enable_MEMtoWB = io_MEMtoWB_register_write_enable_MEMtoWB_REG; // @[MEMStage.scala 80:43]
-  assign io_MEMtoWB_write_back_select_MEMtoWB = io_MEMtoWB_write_back_select_MEMtoWB_REG; // @[MEMStage.scala 81:43]
-  assign io_MEMtoWB_rd_MEMtoWB = io_MEMtoWB_rd_MEMtoWB_REG; // @[MEMStage.scala 82:43]
-  assign io_MEMtoWB_address_is_io_MEMtoWB = io_MEMtoWB_address_is_io_MEMtoWB_REG; // @[MEMStage.scala 83:43]
-  assign io_MEMtoWB_opcode_MEMtoWB = io_MEMtoWB_opcode_MEMtoWB_REG; // @[MEMStage.scala 95:29]
-  assign io_MEMtoWB_data_memory_read_MEMtoWB = dataMem_io_dataOut; // @[MEMStage.scala 90:39]
-  assign io_MEMtoWB_io_memory_read_MEMtoWB = MemoryMappedIO_io_dataOut; // @[MEMStage.scala 70:37]
-  assign io_MEMtoEX_alu_result_MEMtoEX = io_MEMtoEX_alu_result_MEMtoEX_REG; // @[MEMStage.scala 92:33]
-  assign io_MEMtoIFD_rd_MEMtoIFD = io_MEMtoIFD_rd_MEMtoIFD_REG; // @[MEMStage.scala 93:27]
-  assign io_MEMtoIFD_opcode_MEMtoIFD = io_MEMtoIFD_opcode_MEMtoIFD_REG; // @[MEMStage.scala 94:31]
-  assign io_leds = MemoryMappedIO_io_leds; // @[MEMStage.scala 72:11]
-  assign io_display_seg = MemoryMappedIO_io_display_seg; // @[MEMStage.scala 74:18]
-  assign io_display_an = MemoryMappedIO_io_display_an; // @[MEMStage.scala 75:17]
+  assign io_MEMtoWB_alu_result_MEMtoWB = io_MEMtoWB_alu_result_MEMtoWB_REG; // @[MEMStage.scala 80:43]
+  assign io_MEMtoWB_register_write_enable_MEMtoWB = io_MEMtoWB_register_write_enable_MEMtoWB_REG; // @[MEMStage.scala 81:43]
+  assign io_MEMtoWB_write_back_select_MEMtoWB = io_MEMtoWB_write_back_select_MEMtoWB_REG; // @[MEMStage.scala 82:43]
+  assign io_MEMtoWB_rd_MEMtoWB = io_MEMtoWB_rd_MEMtoWB_REG; // @[MEMStage.scala 83:43]
+  assign io_MEMtoWB_address_is_io_MEMtoWB = io_MEMtoWB_address_is_io_MEMtoWB_REG; // @[MEMStage.scala 84:43]
+  assign io_MEMtoWB_opcode_MEMtoWB = io_MEMtoWB_opcode_MEMtoWB_REG; // @[MEMStage.scala 97:29]
+  assign io_MEMtoWB_data_memory_read_MEMtoWB = dataMem_io_dataOut; // @[MEMStage.scala 91:39]
+  assign io_MEMtoWB_io_memory_read_MEMtoWB = MemoryMappedIO_io_dataOut; // @[MEMStage.scala 71:37]
+  assign io_MEMtoEX_alu_result_MEMtoEX = io_MEMtoEX_alu_result_MEMtoEX_REG; // @[MEMStage.scala 93:33]
+  assign io_MEMtoEX_memory_data_MEMtoEX = dataMem_io_dataOut; // @[MEMStage.scala 94:34]
+  assign io_MEMtoIFD_rd_MEMtoIFD = io_MEMtoIFD_rd_MEMtoIFD_REG; // @[MEMStage.scala 95:27]
+  assign io_MEMtoIFD_opcode_MEMtoIFD = io_MEMtoIFD_opcode_MEMtoIFD_REG; // @[MEMStage.scala 96:31]
+  assign io_leds = MemoryMappedIO_io_leds; // @[MEMStage.scala 73:11]
+  assign io_display_seg = MemoryMappedIO_io_display_seg; // @[MEMStage.scala 75:18]
+  assign io_display_an = MemoryMappedIO_io_display_an; // @[MEMStage.scala 76:17]
   assign dataMem_clock = clock;
   assign dataMem_reset = reset;
-  assign dataMem_io_addr = io_EXtoMEM_alu_result_EXtoMEM[14:0]; // @[MEMStage.scala 86:19]
-  assign dataMem_io_enableWrite = io_EXtoMEM_data_memory_write_enable_EXtoMEM; // @[MEMStage.scala 88:26]
-  assign dataMem_io_dataIn = io_EXtoMEM_memory_write_data_EXtoMEM; // @[MEMStage.scala 87:21]
-  assign dataMem_io_alu_operation_select_EXtoMEM = io_EXtoMEM_alu_operation_select_EXtoMEM; // @[MEMStage.scala 89:43]
+  assign dataMem_io_addr = io_EXtoMEM_alu_result_EXtoMEM[14:0]; // @[MEMStage.scala 87:19]
+  assign dataMem_io_enableWrite = io_EXtoMEM_data_memory_write_enable_EXtoMEM; // @[MEMStage.scala 89:26]
+  assign dataMem_io_dataIn = io_EXtoMEM_memory_write_data_EXtoMEM; // @[MEMStage.scala 88:21]
+  assign dataMem_io_alu_operation_select_EXtoMEM = io_EXtoMEM_alu_operation_select_EXtoMEM; // @[MEMStage.scala 90:43]
   assign MemoryMappedIO_clock = clock;
   assign MemoryMappedIO_reset = reset;
-  assign MemoryMappedIO_io_address = io_EXtoMEM_alu_result_EXtoMEM; // @[MEMStage.scala 68:29]
-  assign MemoryMappedIO_io_dataIn = io_EXtoMEM_memory_write_data_EXtoMEM; // @[MEMStage.scala 67:28]
-  assign MemoryMappedIO_io_writeEnable = io_EXtoMEM_io_memory_write_enable_EXtoMEM; // @[MEMStage.scala 66:33]
-  assign MemoryMappedIO_io_readEnable = ~io_EXtoMEM_io_memory_write_enable_EXtoMEM; // @[MEMStage.scala 69:35]
-  assign MemoryMappedIO_io_switches = io_switches; // @[MEMStage.scala 73:30]
+  assign MemoryMappedIO_io_address = io_EXtoMEM_alu_result_EXtoMEM; // @[MEMStage.scala 69:29]
+  assign MemoryMappedIO_io_dataIn = io_EXtoMEM_memory_write_data_EXtoMEM; // @[MEMStage.scala 68:28]
+  assign MemoryMappedIO_io_writeEnable = io_EXtoMEM_io_memory_write_enable_EXtoMEM; // @[MEMStage.scala 67:33]
+  assign MemoryMappedIO_io_readEnable = ~io_EXtoMEM_io_memory_write_enable_EXtoMEM; // @[MEMStage.scala 70:35]
+  assign MemoryMappedIO_io_switches = io_switches; // @[MEMStage.scala 74:30]
   always @(posedge clock) begin
-    io_MEMtoWB_alu_result_MEMtoWB_REG <= io_EXtoMEM_alu_result_EXtoMEM; // @[MEMStage.scala 79:53]
-    io_MEMtoWB_register_write_enable_MEMtoWB_REG <= io_EXtoMEM_register_write_enable_EXtoMEM; // @[MEMStage.scala 80:53]
-    io_MEMtoWB_write_back_select_MEMtoWB_REG <= io_EXtoMEM_write_back_select_EXtoMEM; // @[MEMStage.scala 81:53]
-    io_MEMtoWB_rd_MEMtoWB_REG <= io_EXtoMEM_rd_EXtoMEM; // @[MEMStage.scala 82:53]
-    io_MEMtoWB_address_is_io_MEMtoWB_REG <= io_EXtoMEM_address_is_io_EXtoMEM; // @[MEMStage.scala 83:53]
-    io_MEMtoEX_alu_result_MEMtoEX_REG <= io_EXtoMEM_alu_result_EXtoMEM; // @[MEMStage.scala 92:43]
-    io_MEMtoIFD_rd_MEMtoIFD_REG <= io_EXtoMEM_rd_EXtoMEM; // @[MEMStage.scala 93:37]
-    io_MEMtoIFD_opcode_MEMtoIFD_REG <= io_EXtoMEM_opcode_EXtoMEM; // @[MEMStage.scala 94:41]
-    io_MEMtoWB_opcode_MEMtoWB_REG <= io_EXtoMEM_opcode_EXtoMEM; // @[MEMStage.scala 95:39]
+    io_MEMtoWB_alu_result_MEMtoWB_REG <= io_EXtoMEM_alu_result_EXtoMEM; // @[MEMStage.scala 80:53]
+    io_MEMtoWB_register_write_enable_MEMtoWB_REG <= io_EXtoMEM_register_write_enable_EXtoMEM; // @[MEMStage.scala 81:53]
+    io_MEMtoWB_write_back_select_MEMtoWB_REG <= io_EXtoMEM_write_back_select_EXtoMEM; // @[MEMStage.scala 82:53]
+    io_MEMtoWB_rd_MEMtoWB_REG <= io_EXtoMEM_rd_EXtoMEM; // @[MEMStage.scala 83:53]
+    io_MEMtoWB_address_is_io_MEMtoWB_REG <= io_EXtoMEM_address_is_io_EXtoMEM; // @[MEMStage.scala 84:53]
+    io_MEMtoEX_alu_result_MEMtoEX_REG <= io_EXtoMEM_alu_result_EXtoMEM; // @[MEMStage.scala 93:43]
+    io_MEMtoIFD_rd_MEMtoIFD_REG <= io_EXtoMEM_rd_EXtoMEM; // @[MEMStage.scala 95:37]
+    io_MEMtoIFD_opcode_MEMtoIFD_REG <= io_EXtoMEM_opcode_EXtoMEM; // @[MEMStage.scala 96:41]
+    io_MEMtoWB_opcode_MEMtoWB_REG <= io_EXtoMEM_opcode_EXtoMEM; // @[MEMStage.scala 97:39]
   end
 // Register and memory initialization
 `ifdef RANDOMIZE_GARBAGE_ASSIGN
@@ -3598,7 +3628,6 @@ module ProcessorTopLevel(
   wire  IFD_io_EXtoIFD_take_branch_EXtoIFD; // @[ProcessorTopLevel.scala 20:19]
   wire [31:0] IFD_io_EXtoIFD_branch_address_EXtoIFD; // @[ProcessorTopLevel.scala 20:19]
   wire [4:0] IFD_io_EXtoIFD_rd_EXtoIFD; // @[ProcessorTopLevel.scala 20:19]
-  wire [6:0] IFD_io_EXtoIFD_opcode_EXtoIFD; // @[ProcessorTopLevel.scala 20:19]
   wire [4:0] IFD_io_MEMtoIFD_rd_MEMtoIFD; // @[ProcessorTopLevel.scala 20:19]
   wire [6:0] IFD_io_MEMtoIFD_opcode_MEMtoIFD; // @[ProcessorTopLevel.scala 20:19]
   wire [4:0] IFD_io_decoded_instruction_IFDtoEX_rs1; // @[ProcessorTopLevel.scala 20:19]
@@ -3615,6 +3644,7 @@ module ProcessorTopLevel(
   wire [2:0] IFD_io_IFDtoEX_forward_enable_rs1_IFDtoEX; // @[ProcessorTopLevel.scala 20:19]
   wire [2:0] IFD_io_IFDtoEX_forward_enable_rs2_IFDtoEX; // @[ProcessorTopLevel.scala 20:19]
   wire [2:0] IFD_io_IFDtoEX_forward_enable_memory_data_IFDtoEX; // @[ProcessorTopLevel.scala 20:19]
+  wire [1:0] IFD_io_IFDtoEX_forward_choose_data_IFDtoEX; // @[ProcessorTopLevel.scala 20:19]
   wire [4:0] IFD_io_WBtoIFD_rd_WBtoIFD; // @[ProcessorTopLevel.scala 20:19]
   wire [6:0] IFD_io_WBtoIFD_opcode_WBtoIFD; // @[ProcessorTopLevel.scala 20:19]
   wire  EX_clock; // @[ProcessorTopLevel.scala 21:18]
@@ -3633,6 +3663,7 @@ module ProcessorTopLevel(
   wire [2:0] EX_io_IFDtoEX_forward_enable_rs1_IFDtoEX; // @[ProcessorTopLevel.scala 21:18]
   wire [2:0] EX_io_IFDtoEX_forward_enable_rs2_IFDtoEX; // @[ProcessorTopLevel.scala 21:18]
   wire [2:0] EX_io_IFDtoEX_forward_enable_memory_data_IFDtoEX; // @[ProcessorTopLevel.scala 21:18]
+  wire [1:0] EX_io_IFDtoEX_forward_choose_data_IFDtoEX; // @[ProcessorTopLevel.scala 21:18]
   wire [31:0] EX_io_WBtoEX_regfile_write_data_WBtoEX; // @[ProcessorTopLevel.scala 21:18]
   wire  EX_io_WBtoEX_regfile_write_enable_WBtoEX; // @[ProcessorTopLevel.scala 21:18]
   wire [4:0] EX_io_WBtoEX_rd_WBtoEX; // @[ProcessorTopLevel.scala 21:18]
@@ -3650,8 +3681,8 @@ module ProcessorTopLevel(
   wire [31:0] EX_io_EXtoIFD_branch_address_EXtoIFD; // @[ProcessorTopLevel.scala 21:18]
   wire  EX_io_EXtoIFD_take_branch_EXtoIFD; // @[ProcessorTopLevel.scala 21:18]
   wire [4:0] EX_io_EXtoIFD_rd_EXtoIFD; // @[ProcessorTopLevel.scala 21:18]
-  wire [6:0] EX_io_EXtoIFD_opcode_EXtoIFD; // @[ProcessorTopLevel.scala 21:18]
   wire [31:0] EX_io_MEMtoEX_alu_result_MEMtoEX; // @[ProcessorTopLevel.scala 21:18]
+  wire [31:0] EX_io_MEMtoEX_memory_data_MEMtoEX; // @[ProcessorTopLevel.scala 21:18]
   wire  MEM_clock; // @[ProcessorTopLevel.scala 22:20]
   wire  MEM_reset; // @[ProcessorTopLevel.scala 22:20]
   wire  MEM_io_EXtoMEM_register_write_enable_EXtoMEM; // @[ProcessorTopLevel.scala 22:20]
@@ -3673,6 +3704,7 @@ module ProcessorTopLevel(
   wire [31:0] MEM_io_MEMtoWB_data_memory_read_MEMtoWB; // @[ProcessorTopLevel.scala 22:20]
   wire [31:0] MEM_io_MEMtoWB_io_memory_read_MEMtoWB; // @[ProcessorTopLevel.scala 22:20]
   wire [31:0] MEM_io_MEMtoEX_alu_result_MEMtoEX; // @[ProcessorTopLevel.scala 22:20]
+  wire [31:0] MEM_io_MEMtoEX_memory_data_MEMtoEX; // @[ProcessorTopLevel.scala 22:20]
   wire [4:0] MEM_io_MEMtoIFD_rd_MEMtoIFD; // @[ProcessorTopLevel.scala 22:20]
   wire [6:0] MEM_io_MEMtoIFD_opcode_MEMtoIFD; // @[ProcessorTopLevel.scala 22:20]
   wire [15:0] MEM_io_switches; // @[ProcessorTopLevel.scala 22:20]
@@ -3700,7 +3732,6 @@ module ProcessorTopLevel(
     .io_EXtoIFD_take_branch_EXtoIFD(IFD_io_EXtoIFD_take_branch_EXtoIFD),
     .io_EXtoIFD_branch_address_EXtoIFD(IFD_io_EXtoIFD_branch_address_EXtoIFD),
     .io_EXtoIFD_rd_EXtoIFD(IFD_io_EXtoIFD_rd_EXtoIFD),
-    .io_EXtoIFD_opcode_EXtoIFD(IFD_io_EXtoIFD_opcode_EXtoIFD),
     .io_MEMtoIFD_rd_MEMtoIFD(IFD_io_MEMtoIFD_rd_MEMtoIFD),
     .io_MEMtoIFD_opcode_MEMtoIFD(IFD_io_MEMtoIFD_opcode_MEMtoIFD),
     .io_decoded_instruction_IFDtoEX_rs1(IFD_io_decoded_instruction_IFDtoEX_rs1),
@@ -3717,6 +3748,7 @@ module ProcessorTopLevel(
     .io_IFDtoEX_forward_enable_rs1_IFDtoEX(IFD_io_IFDtoEX_forward_enable_rs1_IFDtoEX),
     .io_IFDtoEX_forward_enable_rs2_IFDtoEX(IFD_io_IFDtoEX_forward_enable_rs2_IFDtoEX),
     .io_IFDtoEX_forward_enable_memory_data_IFDtoEX(IFD_io_IFDtoEX_forward_enable_memory_data_IFDtoEX),
+    .io_IFDtoEX_forward_choose_data_IFDtoEX(IFD_io_IFDtoEX_forward_choose_data_IFDtoEX),
     .io_WBtoIFD_rd_WBtoIFD(IFD_io_WBtoIFD_rd_WBtoIFD),
     .io_WBtoIFD_opcode_WBtoIFD(IFD_io_WBtoIFD_opcode_WBtoIFD)
   );
@@ -3737,6 +3769,7 @@ module ProcessorTopLevel(
     .io_IFDtoEX_forward_enable_rs1_IFDtoEX(EX_io_IFDtoEX_forward_enable_rs1_IFDtoEX),
     .io_IFDtoEX_forward_enable_rs2_IFDtoEX(EX_io_IFDtoEX_forward_enable_rs2_IFDtoEX),
     .io_IFDtoEX_forward_enable_memory_data_IFDtoEX(EX_io_IFDtoEX_forward_enable_memory_data_IFDtoEX),
+    .io_IFDtoEX_forward_choose_data_IFDtoEX(EX_io_IFDtoEX_forward_choose_data_IFDtoEX),
     .io_WBtoEX_regfile_write_data_WBtoEX(EX_io_WBtoEX_regfile_write_data_WBtoEX),
     .io_WBtoEX_regfile_write_enable_WBtoEX(EX_io_WBtoEX_regfile_write_enable_WBtoEX),
     .io_WBtoEX_rd_WBtoEX(EX_io_WBtoEX_rd_WBtoEX),
@@ -3754,8 +3787,8 @@ module ProcessorTopLevel(
     .io_EXtoIFD_branch_address_EXtoIFD(EX_io_EXtoIFD_branch_address_EXtoIFD),
     .io_EXtoIFD_take_branch_EXtoIFD(EX_io_EXtoIFD_take_branch_EXtoIFD),
     .io_EXtoIFD_rd_EXtoIFD(EX_io_EXtoIFD_rd_EXtoIFD),
-    .io_EXtoIFD_opcode_EXtoIFD(EX_io_EXtoIFD_opcode_EXtoIFD),
-    .io_MEMtoEX_alu_result_MEMtoEX(EX_io_MEMtoEX_alu_result_MEMtoEX)
+    .io_MEMtoEX_alu_result_MEMtoEX(EX_io_MEMtoEX_alu_result_MEMtoEX),
+    .io_MEMtoEX_memory_data_MEMtoEX(EX_io_MEMtoEX_memory_data_MEMtoEX)
   );
   MEMStage MEM ( // @[ProcessorTopLevel.scala 22:20]
     .clock(MEM_clock),
@@ -3779,6 +3812,7 @@ module ProcessorTopLevel(
     .io_MEMtoWB_data_memory_read_MEMtoWB(MEM_io_MEMtoWB_data_memory_read_MEMtoWB),
     .io_MEMtoWB_io_memory_read_MEMtoWB(MEM_io_MEMtoWB_io_memory_read_MEMtoWB),
     .io_MEMtoEX_alu_result_MEMtoEX(MEM_io_MEMtoEX_alu_result_MEMtoEX),
+    .io_MEMtoEX_memory_data_MEMtoEX(MEM_io_MEMtoEX_memory_data_MEMtoEX),
     .io_MEMtoIFD_rd_MEMtoIFD(MEM_io_MEMtoIFD_rd_MEMtoIFD),
     .io_MEMtoIFD_opcode_MEMtoIFD(MEM_io_MEMtoIFD_opcode_MEMtoIFD),
     .io_switches(MEM_io_switches),
@@ -3811,7 +3845,6 @@ module ProcessorTopLevel(
   assign IFD_io_EXtoIFD_take_branch_EXtoIFD = EX_io_EXtoIFD_take_branch_EXtoIFD; // @[ProcessorTopLevel.scala 28:18]
   assign IFD_io_EXtoIFD_branch_address_EXtoIFD = EX_io_EXtoIFD_branch_address_EXtoIFD; // @[ProcessorTopLevel.scala 28:18]
   assign IFD_io_EXtoIFD_rd_EXtoIFD = EX_io_EXtoIFD_rd_EXtoIFD; // @[ProcessorTopLevel.scala 28:18]
-  assign IFD_io_EXtoIFD_opcode_EXtoIFD = EX_io_EXtoIFD_opcode_EXtoIFD; // @[ProcessorTopLevel.scala 28:18]
   assign IFD_io_MEMtoIFD_rd_MEMtoIFD = MEM_io_MEMtoIFD_rd_MEMtoIFD; // @[ProcessorTopLevel.scala 33:19]
   assign IFD_io_MEMtoIFD_opcode_MEMtoIFD = MEM_io_MEMtoIFD_opcode_MEMtoIFD; // @[ProcessorTopLevel.scala 33:19]
   assign IFD_io_WBtoIFD_rd_WBtoIFD = WB_io_WBtoIFD_rd_WBtoIFD; // @[ProcessorTopLevel.scala 34:18]
@@ -3832,11 +3865,13 @@ module ProcessorTopLevel(
   assign EX_io_IFDtoEX_forward_enable_rs1_IFDtoEX = IFD_io_IFDtoEX_forward_enable_rs1_IFDtoEX; // @[ProcessorTopLevel.scala 26:18]
   assign EX_io_IFDtoEX_forward_enable_rs2_IFDtoEX = IFD_io_IFDtoEX_forward_enable_rs2_IFDtoEX; // @[ProcessorTopLevel.scala 26:18]
   assign EX_io_IFDtoEX_forward_enable_memory_data_IFDtoEX = IFD_io_IFDtoEX_forward_enable_memory_data_IFDtoEX; // @[ProcessorTopLevel.scala 26:18]
+  assign EX_io_IFDtoEX_forward_choose_data_IFDtoEX = IFD_io_IFDtoEX_forward_choose_data_IFDtoEX; // @[ProcessorTopLevel.scala 26:18]
   assign EX_io_WBtoEX_regfile_write_data_WBtoEX = WB_io_WBtoEX_regfile_write_data_WBtoEX; // @[ProcessorTopLevel.scala 30:16]
   assign EX_io_WBtoEX_regfile_write_enable_WBtoEX = WB_io_WBtoEX_regfile_write_enable_WBtoEX; // @[ProcessorTopLevel.scala 30:16]
   assign EX_io_WBtoEX_rd_WBtoEX = WB_io_WBtoEX_rd_WBtoEX; // @[ProcessorTopLevel.scala 30:16]
   assign EX_io_WBtoEX_alu_result_WBtoEX = WB_io_WBtoEX_alu_result_WBtoEX; // @[ProcessorTopLevel.scala 30:16]
   assign EX_io_MEMtoEX_alu_result_MEMtoEX = MEM_io_MEMtoEX_alu_result_MEMtoEX; // @[ProcessorTopLevel.scala 32:17]
+  assign EX_io_MEMtoEX_memory_data_MEMtoEX = MEM_io_MEMtoEX_memory_data_MEMtoEX; // @[ProcessorTopLevel.scala 32:17]
   assign MEM_clock = clock;
   assign MEM_reset = reset;
   assign MEM_io_EXtoMEM_register_write_enable_EXtoMEM = EX_io_EXtoMEM_register_write_enable_EXtoMEM; // @[ProcessorTopLevel.scala 29:17]
