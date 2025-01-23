@@ -1,125 +1,81 @@
 readSwitches:
-lw s11 0x490 x0
-addi t0 x0 0
-addi t1 x0 0
-andi t0 s11 1 # Run Fibonacci
-blt x0 t0 startFibonacci
-andi t1 s11 2 # Run Mexican wave
-blt x0 t1 startMexican
-beq x0 x0 startRISCY # When in doubt, run RISCYwBUSINESS
+    lh s11 0x490 x0
+    nop
+    nop
+    nop
+    addi t0 x0 0
+    addi t1 x0 0
+    andi t0 s11 1
+    blt x0 t0 startFibonacci # Run Fibonacci
+    nop
+    andi t1 s11 2
+    blt x0 t1 startMexican # Run Mexican wave
+    nop
+    j startRISCY # When in doubt, run RISCYwBUSINESS
+    nop
 
-#--------------------------------------------RISCYwBUSINESS--------------------------------------------#
-startRISCY:
-addi x10 x0 0x410 # Address of IO::display
-
-# Store each character in the string "RISCYwBUSINESS"
-li t0 0x52
-li t1 0x49
-li t2 0x53
-li t3 0x43
-li t4 0x59
-li t5 0x77
-sb t0, 0(x10)        # 'R' -> 0x52
-sb t1, 1(x10)        # 'I' -> 0x49
-sb t2, 2(x10)        # 'S' -> 0x53
-sb t3, 3(x10)        # 'C' -> 0x43
-sb t4, 4(x10)        # 'Y' -> 0x59
-sb t5, 5(x10)        # 'w' -> 0x77
-li t0 0x42
-li t1 0x55
-li t2 0x53
-li t3 0x49
-li t4 0x4E
-li t5 0x45
-sb t0, 6(x10)        # 'B' -> 0x42
-sb t1, 7(x10)        # 'U' -> 0x55
-sb t2, 8(x10)        # 'S' -> 0x53
-sb t3, 9(x10)        # 'I' -> 0x49
-sb t4, 10(x10)       # 'N' -> 0x4E
-sb t5, 11(x10)       # 'E' -> 0x45
-li t0 0x53
-li t1 0x53
-nop
-nop
-sb t0, 12(x10)       # 'S' -> 0x53
-sb t1, 13(x10)       # 'S' -> 0x53
-
-endRISCY:
-lw t0 0x490 x0
-nop
-beq t0 s11 endRISCY
-# Reset display
-addi t0 x0 0
-sb t0, 0(x10)
-sb t0, 1(x10)
-sb t0, 2(x10)
-sb t0, 3(x10)
-sb t0, 4(x10)
-sb t0, 5(x10)
-sb t0, 6(x10)
-sb t1, 7(x10)
-sb t2, 8(x10)
-sb t3, 9(x10)
-sb t4, 10(x10)
-sb t5, 11(x10)
-sb t0, 12(x10)
-sb t1, 13(x10)
-beq x0 x0 readSwitches # Jump back to readSwitches if there is a change
-
-#--------------------------------------------FIBONACCI--------------------------------------------#
-# Setting up counter
+#-----------------------------FIBONACCI-----------------------------#
 startFibonacci:
-lui s0 8057 # Set counter target to 33 million
-addi s1 x0 0
-lui s2 16 # Set max value of Fibonacci
+    # Setting up counter
+    lui s0 8057 # Set counter target to 33 million
+    addi s1 x0 0 # Reset counter
+    lui s2 16 # Set max value of Fibonacci
+    nop
 
-# Starting conditions
-addi t0 x0 0
-sh t0 1072 x0
-jal ra oneSecDelay
-addi t1 x0 1
-sh t0 1072 x0
-jal ra oneSecDelay
+    addi t0 x0 0
+    sh t0 1072 x0
+    jal ra oneSecDelay
+    addi t1 x0 1
+    sh t0 1072 x0
+    jal ra oneSecDelay
 
-sequence:
-add t2 t0 t1
-sh t2 1072 x0
-jal ra oneSecDelay
-add t0 t1 t2
-sh t0 1072 x0
-jal ra oneSecDelay
-add t1 t0 t2
-sh t1 1072 x0
-jal ra oneSecDelay
-bge t1 s2 startFibonacci # Restart Fibonacci if number gets too big
-beq x0 x0 sequence # Keep calculating Fibonacci
+    sequence:
+    add t2 t0 t1
+    sh t2 1072 x0
+    jal ra oneSecDelay
+    add t0 t1 t2
+    sh t0 1072 x0
+    jal ra oneSecDelay
+    add t1 t0 t2
+    sh t1 1072 x0
+    jal ra oneSecDelay
+    bge t1 s2 startFibonacci # Restart Fibonacci if number gets too big
+    nop
+    j sequence # Keep calculating Fibonacci
 
-oneSecDelay:
-addi s1 s1 1
-blt s1 s0 oneSecDelay # Count to 33 million
-nop # Necessary to avoid forwarding wrong value
-addi s1 x0 0 # Reset counter
-jalr ra ra 0
+    oneSecDelay:
+    addi s1 s1 1
+    blt s1 s0 oneSecDelay # Count to 33 million
+    nop # Necessary to avoid forwarding wrong value
+    addi s1 x0 0 # Reset counter
+    lh s10 0x490 x0 # Check if switches have changed
+    nop
+    nop
+    nop
+    bne s11 s10 reset_LEDs # Reset LEDs and then jump back to read switches
+    nop
+    jalr ra ra 0 # Jump back into sequence loop
+    nop
 
-#--------------------------------------------MEXICANWAVE--------------------------------------------#
+#-----------------------------MEXICAN_WAVE-----------------------------#
 startMexican:
-# Turn on all LEDs in led_reg
-li t0 0x430 # led_reg address
-li t6 0xFFFF # Enable all LEDs
-sw t6 0(t0)  # Store to MemoryMappedIO
+    # Turn on all LEDs in led_reg
+    li t0 0x430 # led_reg address
+    li t6 0xFFFF # Enable all LEDs
+    sw t6 0(t0)  # Store to MemoryMappedIO
 
-li t0 0xFFFFFFEF # Value for setting bit 4 = 0
-li t1 0x440 # pwm_reg base address
-li t2 0x00 # base_pwm_shift
-# LED PWM values
-li s0 0
-li s1 6
-li s2 30
-li s3 255
-li s4 255
-li s5 30
-li s6 6
-li s7 0
+    li t0 0xFFFFFFEF # Value for setting bit 4 = 0
+    li t1 0x440 # pwm_reg base address
+    li t2 0x00 # base_pwm_shift
+    # LED PWM values
+    li s0 0
+    li s1 6
+    li s2 30
+    li s3 255
+    li s4 255
+    li s5 30
+    li s6 6
+    li s7 0
 store_pwm_values: # Cycle through PWM values on each LED
 	add t6 t2 t1	# current_pwm_address
     sb s0 0(t6)	# Store PWM
@@ -178,14 +134,18 @@ counter:
 counter_loop:
 	addi t4 t4 1	# increment counter
     blt t4 t5 counter_loop
-    nop # Justin Case
-    nop # Justin Case
-	lw t0 0x490 x0
-	nop
-	beq t0 s11 store_pwm_values
     nop
-    li t0 0xFF
-    sb t0 0(t1)
+    lh s10 0x490 x0 # Check if switches have changed
+    nop
+    nop
+    nop
+    bne s11 s10 reset_LEDs # Reset LEDs and then jump back to read switches
+    nop
+    j store_pwm_values
+    nop
+reset_LEDs:
+	li t0 0xFF
+	sb t0 0(t1)
     sb t0 1(t1)
     sb t0 2(t1)
     sb t0 3(t1)
@@ -203,6 +163,77 @@ counter_loop:
     sb t0 15(t1)
     li t0 0x0 # no bits on
     li t1 0x430 # led_reg address
-    sh t0 0(t1) # turn off all leds'
+    sh t0 0(t1) # turn off all leds
+    nop
     j readSwitches
+    nop
+
+#-----------------------------RISCYwBUSINESS-----------------------------#
+startRISCY:
+	addi x10 x0 0x410 # Address of IO::display
+
+    # Store each character in the string "RISCYwBUSINESS"
+    li t0 0x52
+    li t1 0x49
+    li t2 0x53
+    li t3 0x43
+    li t4 0x59
+    li t5 0x77
+    sb t0, 0(x10)        # 'R' -> 0x52
+    sb t1, 1(x10)        # 'I' -> 0x49
+    sb t2, 2(x10)        # 'S' -> 0x53
+    sb t3, 3(x10)        # 'C' -> 0x43
+    sb t4, 4(x10)        # 'Y' -> 0x59
+    sb t5, 5(x10)        # 'w' -> 0x77
+    li t0 0x42
+    li t1 0x55
+    li t2 0x53
+    li t3 0x49
+    li t4 0x4E
+    li t5 0x45
+    sb t0, 6(x10)        # 'B' -> 0x42
+    sb t1, 7(x10)        # 'U' -> 0x55
+    sb t2, 8(x10)        # 'S' -> 0x53
+    sb t3, 9(x10)        # 'I' -> 0x49
+    sb t4, 10(x10)       # 'N' -> 0x4E
+    sb t5, 11(x10)       # 'E' -> 0x45
+    li t0 0x53
+    li t1 0x53
+    nop
+    nop
+    sb t0, 12(x10)       # 'S' -> 0x53
+    sb t1, 13(x10)       # 'S' -> 0x53
+    nop
+
+loopRISCY:
+    lh s10 0x490 x0 # Check if switches have changed
+    nop
+    nop
+    nop
+    bne s11 s10 endRISCY # Reset 7-seg and then jump back to read switches
+    nop
+    j loopRISCY
+    nop
+
+endRISCY:
+    sb x0, 0(x10)
+    sb x0, 1(x10)
+    sb x0, 2(x10)
+    sb x0, 3(x10)
+    sb x0, 4(x10)
+    sb x0, 5(x10)
+    sb x0, 6(x10)
+    sb x0, 7(x10)
+    sb x0, 8(x10)
+    sb x0, 9(x10)
+    sb x0, 10(x10)
+    sb x0, 11(x10)
+    sb x0, 12(x10)
+    sb x0, 13(x10)
+    nop
+	j readSwitches
+    nop
+
+
+
 

@@ -54,7 +54,7 @@ class IFDStage(val program: Seq[UInt]) extends Module {
   PC := NextInstrAdd
 
   // Instruction memory
-  val instrMem = Module(new InstrMemory(256,10,program))
+  val instrMem = Module(new InstrMemory(512,11,program))
   instrMem.io.addr := NextInstrAdd >> 2.U
 
   //Instruction Decoder
