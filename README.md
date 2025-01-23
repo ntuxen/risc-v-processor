@@ -9,6 +9,7 @@ The long rectangles between stages should not be thought of as pipeline register
 Pipeline registers are included at the start of each stage.
 ## Detailed Diagram of Data Memory Logic
 <img src="images/DataMemory-Diagram.svg" alt="Data Memory Diagram" width="100%;">
+
 # **How to write to peripherals**
 
 # **Vivado Settings**
