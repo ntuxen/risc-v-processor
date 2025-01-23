@@ -24,6 +24,7 @@ beq x0 x0 sequence
 oneSecDelay:
 addi x11 x11 1
 blt x11 x10 oneSecDelay # Count to 33 million
+nop # Necessary to avoid forwarding wrong value
 addi x11 x0 0 # Reset counter
 jalr x20 x20 0
 

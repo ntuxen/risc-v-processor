@@ -1,6 +1,6 @@
 # Fibonacci code
 # Setting up counter
-addi x10, x0, 10 # Load counter with 10
+addi x10, x0, 5 # Load counter with 5
 addi x11 x0 0
 
 # Starting conditions
@@ -23,6 +23,7 @@ beq x0 x0 sequence
 
 oneSecDelay:
 addi x11 x11 1
-blt x11 x10 oneSecDelay # Count to 10
+blt x11 x10 oneSecDelay # Count to 5
+nop # Necessary to avoid forwarding wrong value
 addi x11 x0 0 # Reset counter
 jalr x20 x20 0
