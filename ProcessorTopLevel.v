@@ -8,7 +8,7 @@ module InstrMemory(
   reg [31:0] _RAND_0;
 `endif // RANDOMIZE_REG_INIT
   reg [31:0] io_dataOut_REG; // @[InstrMemory.scala 43:24]
-  wire [31:0] _GEN_1 = 8'h1 == io_addr[7:0] ? 32'h593 : 32'h5f5e537; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_1 = 8'h1 == io_addr[7:0] ? 32'h593 : 32'h1f79537; // @[InstrMemory.scala 43:{24,24}]
   wire [31:0] _GEN_2 = 8'h2 == io_addr[7:0] ? 32'h93 : _GEN_1; // @[InstrMemory.scala 43:{24,24}]
   wire [31:0] _GEN_3 = 8'h3 == io_addr[7:0] ? 32'h100113 : _GEN_2; // @[InstrMemory.scala 43:{24,24}]
   wire [31:0] _GEN_4 = 8'h4 == io_addr[7:0] ? 32'h2081b3 : _GEN_3; // @[InstrMemory.scala 43:{24,24}]
@@ -2557,45 +2557,249 @@ module MemoryMappedLeds(
   reg [31:0] _RAND_3;
   reg [31:0] _RAND_4;
   reg [31:0] _RAND_5;
+  reg [31:0] _RAND_6;
+  reg [31:0] _RAND_7;
+  reg [31:0] _RAND_8;
+  reg [31:0] _RAND_9;
+  reg [31:0] _RAND_10;
+  reg [31:0] _RAND_11;
+  reg [31:0] _RAND_12;
+  reg [31:0] _RAND_13;
+  reg [31:0] _RAND_14;
+  reg [31:0] _RAND_15;
+  reg [31:0] _RAND_16;
+  reg [31:0] _RAND_17;
+  reg [31:0] _RAND_18;
+  reg [31:0] _RAND_19;
+  reg [31:0] _RAND_20;
 `endif // RANDOMIZE_REG_INIT
   reg [15:0] led_reg; // @[MemoryMappedLeds.scala 28:24]
-  reg [7:0] pwm_reg; // @[MemoryMappedLeds.scala 29:24]
-  reg [7:0] pwm_counter; // @[MemoryMappedLeds.scala 30:28]
-  reg [11:0] clk_prescaler; // @[MemoryMappedLeds.scala 31:30]
-  wire [11:0] _clk_prescaler_T_1 = clk_prescaler + 12'h1; // @[MemoryMappedLeds.scala 33:34]
-  wire  _T = io_port_addr == 32'h30; // @[MemoryMappedLeds.scala 37:23]
-  wire [31:0] _GEN_0 = io_port_addr == 32'h30 ? io_port_wrData : {{16'd0}, led_reg}; // @[MemoryMappedLeds.scala 37:46 38:15 28:24]
-  wire [31:0] _GEN_1 = io_port_addr == 32'h30 ? {{24'd0}, pwm_reg} : io_port_wrData; // @[MemoryMappedLeds.scala 29:24 37:46 40:15]
-  wire [31:0] _GEN_2 = io_port_write ? _GEN_0 : {{16'd0}, led_reg}; // @[MemoryMappedLeds.scala 36:23 28:24]
-  wire [31:0] _GEN_3 = io_port_write ? _GEN_1 : {{24'd0}, pwm_reg}; // @[MemoryMappedLeds.scala 36:23 29:24]
-  reg [15:0] rdData; // @[MemoryMappedLeds.scala 45:23]
-  reg [15:0] io_port_rdData_REG; // @[MemoryMappedLeds.scala 54:28]
-  wire [7:0] _pwm_counter_T_1 = pwm_counter + 8'h1; // @[MemoryMappedLeds.scala 58:32]
-  wire [31:0] _GEN_8 = reset ? 32'h0 : _GEN_2; // @[MemoryMappedLeds.scala 28:{24,24}]
-  wire [31:0] _GEN_9 = reset ? 32'hff : _GEN_3; // @[MemoryMappedLeds.scala 29:{24,24}]
-  assign io_port_rdData = {{16'd0}, io_port_rdData_REG}; // @[MemoryMappedLeds.scala 54:18]
-  assign io_pins = pwm_reg >= pwm_counter ? led_reg : 16'h0; // @[MemoryMappedLeds.scala 60:32 61:13 63:13]
+  reg [7:0] pwm_reg_0; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_1; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_2; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_3; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_4; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_5; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_6; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_7; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_8; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_9; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_10; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_11; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_12; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_13; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_14; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_reg_15; // @[MemoryMappedLeds.scala 30:24]
+  reg [7:0] pwm_counter; // @[MemoryMappedLeds.scala 31:28]
+  reg [11:0] clk_prescaler; // @[MemoryMappedLeds.scala 32:30]
+  wire [11:0] _clk_prescaler_T_1 = clk_prescaler + 12'h1; // @[MemoryMappedLeds.scala 34:34]
+  wire [31:0] pwm_addr = io_port_addr - 32'h40; // @[MemoryMappedLeds.scala 37:31]
+  wire [7:0] _GEN_0 = 4'h0 == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_0; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_1 = 4'h1 == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_1; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_2 = 4'h2 == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_2; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_3 = 4'h3 == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_3; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_4 = 4'h4 == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_4; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_5 = 4'h5 == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_5; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_6 = 4'h6 == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_6; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_7 = 4'h7 == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_7; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_8 = 4'h8 == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_8; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_9 = 4'h9 == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_9; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_10 = 4'ha == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_10; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_11 = 4'hb == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_11; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_12 = 4'hc == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_12; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_13 = 4'hd == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_13; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_14 = 4'he == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_14; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [7:0] _GEN_15 = 4'hf == pwm_addr[3:0] ? io_port_wrData[7:0] : pwm_reg_15; // @[MemoryMappedLeds.scala 30:24 42:{25,25}]
+  wire [31:0] _GEN_32 = io_port_addr == 32'h30 ? io_port_wrData : {{16'd0}, led_reg}; // @[MemoryMappedLeds.scala 39:46 40:15 28:24]
+  wire [31:0] _GEN_49 = io_port_write ? _GEN_32 : {{16'd0}, led_reg}; // @[MemoryMappedLeds.scala 38:23 28:24]
+  reg [15:0] rdData; // @[MemoryMappedLeds.scala 47:23]
+  reg [15:0] io_port_rdData_REG; // @[MemoryMappedLeds.scala 56:28]
+  wire [7:0] _pwm_counter_T_1 = pwm_counter + 8'h1; // @[MemoryMappedLeds.scala 60:32]
+  wire  led_state_0 = pwm_reg_0 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_1 = pwm_reg_1 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_2 = pwm_reg_2 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_3 = pwm_reg_3 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_4 = pwm_reg_4 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_5 = pwm_reg_5 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_6 = pwm_reg_6 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_7 = pwm_reg_7 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_8 = pwm_reg_8 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_9 = pwm_reg_9 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_10 = pwm_reg_10 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_11 = pwm_reg_11 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_12 = pwm_reg_12 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_13 = pwm_reg_13 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_14 = pwm_reg_14 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire  led_state_15 = pwm_reg_15 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
+  wire [7:0] io_pins_lo = {led_state_7,led_state_6,led_state_5,led_state_4,led_state_3,led_state_2,led_state_1,
+    led_state_0}; // @[Cat.scala 33:92]
+  wire [7:0] io_pins_hi = {led_state_15,led_state_14,led_state_13,led_state_12,led_state_11,led_state_10,led_state_9,
+    led_state_8}; // @[Cat.scala 33:92]
+  wire [31:0] _GEN_69 = reset ? 32'h0 : _GEN_49; // @[MemoryMappedLeds.scala 28:{24,24}]
+  assign io_port_rdData = {{16'd0}, io_port_rdData_REG}; // @[MemoryMappedLeds.scala 56:18]
+  assign io_pins = {io_pins_hi,io_pins_lo}; // @[Cat.scala 33:92]
   always @(posedge clock) begin
-    led_reg <= _GEN_8[15:0]; // @[MemoryMappedLeds.scala 28:{24,24}]
-    pwm_reg <= _GEN_9[7:0]; // @[MemoryMappedLeds.scala 29:{24,24}]
-    if (reset) begin // @[MemoryMappedLeds.scala 30:28]
-      pwm_counter <= 8'h0; // @[MemoryMappedLeds.scala 30:28]
-    end else if (clk_prescaler == 12'h0) begin // @[MemoryMappedLeds.scala 57:31]
-      pwm_counter <= _pwm_counter_T_1; // @[MemoryMappedLeds.scala 58:17]
+    led_reg <= _GEN_69[15:0]; // @[MemoryMappedLeds.scala 28:{24,24}]
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_0 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_0 <= _GEN_0;
+        end
+      end
     end
-    if (reset) begin // @[MemoryMappedLeds.scala 31:30]
-      clk_prescaler <= 12'h0; // @[MemoryMappedLeds.scala 31:30]
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_1 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_1 <= _GEN_1;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_2 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_2 <= _GEN_2;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_3 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_3 <= _GEN_3;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_4 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_4 <= _GEN_4;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_5 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_5 <= _GEN_5;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_6 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_6 <= _GEN_6;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_7 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_7 <= _GEN_7;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_8 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_8 <= _GEN_8;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_9 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_9 <= _GEN_9;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_10 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_10 <= _GEN_10;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_11 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_11 <= _GEN_11;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_12 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_12 <= _GEN_12;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_13 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_13 <= _GEN_13;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_14 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_14 <= _GEN_14;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 30:24]
+      pwm_reg_15 <= 8'hff; // @[MemoryMappedLeds.scala 30:24]
+    end else if (io_port_write) begin // @[MemoryMappedLeds.scala 38:23]
+      if (!(io_port_addr == 32'h30)) begin // @[MemoryMappedLeds.scala 39:46]
+        if (pwm_addr < 32'h10) begin // @[MemoryMappedLeds.scala 41:37]
+          pwm_reg_15 <= _GEN_15;
+        end
+      end
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 31:28]
+      pwm_counter <= 8'h0; // @[MemoryMappedLeds.scala 31:28]
+    end else if (clk_prescaler == 12'h0) begin // @[MemoryMappedLeds.scala 59:31]
+      pwm_counter <= _pwm_counter_T_1; // @[MemoryMappedLeds.scala 60:17]
+    end
+    if (reset) begin // @[MemoryMappedLeds.scala 32:30]
+      clk_prescaler <= 12'h0; // @[MemoryMappedLeds.scala 32:30]
     end else begin
-      clk_prescaler <= _clk_prescaler_T_1; // @[MemoryMappedLeds.scala 33:17]
+      clk_prescaler <= _clk_prescaler_T_1; // @[MemoryMappedLeds.scala 34:17]
     end
-    if (reset) begin // @[MemoryMappedLeds.scala 45:23]
-      rdData <= 16'h0; // @[MemoryMappedLeds.scala 45:23]
-    end else if (_T) begin // @[MemoryMappedLeds.scala 48:46]
-      rdData <= led_reg; // @[MemoryMappedLeds.scala 49:14]
+    if (reset) begin // @[MemoryMappedLeds.scala 47:23]
+      rdData <= 16'h0; // @[MemoryMappedLeds.scala 47:23]
     end else begin
-      rdData <= {{8'd0}, pwm_reg}; // @[MemoryMappedLeds.scala 51:14]
+      rdData <= led_reg;
     end
-    io_port_rdData_REG <= rdData; // @[MemoryMappedLeds.scala 54:28]
+    io_port_rdData_REG <= rdData; // @[MemoryMappedLeds.scala 56:28]
   end
 // Register and memory initialization
 `ifdef RANDOMIZE_GARBAGE_ASSIGN
@@ -2636,15 +2840,45 @@ initial begin
   _RAND_0 = {1{`RANDOM}};
   led_reg = _RAND_0[15:0];
   _RAND_1 = {1{`RANDOM}};
-  pwm_reg = _RAND_1[7:0];
+  pwm_reg_0 = _RAND_1[7:0];
   _RAND_2 = {1{`RANDOM}};
-  pwm_counter = _RAND_2[7:0];
+  pwm_reg_1 = _RAND_2[7:0];
   _RAND_3 = {1{`RANDOM}};
-  clk_prescaler = _RAND_3[11:0];
+  pwm_reg_2 = _RAND_3[7:0];
   _RAND_4 = {1{`RANDOM}};
-  rdData = _RAND_4[15:0];
+  pwm_reg_3 = _RAND_4[7:0];
   _RAND_5 = {1{`RANDOM}};
-  io_port_rdData_REG = _RAND_5[15:0];
+  pwm_reg_4 = _RAND_5[7:0];
+  _RAND_6 = {1{`RANDOM}};
+  pwm_reg_5 = _RAND_6[7:0];
+  _RAND_7 = {1{`RANDOM}};
+  pwm_reg_6 = _RAND_7[7:0];
+  _RAND_8 = {1{`RANDOM}};
+  pwm_reg_7 = _RAND_8[7:0];
+  _RAND_9 = {1{`RANDOM}};
+  pwm_reg_8 = _RAND_9[7:0];
+  _RAND_10 = {1{`RANDOM}};
+  pwm_reg_9 = _RAND_10[7:0];
+  _RAND_11 = {1{`RANDOM}};
+  pwm_reg_10 = _RAND_11[7:0];
+  _RAND_12 = {1{`RANDOM}};
+  pwm_reg_11 = _RAND_12[7:0];
+  _RAND_13 = {1{`RANDOM}};
+  pwm_reg_12 = _RAND_13[7:0];
+  _RAND_14 = {1{`RANDOM}};
+  pwm_reg_13 = _RAND_14[7:0];
+  _RAND_15 = {1{`RANDOM}};
+  pwm_reg_14 = _RAND_15[7:0];
+  _RAND_16 = {1{`RANDOM}};
+  pwm_reg_15 = _RAND_16[7:0];
+  _RAND_17 = {1{`RANDOM}};
+  pwm_counter = _RAND_17[7:0];
+  _RAND_18 = {1{`RANDOM}};
+  clk_prescaler = _RAND_18[11:0];
+  _RAND_19 = {1{`RANDOM}};
+  rdData = _RAND_19[15:0];
+  _RAND_20 = {1{`RANDOM}};
+  io_port_rdData_REG = _RAND_20[15:0];
 `endif // RANDOMIZE_REG_INIT
   `endif // RANDOMIZE
 end // initial
@@ -3211,12 +3445,12 @@ module MemoryMappedIO(
   wire [3:0] display_io_display_an; // @[MemoryMappedIO.scala 44:23]
   wire [31:0] _address_io_T_1 = io_address - 32'h400; // @[MemoryMappedIO.scala 47:32]
   wire [7:0] address_io = _address_io_T_1[7:0]; // @[MemoryMappedIO.scala 47:53]
-  wire  is_led = address_io == 8'h30 | address_io == 8'h31; // @[MemoryMappedIO.scala 51:49]
-  wire  is_display = 8'h10 <= address_io & address_io <= 8'h20; // @[MemoryMappedIO.scala 74:57]
+  wire  is_led = address_io == 8'h30 | 8'h40 <= address_io & address_io < 8'h50; // @[MemoryMappedIO.scala 51:49]
+  wire  is_display = 8'h10 <= address_io & address_io < 8'h20; // @[MemoryMappedIO.scala 74:57]
   reg [7:0] REG; // @[MemoryMappedIO.scala 84:25]
   reg [7:0] REG_1; // @[MemoryMappedIO.scala 84:17]
-  wire [31:0] _GEN_0 = 8'h40 == REG_1 ? sw_io_port_rdData : 32'h0; // @[MemoryMappedIO.scala 84:40 89:15 83:28]
-  wire [31:0] dataOut = 8'h30 == REG_1 | 8'h31 == REG_1 ? leds_io_port_rdData : _GEN_0; // @[MemoryMappedIO.scala 84:40 86:15]
+  wire [31:0] _GEN_0 = 8'h90 == REG_1 ? sw_io_port_rdData : 32'h0; // @[MemoryMappedIO.scala 84:40 89:15 83:28]
+  wire [31:0] dataOut = 8'h30 == REG_1 | 8'h40 == REG_1 ? leds_io_port_rdData : _GEN_0; // @[MemoryMappedIO.scala 84:40 86:15]
   reg  REG_2; // @[MemoryMappedIO.scala 95:23]
   reg  REG_3; // @[MemoryMappedIO.scala 95:15]
   MemoryMappedLeds leds ( // @[MemoryMappedIO.scala 37:20]

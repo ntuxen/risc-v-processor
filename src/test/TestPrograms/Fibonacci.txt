@@ -1,6 +1,6 @@
 # Fibonacci code
 # Setting up counter
-lui x10 24414 # Set counter target to 10 million
+lui x10 8057 # Set counter target to 33 million
 addi x11 x0 0
 
 # Starting conditions
@@ -23,7 +23,7 @@ beq x0 x0 sequence
 
 oneSecDelay:
 addi x11 x11 1
-blt x11 x10 oneSecDelay # Count to 10 million
+blt x11 x10 oneSecDelay # Count to 33 million
 addi x11 x0 0 # Reset counter
 jalr x20 x20 0
 
