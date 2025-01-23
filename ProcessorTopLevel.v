@@ -23,9 +23,9 @@ module InstrMemory(
   wire [31:0] _GEN_13 = 8'hd == io_addr[7:0] ? 32'hfc000ee3 : _GEN_12; // @[InstrMemory.scala 43:{24,24}]
   wire [31:0] _GEN_14 = 8'he == io_addr[7:0] ? 32'h158593 : _GEN_13; // @[InstrMemory.scala 43:{24,24}]
   wire [31:0] _GEN_15 = 8'hf == io_addr[7:0] ? 32'hfea5cee3 : _GEN_14; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_16 = 8'h10 == io_addr[7:0] ? 32'h593 : _GEN_15; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_17 = 8'h11 == io_addr[7:0] ? 32'ha0a67 : _GEN_16; // @[InstrMemory.scala 43:{24,24}]
-  wire [31:0] _GEN_18 = 8'h12 == io_addr[7:0] ? 32'h13 : _GEN_17; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_16 = 8'h10 == io_addr[7:0] ? 32'h13 : _GEN_15; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_17 = 8'h11 == io_addr[7:0] ? 32'h593 : _GEN_16; // @[InstrMemory.scala 43:{24,24}]
+  wire [31:0] _GEN_18 = 8'h12 == io_addr[7:0] ? 32'ha0a67 : _GEN_17; // @[InstrMemory.scala 43:{24,24}]
   wire [31:0] _GEN_19 = 8'h13 == io_addr[7:0] ? 32'h13 : _GEN_18; // @[InstrMemory.scala 43:{24,24}]
   wire [31:0] _GEN_20 = 8'h14 == io_addr[7:0] ? 32'h13 : _GEN_19; // @[InstrMemory.scala 43:{24,24}]
   wire [31:0] _GEN_21 = 8'h15 == io_addr[7:0] ? 32'h13 : _GEN_20; // @[InstrMemory.scala 43:{24,24}]
@@ -2631,13 +2631,13 @@ module MemoryMappedLeds(
   wire  led_state_13 = pwm_reg_13 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
   wire  led_state_14 = pwm_reg_14 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
   wire  led_state_15 = pwm_reg_15 >= pwm_counter; // @[MemoryMappedLeds.scala 64:32]
-  wire [7:0] io_pins_lo = {led_state_7,led_state_6,led_state_5,led_state_4,led_state_3,led_state_2,led_state_1,
+  wire [7:0] cat_led_state_lo = {led_state_7,led_state_6,led_state_5,led_state_4,led_state_3,led_state_2,led_state_1,
     led_state_0}; // @[Cat.scala 33:92]
-  wire [7:0] io_pins_hi = {led_state_15,led_state_14,led_state_13,led_state_12,led_state_11,led_state_10,led_state_9,
-    led_state_8}; // @[Cat.scala 33:92]
+  wire [15:0] cat_led_state = {led_state_15,led_state_14,led_state_13,led_state_12,led_state_11,led_state_10,led_state_9
+    ,led_state_8,cat_led_state_lo}; // @[Cat.scala 33:92]
   wire [31:0] _GEN_69 = reset ? 32'h0 : _GEN_49; // @[MemoryMappedLeds.scala 28:{24,24}]
   assign io_port_rdData = {{16'd0}, io_port_rdData_REG}; // @[MemoryMappedLeds.scala 56:18]
-  assign io_pins = {io_pins_hi,io_pins_lo}; // @[Cat.scala 33:92]
+  assign io_pins = cat_led_state & led_reg; // @[MemoryMappedLeds.scala 67:28]
   always @(posedge clock) begin
     led_reg <= _GEN_69[15:0]; // @[MemoryMappedLeds.scala 28:{24,24}]
     if (reset) begin // @[MemoryMappedLeds.scala 30:24]

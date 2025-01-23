@@ -26,6 +26,8 @@ The LEDs have PWM. The first address (0x30) points to a 16-bit register, which a
 The state of the switches can be loaded as 16-bit wide integer on address 0x90.
 
 # **Vivado Settings**
+Changing synthesis and implementation can be done by pressing the small gear icon in the menu at the top of Vivado. Under "Project Settings", navigate to "Synthesis" and change the strategy to "Flow_PerfOptimized_high". The strategy under "Implementation" has to be changed to "Performance_ExplorePostRoutePhysOpt". 
 
+These settings should help with designing a more timing-optimized configuration.
 
 
