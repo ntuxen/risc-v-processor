@@ -76,3 +76,24 @@ counter_loop:
     nop # Justin Case
     nop # Justin Case
     j store_pwm_values
+reset_LEDs:
+	li t0 0xFF
+	sb t0 0(t1)
+    sb t0 1(t1)
+    sb t0 2(t1)
+    sb t0 3(t1)
+    sb t0 4(t1)
+    sb t0 5(t1)
+    sb t0 6(t1)
+    sb t0 7(t1)
+    sb t0 8(t1)
+    sb t0 9(t1)
+    sb t0 10(t1)
+    sb t0 11(t1)
+    sb t0 12(t1)
+    sb t0 13(t1)
+    sb t0 14(t1)
+    sb t0 15(t1)
+    li t0 0x0 # no bits on
+    li t1 0x430 # led_reg address
+    sh t0 0(t1) # turn off all leds

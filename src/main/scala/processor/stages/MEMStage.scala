@@ -59,7 +59,6 @@ class MEMStage(clock_freq: Int) extends Module {
   })
 
   //DataMemory Module
-  //val dataMem = Module(new DataMemoryTest(1024,10))
   val dataMem = Module(new DataMemory(32768,15)) // Initialize a huge module to force chisel to make more optimal verilog code
 
   // Memory-mapped IO

@@ -13,6 +13,7 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
     val display = new Bundle {
       val seg = Output(UInt(7.W))
       val an = Output(UInt(4.W))
+      val dp = Output(UInt(1.W))
     }
   })
 
@@ -38,6 +39,7 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
   MEM.io.switches := io.sw
   io.display.seg := MEM.io.display.seg
   io.display.an := MEM.io.display.an
+  io.display.dp := true.B // turn off dot on display
 
 }
 
