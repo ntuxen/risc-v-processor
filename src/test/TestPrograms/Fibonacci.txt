@@ -1,35 +1,35 @@
 # Fibonacci code
 # Setting up counter
-lui x10 8057 # Set counter target to 33 million
-addi x11 x0 0
-lui x12 16 # Set max value of Fibonacci
+lui s0 8057 # Set counter target to 33 million
+addi s1 x0 0
+lui s2 16 # Set max value of Fibonacci
 
 # Starting conditions
 startFibonacci:
-addi x1 x0 0
-sh x1 1072 x0
-jal x20 oneSecDelay
-addi x2 x0 1
-sh x1 1072 x0
-jal x20 oneSecDelay
+addi t0 x0 0
+sh t0 1072 x0
+jal ra oneSecDelay
+addi t1 x0 1
+sh t0 1072 x0
+jal ra oneSecDelay
 
 sequence:
-add x3 x1 x2
-sh x3 1072 x0
-jal x20 oneSecDelay
-add x1 x2 x3
-sh x1 1072 x0
-jal x20 oneSecDelay
-add x2 x1 x3
-sh x2 1072 x0
-jal x20 oneSecDelay
-bge x2 x12 startFibonacci # Restart Fibonacci if number gets too big
+add t2 t0 t1
+sh t2 1072 x0
+jal ra oneSecDelay
+add t0 t1 t2
+sh t0 1072 x0
+jal ra oneSecDelay
+add t1 t0 t2
+sh t1 1072 x0
+jal ra oneSecDelay
+bge t1 s2 startFibonacci # Restart Fibonacci if number gets too big
 beq x0 x0 sequence # Keep calculating Fibonacci
 
 oneSecDelay:
-addi x11 x11 1
-blt x11 x10 oneSecDelay # Count to 33 million
+addi s1 s1 1
+blt s1 s0 oneSecDelay # Count to 33 million
 nop # Necessary to avoid forwarding wrong value
-addi x11 x0 0 # Reset counter
-jalr x20 x20 0
+addi s1 x0 0 # Reset counter
+jalr ra ra 0
 
