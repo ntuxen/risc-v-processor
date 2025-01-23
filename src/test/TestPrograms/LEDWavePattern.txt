@@ -14,39 +14,57 @@ li s6 6
 li s7 0
 
 # Turn on all LEDs
-li t6 0xFFFF # All LEDs high
+li t6 0xFF # All LEDs high
 sw t6 0(t0)  # Store to MemoryMappedIO
 
 store_pwm_values: # Cycle through PWM values on each LED
 	add t3 t2 t1	# current_pwm_shift
+    addi t6 t3 1024 # Address of pwm with max_memory_address shift
 
-    sb s0 0(t3)	# Store PWM
+    sb s0 0(t6)	# Store PWM
     addi t3 t3 1 	# increment current_pwm_shift
     andi t3 t3 0xF	# remove higher address bits (loop around LEDs if necessary)
-    sb s1 0(t3)	# Store PWM
+    addi t6 t3 1024 # Address of pwm with max_memory_address shift
+    add t6 t6 t1	# Address shift of pwm
+    sb s1 0(t6)	# Store PWM
     addi t3 t3 1 	# increment current_pwm_shift
     andi t3 t3 0xF	# remove higher address bits (loop around LEDs if necessary)
-    sb s2 0(t3)	# Store PWM
+    addi t6 t3 1024 # Address of pwm with max_memory_address shift
+    add t6 t6 t1	# Address shift of pwm
+    sb s2 0(t6)	# Store PWM
     addi t3 t3 1 	# increment current_pwm_shift
     andi t3 t3 0xF	# remove higher address bits (loop around LEDs if necessary)
-    sb s3 0(t3)	# Store PWM
+    addi t6 t3 1024 # Address of pwm with max_memory_address shift
+    add t6 t6 t1	# Address shift of pwm
+    sb s3 0(t6)	# Store PWM
     addi t3 t3 1 	# increment current_pwm_shift
     andi t3 t3 0xF	# remove higher address bits (loop around LEDs if necessary)
-    sb s4 0(t3)	# Store PWM
+    addi t6 t3 1024 # Address of pwm with max_memory_address shift
+    add t6 t6 t1	# Address shift of pwm
+    sb s4 0(t6)	# Store PWM
     addi t3 t3 1 	# increment current_pwm_shift
     andi t3 t3 0xF	# remove higher address bits (loop around LEDs if necessary)
-    sb s5 0(t3)	# Store PWM
+    addi t6 t3 1024 # Address of pwm with max_memory_address shift
+    add t6 t6 t1	# Address shift of pwm
+    sb s5 0(t6)	# Store PWM
     addi t3 t3 1 	# increment current_pwm_shift
     andi t3 t3 0xF	# remove higher address bits (loop around LEDs if necessary)
-    sb s6 0(t3)	# Store PWM
+    addi t6 t3 1024 # Address of pwm with max_memory_address shift
+    add t6 t6 t1	# Address shift of pwm
+    sb s6 0(t6)	# Store PWM
     addi t3 t3 1 	# increment current_pwm_shift
     andi t3 t3 0xF	# remove higher address bits (loop around LEDs if necessary)
-    sb s7 0(t3)	# Store PWM
+    addi t6 t3 1024 # Address of pwm with max_memory_address shift
+    add t6 t6 t1	# Address shift of pwm
+    sb s7 0(t6)	# Store PWM
     addi t3 t3 1 	# increment current_pwm_shift
     andi t3 t3 0xF	# remove higher address bits (loop around LEDs if necessary)
+    addi t6 t3 1024 # Address of pwm with max_memory_address shift
+    add t6 t6 t1	# Address shift of pwm
 
     addi t2 t2 1 	# increment base_pwm_shift
     andi t2 t2 0xF	# remove higher address bits (loop around LEDs if necessary)
+
 
 counter:
 	li t4 0 	  # Counter reset

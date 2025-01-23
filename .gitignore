@@ -16,3 +16,4 @@
 
 *.out
 *.bin
+src/test/scala/ProcessorTopLevelTester.scala

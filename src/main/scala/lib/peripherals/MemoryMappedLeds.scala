@@ -25,7 +25,7 @@ class MemoryMappedLeds(cnt: Int) extends Module {
     val pins = Output(UInt(cnt.W))
   })
 
-  val led_reg = RegInit(0.U(cnt.W))
+  val led_reg = RegInit("h0".U(cnt.W))
   // val pwm_reg = RegInit("hFF".U(8.W)) // PWM width is one byte wide
   val pwm_reg = RegInit(VecInit (Seq.fill (cnt) ("hFF".U(8.W)))) // 16 8-bit registers
   val pwm_counter = RegInit(0.U(8.W))
@@ -63,5 +63,6 @@ class MemoryMappedLeds(cnt: Int) extends Module {
   for(i <- 0 until cnt) { // Generate each LED PWM module
     led_state(i) := pwm_reg(i) >= pwm_counter
   }
-  io.pins := Cat(led_state.reverse) & led_reg
+  val cat_led_state = Cat(led_state.reverse)
+  io.pins := cat_led_state & led_reg
 }
