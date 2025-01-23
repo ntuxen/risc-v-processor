@@ -63,5 +63,5 @@ class MemoryMappedLeds(cnt: Int) extends Module {
   for(i <- 0 until cnt) { // Generate each LED PWM module
     led_state(i) := pwm_reg(i) >= pwm_counter
   }
-  io.pins := Cat(led_state.reverse)
+  io.pins := Cat(led_state.reverse) & led_reg
 }
