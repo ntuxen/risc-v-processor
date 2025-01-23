@@ -11,7 +11,6 @@ class IFDStage(val program: Seq[UInt]) extends Module {
       val take_branch_EXtoIFD = Input(Bool())
       val branch_address_EXtoIFD = Input(UInt(32.W))
       val rd_EXtoIFD = Input(UInt(5.W))
-      val opcode_EXtoIFD = Input(UInt(7.W))
     }
     val MEMtoIFD = new Bundle() {
       val rd_MEMtoIFD = Input(UInt(5.W))
@@ -39,7 +38,7 @@ class IFDStage(val program: Seq[UInt]) extends Module {
       val forward_enable_rs1_IFDtoEX = Output(UInt(3.W))
       val forward_enable_rs2_IFDtoEX = Output(UInt(3.W))
       val forward_enable_memory_data_IFDtoEX = Output(UInt(3.W))
-      val forward_choose_data = Output(UInt(2.W))
+      val forward_choose_data_IFDtoEX = Output(UInt(2.W))
     }
     val WBtoIFD = new Bundle() {
       val rd_WBtoIFD = Input(UInt(5.W))
@@ -89,9 +88,9 @@ class IFDStage(val program: Seq[UInt]) extends Module {
 
   io.IFDtoEX.immediate_IFDtoEX := immediateGenerator.io.immediate
 
-  val rs1 = io.decoded_instruction_IFDtoEX.rs1
-  val rs2 = io.decoded_instruction_IFDtoEX.rs2
-  val opcode = io.decoded_instruction_IFDtoEX.opcode
+  val rs1 = instructionDecoder.io.decoded_instruction_IFDtoEX.rs1
+  val rs2 = instructionDecoder.io.decoded_instruction_IFDtoEX.rs2
+  val opcode = instructionDecoder.io.decoded_instruction_IFDtoEX.opcode
 
   //Forwarding Logic
   // Forwarding enable for rs1
@@ -117,7 +116,7 @@ class IFDStage(val program: Seq[UInt]) extends Module {
     (io.MEMtoIFD.rd_MEMtoIFD === rs2) && rs2 =/= 0.U, // MEM stage forwarding
     (io.WBtoIFD.rd_WBtoIFD === rs2) && rs2 =/= 0.U
   )
-  io.IFDtoEX.forward_choose_data := Cat(
+  io.IFDtoEX.forward_choose_data_IFDtoEX := Cat(
     (io.MEMtoIFD.opcode_MEMtoIFD === Opcode.load), // MEM stage forwarding
     (io.WBtoIFD.opcode_WBtoIFD === Opcode.load)
   )
