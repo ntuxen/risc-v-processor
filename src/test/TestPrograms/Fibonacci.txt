@@ -2,10 +2,16 @@
 # Setting up counter
 lui x10 8057 # Set counter target to 33 million
 addi x11 x0 0
+lui x12 16 # Set max value of Fibonacci
 
 # Starting conditions
+startFibonacci:
 addi x1 x0 0
+sh x1 1072 x0
+jal x20 oneSecDelay
 addi x2 x0 1
+sh x1 1072 x0
+jal x20 oneSecDelay
 
 sequence:
 add x3 x1 x2
@@ -17,9 +23,8 @@ jal x20 oneSecDelay
 add x2 x1 x3
 sh x2 1072 x0
 jal x20 oneSecDelay
-
-beq x0 x0 sequence
-
+bge x2 x12 startFibonacci # Restart Fibonacci if number gets too big
+beq x0 x0 sequence # Keep calculating Fibonacci
 
 oneSecDelay:
 addi x11 x11 1
