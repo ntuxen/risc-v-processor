@@ -61,7 +61,7 @@ class MemoryMappedLeds(cnt: Int) extends Module {
   }
   val led_state = Wire(Vec(cnt, Bool()))
   for(i <- 0 until cnt) { // Generate each LED PWM module
-    led_state(i) := pwm_reg(i) >= pwm_counter
+    led_state(i) := pwm_reg(i) > pwm_counter
   }
   val cat_led_state = Cat(led_state.reverse)
   io.pins := cat_led_state & led_reg
