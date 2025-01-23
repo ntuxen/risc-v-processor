@@ -50,7 +50,7 @@ class MemoryMappedLeds(cnt: Int) extends Module {
     when(io.port.addr === IO_Addresses.LEDs) {
       rdData := led_reg
     } .otherwise {
-      //rdData := pwm_reg
+      rdData := pwm_reg(pwm_addr)
     }
   }
   io.port.rdData := RegNext(rdData)
