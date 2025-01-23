@@ -29,7 +29,7 @@ class MemoryMappedLeds(cnt: Int) extends Module {
   // val pwm_reg = RegInit("hFF".U(8.W)) // PWM width is one byte wide
   val pwm_reg = RegInit(VecInit (Seq.fill (cnt) ("hFF".U(8.W)))) // 16 8-bit registers
   val pwm_counter = RegInit(0.U(8.W))
-  val clk_prescaler = RegInit(0.U(12.W)) // Clock prescaler
+  val clk_prescaler = RegInit(0.U(12.W)) // Clock prescaler TODO: set prescaler to 12.W
 
   clk_prescaler := clk_prescaler + 1.U
 
@@ -50,7 +50,7 @@ class MemoryMappedLeds(cnt: Int) extends Module {
     when(io.port.addr === IO_Addresses.LEDs) {
       rdData := led_reg
     } .otherwise {
-      rdData := pwm_reg
+      //rdData := pwm_reg
     }
   }
   io.port.rdData := RegNext(rdData)
@@ -59,11 +59,9 @@ class MemoryMappedLeds(cnt: Int) extends Module {
   when(clk_prescaler === 0.U) {
     pwm_counter := pwm_counter + 1.U // Automatically overflows back to 0 after 255
   }
+  val led_state = Wire(Vec(cnt, Bool()))
   for(i <- 0 until cnt) { // Generate each LED PWM module
-    when(pwm_reg(i) >= pwm_counter) { // Use counter to either
-      io.pins(i) := led_reg(i) // assign register content to LEDs
-    } .otherwise {
-      io.pins(i) := false.B // turn off LEDs
-    }
+    led_state(i) := pwm_reg(i) >= pwm_counter
   }
+  io.pins := Cat(led_state.reverse)
 }

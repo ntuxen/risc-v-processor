@@ -26,6 +26,15 @@ class MemoryMappedIOTester extends AnyFlatSpec with ChiselScalatestTester {
         }
       }
 
+      def writePWMtoLED(pwm: Int, addr: Int): Unit = {
+        dut.io.address.poke(IO_Addresses.LEDs_pwm.litValue.toInt + addr)
+        dut.io.dataIn.poke(pwm.U)
+        dut.io.writeEnable.poke(true.B)
+        step(1)
+        dut.io.dataIn.poke(0.U)
+        dut.io.writeEnable.poke(false.B)
+      }
+
       // Initial inputs
       dut.io.address.poke(0.U)
       dut.io.dataIn.poke(0.U)
@@ -48,7 +57,7 @@ class MemoryMappedIOTester extends AnyFlatSpec with ChiselScalatestTester {
 
       // Write to and read from LEDs
       dut.io.address.poke(IO_Addresses.LEDs)
-      dut.io.dataIn.poke("hABBA".U)
+      dut.io.dataIn.poke("hFFFF".U)
       dut.io.writeEnable.poke(true.B)
       step(1)
       dut.io.writeEnable.poke(false.B)
@@ -61,14 +70,20 @@ class MemoryMappedIOTester extends AnyFlatSpec with ChiselScalatestTester {
       dut.io.address.poke(0.U)
       step(3)
 
+      writePWMtoLED(0,0)
+      writePWMtoLED(30,1)
+      writePWMtoLED(60,2)
+      writePWMtoLED(90,3)
+      writePWMtoLED(120,4)
+      writePWMtoLED(150,5)
+      writePWMtoLED(180,6)
+      writePWMtoLED(210,7)
+      writePWMtoLED(240,8)
+      step(970)
 
-      dut.io.address.poke(IO_Addresses.LEDs_pwm)
-      dut.io.dataIn.poke("hBB".U)
-      dut.io.writeEnable.poke(true.B)
-      step(1)
-      dut.io.writeEnable.poke(false.B)
-      dut.io.address.poke(0.U)
-      step(3)
+
+
+
 
 
 

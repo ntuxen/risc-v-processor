@@ -40,7 +40,7 @@ class ProcessorTopLevel(val program: Seq[UInt]) extends Module {
 
 object Processor extends App {
   // Load Program (doesn't work because of different types
-  val program: Seq[UInt] = ProgramLoader.loadHexFile("src/test/TestPrograms/RISCYwBUSINESS.hex")
+  val program: Seq[UInt] = ProgramLoader.loadHexFile("src/test/TestPrograms/LEDWavePattern.hex")
   //val program = "src/test/TestPrograms/BlinkingLEDsFast.hex"
   // Emit Verilog file
   (new chisel3.stage.ChiselStage).emitVerilog(new ProcessorTopLevel(program))
